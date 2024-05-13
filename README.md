@@ -14,8 +14,9 @@ ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 # Installation
 
 ## First install the "remotes" package
-``install.packages("remotes")´´´
+
+install.packages("remotes")
 
 ## Then install the Virusparies package
 
-``remotes::install_github("SergejRuff/Virusparies")´´´
+remotes::install_github("SergejRuff/Virusparies")
