@@ -1,0 +1,22 @@
+Package: Virusparies
+Title: Create Data Visualisations for VirusHuntergatherer hittables output
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Ruff", "Sergej", email = "serijnh@gmail.com", role = c("aut", "cre")),
+    person("Lauber", "Chris", email = "chris.lauber@twincore.de", role = "aut"),
+    person("Li Chuin", "Chong",email = "lichuin.chong@twincore.de", role = "aut"))
+Author: Sergej Ruff [aut, cre],
+  Chris Lauber [aut],
+  Li Chuin Chong [aut].de>
+Description: Virusparies contains a collection of Data Visualisations for VirusHuntergatherer output.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    dplyr,
+    ggplot2,
+    gt,
+    rlang,
+    stats,
+    stringr
