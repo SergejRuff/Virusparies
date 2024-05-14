@@ -30,7 +30,7 @@ vh_runs_bar <- function(vh_file,generate_table=FALSE){
          x="Virus family found in query",
          y="Number of datesets with hits",
          subtitle = paste0("total number of datasets with hits: ",sum(sample_run$unique_SRA_run)))+
-    theme_linedraw()+
+    theme_minimal()+
     theme(legend.position = "bottom",
           axis.text.y = element_text(size = 10),
           axis.text.x = element_text(size = 10),
