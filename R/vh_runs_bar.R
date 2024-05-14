@@ -3,12 +3,16 @@
 #' @param vh_file Dataframe containing Virushunter hittables results
 #' @param generate_table Logical indicating whether to generate a table along with the plot
 #' (default: FALSE)
+#' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+#' with values larger than cutoff value in ViralRefSeq_E column.
 #'
 #' @return A list containing the bar plot and optionally the generated table and processed data
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vh_runs_bar <- function(vh_file,generate_table=FALSE){
+vh_runs_bar <- function(vh_file,generate_table=FALSE,cut = 1e-5){
+
+  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
 
   # preprocess data for plot

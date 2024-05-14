@@ -4,10 +4,13 @@
 \alias{vh_sum_hits_bar}
 \title{Generate a bar plot showing the sum of hits for each virus family}
 \usage{
-vh_sum_hits_bar(vh_file)
+vh_sum_hits_bar(vh_file, cut = 1e-05)
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunters hittables results.}
+
+\item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+with values larger than cutoff value in ViralRefSeq_E column.}
 }
 \value{
 A list containing the generated bar plot and processed data

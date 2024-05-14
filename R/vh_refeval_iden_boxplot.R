@@ -80,7 +80,7 @@ vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
                                           y=.data$ViralRefSeq_ident,fill=.data$best_query))+
       geom_boxplot(staplewidth = 0.4)+
       labs(x="virus family query",
-           y="-log10 of viral Reference Identity",
+           y="Viral Reference Identity in %",
            title="Boxplot plotting viral Refrence Identity for each virus family")+
       theme_minimal()+
       theme(legend.position = "bottom")+

@@ -4,13 +4,16 @@
 \alias{vh_runs_bar}
 \title{Generate a bar plot showing the number of datasets with unique runs found for each Virus group.}
 \usage{
-vh_runs_bar(vh_file, generate_table = FALSE)
+vh_runs_bar(vh_file, generate_table = FALSE, cut = 1e-05)
 }
 \arguments{
 \item{vh_file}{Dataframe containing Virushunter hittables results}
 
 \item{generate_table}{Logical indicating whether to generate a table along with the plot
 (default: FALSE)}
+
+\item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+with values larger than cutoff value in ViralRefSeq_E column.}
 }
 \value{
 A list containing the bar plot and optionally the generated table and processed data

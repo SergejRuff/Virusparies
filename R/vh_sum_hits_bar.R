@@ -4,6 +4,8 @@
 #' for each virus family from the input dataset.
 #'
 #' @param vh_file A data frame containing VirusHunters hittables results.
+#' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+#' with values larger than cutoff value in ViralRefSeq_E column.
 #'
 #' @return A list containing the generated bar plot and processed data
 #'
@@ -16,9 +18,12 @@
 #' @importFrom rlang .data
 #'
 #' @export
-vh_sum_hits_bar <- function(vh_file){
+vh_sum_hits_bar <- function(vh_file,cut = 1e-5){
+
+
 
  ## preprocess data for plotting
+ vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
  vh_group <- vh_sumhitbar_preprocessing(vh_file)
 
  ## need to genrate a table function that will also be returned.
