@@ -20,3 +20,11 @@ install.packages("remotes")
 ## Then install the Virusparies package
 
 remotes::install_github("SergejRuff/Virusparies")
+
+
+# Contributions
+
+Sergej Ruff formulated the idea behind Virusparies and was responsible for its implementation.
+
+Chris Lauber and Li Chuin Chong from Twincore - Centre for Experimental and Clinical Infection Research provided ideas for improvements. 
+Chris Lauber is the main developer behind the VirusHuntergatherer software and the Group Leader of the Computational Virology working group at the Institute for Experimental Virology, TWINCORE.
