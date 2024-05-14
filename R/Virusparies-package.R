@@ -1,7 +1,7 @@
 #' Virusparies Package
 #'
 #'@description
-#'A comprehensive toolkit for repeated high-dimensional analysis.
+#' Virusparies contains a collection of Data Visualisations for VirusHunterGatherer output.
 #'
 #'@details
 #' VirusHunterGatherer is a data-driven tool designed for high-throughput virus discovery.

@@ -30,7 +30,7 @@ vh_runs_bar <- function(vh_file,generate_table=FALSE){
          x="Virus family found in query",
          y="Number of datesets with hits",
          subtitle = paste0("total number of datasets with hits: ",sum(sample_run$unique_SRA_run)))+
-    theme_linedraw()+
+    theme_minimal()+
     theme(legend.position = "bottom",
           axis.text.y = element_text(size = 10),
           axis.text.x = element_text(size = 10),
@@ -48,15 +48,15 @@ vh_runs_bar <- function(vh_file,generate_table=FALSE){
     scale_y_continuous(expand = c(0, 0), limits = c(0, max(sample_run$unique_SRA_run)+max(sample_run$unique_SRA_run)/10))+
     theme(
       # This is the new default font in the plot
-      text = element_text(family = "Roboto", size = 8, color = "black"),
+      text = element_text( size = 8, color = "black"),
       plot.title = element_text(
-        family = "Lobster Two",
+
         size = 16,
         face = "bold",
         color = "#2a475e"),
       # Statistical annotations below the main title
       plot.subtitle = element_text(
-        family = "Roboto",
+
         size = 12,
         face = "bold",
         color="#1b2838"

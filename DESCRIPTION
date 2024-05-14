@@ -8,7 +8,7 @@ Authors@R:
 Author: Sergej Ruff [aut, cre],
   Chris Lauber [aut],
   Li Chuin Chong [aut].de>
-Description: Virusparies contains a collection of Data Visualisations for VirusHuntergatherer output.
+Description: Virusparies contains a collection of Data Visualisations for VirusHunterGatherer output.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

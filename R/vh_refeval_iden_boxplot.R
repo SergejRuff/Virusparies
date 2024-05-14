@@ -51,15 +51,14 @@ vh_refeval_iden_boxplot <- function(vh_file,cut = 1e-5,eval_vs_iden="evalue"){
            title="Boxplot plotting viral Refrence E-Values for each virus family",
            subtitle = paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")"))+
       geom_hline(aes(yintercept=cutoff), colour="#990000")+
-      theme_linedraw()+
+      theme_minimal()+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+
       theme(
         # This is the new default font in the plot
-        text = element_text(family = "Roboto", size = 8, color = "black"),
+        text = element_text( size = 8, color = "black"),
         plot.title = element_text(
-          family = "Lobster Two",
           size = 16,
           face = "bold",
           color = "#2a475e"),
@@ -84,15 +83,14 @@ vh_refeval_iden_boxplot <- function(vh_file,cut = 1e-5,eval_vs_iden="evalue"){
       labs(x="virus family query",
            y="-log10 of viral Reference Identity",
            title="Boxplot plotting viral Refrence Identity for each virus family")+
-      theme_linedraw()+
+      theme_minimal()+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+
       theme(
         # This is the new default font in the plot
-        text = element_text(family = "Roboto", size = 8, color = "black"),
+        text = element_text( size = 8, color = "black"),
         plot.title = element_text(
-          family = "Lobster Two",
           size = 16,
           face = "bold",
           color = "#2a475e"),
