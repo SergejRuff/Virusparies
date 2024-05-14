@@ -25,25 +25,25 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file,cutoff){
   ## calculate median, 25 and 75 quartile
 
   summary_stats <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(vh_file$best_query) %>%
     summarise(
-      median = median(-log10(.data$ViralRefSeq_E)),
-      Q1 = quantile(-log10(.data$ViralRefSeq_E), 0.25),
-      Q3 = quantile(-log10(.data$ViralRefSeq_E), 0.75),
-      min = min(-log10(.data$ViralRefSeq_E)),
-      max= max(-log10(.data$ViralRefSeq_E))
+      median = median(-log10(vh_file$ViralRefSeq_E)),
+      Q1 = quantile(-log10(vh_file$ViralRefSeq_E), 0.25),
+      Q3 = quantile(-log10(vh_file$ViralRefSeq_E), 0.75),
+      min = min(-log10(vh_file$ViralRefSeq_E)),
+      max= max(-log10(vh_file$ViralRefSeq_E))
     ) %>%
     arrange(desc(median))
 
   below_threshold <- vh_file %>%
     filter(vh_file$ViralRefSeq_E < 10^(-cutoff)) %>%
-    group_by(.data$best_query) %>%
-    summarise(below_threshold = sum(.data$num_hits))
+    group_by(vh_file$best_query) %>%
+    summarise(below_threshold = sum(vh_file$num_hits))
 
   # Calculate the total hits for each best_query group
   total_hits <- vh_file %>%
-    group_by(.data$best_query) %>%
-    summarise(total_hits = sum(.data$num_hits))
+    group_by(vh_file$best_query) %>%
+    summarise(total_hits = sum(vh_file$num_hits))
 
   below_threshold <- below_threshold %>%
     left_join(total_hits, by = "best_query")%>%
