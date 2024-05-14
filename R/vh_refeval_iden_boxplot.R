@@ -20,14 +20,13 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vh_refeval_iden_boxplot <- function(vh_file,cut = 1e-5,eval_vs_iden="evalue"){
+vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
 
+  if(eval_vs_iden=="evalue"){
+    # define a cut off fot evalue significance
+    cutoff <- -log10(cut)
 
-
-  # define a cut off fot evalue significance
-  cutoff <- -log10(cut)
-
-
+  }
 
 
 
@@ -51,7 +50,7 @@ vh_refeval_iden_boxplot <- function(vh_file,cut = 1e-5,eval_vs_iden="evalue"){
            title="Boxplot plotting viral Refrence E-Values for each virus family",
            subtitle = paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")"))+
       geom_hline(aes(yintercept=cutoff), colour="#990000")+
-      theme_minimal()+
+      theme_linedraw()+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+
@@ -83,7 +82,7 @@ vh_refeval_iden_boxplot <- function(vh_file,cut = 1e-5,eval_vs_iden="evalue"){
       labs(x="virus family query",
            y="-log10 of viral Reference Identity",
            title="Boxplot plotting viral Refrence Identity for each virus family")+
-      theme_minimal()+
+      theme_linedraw()+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+

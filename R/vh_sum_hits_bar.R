@@ -35,7 +35,7 @@ vh_sum_hits_bar <- function(vh_file){
         x="Virus family found in query",
         y="sum of hits",
         subtitle = paste0("total number of hits: ",sum(vh_group$sum)))+
-   theme_minimal()+
+   theme_linedraw()+
    theme(legend.position = "bottom",
          axis.text.y = element_text(size = 10),
          axis.text.x = element_text(size = 10),

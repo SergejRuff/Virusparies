@@ -4,15 +4,15 @@
 \alias{vh_refeval_iden_boxplot}
 \title{Generate boxplots comparing E-values or identity for each virus group}
 \usage{
-vh_refeval_iden_boxplot(vh_file, cut = 1e-05, eval_vs_iden = "evalue")
+vh_refeval_iden_boxplot(vh_file, eval_vs_iden = "evalue", cut = 1e-05)
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter Hittable results.}
 
-\item{cut}{The significance cutoff value for E-values (default: 1e-5)}
-
 \item{eval_vs_iden}{Specifies whether to generate boxplots for E-values ("evalue")
 or identity ("identity")}
+
+\item{cut}{The significance cutoff value for E-values (default: 1e-5)}
 }
 \value{
 A list containing the generated boxplot, summary statistics, and optionally outliers and summary tables

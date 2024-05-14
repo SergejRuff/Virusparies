@@ -36,7 +36,7 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file,cutoff){
     arrange(desc(median))
 
   below_threshold <- vh_file %>%
-    filter(cur_data()[["ViralRefSeq_E"]] < 10^(-cutoff)) %>%
+    filter(vh_file$ViralRefSeq_E < 10^(-cutoff)) %>%
     group_by(.data$best_query) %>%
     summarise(below_threshold = sum(.data$num_hits))
 
