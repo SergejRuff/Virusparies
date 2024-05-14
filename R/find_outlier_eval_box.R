@@ -22,7 +22,7 @@ find_outlier_eval_box <- function(vh_file){
   }
 
   outlier <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(vh_file$best_query) %>%
     mutate(outlier = ifelse(find_outlier(-log10(.data$ViralRefSeq_E)), -log10(.data$ViralRefSeq_E), NA))
 
   outlier <- outlier[!is.na(outlier$outlier),]
