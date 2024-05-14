@@ -21,6 +21,8 @@
 #' @keywords internal
 vh_sum_stat_evavlue_boxplot <- function(vh_file,cutoff){
 
+  print(class(vh_file))
+
 
   ## calculate median, 25 and 75 quartile
 
