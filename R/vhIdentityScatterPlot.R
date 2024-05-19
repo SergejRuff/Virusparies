@@ -17,6 +17,8 @@
 #' @export
 vhIdentityScatterPlot <- function(vh_file,cutoff = 1e-5){
 
+  cutoff <- -log10(cutoff)
+
   # Calculate the maximum y-value
   max_y <- max(-log10(vh_file$ViralRefSeq_E)) + 5
 
