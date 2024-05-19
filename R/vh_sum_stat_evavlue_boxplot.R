@@ -15,55 +15,53 @@
 #' It also identifies hits below a specified E-value threshold and calculates the percentage
 #' of hits below the threshold relative to the total hits for each virus group.
 #'
-#' @importFrom dplyr group_by summarise left_join arrange select cur_data filter
-#' @importFrom stats IQR median quantile reorder
+#' @importFrom dplyr tibble
+#' @importFrom stats IQR median quantile reorder aggregate
 #' @importFrom rlang .data
 #' @keywords internal
-vh_sum_stat_evavlue_boxplot <- function(vh_file,cutoff){
+vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
+  # Calculate median, quartiles, and other summary statistics
+  summary_stats <- aggregate(-log10(vh_file$ViralRefSeq_E) ~ best_query, data = vh_file, FUN = function(x) {
+    c(median = median(x), Q1 = quantile(x, 0.25), Q3 = quantile(x, 0.75), min = min(x), max = max(x))
+  })
 
-  print(class(vh_file))
+  summary_stats <- data.frame(
+    best_query = summary_stats$best_query,
+    median = summary_stats[, "-log10(ViralRefSeq_E)"][, 1],
+    Q1 = summary_stats[, "-log10(ViralRefSeq_E)"][, 2],
+    Q3 = summary_stats[, "-log10(ViralRefSeq_E)"][, 3],
+    min = summary_stats[, "-log10(ViralRefSeq_E)"][, 4],
+    max = summary_stats[, "-log10(ViralRefSeq_E)"][, 5]
+  )
 
+  # Rename columns
+  colnames(summary_stats) <- c("best_query", "median", "Q1", "Q3", "min", "max")
 
-  ## calculate median, 25 and 75 quartile
-
-  summary_stats <- vh_file %>%
-    group_by(best_query) %>%
-    summarise(
-      median = median(-log10(ViralRefSeq_E)),
-      Q1 = quantile(-log10(ViralRefSeq_E), 0.25),
-      Q3 = quantile(-log10(ViralRefSeq_E), 0.75),
-      min = min(-log10(ViralRefSeq_E)),
-      max= max(-log10(ViralRefSeq_E))
-    ) %>%
-    arrange(desc(median))
-
-  below_threshold <- vh_file %>%
-    filter(ViralRefSeq_E < 10^(-cutoff)) %>%
-    group_by(best_query) %>%
-    summarise(below_threshold = sum(num_hits))
+  # Identify hits below the cutoff threshold
+  below_threshold <- aggregate(num_hits ~ best_query, data = subset(vh_file, .data$ViralRefSeq_E < 10^(-cutoff)), sum)
 
   # Calculate the total hits for each best_query group
-  total_hits <- vh_file %>%
-    group_by(best_query) %>%
-    summarise(total_hits = sum(vh_file$num_hits))
+  total_hits <- aggregate(num_hits ~ best_query, data = vh_file, sum)
 
-  below_threshold <- below_threshold %>%
-    left_join(total_hits, by = "best_query")%>%
-    mutate(percentage_below_thr = (below_threshold / total_hits) * 100)
+  # Calculate the percentage of hits below the threshold
+  below_threshold <- merge(below_threshold, total_hits, by = "best_query")
+  below_threshold$percentage_below_thr <- with(below_threshold, (.data$num_hits.x /.data$num_hits.y) * 100)
 
-
-
+  # Rename and keep only the relevant num_hits column
+  below_threshold <- within(below_threshold, {
+    num_hits <- .data$num_hits.x  # Keeping num_hits.x and renaming it to num_hits
+    total_hits <- NULL
+    names(percentage_below_thr) <- "percentage_below_cutoff"
+  })
 
   # Join the summarized statistics with the below_threshold information
-  summary_stats<- summary_stats %>%
-    left_join(below_threshold, by = "best_query")%>%replace(is.na(.data$.), 0)%>%
-    select (-total_hits)
+  summary_stats <- merge(summary_stats, below_threshold, by = "best_query", all.x = TRUE)
+  summary_stats[is.na(summary_stats)] <- 0  # Replace NA values with 0
 
-  return(summary_stats)
+  # Sort by median
+  summary_stats <- summary_stats[order(summary_stats$median, decreasing = TRUE), ]
 
+  summary_stats <- summary_stats[,-c(7,8)]
 
-
+  return(tibble(summary_stats))
 }
-
-# Declare individual columns of vh_file as global variables in the package's namespace
-utils::globalVariables(c("ViralRefSeq_E", "num_hits", "best_query"))
