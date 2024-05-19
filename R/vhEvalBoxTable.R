@@ -23,7 +23,7 @@ vhEvalBoxTable <- function(summary_stats){
   gt_table <- summary_stats %>%
     gt()%>%
     fmt_number(
-      columns = !.data$below_threshold,
+
       decimals = 2
     )
 
