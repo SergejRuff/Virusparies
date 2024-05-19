@@ -12,6 +12,16 @@
 #' @details This function generates a table for the summary statistics output from the vhEvalIdenBoxplot
 #' function.It formats summary statistics into a table using the gt package.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # plot 1: plot boxplot for "evalue"
+#' eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="evalue",cut = 1e-5)
+#'
+#' # generate table
+#' eval_table <- vhEvalBoxTable(eval$summary_stats)
+#'
 #' @seealso \code{\link{vhEvalIdenBoxplot}}
 #' @import dplyr
 #' @importFrom gt gt fmt_number

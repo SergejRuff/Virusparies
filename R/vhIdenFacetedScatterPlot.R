@@ -17,6 +17,12 @@
 #' - Points colored based on whether they meet the cutoff condition.
 #' - Faceting by the `best_query` column.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' vhIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
+#'
 #'
 #' @import ggplot2
 #' @importFrom stats runif

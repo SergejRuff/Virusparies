@@ -17,6 +17,17 @@
 #' The user can specify whether to generate boxplots for E-values or identity by setting
 #' the parameter `eval_vs_iden`.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # plot 1: plot boxplot for "evalue"
+#' eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="evalue",cut = 1e-5)
+#'
+#'
+#' # plot 2: plot boxplot for "identity"
+#' identity <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export

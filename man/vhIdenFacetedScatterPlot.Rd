@@ -30,3 +30,11 @@ The plot includes:
 \item Faceting by the \code{best_query} column.
 }
 }
+\examples{
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+vhIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
+
+
+}
