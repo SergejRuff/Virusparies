@@ -55,16 +55,17 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
     gt()%>%
     tab_header(
       title = title
+    )%>%
+    cols_label(
+      best_query = names_[[1]],
+      unique_SRA_run = names_[[2]],
+      SRAs_found = names_[[3]]
+    ) %>%
+    cols_align(
+      align = align
     )
+
 
   return(which_runs_table)
 
-}%>%
-  cols_label(
-    best_query = names_[[1]],
-    unique_SRA_run = names_[[2]],
-    SRAs_found = names_[[3]]
-  ) %>%
-  cols_align(
-    align = align
-  )
+}
