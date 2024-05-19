@@ -8,10 +8,13 @@
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param title (optional): a title for the summary title.
 #' Default is "Summary Table of Unique Runs for Each Virus Group"
+#' @param title_align (optional): a character vector specifying the alignment of title (and subttile) text.
+#' Possible values are "left", "center", or "right". Default is "left".
 #' @param names_ (optional): a vector of length 3 containing column names.
 #' Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")
 #' @param align (optional): a character vector specifying the alignment of text in the table columns.
 #' Possible values are "left", "center", or "right". Default is "left".
+#' @param subtit (optional): a character vector specifying the subtitle. Default is NULL.
 #'
 #' @return A formatted gt table summarizing unique runs for each virus group
 #'
@@ -29,8 +32,8 @@
 #'
 #' # example 2: generate table with custom arguments
 #'
-#' table_2 <- vhRunsTable(vh_file,title = "test",names_ = c("column_1","column_2","column_3"),
-#' align = "right")
+#' table_2 <- vhRunsTable(vh_file,title = "test",title_align="right",
+#' names_ = c("column_1","column_2","column_3"),align = "right",subtit="subtitle")
 #'
 #' table_2
 #'
@@ -41,7 +44,7 @@
 #' @importFrom rlang .data
 #' @export
 vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
-                        names_=NULL,align = "left"){
+                        title_align = "left",names_=NULL,align = "left",subtit =NULL){
 
   if(is.null(names_)){
     names_ <- c("Virus Group","Number of Unique SRA Runs","SRAs Found")
@@ -70,7 +73,16 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
     ) %>%
     cols_align(
       align = align
+    )%>%
+    opt_align_table_header(align = title_align)
+
+  if(!is.null(subtit)){
+    which_runs_table <- which_runs_table %>%
+      tab_header(
+      title = title,
+      subtitle = subtit # Add the subtitle
     )
+  }
 
 
   return(which_runs_table)

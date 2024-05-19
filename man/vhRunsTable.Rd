@@ -8,8 +8,10 @@ vhRunsTable(
   vh_file,
   cut = 1e-05,
   title = "Summary Table of Unique Runs for Each Virus Group",
+  title_align = "left",
   names_ = NULL,
-  align = "left"
+  align = "left",
+  subtit = NULL
 )
 }
 \arguments{
@@ -21,11 +23,16 @@ with values larger than cutoff value in ViralRefSeq_E column.}
 \item{title}{(optional): a title for the summary title.
 Default is "Summary Table of Unique Runs for Each Virus Group"}
 
+\item{title_align}{(optional): a character vector specifying the alignment of title (and subttile) text.
+Possible values are "left", "center", or "right". Default is "left".}
+
 \item{names_}{(optional): a vector of length 3 containing column names.
 Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")}
 
 \item{align}{(optional): a character vector specifying the alignment of text in the table columns.
 Possible values are "left", "center", or "right". Default is "left".}
+
+\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL.}
 }
 \value{
 A formatted gt table summarizing unique runs for each virus group
@@ -49,8 +56,8 @@ table
 
 # example 2: generate table with custom arguments
 
-table_2 <- vhRunsTable(vh_file,title = "test",names_ = c("column_1","column_2","column_3"),
-align = "right")
+table_2 <- vhRunsTable(vh_file,title = "test",title_align="right",
+names_ = c("column_1","column_2","column_3"),align = "right",subtit="subtitle")
 
 table_2
 
