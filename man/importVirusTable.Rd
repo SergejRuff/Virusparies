@@ -20,3 +20,11 @@ This function reads the VirusHunter or VirusGatherer hittable file specified by 
 into a dataframe in R. The file should be in tab-separated values (TSV) format.
 The first row should contain column headers.
 }
+\examples{
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+print(head(vh_file))
+
+
+}

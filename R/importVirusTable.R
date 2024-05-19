@@ -10,6 +10,12 @@
 #'
 #' @return A dataframe containing the data from the VirusHunter or VirusGatherer hittable file.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' print(head(vh_file))
+#'
 #'
 #' @importFrom utils read.table
 #' @export
