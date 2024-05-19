@@ -19,7 +19,6 @@ vhIdentityBoxTable <- function(summary_stats_identity){
 
   summary_stats_identity %>% gt()
 
-  summary_stats_identity
 
   return(summary_stats_identity)
 
