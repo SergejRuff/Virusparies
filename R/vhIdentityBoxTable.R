@@ -15,7 +15,7 @@
 #' @seealso \code{\link{vhEvalIdenBoxplot}}
 #' @import gt
 #' @export
-creatTableIdentityBox <- function(summary_stats_identity){
+vhIdentityBoxTable <- function(summary_stats_identity){
 
   summary_stats_identity %>% gt()
 

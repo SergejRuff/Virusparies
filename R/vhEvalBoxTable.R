@@ -16,7 +16,7 @@
 #' @importFrom gt gt fmt_number
 #' @importFrom rlang .data
 #' @export
-creatTableEvalBox <- function(summary_stats){
+vhEvalBoxTable <- function(summary_stats){
 
   # Create gt table
   gt_table <- summary_stats %>%

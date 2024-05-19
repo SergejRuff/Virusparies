@@ -40,8 +40,8 @@ This package includes the following functions:
 \strong{Tables}:
 \itemize{
 \item \code{\link{vhRunsTable}}: Generate a gt-table for vhRunsBarplot.
-\item \code{\link{creatTableEvalBox}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
-\item \code{\link{creatTableIdentityBox}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
+\item \code{\link{vhEvalBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
+\item \code{\link{vhIdentityBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
 }
 }
 
