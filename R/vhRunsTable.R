@@ -8,6 +8,10 @@
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param title (optional): a title for the summary title.
 #' Default is "Summary Table of Unique Runs for Each Virus Group"
+#' @param names_ (optional): a vector of length 3 containing column names.
+#' Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")
+#' @param align (optional): a character vector specifying the alignment of text in the table columns.
+#' Possible values are "left", "center", or "right". Default is "left".
 #'
 #' @return A formatted gt table summarizing unique runs for each virus group
 #'
@@ -29,7 +33,12 @@
 #' @importFrom gt gt
 #' @importFrom rlang .data
 #' @export
-vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group"){
+vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
+                        names_=NULL,align = "left"){
+
+  if(is.null(names_)){
+    names_ <- c("Virus Group","Number of Unique SRA Runs","SRAs Found")
+  }
 
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
@@ -50,4 +59,12 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
 
   return(which_runs_table)
 
-}
+}%>%
+  cols_label(
+    best_query = names_[[1]],
+    unique_SRA_run = names_[[2]],
+    SRAs_found = names_[[3]]
+  ) %>%
+  cols_align(
+    align = align
+  )
