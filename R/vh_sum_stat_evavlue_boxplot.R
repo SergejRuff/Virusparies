@@ -48,7 +48,7 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
   below_threshold$percentage_below_thr <- with(below_threshold, (num_hits.x / num_hits.y) * 100)
 
   # Rename and keep only the relevant num_hits column
-  below_threshold$num_hits <- below_threshold$num_hits.x  # Keeping num_hits.x and renaming it to num_hits
+  below_threshold$num_hits_belowThreshold <- below_threshold$num_hits.x  # Keeping num_hits.x and renaming it to num_hits
   below_threshold$total_hits <- NULL
   names(below_threshold)[names(below_threshold) == "percentage_below_thr"] <- "percentage_below_cutoff"
 
@@ -58,6 +58,8 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
 
   # Sort by median
   summary_stats <- summary_stats[order(summary_stats$median, decreasing = TRUE), ]
+
+  summary_stats <- summary_stats[,-c(7,8)]
 
   return(as_tibble(summary_stats))
 }
