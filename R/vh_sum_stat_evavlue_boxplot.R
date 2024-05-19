@@ -25,8 +25,6 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
     c(median = median(x), Q1 = quantile(x, 0.25), Q3 = quantile(x, 0.75), min = min(x), max = max(x))
   })
 
-  print(colnames(summary_stats))
-
   summary_stats <- data.frame(
     best_query = summary_stats$best_query,
     median = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 1],
@@ -47,14 +45,12 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
 
   # Calculate the percentage of hits below the threshold
   below_threshold <- merge(below_threshold, total_hits, by = "best_query")
-  below_threshold$percentage_below_thr <- with(below_threshold, (.data$num_hits.x /.data$num_hits.y) * 100)
+  below_threshold$percentage_below_thr <- with(below_threshold, (num_hits.x / num_hits.y) * 100)
 
   # Rename and keep only the relevant num_hits column
-  below_threshold <- within(below_threshold, {
-    num_hits <- .data$num_hits.x  # Keeping num_hits.x and renaming it to num_hits
-    total_hits <- NULL
-    names(percentage_below_thr) <- "percentage_below_cutoff"
-  })
+  below_threshold$num_hits <- below_threshold$num_hits.x  # Keeping num_hits.x and renaming it to num_hits
+  below_threshold$total_hits <- NULL
+  names(below_threshold)[names(below_threshold) == "percentage_below_thr"] <- "percentage_below_cutoff"
 
   # Join the summarized statistics with the below_threshold information
   summary_stats <- merge(summary_stats, below_threshold, by = "best_query", all.x = TRUE)
@@ -63,7 +59,5 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
   # Sort by median
   summary_stats <- summary_stats[order(summary_stats$median, decreasing = TRUE), ]
 
-  summary_stats <- summary_stats[,-c(7,8)]
-
-  return(tibble(summary_stats))
+  return(as_tibble(summary_stats))
 }
