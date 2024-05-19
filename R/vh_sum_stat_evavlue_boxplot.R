@@ -40,7 +40,7 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
   colnames(summary_stats) <- c("best_query", "median", "Q1", "Q3", "min", "max")
 
   # Identify hits below the cutoff threshold
-  below_threshold <- aggregate(num_hits ~ best_query, data = subset(vh_file, .data$ViralRefSeq_E < 10^(-cutoff)), sum)
+  below_threshold <- aggregate(num_hits ~ best_query, data = subset(vh_file, vh_file$ViralRefSeq_E < 10^(-cutoff)), sum)
 
   # Calculate the total hits for each best_query group
   total_hits <- aggregate(num_hits ~ best_query, data = vh_file, sum)
