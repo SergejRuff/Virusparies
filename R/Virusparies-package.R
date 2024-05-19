@@ -20,9 +20,9 @@
 #'
 #' This package includes the following functions:
 #'
-#' #' \strong{Import}:
+#' \strong{Import}:
 #' \itemize{
-#'   \item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R
+#'   \item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R.
 
 #' }
 #'

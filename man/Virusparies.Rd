@@ -25,9 +25,9 @@ ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
 This package includes the following functions:
 
-#' \strong{Import}:
+\strong{Import}:
 \itemize{
-\item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R
+\item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R.
 }
 
 \strong{Virushunter Plots}:
