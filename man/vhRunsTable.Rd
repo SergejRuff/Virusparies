@@ -2,21 +2,28 @@
 % Please edit documentation in R/vhRunsTable.R
 \name{vhRunsTable}
 \alias{vhRunsTable}
-\title{Generate a gt summary table of unique SRA runs for each virus group}
+\title{Generate a gt summary table of unique runs for each virus group}
 \usage{
-vhRunsTable(vh_file, cut = 1e-05)
+vhRunsTable(
+  vh_file,
+  cut = 1e-05,
+  title = "Summary Table of Unique Runs for Each Virus Group"
+)
 }
 \arguments{
 \item{vh_file}{A data frame containing the Virushunter Hittables Results}
 
 \item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
+
+\item{title}{(optional): a title for the summary title.
+Default is "Summary Table of Unique Runs for Each Virus Group"}
 }
 \value{
 A formatted gt table summarizing unique runs for each virus group
 }
 \description{
-This function generates a summary table of unique SRA runs for each virus group
+This function generates a summary table of unique runs for each virus group
 based on the input dataset.
 }
 \details{
