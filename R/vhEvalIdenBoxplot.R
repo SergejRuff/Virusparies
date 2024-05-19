@@ -1,4 +1,4 @@
-#' @title Generate boxplots comparing E-values or identity for each virus group
+#' @title vhEvalIdenBoxplot: Generate boxplots comparing E-values or identity for each virus group
 #'
 #' @description
 #'  This function generates boxplots comparing either E-values or identity
@@ -9,18 +9,18 @@
 #' @param eval_vs_iden Specifies whether to generate boxplots for E-values ("evalue")
 #' or identity ("identity")
 #'
-#' @return A list containing the generated boxplot, summary statistics, and optionally outliers and summary tables
+#' @return A list containing the generated boxplot, summary statistics, and outliers
 #'
 #' @details This function generates boxplots comparing either E-values or identity for each virus
 #' group from the VirusHunters Hittable.
-#' It also calculates summary statistics and optionally identifies outliers for further analysis.
+#' It also calculates summary statistics and  identifies outliers for further analysis.
 #' The user can specify whether to generate boxplots for E-values or identity by setting
 #' the parameter `eval_vs_iden`.
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
+vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
 
   if(eval_vs_iden=="evalue"){
     # define a cut off fot evalue significance
@@ -111,7 +111,7 @@ vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
 
     #summary_stats <- vh_sum_stat_evavlue_boxplot(vh_file,cutoff)
     outlier <- find_outlier_eval_box(vh_file)
-    #gt_tablebox <- creat_table_eval_box(summary_stats)
+
 
   }
 
@@ -122,7 +122,7 @@ vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
     print("generating summary stats in dataframe and gt-table for identity-boxplots")
 
     summary_stats <- summary_stats_identity(vh_file)
-    gt_tablebox <- summary_stats_identity_gt(summary_stats)
+
 
   }
 
@@ -132,12 +132,12 @@ vh_refeval_iden_boxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
   plot(boxp)
 
   if(eval_vs_iden=="evalue"){
-    #return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier,gt_tablebox=gt_tablebox))
+    #return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
     return(list(boxp=boxp,outlier=outlier))
   }
 
   if(eval_vs_iden=="identity"){
-    return(list(boxp=boxp,summary_stats=summary_stats,gt_tablebox=gt_tablebox))
+    return(list(boxp=boxp,summary_stats=summary_stats))
   }
 
 

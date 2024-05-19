@@ -27,14 +27,21 @@ This package includes the following functions:
 
 \strong{Virushunter Plots}:
 \itemize{
-\item \code{\link{vh_sum_hits_bar}}: barplot for the sum of hits for each virus found in pHMM query.
-\item \code{\link{vh_refeval_iden_boxplot}}: boxplot plotting identity or RefSeq evalues for each virus query.
-\item \code{\link{vh_runs_bar}}: barplot showing how many unique Runs map agains each virus
+\item \code{\link{vhSumHitsBarplot}}: barplot for the sum of hits for each virus found in pHMM query.
+\item \code{\link{vhEvalIdenBoxplot}}: boxplot plotting identity or RefSeq evalues for each virus query.
+\item \code{\link{vhRunsBarplot}}: barplot showing how many unique Runs map agains each virus.
 }
 
 \strong{Virusgatherer Plots}:
 \itemize{
-\item \code{\link{vh_sum_hits_bar}}: Placeholder
+\item \code{\link{vhSumHitsBarplot}}: Placeholder
+}
+
+\strong{Tables}:
+\itemize{
+\item \code{\link{vhRunsTable}}: Generate a gt-table for vhRunsBarplot.
+\item \code{\link{creatTableEvalBox}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
+\item \code{\link{creatTableIdentityBox}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
 }
 }
 
@@ -48,7 +55,7 @@ VirusHunterGatherer is available on: \url{https://github.com/lauberlab/VirusHunt
 
 \itemize{
 \item Chris Lauber (\email{chris.lauber@twincore.de})
-\item Chong, Li Chuin (\email{lichuin.chong@twincore.de})
+\item Li Chuin, Chong (\email{lichuin.chong@twincore.de})
 }
 
 If you have any questions, suggestions, or issues, please feel free to contact the maintainer,

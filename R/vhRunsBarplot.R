@@ -1,8 +1,7 @@
-#' Generate a bar plot showing the number of datasets with unique runs found for each Virus group.
+#' vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+#' each Virus group.
 #'
 #' @param vh_file Dataframe containing Virushunter hittables results
-#' @param generate_table Logical indicating whether to generate a table along with the plot
-#' (default: FALSE)
 #' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #'
@@ -10,7 +9,7 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vh_runs_bar <- function(vh_file,generate_table=FALSE,cut = 1e-5){
+vhRunsBarplot <- function(vh_file,cut = 1e-5){
 
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
@@ -18,11 +17,7 @@ vh_runs_bar <- function(vh_file,generate_table=FALSE,cut = 1e-5){
   # preprocess data for plot
   sample_run <- preprocess_runs_bar(vh_file)
 
-  if(generate_table == TRUE){
 
-    # creat a table
-    which_runs_table <- generate_run_bar_table(vh_file)
-  }
 
   #####################
   ### Generate Plot ###
@@ -68,17 +63,10 @@ vh_runs_bar <- function(vh_file,generate_table=FALSE,cut = 1e-5){
 
   plot(run_bar)
 
-  if(generate_table == TRUE){
 
-    return(list(run_bar=run_bar,which_runs_table=which_runs_table,
-                sample_run=sample_run))
-  }
 
-  if(generate_table == FALSE){
-
-    return(list(run_bar=run_bar,
-                sample_run=sample_run))
-  }
+  return(list(run_bar=run_bar,
+              sample_run=sample_run))
 
 
 }

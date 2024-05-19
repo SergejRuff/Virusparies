@@ -18,7 +18,7 @@
 #' @importFrom rlang .data
 #'
 #' @export
-vh_sum_hits_bar <- function(vh_file,cut = 1e-5){
+vhSumHitsBarplot <- function(vh_file,cut = 1e-5){
 
 
 
