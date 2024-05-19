@@ -17,9 +17,10 @@ vhRunsTable(
   title_size = 26,
   subtitle_size = 14,
   title_weight = "bold",
-  title_colour = NULL,
+  title_colour = "dodgerblue4",
   table_font_size = 14,
-  cell_colour = "grey90"
+  cell_colour = "grey90",
+  col_everyrow = FALSE
 )
 }
 \arguments{
@@ -44,7 +45,8 @@ Possible values are "left", "center", or "right". Default is "left".}
 
 \item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
 
-\item{column_colour}{(optional): character specifying the background colour for the column header.}
+\item{column_colour}{(optional): character specifying the background colour for the column header.
+Default is dodgerblue4.}
 
 \item{title_size}{(optional): numeric value specifying title size. Default is 26.}
 
@@ -54,12 +56,16 @@ Possible values are "left", "center", or "right". Default is "left".}
 The weight of the font can be modified thorough a text-based option such as "normal", "bold",
 "lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".}
 
-\item{title_colour}{(optional): character specifying title colour. Default is NULL.}
+\item{title_colour}{(optional): character specifying title colour. Default is dodgerblue4.}
 
 \item{table_font_size}{(optional): numeric value specifying table font size. This will change font
 size for the column header and for all values in each cell. Default is 14.}
 
-\item{cell_colour}{(optional): character specifying cell colour.}
+\item{cell_colour}{(optional): character specifying cell colour.Default is grey90.}
+
+\item{col_everyrow}{(optional): bool value specifying if every row or every second row of the table
+should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colours every
+row and col_everyrow = FALSE colours every second row. Default is FALSE.}
 }
 \value{
 A formatted gt table summarizing unique runs for each virus group
