@@ -42,10 +42,17 @@ It calculates the number of unique runs for each virus group from the input data
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
-# generate table
+# example 1: generate table with defaul arguments
 table <- vhRunsTable(vh_file,cut = 1e-5)
 
 table
+
+# example 2: generate table with custom arguments
+
+table_2 <- vhRunsTable(vh_file,title = "test",names_ = c("column_1","column_2","column_3"),
+align = "right")
+
+table_2
 
 }
 \seealso{
