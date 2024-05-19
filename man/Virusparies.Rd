@@ -37,7 +37,7 @@ This package includes the following functions:
 \item \code{\link{vhSumHitsBarplot}}: Placeholder
 }
 
-\strong{Tables}:
+\strong{Graphical Tables(gt)}:
 \itemize{
 \item \code{\link{vhRunsTable}}: Generate a gt-table for vhRunsBarplot.
 \item \code{\link{vhEvalBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
