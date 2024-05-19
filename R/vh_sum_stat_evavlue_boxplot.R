@@ -29,11 +29,11 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
 
   summary_stats <- data.frame(
     best_query = summary_stats$best_query,
-    median = summary_stats[, "-log10(ViralRefSeq_E)"][, 1],
-    Q1 = summary_stats[, "-log10(ViralRefSeq_E)"][, 2],
-    Q3 = summary_stats[, "-log10(ViralRefSeq_E)"][, 3],
-    min = summary_stats[, "-log10(ViralRefSeq_E)"][, 4],
-    max = summary_stats[, "-log10(ViralRefSeq_E)"][, 5]
+    median = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 1],
+    Q1 = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 2],
+    Q3 = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 3],
+    min = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 4],
+    max = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 5]
   )
 
   # Rename columns
