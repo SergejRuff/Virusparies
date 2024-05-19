@@ -15,8 +15,8 @@
 #' It also identifies hits below a specified E-value threshold and calculates the percentage
 #' of hits below the threshold relative to the total hits for each virus group.
 #'
-#' @importFrom dplyr group_by summarise left_join arrange select cur_data
-#' @importFrom stats IQR filter median quantile reorder
+#' @importFrom dplyr group_by summarise left_join arrange select cur_data filter
+#' @importFrom stats IQR median quantile reorder
 #' @importFrom rlang .data
 #' @keywords internal
 vh_sum_stat_evavlue_boxplot <- function(vh_file,cutoff){

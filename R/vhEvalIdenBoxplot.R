@@ -109,7 +109,7 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
 
     print("generating summary stats in dataframe and gt-table outlier extraction for evalue-boxplots")
 
-    #summary_stats <- vh_sum_stat_evavlue_boxplot(vh_file,cutoff)
+    summary_stats <- vh_sum_stat_evavlue_boxplot(vh_file,cutoff)
     outlier <- find_outlier_eval_box(vh_file)
 
 
@@ -132,8 +132,8 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
   plot(boxp)
 
   if(eval_vs_iden=="evalue"){
-    #return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
-    return(list(boxp=boxp,outlier=outlier))
+    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
+    #return(list(boxp=boxp,outlier=outlier))
   }
 
   if(eval_vs_iden=="identity"){

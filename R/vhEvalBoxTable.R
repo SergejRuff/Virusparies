@@ -13,6 +13,7 @@
 #' function.It formats summary statistics into a table using the gt package.
 #'
 #' @seealso \code{\link{vhEvalIdenBoxplot}}
+#' @import dplyr
 #' @importFrom gt gt fmt_number
 #' @importFrom rlang .data
 #' @export
@@ -26,7 +27,7 @@ vhEvalBoxTable <- function(summary_stats){
       decimals = 2
     )
 
-  gt_table
+
 
   return(gt_table)
 }
