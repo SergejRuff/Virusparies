@@ -4,6 +4,10 @@
 #'
 #' @param path A character string specifying the path to the VirusHunter or VirusGatherer hittable file.
 #'
+#' @details This function reads the VirusHunter or VirusGatherer hittable file specified by 'path'
+#' into a dataframe in R. The file should be in tab-separated values (TSV) format.
+#' The first row should contain column headers.
+#'
 #' @return A dataframe containing the data from the VirusHunter or VirusGatherer hittable file.
 #'
 #'

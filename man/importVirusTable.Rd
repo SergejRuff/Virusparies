@@ -15,3 +15,8 @@ A dataframe containing the data from the VirusHunter or VirusGatherer hittable f
 \description{
 This function imports VirusHunterGatherer hittables into R.
 }
+\details{
+This function reads the VirusHunter or VirusGatherer hittable file specified by 'path'
+into a dataframe in R. The file should be in tab-separated values (TSV) format.
+The first row should contain column headers.
+}
