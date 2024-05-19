@@ -32,6 +32,8 @@ eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="evalue",cut = 1e-5)
 # generate table
 eval_table <- vhEvalBoxTable(eval$summary_stats)
 
+eval_table
+
 }
 \seealso{
 \code{\link{vhEvalIdenBoxplot}}

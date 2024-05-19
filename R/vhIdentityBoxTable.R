@@ -22,6 +22,8 @@
 #' # generate table
 #' iden_table <- vhEvalBoxTable(identity$summary_stats)
 #'
+#' iden_table
+#'
 #' @seealso \code{\link{vhEvalIdenBoxplot}}
 #' @import gt
 #' @export

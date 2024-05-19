@@ -12,6 +12,15 @@
 #' @details This function is an internal utility function used within the package.
 #' It calculates the number of unique runs for each virus group from the input dataset.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # generate table
+#' table <- vhRunsTable(vh_file,cut = 1e-5)
+#'
+#' table
+#'
 #' @seealso \code{\link{vhRunsBarplot}}
 #'
 #' @importFrom dplyr group_by summarise n_distinct across any_of

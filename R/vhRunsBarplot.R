@@ -6,6 +6,17 @@
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #'
 #' @return A list containing the bar plot and optionally the generated table and processed data
+#'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # plot 1: plot boxplot for "identity"
+#' plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+#'
+#' # return sample_run inside plot object
+#' print(plot$sample_run)
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export

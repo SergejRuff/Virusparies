@@ -22,6 +22,8 @@
 #' # generate table
 #' eval_table <- vhEvalBoxTable(eval$summary_stats)
 #'
+#' eval_table
+#'
 #' @seealso \code{\link{vhEvalIdenBoxplot}}
 #' @import dplyr
 #' @importFrom gt gt fmt_number

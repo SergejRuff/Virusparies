@@ -14,6 +14,16 @@
 #' the sum of hits for each virus family. Additionally, it returns the processed data
 #' for further analysis.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # plot 1: plot boxplot for "identity"
+#' plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
+#'
+#' # return vh_group inside plot object
+#' print(plot$vh_group)
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #'

@@ -20,3 +20,14 @@ A list containing the bar plot and optionally the generated table and processed 
 vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
 each Virus group.
 }
+\examples{
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+# plot 1: plot boxplot for "identity"
+plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+
+# return sample_run inside plot object
+print(plot$sample_run)
+
+}
