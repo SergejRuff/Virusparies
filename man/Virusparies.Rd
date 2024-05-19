@@ -25,6 +25,11 @@ ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
 This package includes the following functions:
 
+#' \strong{Import}:
+\itemize{
+\item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R
+}
+
 \strong{Virushunter Plots}:
 \itemize{
 \item \code{\link{vhSumHitsBarplot}}: barplot for the sum of hits for each virus found in pHMM query.

@@ -19,4 +19,5 @@ Imports:
     gt,
     rlang,
     stats,
-    stringr
+    stringr,
+    utils

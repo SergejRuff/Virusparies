@@ -20,6 +20,12 @@
 #'
 #' This package includes the following functions:
 #'
+#' #' \strong{Import}:
+#' \itemize{
+#'   \item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R
+
+#' }
+#'
 #'
 #' \strong{Virushunter Plots}:
 #' \itemize{
