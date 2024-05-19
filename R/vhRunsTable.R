@@ -8,7 +8,7 @@
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param title (optional): a title for the summary title.
 #' Default is "Summary Table of Unique Runs for Each Virus Group"
-#' @param title_align (optional): a character vector specifying the alignment of title (and subttile) text.
+#' @param title_align (optional): a character vector specifying the alignment of title (and subtile) text.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param names_ (optional): a vector of length 3 containing column names.
 #' Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")
@@ -17,10 +17,15 @@
 #' @param subtit (optional): a character vector specifying the subtitle. Default is NULL.
 #' @param data_row.pad (optional): numeric value specifying the row padding. Default is 6.
 #' @param column_colour (optional): character specifying the background colour for the column header.
-#' @param title_size (optional): numeric value specifying title size. Defaulit is 26.
-#' @param subtitle_size (optional): numeric value specifying subtitle size. Defaulit is 14.
-#' @param title_weight (optional): character specifying title weight. Default value is "bold".
+#' @param title_size (optional): numeric value specifying title size. Default is 26.
+#' @param subtitle_size (optional): numeric value specifying subtitle size. Default is 14.
+#' @param title_weight (optional): character or numeric value specifying title font weight.
+#' The weight of the font can be modified thorough a text-based option such as "normal", "bold",
+#' "lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".
 #' @param title_colour (optional): character specifying title colour. Default is NULL.
+#' @param table_font_size  (optional): numeric value specifying table font size. This will change font
+#' size for the column header and for all values in each cell. Default is 14.
+#' @param cell_colour (optional): character specifying cell colour.
 #'
 #' @return A formatted gt table summarizing unique runs for each virus group
 #'
@@ -51,8 +56,9 @@
 #' @export
 vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
                         title_align = "left",names_=NULL,align = "left",subtit =NULL,
-                        data_row.pad=6,column_colour=NULL,title_size = 26,subtitle_size=14,
-                        title_weight="bold",title_colour=NULL){
+                        data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
+                        title_weight="bold",title_colour=NULL,table_font_size = 14,
+                        cell_colour="grey90"){
 
   if(is.null(names_)){
     names_ <- c("Virus Group","Number of Unique SRA Runs","SRAs Found")
@@ -67,6 +73,8 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
 
   # Remove "c()", "\", and quotation marks
   which_runs$SRAs_found <- gsub("[c()\\\\\"]", "", which_runs$SRAs_found)
+
+  row_number <- nrow(which_runs)
 
   # creat a table
   which_runs_table <- which_runs %>%
@@ -109,6 +117,11 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
         weight = title_weight
       ),
       locations = cells_title(groups = "title")
+    ) %>%
+    tab_options(table.font.size = px(table_font_size))%>%
+    tab_style(
+      style = cell_fill(color = cell_colour),
+      locations = cells_body(rows = seq(1,row_number,2))
     )
 
 
