@@ -20,3 +20,12 @@ This function creates a scatter plot of viral RefSeq identity versus
 the negative logarithm (base 10) of viral RefSeq E-value. It colors the points
 based on  best query  and adds a horizontal line representing the cutoff value.
 }
+\examples{
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+# plot
+plot <- vhIdentityScatterPlot(vh_file,cutoff = 1e-5)
+
+
+}

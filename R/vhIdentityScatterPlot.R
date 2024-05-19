@@ -11,6 +11,13 @@
 #'
 #' @return A ggplot object representing the scatter plot.
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- importVirusTable(path)
+#'
+#' # plot
+#' plot <- vhIdentityScatterPlot(vh_file,cutoff = 1e-5)
+#'
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
