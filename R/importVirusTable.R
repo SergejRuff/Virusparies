@@ -22,6 +22,6 @@ importVirusTable <- function(path){
 
   vh_file <- read.table(file=path,sep = "\t",header = TRUE)
 
-  return(path)
+  return(vh_file)
 
 }
