@@ -16,13 +16,15 @@
 #' @import gt
 #' @export
 vhIdentityBoxTable <- function(summary_stats_identity){
+  # Create gt table
+  gt_table <- summary_stats_identity %>%
+    gt()
 
-  summary_stats_identity %>% gt()
+  # Print the gt table
+  print(gt_table)
 
-
-  return(summary_stats_identity)
-
+  # Return the original summary statistics data frame
+  return(gt_table)
 }
-
 
 
