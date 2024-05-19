@@ -15,6 +15,12 @@
 #' @param align (optional): a character vector specifying the alignment of text in the table columns.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param subtit (optional): a character vector specifying the subtitle. Default is NULL.
+#' @param data_row.pad (optional): numeric value specifying the row padding. Default is 6.
+#' @param column_colour (optional): character specifying the background colour for the column header.
+#' @param title_size (optional): numeric value specifying title size. Defaulit is 26.
+#' @param subtitle_size (optional): numeric value specifying subtitle size. Defaulit is 14.
+#' @param title_weight (optional): character specifying title weight. Default value is "bold".
+#' @param title_colour (optional): character specifying title colour. Default is NULL.
 #'
 #' @return A formatted gt table summarizing unique runs for each virus group
 #'
@@ -44,7 +50,9 @@
 #' @importFrom rlang .data
 #' @export
 vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
-                        title_align = "left",names_=NULL,align = "left",subtit =NULL){
+                        title_align = "left",names_=NULL,align = "left",subtit =NULL,
+                        data_row.pad=6,column_colour=NULL,title_size = 26,subtitle_size=14,
+                        title_weight="bold",title_colour=NULL){
 
   if(is.null(names_)){
     names_ <- c("Virus Group","Number of Unique SRA Runs","SRAs Found")
@@ -81,8 +89,27 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
       tab_header(
       title = title,
       subtitle = subtit # Add the subtitle
-    )
+    )%>%
+      tab_options(
+        heading.subtitle.font.size = px(subtitle_size)
+
+      )
   }
+
+  which_runs_table <- which_runs_table %>%
+    tab_options(
+      data_row.padding = px(data_row.pad),
+      column_labels.background.color = column_colour,
+      heading.title.font.size = px(title_size)
+
+    )%>%
+    tab_style(
+      style = cell_text(
+        color = title_colour,
+        weight = title_weight
+      ),
+      locations = cells_title(groups = "title")
+    )
 
 
   return(which_runs_table)

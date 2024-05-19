@@ -11,7 +11,13 @@ vhRunsTable(
   title_align = "left",
   names_ = NULL,
   align = "left",
-  subtit = NULL
+  subtit = NULL,
+  data_row.pad = 6,
+  column_colour = NULL,
+  title_size = 26,
+  subtitle_size = 14,
+  title_weight = "bold",
+  title_colour = NULL
 )
 }
 \arguments{
@@ -33,6 +39,18 @@ Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")}
 Possible values are "left", "center", or "right". Default is "left".}
 
 \item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL.}
+
+\item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
+
+\item{column_colour}{(optional): character specifying the background colour for the column header.}
+
+\item{title_size}{(optional): numeric value specifying title size. Defaulit is 26.}
+
+\item{subtitle_size}{(optional): numeric value specifying subtitle size. Defaulit is 14.}
+
+\item{title_weight}{(optional): character specifying title weight. Default value is "bold".}
+
+\item{title_colour}{(optional): character specifying title colour. Default is NULL.}
 }
 \value{
 A formatted gt table summarizing unique runs for each virus group
