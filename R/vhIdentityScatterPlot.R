@@ -4,13 +4,14 @@
 #' This function creates a scatter plot of viral RefSeq identity versus
 #' the negative logarithm (base 10) of viral RefSeq E-value. It colors the points
 #' based on  best query  and adds a horizontal line representing the cutoff value.
-#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
-#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "minimal".
+#'
 #'
 #' @param vh_file A data frame containing VirusHunter Hittable results.
 #' @param cutoff The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
+#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+#'  Default is "minimal".
 #'
 #' @return A ggplot object representing the scatter plot.
 #'
