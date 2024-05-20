@@ -5,10 +5,65 @@
 \title{creatTableIdentityBox: Create a formatted table using the gt package for vhEvalIdenBoxplot
 with eval_vs_iden="identity"}
 \usage{
-vhIdentityBoxTable(summary_stats_identity)
+vhIdentityBoxTable(
+  summary_stats_identity,
+  title = "Summary Table for RefSeq Identity for each best query",
+  title_align = "left",
+  names_ = NULL,
+  align = "left",
+  subtit = NULL,
+  data_row.pad = 6,
+  column_colour = "dodgerblue4",
+  title_size = 26,
+  subtitle_size = 14,
+  title_weight = "bold",
+  title_colour = "dodgerblue4",
+  table_font_size = 14,
+  cell_colour = "grey90",
+  col_everyrow = FALSE
+)
 }
 \arguments{
-\item{summary_stats_identity}{A data frame containing summary statistics}
+\item{summary_stats_identity}{A data frame containing summary statistics.}
+
+\item{title}{(optional): a title for the summary title.
+Default is "Summary Table for RefSeq Identity for each best query".}
+
+\item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
+Possible values are "left", "center", or "right". Default is "left".}
+
+\item{names_}{(optional): a vector of length 3 containing column names.
+Default is c("Best Query","median","Q1","Q3","min","max","\% of hits below Threshold",
+"Number Hits below Threshold")}
+
+\item{align}{(optional): a character vector specifying the alignment of text in the table columns.
+Possible values are "left", "center", or "right". Default is "left".}
+
+\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL.}
+
+\item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
+
+\item{column_colour}{(optional): character specifying the background colour for the column header.
+Default is dodgerblue4.}
+
+\item{title_size}{(optional): numeric value specifying title size. Default is 26.}
+
+\item{subtitle_size}{(optional): numeric value specifying subtitle size. Default is 14.}
+
+\item{title_weight}{(optional): character or numeric value specifying title font weight.
+The weight of the font can be modified thorough a text-based option such as "normal", "bold",
+"lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".}
+
+\item{title_colour}{(optional): character specifying title colour. Default is dodgerblue4.}
+
+\item{table_font_size}{(optional): numeric value specifying table font size. This will change font
+size for the column header and for all values in each cell. Default is 14.}
+
+\item{cell_colour}{(optional): character specifying cell colour.Default is grey90.}
+
+\item{col_everyrow}{(optional): bool value specifying if every row or every second row of the table
+should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colours every
+row and col_everyrow = FALSE colours every second row. Default is FALSE.}
 }
 \value{
 A gt table representing the summary statistics
