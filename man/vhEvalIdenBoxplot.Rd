@@ -8,7 +8,8 @@ vhEvalIdenBoxplot(
   vh_file,
   eval_vs_iden = "evalue",
   cut = 1e-05,
-  theme_choice = "minimal"
+  theme_choice = "minimal",
+  x_label = NULL
 )
 }
 \arguments{
@@ -19,9 +20,12 @@ or identity ("identity")}
 
 \item{cut}{The significance cutoff value for E-values (default: 1e-5)}
 
-\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "minimal".}
+
+\item{x_label}{(optional): A character indicating new x label asigned by user. Default is NuLL
+(NULl= "virus family query" )}
 }
 \value{
 A list containing the generated boxplot, summary statistics, and outliers

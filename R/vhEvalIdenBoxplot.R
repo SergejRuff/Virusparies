@@ -8,9 +8,11 @@
 #' @param cut The significance cutoff value for E-values (default: 1e-5)
 #' @param eval_vs_iden Specifies whether to generate boxplots for E-values ("evalue")
 #' or identity ("identity")
-#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "minimal".
+#' @param x_label (optional): A character indicating new x label asigned by user. Default is NuLL
+#' (NULl= "virus family query" )
 #'
 #' @return A list containing the generated boxplot, summary statistics, and outliers
 #'
@@ -34,12 +36,16 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5,theme_choice = "minimal"){
+vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5,theme_choice = "minimal",x_label=NULL){
 
   if(eval_vs_iden=="evalue"){
     # define a cut off fot evalue significance
     cutoff <- -log10(cut)
 
+  }
+
+  if(is.null(x_label)){
+    x_label <- "virus family query"
   }
 
   # Apply the selected theme
@@ -62,7 +68,7 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5,theme_cho
     boxp <- ggplot(vh_file,aes(x=reorder(.data$best_query,-log10(.data$ViralRefSeq_E),FUN=median),
                                y=-log10(.data$ViralRefSeq_E),fill=.data$best_query))+
       geom_boxplot(staplewidth = 0.4)+
-      labs(x="virus family query",
+      labs(x=x_label,
            y="-log10 of viral Reference E-values",
            title="Boxplot plotting viral Refrence E-Values for each virus family",
            subtitle = paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")"))+
@@ -96,7 +102,7 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5,theme_cho
     boxp <- ggplot(vh_file,aes(x=reorder(.data$best_query,.data$ViralRefSeq_ident,FUN=median),
                                           y=.data$ViralRefSeq_ident,fill=.data$best_query))+
       geom_boxplot(staplewidth = 0.4)+
-      labs(x="virus family query",
+      labs(x=x_label,
            y="Viral Reference Identity in %",
            title="Boxplot plotting viral Refrence Identity for each virus family")+
       theme_selected+
