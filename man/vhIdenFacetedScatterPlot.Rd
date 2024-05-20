@@ -5,13 +5,17 @@
 \title{Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value faceted by
 the \code{best_query} column.}
 \usage{
-vhIdenFacetedScatterPlot(vh_file, cutoff = 1e-05)
+vhIdenFacetedScatterPlot(vh_file, cutoff = 1e-05, theme_choice = "minimal")
 }
 \arguments{
 \item{vh_file}{A data frame containing at least the columns \code{ViralRefSeq_E}, \code{ViralRefSeq_ident}, and \code{best_query}.}
 
 \item{cutoff}{A numeric value representing the cutoff for the viral reference e-value. Points with \code{ViralRefSeq_E}
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}
+
+\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+Default is "minimal".}
 }
 \value{
 A ggplot object representing the scatterplot.

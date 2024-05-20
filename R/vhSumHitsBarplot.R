@@ -6,6 +6,9 @@
 #' @param vh_file A data frame containing VirusHunters hittables results.
 #' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
+#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+#'  Default is "minimal".
 #'
 #' @return A list containing the generated bar plot and processed data
 #'
@@ -28,13 +31,17 @@
 #' @importFrom rlang .data
 #'
 #' @export
-vhSumHitsBarplot <- function(vh_file,cut = 1e-5){
+vhSumHitsBarplot <- function(vh_file,cut = 1e-5,theme_choice = "minimal"){
 
 
 
  ## preprocess data for plotting
  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
  vh_group <- vh_sumhitbar_preprocessing(vh_file)
+
+ # Apply the selected theme
+ theme_selected <- select_theme(theme_choice)
+
 
  ## need to genrate a table function that will also be returned.
 
@@ -50,7 +57,7 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5){
         x="Virus family found in query",
         y="sum of hits",
         subtitle = paste0("total number of hits: ",sum(vh_group$sum)))+
-   theme_minimal()+
+   theme_selected+
    theme(legend.position = "bottom",
          axis.text.y = element_text(size = 10),
          axis.text.x = element_text(size = 10),

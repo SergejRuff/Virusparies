@@ -4,13 +4,17 @@
 \alias{vhSumHitsBarplot}
 \title{Generate a bar plot showing the sum of hits for each virus family}
 \usage{
-vhSumHitsBarplot(vh_file, cut = 1e-05)
+vhSumHitsBarplot(vh_file, cut = 1e-05, theme_choice = "minimal")
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunters hittables results.}
 
 \item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
+
+\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+Default is "minimal".}
 }
 \value{
 A list containing the generated bar plot and processed data

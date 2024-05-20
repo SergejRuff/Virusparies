@@ -5,13 +5,17 @@
 \title{vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
 each Virus group.}
 \usage{
-vhRunsBarplot(vh_file, cut = 1e-05)
+vhRunsBarplot(vh_file, cut = 1e-05, theme_choice = "minimal")
 }
 \arguments{
 \item{vh_file}{Dataframe containing Virushunter hittables results}
 
 \item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
+
+\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+Default is "minimal".}
 }
 \value{
 A list containing the bar plot and optionally the generated table and processed data

@@ -4,7 +4,12 @@
 \alias{vhEvalIdenBoxplot}
 \title{vhEvalIdenBoxplot: Generate boxplots comparing E-values or identity for each virus group}
 \usage{
-vhEvalIdenBoxplot(vh_file, eval_vs_iden = "evalue", cut = 1e-05)
+vhEvalIdenBoxplot(
+  vh_file,
+  eval_vs_iden = "evalue",
+  cut = 1e-05,
+  theme_choice = "minimal"
+)
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter Hittable results.}
@@ -13,6 +18,10 @@ vhEvalIdenBoxplot(vh_file, eval_vs_iden = "evalue", cut = 1e-05)
 or identity ("identity")}
 
 \item{cut}{The significance cutoff value for E-values (default: 1e-5)}
+
+\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+Default is "minimal".}
 }
 \value{
 A list containing the generated boxplot, summary statistics, and outliers

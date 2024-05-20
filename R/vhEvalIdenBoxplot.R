@@ -8,6 +8,9 @@
 #' @param cut The significance cutoff value for E-values (default: 1e-5)
 #' @param eval_vs_iden Specifies whether to generate boxplots for E-values ("evalue")
 #' or identity ("identity")
+#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+#'  Default is "minimal".
 #'
 #' @return A list containing the generated boxplot, summary statistics, and outliers
 #'
@@ -31,13 +34,16 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
+vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5,theme_choice = "minimal"){
 
   if(eval_vs_iden=="evalue"){
     # define a cut off fot evalue significance
     cutoff <- -log10(cut)
 
   }
+
+  # Apply the selected theme
+  theme_selected <- select_theme(theme_choice)
 
 
 
@@ -61,7 +67,7 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
            title="Boxplot plotting viral Refrence E-Values for each virus family",
            subtitle = paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")"))+
       geom_hline(aes(yintercept=cutoff), colour="#990000")+
-      theme_minimal()+
+      theme_selected+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+
@@ -93,7 +99,7 @@ vhEvalIdenBoxplot <- function(vh_file,eval_vs_iden="evalue",cut = 1e-5){
       labs(x="virus family query",
            y="Viral Reference Identity in %",
            title="Boxplot plotting viral Refrence Identity for each virus family")+
-      theme_minimal()+
+      theme_selected+
       theme(legend.position = "bottom")+
       guides(fill=guide_legend(title="virus family"))+
       coord_flip()+

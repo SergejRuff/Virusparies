@@ -8,6 +8,9 @@
 #' @param vh_file A data frame containing at least the columns `ViralRefSeq_E`, `ViralRefSeq_ident`, and `best_query`.
 #' @param cutoff A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
+#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+#'  Default is "minimal".
 #'
 #' @return A ggplot object representing the scatterplot.
 #'
@@ -28,9 +31,13 @@
 #' @importFrom stats runif
 #' @importFrom rlang .data
 #' @export
-vhIdenFacetedScatterPlot <- function(vh_file,cutoff = 1e-5){
+vhIdenFacetedScatterPlot <- function(vh_file,cutoff = 1e-5,theme_choice = "minimal"){
 
   vh_file$cutoff_met <- vh_file$ViralRefSeq_E <= cutoff
+
+  # Apply the selected theme
+  theme_selected <- select_theme(theme_choice)
+
 
   max_y <- max(-log10(vh_file$ViralRefSeq_E)) + 5
 
@@ -42,7 +49,7 @@ vhIdenFacetedScatterPlot <- function(vh_file,cutoff = 1e-5){
     labs(x="viral Refseq Identity in %",
          y="-log10 of viral Reference e-value",
          title="scatterplot for refrence identity vs -log10 of refrence e-value for each virus seperatly")+
-    theme_linedraw()+
+    theme_selected+
     theme(legend.position = "bottom")+
     guides(fill=guide_legend(title="virus family"))+
     theme(
