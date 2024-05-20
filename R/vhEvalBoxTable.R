@@ -42,7 +42,8 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1: plot boxplot for "evalue"
-#' eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="evalue",cut = 1e-5)
+#' eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden = "evalue",cut = 1e-5)
+#'
 #'
 #' # generate table
 #' eval_table <- vhEvalBoxTable(eval$summary_stats)
@@ -53,6 +54,7 @@
 #' @import dplyr
 #' @importFrom gt gt fmt_number
 #' @importFrom rlang .data
+#' @importFrom stats setNames
 #' @export
 vhEvalBoxTable <- function(summary_stats,title="Summary Table for RefSeq E-value for each best query",
                            title_align = "left",names_=NULL,align = "left",subtit =NULL,
@@ -62,9 +64,16 @@ vhEvalBoxTable <- function(summary_stats,title="Summary Table for RefSeq E-value
 
 
 
+
+
+
+
   if(is.null(names_)){
-    names_ <- c("Best Query","median","Q1","Q3","min","max")
+    names_ <- c("Best Query","median","Q1","Q3","min","max",
+                "% of hits below Threshold","Number Hits below Threshold")
   }
+
+  summary_stats <- setNames(summary_stats, names_)
 
   # Create gt table
   gt_table <- summary_stats %>%
@@ -76,14 +85,6 @@ vhEvalBoxTable <- function(summary_stats,title="Summary Table for RefSeq E-value
     tab_header(
       title = title
     )%>%
-    cols_label(
-      best_query = names_[[1]],
-      median = names_[[2]],
-      Q1 = names_[[3]],
-      Q3 = names_[[4]],
-      min = names_[[5]],
-      max = names_[[6]]
-    ) %>%
     cols_align(
       align = align
     )%>%
