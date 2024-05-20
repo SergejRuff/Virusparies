@@ -4,6 +4,9 @@
 #' This function creates a scatter plot of viral RefSeq identity versus
 #' the negative logarithm (base 10) of viral RefSeq E-value. It colors the points
 #' based on  best query  and adds a horizontal line representing the cutoff value.
+#' @param theme_choice A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+#'  Default is "minimal".
 #'
 #' @param vh_file A data frame containing VirusHunter Hittable results.
 #' @param cutoff The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
@@ -22,9 +25,12 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vhIdentityScatterPlot <- function(vh_file,cutoff = 1e-5){
+vhIdentityScatterPlot <- function(vh_file,cutoff = 1e-5,theme_choice = "minimal"){
 
   cutoff <- -log10(cutoff)
+
+  # Apply the selected theme
+  theme_selected <- select_theme(theme_choice)
 
   # Calculate the maximum y-value
   max_y <- max(-log10(vh_file$ViralRefSeq_E)) + 5
@@ -35,7 +41,7 @@ vhIdentityScatterPlot <- function(vh_file,cutoff = 1e-5){
     labs(x="viral Refseq Identity in %",
          y="-log10 of viral Reference e-value",
          title="scatterplot for refrence identity vs -log10 of refrence e-value")+
-    theme_linedraw()+
+    theme_selected+
     theme(legend.position = "bottom")+
     guides(fill=guide_legend(title="virus family"))+
     theme(

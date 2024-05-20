@@ -4,13 +4,17 @@
 \alias{vhIdentityScatterPlot}
 \title{vhIdentityScatterPlot: Scatter Plot for Reference Identity vs -log10 of Reference E-value}
 \usage{
-vhIdentityScatterPlot(vh_file, cutoff = 1e-05)
+vhIdentityScatterPlot(vh_file, cutoff = 1e-05, theme_choice = "minimal")
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter Hittable results.}
 
 \item{cutoff}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
+
+\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
+Default is "minimal".}
 }
 \value{
 A ggplot object representing the scatter plot.
