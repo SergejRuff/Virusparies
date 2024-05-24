@@ -34,9 +34,7 @@ This package includes the following functions:
 \itemize{
 \item \code{\link{VhgEvalIdenBoxplot}}: boxplot plotting identity or RefSeq evalues for each virus query.
 \item \code{\link{vhIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-\item \code{\link{vhIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-\item \code{\link{vhRunsBarplot}}: barplot showing how many unique Runs map against each virus.
-\item \code{\link{vhSumHitsBarplot}}: barplot for the sum of hits for each virus found in pHMM query.
+\item \code{\link{VhgIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 }
 
 \strong{Virushunter only Plots}:

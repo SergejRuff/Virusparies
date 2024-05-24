@@ -166,7 +166,7 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
  }
 
 
- plot(sum_plot)
+ #plot(sum_plot)
 
  return(list(plot=sum_plot,vh_group=vh_group))
 

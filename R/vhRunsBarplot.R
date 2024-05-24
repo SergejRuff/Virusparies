@@ -157,7 +157,7 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
   }
 
 
-  plot(run_bar)
+  #plot(run_bar)
 
 
 

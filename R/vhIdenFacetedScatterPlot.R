@@ -72,7 +72,7 @@ vhIdenFacetedScatterPlot <- function(vh_file,cutoff = 1e-5,theme_choice = "minim
       breaks = seq(0, 100, by = 10)
     )
 
-  plot(iden_refevalue_seperate)
+  #plot(iden_refevalue_seperate)
 
   return(iden_refevalue_seperate)
 }
