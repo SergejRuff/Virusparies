@@ -4,17 +4,95 @@
 \alias{vhSumHitsBarplot}
 \title{Generate a bar plot showing the sum of hits for each virus family}
 \usage{
-vhSumHitsBarplot(vh_file, cut = 1e-05, theme_choice = "minimal")
+vhSumHitsBarplot(
+  vh_file,
+  cut = 1e-05,
+  theme_choice = "minimal",
+  flip_coords = TRUE,
+  title = "sum of hits for each family",
+  title_size = 16,
+  title_face = "bold",
+  title_colour = "#2a475e",
+  subtitle = "default",
+  subtitle_size = 12,
+  subtitle_face = "bold",
+  subtitle_colour = "#1b2838",
+  xlabel = "Virus family found in query",
+  ylabel = "sum of hits",
+  axis_title_size = 12,
+  xtext_size = 10,
+  ytext_size = 10,
+  legend_title = "virus family",
+  legend_position = "bottom",
+  legend_title_size = 12,
+  legend_title_face = "bold",
+  legend_text_size = 10,
+  plot_text_size = 3.5,
+  plot_text_position_dodge = 0.9,
+  plot_text_hjust = -0.1,
+  plot_text_vjust = 0.5,
+  plot_text_colour = "black"
+)
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunters hittables results.}
 
-\item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
 
-\item{theme_choice}{A character indicating the ggplot2 theme to apply. Options include "minimal",
+\item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "minimal".}
+
+\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+
+\item{title}{(optional) A character specifying the title of the plot. Default is "sum of hits for each family".}
+
+\item{title_size}{(optional) The size of the plot title. Default is 16.}
+
+\item{title_face}{(optional) The font face of the plot title. Default is "bold".}
+
+\item{title_colour}{(optional) The color of the plot title. Default is "#2a475e".}
+
+\item{subtitle}{(optional) A character specifying the subtitle of the plot.
+Default is "total number of hits: " followed by the calculated number.empty string ("") removes subttitle.}
+
+\item{subtitle_size}{(optional) The size of the plot subtitle. Default is 12.}
+
+\item{subtitle_face}{(optional) The font face of the plot subtitle. Default is "bold".}
+
+\item{subtitle_colour}{(optional) The color of the plot subtitle. Default is "#1b2838".}
+
+\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus family found in query".}
+
+\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "sum of hits".}
+
+\item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
+
+\item{xtext_size}{(optional) The size of x-axis text labels. Default is 10.}
+
+\item{ytext_size}{(optional) The size of y-axis text labels. Default is 10.}
+
+\item{legend_title}{(optional) A character specifying the title of the legend. Default is "virus family".}
+
+\item{legend_position}{(optional) The position of the legend. Default is "bottom".}
+
+\item{legend_title_size}{(optional) The size of the legend title. Default is 12.}
+
+\item{legend_title_face}{(optional) The font face of the legend title. Default is "bold".}
+
+\item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+
+\item{plot_text_size}{(optional) The size of the text labels added to the plot. Default is 3.5.}
+
+\item{plot_text_position_dodge}{(optional) The degree of dodging for positioning text labels. Default is 0.9.}
+
+\item{plot_text_hjust}{(optional) The horizontal justification of text labels. Default is -0.1.}
+
+\item{plot_text_vjust}{(optional) The vertical justification of text labels. Default is 0.5.
+It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
+
+\item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
 }
 \value{
 A list containing the generated bar plot and processed data
@@ -38,5 +116,19 @@ plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
 
 # return vh_group inside plot object
 print(plot$vh_group)
+
+
+# plot 2: Customized plot
+plot2 <- vhSumHitsBarplot(
+  vh_file,
+  cut = 1e-5,
+  title = "Customized Hits Plot",
+  subtitle = "Total Hits with Significance Cutoff",
+  xlabel = "Virus Family",
+  ylabel = "Total Hits",
+  legend_title = "Virus Families",
+  plot_text_size = 4,
+  plot_text_colour = "blue"
+)
 
 }
