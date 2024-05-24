@@ -33,7 +33,7 @@ This package includes the following functions:
 \strong{VirushunterGatherer Plots}:
 \itemize{
 \item \code{\link{VhgEvalIdenBoxplot}}: boxplot plotting identity or RefSeq evalues for each virus query.
-\item \code{\link{vhIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+\item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 \item \code{\link{VhgIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 }
 
