@@ -51,6 +51,7 @@
 #'
 #' # plot 1: plot boxplot for "identity"
 #' plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
+#' plot
 #'
 #' # return vh_group inside plot object
 #' print(plot$vh_group)
@@ -68,6 +69,8 @@
 #'   plot_text_size = 4,
 #'   plot_text_colour = "blue"
 #' )
+#'
+#' plot2
 #'
 #' @import ggplot2
 #' @importFrom rlang .data

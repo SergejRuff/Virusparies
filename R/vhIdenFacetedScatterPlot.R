@@ -54,6 +54,23 @@
 #'
 #' plot
 #'
+#' # plot 2 with custom data
+#' custom_plot <- VhgIdenFacetedScatterPlot(vh_file,
+#'                                          cutoff = 1e-4,
+#'                                          theme_choice = "dark",
+#'                                          title = "Custom Scatterplot",
+#'                                          title_size = 18,
+#'                                          title_face = "italic",
+#'                                          title_colour = "orange",
+#'                                          xlabel = "Custom X Label",
+#'                                          ylabel = "Custom Y Label",
+#'                                          axis_title_size = 14,
+#'                                          legend_position = "right",
+#'                                          true_colour = "green",
+#'                                          false_colour = "purple")
+#'
+#' custom_plot
+#'
 #'
 #' @import ggplot2
 #' @importFrom stats runif
@@ -92,6 +109,12 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
     stop(paste("Error: Column", groupby, "does not exist in vh_file."))
   }
 
+  # Find the smallest value greater than 0 in ViralRefSeq_E
+  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+
+  # Replace all 0 values with the smallest positive value
+  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
@@ -106,7 +129,8 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
     facet_wrap(~.data[[groupby]], ncol = wrap_ncol)+
     labs(x=xlabel,
          y=ylabel,
-         title=title)+
+         title=title,
+         subtitle=subtitle)+
     theme_selected+
     theme(legend.position = legend_position)+
     guides(fill=guide_legend(title=legend_title))+

@@ -108,6 +108,7 @@ vh_file <- importVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
 plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+plot
 
 # return sample_run inside plot object
 print(plot$sample_run)
@@ -125,5 +126,6 @@ plot_custom <- vhRunsBarplot(
   plot_text_size = 5, # Larger text label size
   plot_text_colour = "red" # Red text labels
 )
+plot_custom
 
 }

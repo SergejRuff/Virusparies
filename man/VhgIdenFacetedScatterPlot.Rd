@@ -116,5 +116,22 @@ plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
 
 plot
 
+# plot 2 with custom data
+custom_plot <- VhgIdenFacetedScatterPlot(vh_file,
+                                         cutoff = 1e-4,
+                                         theme_choice = "dark",
+                                         title = "Custom Scatterplot",
+                                         title_size = 18,
+                                         title_face = "italic",
+                                         title_colour = "orange",
+                                         xlabel = "Custom X Label",
+                                         ylabel = "Custom Y Label",
+                                         axis_title_size = 14,
+                                         legend_position = "right",
+                                         true_colour = "green",
+                                         false_colour = "purple")
+
+custom_plot
+
 
 }

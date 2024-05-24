@@ -105,6 +105,12 @@ VhgIdentityScatterPlot <- function(vh_file,
     stop(paste("Error: Column", groupby, "does not exist in vh_file."))
   }
 
+  # Find the smallest value greater than 0 in ViralRefSeq_E
+  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+
+  # Replace all 0 values with the smallest positive value
+  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
 

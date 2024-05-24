@@ -46,13 +46,15 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1 for evalues
-#' VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+#' plot1 <- VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+#' plot1
 #'
 #' # plot 2 for identity
-#' VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+#' plot2 <- VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+#' plot2
 #'
 #' # plot 3 custom arguments used
-#' VhgEvalIdenBoxplot(vh_file,
+#' plot3 <- VhgEvalIdenBoxplot(vh_file,
 #'                   x_column = "best_query",
 #'                   y_column = "ViralRefSeq_E",
 #'                   theme_choice = "grey",
@@ -60,6 +62,7 @@
 #'                   xlabel = "Custom x-axis label: Custom query",
 #'                   ylabel = "Custom y-axis label: Viral Reference Evalue in -log10 scale",
 #'                   legend_position = "right")
+#' plot3
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
