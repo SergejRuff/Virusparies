@@ -237,7 +237,7 @@ VhgEvalIdenBoxplot <- function(vh_file,
 
 
 
-  if(y_column=="ViralRefSeq_E"){
+  if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
 
     print("generating summary stats in dataframe and gt-table outlier extraction for evalue-boxplots")
 
@@ -263,13 +263,17 @@ VhgEvalIdenBoxplot <- function(vh_file,
 
   plot(boxp)
 
-  if(y_column=="ViralRefSeq_E"){
+  if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
     return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
     #return(list(boxp=boxp,outlier=outlier))
   }
 
-  if(y_column=="ViralRefSeq_ident"){
+  if(y_column=="ViralRefSeq_ident"& x_column=="best_query"){
     return(list(boxp=boxp,summary_stats=summary_stats))
+  }
+
+  if(x_column != "best_query"){
+    return(boxp)
   }
 
 
