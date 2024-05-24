@@ -50,7 +50,7 @@
 #'
 #' #eval_table
 #'
-#' @seealso \code{\link{vhEvalIdenBoxplot}}
+#' @seealso \code{\link{VhgEvalIdenBoxplot}}
 #' @import dplyr
 #' @importFrom gt gt fmt_number
 #' @importFrom rlang .data

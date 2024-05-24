@@ -74,7 +74,7 @@ and creates a formatted table using the gt package.Should only be used if the ou
 generated with eval_vs_iden="identity".
 }
 \details{
-This function generates a table for the summary statistics output from the vhEvalIdenBoxplot
+This function generates a table for the summary statistics output from the VhgEvalIdenBoxplot
 function.It formats summary statistics into a table using the gt package.
 }
 \examples{
@@ -91,5 +91,5 @@ vh_file <- importVirusTable(path)
 
 }
 \seealso{
-\code{\link{vhEvalIdenBoxplot}}
+\code{\link{VhgEvalIdenBoxplot}}
 }

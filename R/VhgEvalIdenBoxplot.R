@@ -2,10 +2,10 @@
 #'
 #' @description
 #'  This function generates boxplots comparing either E-values or identity
-#' for each virus group from VirusHunter Hittables results.
+#' for each group from VirusHunter or VirusGatherer Hittables results.
 #'
-#' @param vh_file A data frame containing VirusHunter Hittable results.
-#' @param x_column A character specifying the column containing the virus groups (Default:"best_query").
+#' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
+#' @param x_column A character specifying the column containing the groups (Default:"best_query").
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident" and
 #' "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
@@ -37,7 +37,7 @@
 #' @return A list containing the generated boxplot, summary statistics, and outliers
 #'
 #' @details This function generates boxplots comparing either E-values or identity for each virus
-#' group from the VirusHunters Hittable.
+#' group from the VirusHunter or Gatherer Hittable.
 #' It also calculates summary statistics and  identifies outliers for further analysis.
 #' The user can specify whether to generate boxplots for E-values or identity by setting
 #' the parameter .
@@ -46,13 +46,13 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1 for evalues
-#' vhEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+#' VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
 #'
 #' # plot 2 for identity
-#' vhEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+#' VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 #'
 #' # plot 3 custom arguments used
-#' vhEvalIdenBoxplot(vh_file,
+#' VhgEvalIdenBoxplot(vh_file,
 #'                   x_column = "best_query",
 #'                   y_column = "ViralRefSeq_E",
 #'                   theme_choice = "grey",
@@ -64,7 +64,7 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vhEvalIdenBoxplot <- function(vh_file,
+VhgEvalIdenBoxplot <- function(vh_file,
                               x_column ="best_query",
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,
@@ -90,6 +90,16 @@ vhEvalIdenBoxplot <- function(vh_file,
                               legend_title_face = "bold",
                               legend_text_size = 10
                               ){
+
+  all_names <- names(vh_file)
+  # Check if x_column and y_column exist in vh_file
+  if (!(x_column %in% all_names)) {
+    stop("x_column '", x_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+  }
+  if (!(y_column %in% all_names)) {
+    stop("y_column '", y_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+  }
+
 
 
 

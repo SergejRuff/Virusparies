@@ -34,7 +34,7 @@
 #'
 #' @return A gt table representing the summary statistics
 #'
-#' @details This function generates a table for the summary statistics output from the vhEvalIdenBoxplot
+#' @details This function generates a table for the summary statistics output from the VhgEvalIdenBoxplot
 #' function.It formats summary statistics into a table using the gt package.
 #'
 #' @examples
@@ -49,7 +49,7 @@
 #'
 #' #iden_table
 #'
-#' @seealso \code{\link{vhEvalIdenBoxplot}}
+#' @seealso \code{\link{VhgEvalIdenBoxplot}}
 #' @import gt
 #' @export
 vhIdentityBoxTable <- function(summary_stats_identity,title="Summary Table for RefSeq Identity for each best query",

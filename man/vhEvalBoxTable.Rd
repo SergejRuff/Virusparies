@@ -92,5 +92,5 @@ vh_file <- importVirusTable(path)
 
 }
 \seealso{
-\code{\link{vhEvalIdenBoxplot}}
+\code{\link{VhgEvalIdenBoxplot}}
 }
