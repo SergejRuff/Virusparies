@@ -6,26 +6,85 @@
 \usage{
 vhEvalIdenBoxplot(
   vh_file,
-  eval_vs_iden = "evalue",
+  x_column = "best_query",
+  y_column = "ViralRefSeq_E",
   cut = 1e-05,
+  cut_colour = "#990000",
   theme_choice = "minimal",
-  x_label = NULL
+  flip_coords = TRUE,
+  title = "default",
+  title_size = 16,
+  title_face = "bold",
+  title_colour = "#2a475e",
+  subtitle = "default",
+  subtitle_size = 12,
+  subtitle_face = "bold",
+  subtitle_colour = "#1b2838",
+  xlabel = NULL,
+  ylabel = NULL,
+  axis_title_size = 12,
+  xtext_size = 10,
+  ytext_size = 10,
+  legend_title = "virus family",
+  legend_position = "bottom",
+  legend_title_size = 12,
+  legend_title_face = "bold",
+  legend_text_size = 10
 )
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter Hittable results.}
 
-\item{eval_vs_iden}{Specifies whether to generate boxplots for E-values ("evalue")
-or identity ("identity")}
+\item{x_column}{A character specifying the column containing the virus groups (Default:"best_query").}
 
-\item{cut}{The significance cutoff value for E-values (default: 1e-5)}
+\item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident" and
+"ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
+
+\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
+
+\item{cut_colour}{(optional) The color for the significance cutoff line (default: "#990000").}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "minimal".}
 
-\item{x_label}{(optional): A character indicating new x label asigned by user. Default is NuLL
-(NULl= "virus family query" )}
+\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+
+\item{title}{(optional) A character specifying the title of the plot. Default title is set based on y_column.}
+
+\item{title_size}{(optional) Numeric specifying the size of the title text. Default is 16.}
+
+\item{title_face}{(optional) A character specifying the font face for the title text. Default is "bold".}
+
+\item{title_colour}{(optional) A character specifying the color for the title text. Default is "#2a475e".}
+
+\item{subtitle}{(optional) A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
+
+\item{subtitle_size}{(optional) Numeric specifying the size of the subtitle text. Default is 12.}
+
+\item{subtitle_face}{(optional) A character specifying the font face for the subtitle text. Default is "bold".}
+
+\item{subtitle_colour}{(optional) A character specifying the color for the subtitle text. Default is "#1b2838".}
+
+\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus found in query".}
+
+\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is set based on y_column.}
+
+\item{axis_title_size}{(optional) Numeric specifying the size of the axis title text. Default is 12.}
+
+\item{xtext_size}{(optional) Numeric specifying the size of the x-axis tick labels. Default is 10.}
+
+\item{ytext_size}{(optional) Numeric specifying the size of the y-axis tick labels. Default is 10.}
+
+\item{legend_title}{(optional) A character specifying the title for the legend. Default is "virus family".}
+
+\item{legend_position}{(optional) A character specifying the position of the legend. Default is "bottom".}
+
+\item{legend_title_size}{(optional) Numeric specifying the size of the legend title text. Default is 12.}
+
+\item{legend_title_face}{(optional) A character specifying the font face for the legend title text. Default is "bold".}
+
+\item{legend_text_size}{(optional) Numeric specifying the size of the legend text. Default is 10.}
 }
 \value{
 A list containing the generated boxplot, summary statistics, and outliers
@@ -39,17 +98,26 @@ This function generates boxplots comparing either E-values or identity for each 
 group from the VirusHunters Hittable.
 It also calculates summary statistics and  identifies outliers for further analysis.
 The user can specify whether to generate boxplots for E-values or identity by setting
-the parameter \code{eval_vs_iden}.
+the parameter .
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
-# plot 1: plot boxplot for "evalue"
-eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="evalue",cut = 1e-5)
+# plot 1 for evalues
+vhEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
 
+# plot 2 for identity
+vhEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 
-# plot 2: plot boxplot for "identity"
-identity <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
+# plot 3 custom arguments used
+vhEvalIdenBoxplot(vh_file,
+                  x_column = "best_query",
+                  y_column = "ViralRefSeq_E",
+                  theme_choice = "grey",
+                  subtitle = "Custom subtitle: Identity for custom query",
+                  xlabel = "Custom x-axis label: Custom query",
+                  ylabel = "Custom y-axis label: Viral Reference Evalue in -log10 scale",
+                  legend_position = "right")
 
 }

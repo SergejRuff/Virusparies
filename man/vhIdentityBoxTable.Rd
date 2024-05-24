@@ -82,12 +82,12 @@ path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
-identity <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
+#identity <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
 
 # generate table
-iden_table <- vhEvalBoxTable(identity$summary_stats)
+#iden_table <- vhEvalBoxTable(identity$summary_stats)
 
-iden_table
+#iden_table
 
 }
 \seealso{
