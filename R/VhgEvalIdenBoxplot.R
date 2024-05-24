@@ -249,7 +249,7 @@ VhgEvalIdenBoxplot <- function(vh_file,
 
 
 
-  if(y_column=="ViralRefSeq_ident"){
+  if(y_column=="ViralRefSeq_ident"& x_column=="best_query"){
 
     print("generating summary stats in dataframe and gt-table for identity-boxplots")
 
