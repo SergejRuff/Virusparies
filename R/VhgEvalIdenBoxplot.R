@@ -111,6 +111,12 @@ VhgEvalIdenBoxplot <- function(vh_file,
     stop("y_column '", y_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
+  # Find the smallest value greater than 0 in ViralRefSeq_E
+  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+
+  # Replace all 0 values with the smallest positive value
+  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+
 
 
 
