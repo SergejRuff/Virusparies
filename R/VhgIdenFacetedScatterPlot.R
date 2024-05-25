@@ -134,6 +134,7 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
   min_y <- min(-log10(vh_file$ViralRefSeq_E))
   min_y <- ifelse(min_y > 0, 0, min_y)
 
+
   # Plot the data and color points based on the cutoff condition, faceted by 'best_query'
   iden_refevalue_seperate <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
     geom_point(aes(color = .data$cutoff_met)) +  # Map color to the cutoff condition

@@ -49,6 +49,11 @@ This package includes the following functions:
 \item \code{\link{vhEvalBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
 \item \code{\link{vhIdentityBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
 }
+
+\strong{Export}:
+\itemize{
+\item \code{\link{exportVirusGt}}: Export Graphical Tables.
+}
 }
 
 \seealso{

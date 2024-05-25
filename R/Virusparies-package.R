@@ -23,7 +23,6 @@
 #' \strong{Import}:
 #' \itemize{
 #'   \item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R.
-
 #' }
 #'
 #' \strong{VirushunterGatherer Plots}:
@@ -48,6 +47,10 @@
 #'   \item \code{\link{vhIdentityBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
 #' }
 #'
+#'\strong{Export}:
+#' \itemize{
+#'   \item \code{\link{exportVirusGt}}: Export Graphical Tables.
+#' }
 #'
 #'
 #' @name Virusparies
