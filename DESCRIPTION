@@ -16,6 +16,7 @@ RoxygenNote: 7.3.1
 Imports: 
     dplyr,
     ggplot2,
+    grDevices,
     gt,
     rlang,
     stats,
