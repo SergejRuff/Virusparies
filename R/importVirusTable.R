@@ -16,6 +16,12 @@
 #'
 #' print(head(vh_file))
 #'
+#' # import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- importVirusTable(path2)
+#'
+#' print(head(vg_file))
+#'
 #'
 #' @importFrom utils read.table
 #' @export

@@ -72,6 +72,14 @@
 #'
 #'plot(custom_plot)
 #'
+#'# import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- importVirusTable(path2)
+#'
+#' # vgplot: virusgatherer plot with SRA_run as custom grouping
+#' vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "SRA_run")
+#' vgplot
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export

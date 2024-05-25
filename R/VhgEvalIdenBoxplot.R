@@ -64,6 +64,14 @@
 #'                   legend_position = "right")
 #' plot3
 #'
+#' # import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- importVirusTable(path2)
+#'
+#' # plot 4: virusgatherer plot with SRA_run as custom grouping
+#' plot4 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
+#' plot4
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
