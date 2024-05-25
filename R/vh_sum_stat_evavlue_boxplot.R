@@ -25,8 +25,9 @@ vh_sum_stat_evavlue_boxplot <- function(vh_file, cutoff) {
     c(median = median(x), Q1 = quantile(x, 0.25), Q3 = quantile(x, 0.75), min = min(x), max = max(x))
   })
 
+
   summary_stats <- data.frame(
-    best_query = summary_stats$best_query,
+    best_query = summary_stats[,1],
     median = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 1],
     Q1 = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 2],
     Q3 = summary_stats[, "-log10(vh_file$ViralRefSeq_E)"][, 3],

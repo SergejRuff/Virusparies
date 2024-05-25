@@ -4,10 +4,18 @@
 \alias{summary_stats_identity}
 \title{Calculate summary statistics for identity}
 \usage{
-summary_stats_identity(vh_file)
+summary_stats_identity(
+  vh_file,
+  group = "best_query",
+  ycol = "ViralRefSeq_ident"
+)
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter hittables.}
+
+\item{group}{column to group stats by}
+
+\item{ycol}{column, which specifies identity or evalue.}
 }
 \value{
 A data frame containing summary statistics including median,

@@ -3,6 +3,8 @@
 #' @description This function calculates summary statistics for identity based on the input virus data.
 #'
 #' @param vh_file A data frame containing VirusHunter hittables.
+#' @param group column to group stats by
+#' @param ycol column, which specifies identity or evalue.
 #'
 #' @return A data frame containing summary statistics including median,
 #' Q1 (1st quartile), Q3 (3rd quartile), minimum, and maximum identity values for each virus group
@@ -13,18 +15,23 @@
 #' @importFrom dplyr group_by summarise arrange desc
 #' @importFrom rlang .data
 #' @keywords internal
-summary_stats_identity <- function(vh_file){
+summary_stats_identity <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
+
+  if(ycol == "ViralRefSeq_E"){
+
+    vh_file[[ycol]] <- -log10(vh_file[[ycol]])
+  }
 
   ## calculate summary stats for identity
 
   summary_stats_identity <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(.data[[group]]) %>%
     summarise(
-      median = median(.data$ViralRefSeq_ident),
-      Q1 = quantile(.data$ViralRefSeq_ident, 0.25),
-      Q3 = quantile(.data$ViralRefSeq_ident, 0.75),
-      min= min(.data$ViralRefSeq_ident),
-      max = max(.data$ViralRefSeq_ident)
+      median = median(.data[[ycol]]),
+      Q1 = quantile(.data[[ycol]], 0.25),
+      Q3 = quantile(.data[[ycol]], 0.75),
+      min= min(.data[[ycol]]),
+      max = max(.data[[ycol]])
     ) %>%
     arrange(desc(median))
 

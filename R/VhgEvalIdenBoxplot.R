@@ -275,6 +275,15 @@ VhgEvalIdenBoxplot <- function(vh_file,
 
   }
 
+  if(y_column=="ViralRefSeq_E"& x_column != "best_query"){
+    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
+    outlier <- find_outlier_eval_box(vh_file,group=x_column)
+  }
+
+  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
+    summary_stats <- summary_stats_identity(vh_file,group=x_column)
+  }
+
 
 
 
@@ -289,9 +298,15 @@ VhgEvalIdenBoxplot <- function(vh_file,
     return(list(boxp=boxp,summary_stats=summary_stats))
   }
 
-  if(x_column != "best_query"){
-    return(boxp)
+  if(y_column=="ViralRefSeq_E"& x_column != "best_query"){
+    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
   }
+
+
+  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
+    return(list(boxp=boxp,summary_stats=summary_stats))
+  }
+
 
 
 }

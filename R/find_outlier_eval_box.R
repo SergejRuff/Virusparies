@@ -3,6 +3,7 @@
 #' @description This function detects outliers in a dataset using the interquartile range (IQR) method.
 #'
 #' @param vh_file  A numeric vector or column of a data frame
+#' @param group column to group stats by
 #'
 #' @return A dataframe indicating outliers in the input data
 #'
@@ -13,7 +14,7 @@
 #' @importFrom dplyr group_by mutate
 #' @importFrom rlang .data
 #' @keywords internal
-find_outlier_eval_box <- function(vh_file){
+find_outlier_eval_box <- function(vh_file,group="best_query"){
 
   ## detect outlier in boxplot
 
@@ -22,7 +23,7 @@ find_outlier_eval_box <- function(vh_file){
   }
 
   outlier <- vh_file %>%
-    group_by(vh_file$best_query) %>%
+    group_by(vh_file[[group]]) %>%
     mutate(outlier = ifelse(find_outlier(-log10(.data$ViralRefSeq_E)), -log10(.data$ViralRefSeq_E), NA))
 
   outlier <- outlier[!is.na(outlier$outlier),]
