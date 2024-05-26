@@ -6,8 +6,8 @@
 #'
 #' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param x_column A character specifying the column containing the groups (Default:"best_query").
-#' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident" and
-#' "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
+#' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
+#' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -72,6 +72,11 @@
 #' plot4 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
 #' plot4
 #'
+#' # plot 5: Virusgatherer plot for SRA_runs agains contig length
+#' plot5 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
+#' plot5
+#'
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
@@ -129,6 +134,9 @@ VhgEvalIdenBoxplot <- function(vh_file,
   } else if (y_column == "ViralRefSeq_ident") {
     cutoff <- NULL
     default_ylabel <- "Viral Reference Identity in %"  # Default y-axis label
+  } else if (y_column == "contig_len") {
+    cutoff <- NULL
+    default_ylabel <- "Contig Length"  # Default y-axis label
   } else {
     stop("Invalid y_column value provided.")
   }
@@ -137,6 +145,8 @@ VhgEvalIdenBoxplot <- function(vh_file,
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
 
+
+  # change values of evalues to -log10
   if(y_column == "ViralRefSeq_E"){
 
     y_aes <- -log10(vh_file[[y_column]])
@@ -144,6 +154,7 @@ VhgEvalIdenBoxplot <- function(vh_file,
     y_aes <- vh_file[[y_column]]
   }
 
+  # add default subtitle for E-values
   if(y_column=="ViralRefSeq_E"){
     # define a cut off fot evalue significance
     default_sub <- paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")")
@@ -153,10 +164,14 @@ VhgEvalIdenBoxplot <- function(vh_file,
     default_sub <- NULL
   }
 
+  # set default titles
   if(y_column=="ViralRefSeq_E"){
     # define a cut off fot evalue significance
     default_titl <- "Boxplot plotting viral Refrence E-Values for each virus family"
 
+  }else if (y_column == "contig_len") {
+
+    default_titl <- "Boxplot plotting contig length for each virus family"  # Default y-axis label
   }else{
 
     default_titl <- "Boxplot plotting viral Refrence Identity for each virus family"
@@ -181,7 +196,7 @@ VhgEvalIdenBoxplot <- function(vh_file,
   }
 
   # Update xlabel to use user-provided label if provided
-  xlabel <- ifelse(!is.null(xlabel), xlabel, "Virus found in query")
+  xlabel <- ifelse(!is.null(xlabel), xlabel, "Group in query")
   # Determine the y-axis label based on user-provided ylabel or default label
   ylabel <- ifelse(!is.null(ylabel), ylabel, default_ylabel)
 
@@ -193,13 +208,20 @@ VhgEvalIdenBoxplot <- function(vh_file,
 
   if(y_column=="ViralRefSeq_E"){
 
-    message("boxplot plotting RefSeq evalues for specified group (x_column)")
+    message("boxplot plotting RefSeq evalues for specified groups (x_column)")
     print(paste0("using the following cut off: ", cutoff))
   }
 
   if(y_column=="ViralRefSeq_ident"){
 
-    print("boxplot plotting RefSeq Identity for specified group (x_column)")
+    print("boxplot plotting RefSeq Identity for specified groups (x_column)")
+
+
+  }
+
+  if(y_column=="contig_len"){
+
+    print("boxplot plotting contig length for specified groups (x_column)")
 
 
   }
@@ -284,6 +306,14 @@ VhgEvalIdenBoxplot <- function(vh_file,
     summary_stats <- summary_stats_identity(vh_file,group=x_column)
   }
 
+  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
+    summary_stats <- summary_stats_identity(vh_file,group=x_column)
+  }
+
+  if(y_column=="contig_len"& x_column != "best_query"){
+    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
+  }
+
 
 
 
@@ -303,7 +333,7 @@ VhgEvalIdenBoxplot <- function(vh_file,
   }
 
 
-  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
+  if(y_column=="contig_len"& x_column != "best_query"){
     return(list(boxp=boxp,summary_stats=summary_stats))
   }
 

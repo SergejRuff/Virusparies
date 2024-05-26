@@ -37,8 +37,8 @@ VhgEvalIdenBoxplot(
 
 \item{x_column}{A character specifying the column containing the groups (Default:"best_query").}
 
-\item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident" and
-"ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
+\item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
+"contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
 
@@ -130,5 +130,10 @@ vg_file <- importVirusTable(path2)
 # plot 4: virusgatherer plot with SRA_run as custom grouping
 plot4 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
 plot4
+
+# plot 5: Virusgatherer plot for SRA_runs agains contig length
+plot5 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
+plot5
+
 
 }
