@@ -1,7 +1,7 @@
-#' @title creatTableIdentityBox: Create a formatted table using the gt package for vhEvalIdenBoxplot
+#' @title creatTableIdentityBox: Create a formatted table using the gt package for VhgBoxplot
 #' with eval_vs_iden="identity"
 #'
-#' @description This function takes the summary statistics output from vhEvalIdenBoxplot
+#' @description This function takes the summary statistics output from VhgBoxplot
 #' and creates a formatted table using the gt package.Should only be used if the output stats were
 #' generated with eval_vs_iden="identity".
 #'
@@ -34,7 +34,7 @@
 #'
 #' @return A gt table representing the summary statistics
 #'
-#' @details This function generates a table for the summary statistics output from the VhgEvalIdenBoxplot
+#' @details This function generates a table for the summary statistics output from the VhgBoxplot
 #' function.It formats summary statistics into a table using the gt package.
 #'
 #' @examples
@@ -42,14 +42,14 @@
 #' vh_file <- importVirusTable(path)
 #'
 #'# plot 1: plot boxplot for "identity"
-#' #identity <- vhEvalIdenBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
+#' #identity <- VhgBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
 #'
 #' # generate table
 #' #iden_table <- vhEvalBoxTable(identity$summary_stats)
 #'
 #' #iden_table
 #'
-#' @seealso \code{\link{VhgEvalIdenBoxplot}}
+#' @seealso \code{\link{VhgBoxplot}}
 #' @import gt
 #' @export
 vhIdentityBoxTable <- function(summary_stats_identity,title="Summary Table for RefSeq Identity for each best query",

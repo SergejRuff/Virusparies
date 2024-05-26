@@ -1,4 +1,4 @@
-#' @title vhEvalIdenBoxplot: Generate boxplots comparing E-values or identity for each virus group
+#' @title VhgBoxplot: Generate boxplots comparing E-values or identity for each virus group
 #'
 #' @description
 #'  This function generates boxplots comparing either E-values or identity
@@ -46,15 +46,15 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1 for evalues
-#' plot1 <- VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+#' plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
 #' plot1
 #'
 #' # plot 2 for identity
-#' plot2 <- VhgEvalIdenBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+#' plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 #' plot2
 #'
 #' # plot 3 custom arguments used
-#' plot3 <- VhgEvalIdenBoxplot(vh_file,
+#' plot3 <- VhgBoxplot(vh_file,
 #'                   x_column = "best_query",
 #'                   y_column = "ViralRefSeq_E",
 #'                   theme_choice = "grey",
@@ -69,18 +69,18 @@
 #' vg_file <- importVirusTable(path2)
 #'
 #' # plot 4: virusgatherer plot with SRA_run as custom grouping
-#' plot4 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
+#' plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
 #' plot4
 #'
 #' # plot 5: Virusgatherer plot for SRA_runs agains contig length
-#' plot5 <- VhgEvalIdenBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
+#' plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
 #' plot5
 #'
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-VhgEvalIdenBoxplot <- function(vh_file,
+VhgBoxplot <- function(vh_file,
                               x_column ="best_query",
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,

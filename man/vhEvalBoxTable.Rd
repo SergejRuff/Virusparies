@@ -2,7 +2,7 @@
 % Please edit documentation in R/vhEvalBoxTable.R
 \name{vhEvalBoxTable}
 \alias{vhEvalBoxTable}
-\title{vh_refeval_iden_boxplot: Create a formatted table using the gt package for vhEvalIdenBoxplot
+\title{vh_refeval_iden_boxplot: Create a formatted table using the gt package for VhgBoxplot
 with eval_vs_iden="evalue"}
 \usage{
 vhEvalBoxTable(
@@ -69,12 +69,12 @@ row and col_everyrow = FALSE colours every second row. Default is FALSE.}
 A formatted gt table
 }
 \description{
-This function takes the summary statistics output from vhEvalIdenBoxplot
+This function takes the summary statistics output from VhgBoxplot
 and creates a formatted table using the gt package.Should only be used if the output stats were
 generated with eval_vs_iden="evalue".
 }
 \details{
-This function generates a table for the summary statistics output from the vhEvalIdenBoxplot
+This function generates a table for the summary statistics output from the VhgBoxplot
 function.It formats summary statistics into a table using the gt package.
 }
 \examples{
@@ -82,7 +82,7 @@ path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
 # plot 1: plot boxplot for "evalue"
-#eval <- vhEvalIdenBoxplot(vh_file,eval_vs_iden = "evalue",cut = 1e-5)
+#eval <- VhgBoxplot(vh_file,eval_vs_iden = "evalue",cut = 1e-5)
 
 
 # generate table
@@ -92,5 +92,5 @@ vh_file <- importVirusTable(path)
 
 }
 \seealso{
-\code{\link{VhgEvalIdenBoxplot}}
+\code{\link{VhgBoxplot}}
 }
