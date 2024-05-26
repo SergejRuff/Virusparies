@@ -4,12 +4,18 @@
 \alias{find_outlier_eval_box}
 \title{find_outlier_eval_box: Detect outliers in a dataset using the interquartile range (IQR) method}
 \usage{
-find_outlier_eval_box(vh_file, group = "best_query")
+find_outlier_eval_box(
+  vh_file,
+  group = "best_query",
+  y_column = "ViralRefSeq_E"
+)
 }
 \arguments{
 \item{vh_file}{A numeric vector or column of a data frame}
 
 \item{group}{column to group stats by}
+
+\item{y_column}{column with metric values.}
 }
 \value{
 A dataframe indicating outliers in the input data

@@ -312,6 +312,7 @@ VhgBoxplot <- function(vh_file,
 
   if(y_column=="contig_len"& x_column != "best_query"){
     summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
+    outlier <- find_outlier_eval_box(vh_file,group=x_column,y_column=y_column)
   }
 
 
@@ -334,7 +335,7 @@ VhgBoxplot <- function(vh_file,
 
 
   if(y_column=="contig_len"& x_column != "best_query"){
-    return(list(boxp=boxp,summary_stats=summary_stats))
+    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
   }
 
 
