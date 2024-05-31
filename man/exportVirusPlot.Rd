@@ -14,7 +14,7 @@ exportVirusPlot(
 )
 }
 \arguments{
-\item{plot_object}{A graphical object to be exported.}
+\item{plot_object}{A plot object to be exported.}
 
 \item{file_name}{Name of the output file. Default is "plot.png".}
 

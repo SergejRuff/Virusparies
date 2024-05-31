@@ -116,7 +116,7 @@ VhgBoxplot <- function(vh_file,
     stop("y_column '", y_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
-  is_vh_file_empty(vh_file)
+  is_file_empty(vh_file)
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
@@ -155,8 +155,8 @@ VhgBoxplot <- function(vh_file,
 
     vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
-    message(paste0("after removing rows based on evalue the hittable has: ",nrow(vh_file)," rows left."))
-    is_vh_file_empty(vh_file)
+    message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
+    is_file_empty(vh_file)
 
   }
 

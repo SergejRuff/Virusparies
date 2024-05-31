@@ -1,15 +1,16 @@
 #' Check if hittable is empty
 #'
-#' @param vh_file a Virushuntegatherer hittable
+#' @param file a Virushuntegatherer hittable
 #'
 #' @details
-#' Internal helper function which checks if hittables are empty. Returns an error message if they are.
+#' Internal helper function which checks if input is empty.objects with 0 observations (hittable,summarystats)
+#' returns an error.
 #'
 #'
 #' @keywords internal
-is_vh_file_empty <- function(vh_file) {
-  if (nrow(vh_file) == 0) {
-    stop("Error: Hittables has zero rows.")
+is_file_empty <- function(file) {
+  if (nrow(file) == 0) {
+    stop("Error: Input has zero rows.")
   }
 }
 
@@ -35,3 +36,21 @@ plot_boxplot_message <- function(y_column, x_column, cutoff) {
     warning("y_column does not match any expected values.")
   }
 }
+
+
+#' Internal function: adds colour blind support
+#'
+#' @param plot plot obj
+#' @param color color
+#'
+#' @return plot
+#' @importFrom colorBlindness cvdPlot
+#'
+#' @keywords internal
+colorblind_support <- function(plot,color){
+
+  return(cvdPlot(plot=plot,layout=color))
+
+}
+
+

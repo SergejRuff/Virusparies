@@ -23,7 +23,7 @@
 #' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
 #' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
 #' @param legend_title (optional) A character specifying the title of the legend. Default is "virus family".
-#' @param legend_position (optional) The position of the legend. Default is "bottom".
+#' @param legend_position (optional) The position of the legend. Default is "bottom"."none" removes legend.
 #' @param legend_title_size (optional) The size of the legend title. Default is 12.
 #' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
 #' @param legend_text_size (optional) The size of the legend text. Default is 10.
@@ -33,6 +33,16 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
+#' @param colorblind (optional) A character specifying the type of color vision deficiency correction to apply.
+#' Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
+#' "enhanced.protanope", and "enhanced.desaturate".
+#' - "deuteranope": Simulates deuteranopia (green-weakness).
+#' - "protanope": Simulates protanopia (red-weakness).
+#' - "desaturate": Converts colors to grayscale.
+#' - "enhanced": Applies enhanced color vision deficiency correction.
+#' - "enhanced.deuteranope": Enhanced correction for deuteranopia.
+#' - "enhanced.protanope": Enhanced correction for protanopia.
+#' - "enhanced.desaturate": Enhanced correction with desaturation.
 #'
 #' @return A list containing the bar plot and optionally the generated table and processed data
 #'
@@ -90,10 +100,18 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
                           plot_text_position_dodge = 0.9,
                           plot_text_hjust = -0.1,
                           plot_text_vjust = 0.5,
-                          plot_text_colour = "black"
+                          plot_text_colour = "black",
+                          colorblind = NULL
                           ){
 
+  # check if hittable is empty
+  is_file_empty(vh_file)
+
+  # Filter obj
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
+  message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
+  #check if obj has 0 ob after filtering
+  is_file_empty(vh_file)
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
@@ -105,10 +123,8 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
   # Set the subtitle based on the input
   if (subtitle == "default") {
     subtitle_text <- paste0("total number of datasets with hits: ", sum(sample_run$unique_SRA_run))
-  } else if (is.null(subtitle) || subtitle == "") {
-    subtitle_text <- NULL
   } else {
-    subtitle_text <- subtitle
+    subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
   }
 
 
@@ -159,11 +175,14 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
   }
 
 
-  #plot(run_bar)
+  #colorbildness support
+  if(!is.null(colorblind)){
+    run_bar <- colorblind_support(run_bar,colorblind)
+  }
 
 
 
-  return(list(run_bar=run_bar,
+  return(list(plot=run_bar,
               sample_run=sample_run))
 
 
