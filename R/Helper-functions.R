@@ -38,20 +38,7 @@ plot_boxplot_message <- function(y_column, x_column, cutoff) {
 }
 
 
-#' Internal function: adds colour blind support
-#'
-#' @param plot plot obj
-#' @param color color
-#'
-#' @return plot
-#' @importFrom colorBlindness cvdPlot
-#'
-#' @keywords internal
-colorblind_support <- function(plot,color){
 
-  return(cvdPlot(plot=plot,layout=color))
-
-}
 
 
 #' internal: check if all columns exist

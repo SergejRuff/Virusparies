@@ -29,8 +29,7 @@ VhgBoxplot(
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
-  legend_text_size = 10,
-  colorblind = NULL
+  legend_text_size = 10
 )
 }
 \arguments{
@@ -86,19 +85,6 @@ Default is "minimal".}
 \item{legend_title_face}{(optional) A character specifying the font face for the legend title text. Default is "bold".}
 
 \item{legend_text_size}{(optional) Numeric specifying the size of the legend text. Default is 10.}
-
-\item{colorblind}{(optional) A character specifying the type of color vision deficiency correction to apply.
-Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
-"enhanced.protanope", and "enhanced.desaturate".
-\itemize{
-\item "deuteranope": Simulates deuteranopia (green-weakness).
-\item "protanope": Simulates protanopia (red-weakness).
-\item "desaturate": Converts colors to grayscale.
-\item "enhanced": Applies enhanced color vision deficiency correction.
-\item "enhanced.deuteranope": Enhanced correction for deuteranopia.
-\item "enhanced.protanope": Enhanced correction for protanopia.
-\item "enhanced.desaturate": Enhanced correction with desaturation.
-}}
 }
 \value{
 A list containing the generated boxplot, summary statistics, and outliers

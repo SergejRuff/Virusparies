@@ -33,16 +33,6 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
-#' @param colorblind (optional) A character specifying the type of color vision deficiency correction to apply.
-#' Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
-#' "enhanced.protanope", and "enhanced.desaturate".
-#' - "deuteranope": Simulates deuteranopia (green-weakness).
-#' - "protanope": Simulates protanopia (red-weakness).
-#' - "desaturate": Converts colors to grayscale.
-#' - "enhanced": Applies enhanced color vision deficiency correction.
-#' - "enhanced.deuteranope": Enhanced correction for deuteranopia.
-#' - "enhanced.protanope": Enhanced correction for protanopia.
-#' - "enhanced.desaturate": Enhanced correction with desaturation.
 #'
 #' @return A list containing the bar plot and optionally the generated table and processed data
 #'
@@ -100,8 +90,7 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
                           plot_text_position_dodge = 0.9,
                           plot_text_hjust = -0.1,
                           plot_text_vjust = 0.5,
-                          plot_text_colour = "black",
-                          colorblind = NULL
+                          plot_text_colour = "black"
                           ){
 
 
@@ -191,10 +180,7 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
   }
 
 
-  #colorbildness support
-  if(!is.null(colorblind)){
-    run_bar <- colorblind_support(run_bar,colorblind)
-  }
+
 
 
 

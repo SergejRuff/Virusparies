@@ -32,8 +32,7 @@ vhRunsBarplot(
   plot_text_position_dodge = 0.9,
   plot_text_hjust = -0.1,
   plot_text_vjust = 0.5,
-  plot_text_colour = "black",
-  colorblind = NULL
+  plot_text_colour = "black"
 )
 }
 \arguments{
@@ -95,19 +94,6 @@ Default is "default", which calculates the total number of datasets with hits an
 It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
 
 \item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
-
-\item{colorblind}{(optional) A character specifying the type of color vision deficiency correction to apply.
-Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
-"enhanced.protanope", and "enhanced.desaturate".
-\itemize{
-\item "deuteranope": Simulates deuteranopia (green-weakness).
-\item "protanope": Simulates protanopia (red-weakness).
-\item "desaturate": Converts colors to grayscale.
-\item "enhanced": Applies enhanced color vision deficiency correction.
-\item "enhanced.deuteranope": Enhanced correction for deuteranopia.
-\item "enhanced.protanope": Enhanced correction for protanopia.
-\item "enhanced.desaturate": Enhanced correction with desaturation.
-}}
 }
 \value{
 A list containing the bar plot and optionally the generated table and processed data
