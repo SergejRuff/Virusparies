@@ -25,15 +25,20 @@
 #'
 #' @importFrom utils read.table
 #' @export
-importVirusTable <- function(path){
-
+importVirusTable <- function(path) {
   if (!is.character(path)) {
     stop("Error: 'path' argument must be a character string.")
   }
 
+  # Try to read the file and handle any potential errors
+  tryCatch({
+    vh_file <- read.table(file = path, sep = "\t", header = TRUE)
 
-  vh_file <- read.table(file=path,sep = "\t",header = TRUE)
+    # Print success message
+    message("File successfully imported.")
 
-  return(vh_file)
-
+    return(vh_file)
+  }, error = function(e) {
+    stop("Error: Failed to import file. ", e$message)
+  })
 }
