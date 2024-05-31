@@ -104,8 +104,24 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
                           colorblind = NULL
                           ){
 
+
+
+
   # check if hittable is empty
   is_file_empty(vh_file)
+
+  required_columns <- c("ViralRefSeq_E","best_query")
+  all_names <- names(vh_file)
+
+
+  check_columns(vh_file,required_columns)
+  # Check if either "SRA_run" or "run_id" exists in vh_file
+  if (!("SRA_run" %in% all_names) && !("run_id" %in% all_names)) {
+    stop("Neither 'SRA_run' nor 'run_id' found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+  }
+
+  check_input_type(vh_file,"ViralRefSeq_E",2)
+  check_input_type(vh_file,"best_query",1)
 
   # Filter obj
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]

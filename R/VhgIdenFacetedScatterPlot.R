@@ -122,11 +122,19 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
                                      colorblind = NULL
                                      ){
 
+  # check if hittable is complete
+  is_file_empty(vh_file)
+  required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
+  check_columns(vh_file,required_columns)
+  check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
+  check_input_type(vh_file,groupby,1)
+
+
   vh_file$cutoff_met <- vh_file$ViralRefSeq_E <= cutoff
 
-  if (!groupby %in% names(vh_file)) {
-    stop(paste("Error: Column", groupby, "does not exist in vh_file."))
-  }
+  # if (!groupby %in% names(vh_file)) {
+  #   stop(paste("Error: Column", groupby, "does not exist in vh_file."))
+  # }
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])

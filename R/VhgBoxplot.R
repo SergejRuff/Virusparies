@@ -117,16 +117,14 @@ VhgBoxplot <- function(vh_file,
                               colorblind = NULL
                               ){
 
-  all_names <- names(vh_file)
-  # Check if x_column and y_column exist in vh_file
-  if (!(x_column %in% all_names)) {
-    stop("x_column '", x_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
-  }
-  if (!(y_column %in% all_names)) {
-    stop("y_column '", y_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
-  }
+
 
   is_file_empty(vh_file)
+  check_columns(vh_file,x_column)
+  check_columns(vh_file,y_column)
+  check_input_type(vh_file,y_column,2)
+  check_input_type(vh_file,x_column,1)
+
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
@@ -233,7 +231,6 @@ VhgBoxplot <- function(vh_file,
     theme_selected+
     theme(legend.position = legend_position)+
     guides(fill=guide_legend(title=legend_title))+
-    coord_flip()+
     theme(
 
       plot.title = element_text(

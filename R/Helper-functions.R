@@ -54,3 +54,59 @@ colorblind_support <- function(plot,color){
 }
 
 
+#' internal: check if all columns exist
+#'
+#' @param file file
+#' @param columns single column or list of columns
+#'
+#'
+#' @keywords internal
+check_columns <- function(file,columns){
+
+  # Get all column names from file
+  all_names <- names(file)
+
+  # Define the required columns
+  required_columns <- columns
+
+  # Check if each required column exists in file
+  for (col in required_columns) {
+    if (!(col %in% all_names)) {
+      stop("Column '", col, "' not found in file. Available column names: ", paste(all_names, collapse = ", "))
+    }
+  }
+
+}
+
+
+#' internal: check if datatype is correct
+#'
+#' @param vh_file file
+#' @param columns object single or list specifying column
+#' @param option 1 for chacter,2 for numeric
+#'
+#'
+#' @keywords internal
+check_input_type <- function(vh_file, columns, option) {
+  # Check if the option is valid (either 1 or 2)
+  if (!option %in% c(1, 2)) {
+    stop("Invalid option. Please choose 1 for character or 2 for numeric.")
+  }
+
+  # Define the expected class based on the option
+  expected_class <- if (option == 1) "character" else c("numeric", "integer")
+
+  # Check if the specified columns exist in vh_file
+  all_names <- names(vh_file)
+  for (col in columns) {
+    if (!(col %in% all_names)) {
+      stop("Column '", col, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+    }
+
+    # Check the class of the column
+    if (!inherits(vh_file[[col]], expected_class)) {
+      stop("Error: Column '", col, "' must be of type ", expected_class, ".")
+    }
+  }
+}
+

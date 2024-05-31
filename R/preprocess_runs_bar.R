@@ -18,6 +18,14 @@
 #' @keywords internal
 preprocess_runs_bar <- function(vh_file){
 
+  all_names <- names(vh_file)
+  # Check if either "SRA_run" or "run_id" exists in vh_file
+  if (!("SRA_run" %in% all_names) && !("run_id" %in% all_names)) {
+    stop("Neither 'SRA_run' nor 'run_id' found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+  }
+
+  check_columns(vh_file,"best_query")
+
 
   sample_run <- vh_file %>%
     group_by(.data$best_query) %>%

@@ -120,9 +120,14 @@ VhgIdentityScatterPlot <- function(vh_file,
 
   cutoff <- -log10(cutoff)
 
-  if (!groupby %in% names(vh_file)) {
-    stop(paste("Error: Column", groupby, "does not exist in vh_file."))
-  }
+
+
+  # check if hittable is complete
+  is_file_empty(vh_file)
+  required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
+  check_columns(vh_file,required_columns)
+  check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
+  check_input_type(vh_file,groupby,1)
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])

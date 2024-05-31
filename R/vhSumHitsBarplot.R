@@ -115,9 +115,20 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
                              colorblind = NULL){
 
 
+ #check if table is empty
+ is_file_empty(vh_file)
+
+
+ # Define the required columns
+ required_columns <- c("num_hits", "ViralRefSeq_E", "best_query")
+
+ check_columns(vh_file,required_columns)
+ check_input_type(vh_file,c("num_hits", "ViralRefSeq_E"),2)
+ check_input_type(vh_file,"best_query",1)
 
  ## preprocess data for plotting
  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
+ is_file_empty(vh_file)
  vh_group <- vh_sumhitbar_preprocessing(vh_file)
 
  # Apply the selected theme
