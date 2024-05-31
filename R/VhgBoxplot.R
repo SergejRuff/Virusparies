@@ -116,6 +116,8 @@ VhgBoxplot <- function(vh_file,
     stop("y_column '", y_column, "' not found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
+  is_vh_file_empty(vh_file)
+
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
 
@@ -145,6 +147,19 @@ VhgBoxplot <- function(vh_file,
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
 
+  # set cutoff for contig_len and identity
+  if(y_column=="contig_len" | y_column== "ViralRefSeq_ident"){
+
+    message(paste(y_column," column was selected."))
+    message(paste("Removing values with E-values higher than: ",cut,"."))
+
+    vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
+
+    message(paste0("after removing rows based on evalue the hittable has: ",nrow(vh_file)," rows left."))
+    is_vh_file_empty(vh_file)
+
+  }
+
 
   # change values of evalues to -log10
   if(y_column == "ViralRefSeq_E"){
@@ -153,6 +168,7 @@ VhgBoxplot <- function(vh_file,
   }else{
     y_aes <- vh_file[[y_column]]
   }
+
 
   # add default subtitle for E-values
   if(y_column=="ViralRefSeq_E"){
@@ -165,35 +181,19 @@ VhgBoxplot <- function(vh_file,
   }
 
   # set default titles
-  if(y_column=="ViralRefSeq_E"){
-    # define a cut off fot evalue significance
-    default_titl <- "Boxplot plotting viral Refrence E-Values for each virus family"
+  default_titl <- switch(
+    y_column,
+    "ViralRefSeq_E" = "Boxplot plotting viral Reference E-Values for each virus family",
+    "contig_len" = "Boxplot plotting contig length for each virus family",
+    "ViralRefSeq_ident" = "Boxplot plotting viral Reference Identity for each virus family"
+  )
 
-  }else if (y_column == "contig_len") {
 
-    default_titl <- "Boxplot plotting contig length for each virus family"  # Default y-axis label
-  }else{
+  # Set the title
+  title_text <- if (title == "default") default_titl else if (is.null(title) || title == "") NULL else title
 
-    default_titl <- "Boxplot plotting viral Refrence Identity for each virus family"
-  }
-
-  # Set the subtitle based on the input
-  if (title == "default") {
-    title_text <- default_titl
-  } else if (is.null(title) || title == "") {
-    subtitle_text <- NULL
-  } else {
-    title_text <- title
-  }
-
-  # Set the subtitle based on the input
-  if (subtitle == "default") {
-    subtitle_text <- default_sub
-  } else if (is.null(subtitle) || subtitle == "") {
-    subtitle_text <- NULL
-  } else {
-    subtitle_text <- subtitle
-  }
+  # Set the subtitle
+  subtitle_text <- if (subtitle == "default") default_sub else if (is.null(subtitle) || subtitle == "") NULL else subtitle
 
   # Update xlabel to use user-provided label if provided
   xlabel <- ifelse(!is.null(xlabel), xlabel, "Group in query")
@@ -206,25 +206,8 @@ VhgBoxplot <- function(vh_file,
   ### generate boxplot ###
   ########################
 
-  if(y_column=="ViralRefSeq_E"){
-
-    message("boxplot plotting RefSeq evalues for specified groups (x_column)")
-    print(paste0("using the following cut off: ", cutoff))
-  }
-
-  if(y_column=="ViralRefSeq_ident"){
-
-    print("boxplot plotting RefSeq Identity for specified groups (x_column)")
-
-
-  }
-
-  if(y_column=="contig_len"){
-
-    print("boxplot plotting contig length for specified groups (x_column)")
-
-
-  }
+  # print message to console.
+  plot_boxplot_message(y_column=y_column,x_column=x_column,cutoff)
 
 
 
@@ -278,7 +261,6 @@ VhgBoxplot <- function(vh_file,
 
   if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
 
-    print("generating summary stats in dataframe and gt-table outlier extraction for evalue-boxplots")
 
     summary_stats <- vh_sum_stat_evavlue_boxplot(vh_file,cutoff)
     outlier <- find_outlier_eval_box(vh_file)
@@ -290,7 +272,7 @@ VhgBoxplot <- function(vh_file,
 
   if(y_column=="ViralRefSeq_ident"& x_column=="best_query"){
 
-    print("generating summary stats in dataframe and gt-table for identity-boxplots")
+
 
     summary_stats <- summary_stats_identity(vh_file)
 
@@ -320,23 +302,17 @@ VhgBoxplot <- function(vh_file,
 
   #plot(boxp)
 
-  if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
-    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
-    #return(list(boxp=boxp,outlier=outlier))
+  # Prepare the results list
+  results <- list(boxp = boxp, summary_stats = summary_stats)
+
+  # Add outliers if applicable
+  if (y_column == "ViralRefSeq_E" || y_column == "contig_len") {
+    results$outlier <- outlier
   }
 
-  if(y_column=="ViralRefSeq_ident"& x_column=="best_query"){
-    return(list(boxp=boxp,summary_stats=summary_stats))
-  }
+  # Return the results list
+  return(results)
 
-  if(y_column=="ViralRefSeq_E"& x_column != "best_query"){
-    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
-  }
-
-
-  if(y_column=="contig_len"& x_column != "best_query"){
-    return(list(boxp=boxp,summary_stats=summary_stats,outlier=outlier))
-  }
 
 
 
