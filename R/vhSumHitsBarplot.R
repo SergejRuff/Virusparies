@@ -36,6 +36,16 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
+#' @param colorblind (optional) A character specifying the type of color vision deficiency correction to apply.
+#' Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
+#' "enhanced.protanope", and "enhanced.desaturate".
+#' - "deuteranope": Simulates deuteranopia (green-weakness).
+#' - "protanope": Simulates protanopia (red-weakness).
+#' - "desaturate": Converts colors to grayscale.
+#' - "enhanced": Applies enhanced color vision deficiency correction.
+#' - "enhanced.deuteranope": Enhanced correction for deuteranopia.
+#' - "enhanced.protanope": Enhanced correction for protanopia.
+#' - "enhanced.desaturate": Enhanced correction with desaturation.
 #'
 #'
 #' @return A list containing the generated bar plot and processed data
@@ -101,7 +111,8 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
                              plot_text_position_dodge = 0.9,
                              plot_text_hjust = -0.1,
                              plot_text_vjust = 0.5,
-                             plot_text_colour = "black"){
+                             plot_text_colour = "black",
+                             colorblind = NULL){
 
 
 
@@ -167,6 +178,12 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
  if (flip_coords) {
     sum_plot <- sum_plot + coord_flip()
  }
+
+ #colorbildness support
+ if(!is.null(colorblind)){
+     sum_plot <- colorblind_support(sum_plot,colorblind)
+ }
+
 
 
  #plot(sum_plot)

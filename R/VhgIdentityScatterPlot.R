@@ -33,6 +33,16 @@
 #' @param legend_title_size (optional) The size of the legend title text. Default is 12.
 #' @param legend_title_face (optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".
 #' @param legend_text_size (optional) The size of the legend text. Default is 10.
+#' @param colorblind (optional) A character specifying the type of color vision deficiency correction to apply.
+#' Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
+#' "enhanced.protanope", and "enhanced.desaturate".
+#' - "deuteranope": Simulates deuteranopia (green-weakness).
+#' - "protanope": Simulates protanopia (red-weakness).
+#' - "desaturate": Converts colors to grayscale.
+#' - "enhanced": Applies enhanced color vision deficiency correction.
+#' - "enhanced.deuteranope": Enhanced correction for deuteranopia.
+#' - "enhanced.protanope": Enhanced correction for protanopia.
+#' - "enhanced.desaturate": Enhanced correction with desaturation.
 #'
 #' @return A ggplot object representing the scatter plot.
 #'
@@ -105,7 +115,8 @@ VhgIdentityScatterPlot <- function(vh_file,
                                   legend_position = "bottom",
                                   legend_title_size = 12,
                                   legend_title_face = "bold",
-                                  legend_text_size = 10){
+                                  legend_text_size = 10,
+                                  colorblind = NULL){
 
   cutoff <- -log10(cutoff)
 
@@ -169,6 +180,11 @@ VhgIdentityScatterPlot <- function(vh_file,
       limits = c(0, 105),
       breaks = seq(0, 100, by = 10)
     )
+
+  #colorbildness support
+  if(!is.null(colorblind)){
+    iden_refevalue <- colorblind_support(iden_refevalue,colorblind)
+  }
 
   #plot(iden_refevalue)
 

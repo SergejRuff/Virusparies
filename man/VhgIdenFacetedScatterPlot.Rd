@@ -30,7 +30,8 @@ VhgIdenFacetedScatterPlot(
   legend_text_size = 10,
   true_colour = "blue",
   false_colour = "red",
-  wrap_ncol = 2
+  wrap_ncol = 2,
+  colorblind = NULL
 )
 }
 \arguments{
@@ -88,6 +89,19 @@ Default is "minimal".}
 \item{false_colour}{(optional) The color for points that do not meet the cutoff condition. Default is "red".}
 
 \item{wrap_ncol}{(optional) The number of columns for faceting. Default is 2.}
+
+\item{colorblind}{(optional) A character specifying the type of color vision deficiency correction to apply.
+Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
+"enhanced.protanope", and "enhanced.desaturate".
+\itemize{
+\item "deuteranope": Simulates deuteranopia (green-weakness).
+\item "protanope": Simulates protanopia (red-weakness).
+\item "desaturate": Converts colors to grayscale.
+\item "enhanced": Applies enhanced color vision deficiency correction.
+\item "enhanced.deuteranope": Enhanced correction for deuteranopia.
+\item "enhanced.protanope": Enhanced correction for protanopia.
+\item "enhanced.desaturate": Enhanced correction with desaturation.
+}}
 }
 \value{
 A ggplot object representing the scatterplot.

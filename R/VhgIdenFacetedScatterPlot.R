@@ -35,6 +35,16 @@
 #' @param true_colour (optional) The color for points that meet the cutoff condition. Default is "blue".
 #' @param false_colour (optional) The color for points that do not meet the cutoff condition. Default is "red".
 #' @param wrap_ncol (optional) The number of columns for faceting. Default is 2.
+#' @param colorblind (optional) A character specifying the type of color vision deficiency correction to apply.
+#' Possible values are NULL (default), "deuteranope", "protanope", "desaturate", "enhanced", "enhanced.deuteranope",
+#' "enhanced.protanope", and "enhanced.desaturate".
+#' - "deuteranope": Simulates deuteranopia (green-weakness).
+#' - "protanope": Simulates protanopia (red-weakness).
+#' - "desaturate": Converts colors to grayscale.
+#' - "enhanced": Applies enhanced color vision deficiency correction.
+#' - "enhanced.deuteranope": Enhanced correction for deuteranopia.
+#' - "enhanced.protanope": Enhanced correction for protanopia.
+#' - "enhanced.desaturate": Enhanced correction with desaturation.
 #'
 #' @return A ggplot object representing the scatterplot.
 #'
@@ -108,7 +118,8 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
                                      legend_text_size = 10,
                                      true_colour = "blue",
                                      false_colour = "red",
-                                     wrap_ncol = 2
+                                     wrap_ncol = 2,
+                                     colorblind = NULL
                                      ){
 
   vh_file$cutoff_met <- vh_file$ViralRefSeq_E <= cutoff
@@ -170,6 +181,11 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
       limits = c(0, 105),
       breaks = seq(0, 100, by = 10)
     )
+
+  #colorbildness support
+  if(!is.null(colorblind)){
+    iden_refevalue_seperate <- colorblind_support(iden_refevalue_seperate,colorblind)
+  }
 
   #plot(iden_refevalue_seperate)
 
