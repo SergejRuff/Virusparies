@@ -78,7 +78,8 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-vhRunsBarplot <- function(vh_file,cut = 1e-5,
+vhRunsBarplot <- function(vh_file,
+                          cut = 1e-5,
                           theme_choice = "minimal",
                           flip_coords = TRUE,
                           title = "Number of datasets with hits found for each Virus group",
@@ -113,6 +114,16 @@ vhRunsBarplot <- function(vh_file,cut = 1e-5,
 
   # check if hittable is empty
   is_file_empty(vh_file)
+
+  # check arguments
+  arg_character(theme_choice)
+  arg_character(legend_position)
+  arg_character(colormap)
+  arg_logical(flip_coords)
+  arg_logical(colorblind_support)
+
+
+
 
   required_columns <- c("ViralRefSeq_E","best_query")
   all_names <- names(vh_file)

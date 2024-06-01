@@ -130,6 +130,13 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
  check_input_type(vh_file,c("num_hits", "ViralRefSeq_E"),2)
  check_input_type(vh_file,"best_query",1)
 
+ # check arguments
+ arg_character(theme_choice)
+ arg_character(legend_position)
+ arg_character(colormap)
+ arg_logical(flip_coords)
+ arg_logical(colorblind_support)
+
  ## preprocess data for plotting
  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
  is_file_empty(vh_file)

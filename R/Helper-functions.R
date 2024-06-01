@@ -141,3 +141,45 @@ colorbildsupport_ <- function(plot,option){
 }
 
 
+#' checks if correct datatype is provided to function (character check)
+#'
+#' @param name argument from function.
+#'
+#'
+#' @keywords internal
+arg_character <- function(name) {
+  if (!is.character(name)) {
+    errorMessage <- paste("Input argument", deparse(substitute(name)), "must be a character")
+    stop(errorMessage)
+  }
+}
+
+#' checks if correct datatype is provided to function (numeric check)
+#'
+#' @param name argument from function.
+#'
+#' @details
+#' currently not in use. Might be in a later version.
+#'
+#'
+#'
+#' @keywords internal
+arg_numeric_or_integer <- function(name) {
+  if (!(is.numeric(name) || is.integer(name))) {
+    errorMessage <- paste("Input argument", deparse(substitute(name)), "must be numeric or integer")
+    stop(errorMessage)
+  }
+}
+
+#' checks if correct datatype is provided to function (logical check)
+#'
+#' @param name argument from function.
+#'
+#'
+#' @keywords internal
+arg_logical <- function(name) {
+  if (!is.logical(name)) {
+    errorMessage <- paste("Input argument", deparse(substitute(name)), "must be logical")
+    stop(errorMessage)
+  }
+}

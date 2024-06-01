@@ -133,6 +133,12 @@ VhgIdentityScatterPlot <- function(vh_file,
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(vh_file,groupby,1)
 
+  # check arguments
+  arg_character(theme_choice)
+  arg_character(legend_position)
+  arg_character(colormap)
+  arg_logical(colorblind_support)
+
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
 

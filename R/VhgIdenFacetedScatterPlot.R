@@ -133,6 +133,12 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(vh_file,groupby,1)
 
+  # check arguments
+  arg_character(theme_choice)
+  arg_character(legend_position)
+  arg_character(colormap)
+  arg_logical(colorblind_support)
+
 
   vh_file$cutoff_met <- vh_file$ViralRefSeq_E <= cutoff
 
