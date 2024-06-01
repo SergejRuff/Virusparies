@@ -272,6 +272,8 @@ VhgBoxplot <- function(vh_file,
     boxp <- boxp+geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
 
+
+
   # add colorblind support
   if(colorblind_support){
     boxp<- colorbildsupport(boxp,colormap)

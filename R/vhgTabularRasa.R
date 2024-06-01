@@ -1,4 +1,4 @@
-#' @title creatTableIdentityBox: Create a formatted table using the gt package for VhgBoxplot
+#' @title vhgTabularRasa: Create a formatted table using the gt package for VhgBoxplot
 #' with eval_vs_iden="identity"
 #'
 #' @description This function takes the summary statistics output from VhgBoxplot
@@ -52,7 +52,7 @@
 #' @seealso \code{\link{VhgBoxplot}}
 #' @import gt
 #' @export
-vhIdentityBoxTable <- function(summary_stats_identity,title="Summary Table for RefSeq Identity for each best query",
+vhgTabularRasa <- function(summary_stats_identity,title="Summary Table for RefSeq Identity for each best query",
                                title_align = "left",names_=NULL,align = "left",subtit =NULL,
                                data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                                title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
@@ -60,7 +60,7 @@ vhIdentityBoxTable <- function(summary_stats_identity,title="Summary Table for R
 
 
   if(is.null(names_)){
-    names_ <- c("Best Query","median","Q1","Q3","min","max")
+    names_ <- names(summary_stats_identity)
   }
 
   summary_stats_identity <- setNames(summary_stats_identity, names_)
