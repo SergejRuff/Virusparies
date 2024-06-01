@@ -35,6 +35,19 @@
 #' @param true_colour (optional) The color for points that meet the cutoff condition. Default is "blue".
 #' @param false_colour (optional) The color for points that do not meet the cutoff condition. Default is "red".
 #' @param wrap_ncol (optional) The number of columns for faceting. Default is 2.
+#' @param colorblind_support (optional): Logical (TRUE or FALSE). If set to TRUE,
+#' the function will use color scales that are more accessible for people with color vision deficiencies.
+#' The default value is FALSE.
+#' @param colormap (optional) Applies if `colorblind_support = TRUE`. A character string indicating the colormap option to use.
+#' Default is "viridis". Eight options are available, derived from the Viridis package:
+#'   - "magma" (or "A")
+#'   - "inferno" (or "B")
+#'   - "plasma" (or "C")
+#'   - "viridis" (or "D")
+#'   - "cividis" (or "E")
+#'   - "rocket" (or "F")
+#'   - "mako" (or "G")
+#'   - "turbo" (or "H")
 #'
 #' @return A ggplot object representing the scatterplot.
 #'
@@ -108,7 +121,9 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
                                      legend_text_size = 10,
                                      true_colour = "blue",
                                      false_colour = "red",
-                                     wrap_ncol = 2
+                                     wrap_ncol = 2,
+                                     colorblind_support = FALSE,
+                                     colormap = "viridis"
                                      ){
 
   # check if hittable is complete
@@ -178,6 +193,11 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
       limits = c(0, 105),
       breaks = seq(0, 100, by = 10)
     )
+
+  # add colorblind support
+  if(colorblind_support){
+    iden_refevalue_seperate<- colorbildsupport(iden_refevalue_seperate,colormap)
+  }
 
 
 

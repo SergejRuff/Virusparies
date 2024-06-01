@@ -36,6 +36,19 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
+#' @param colorblind_support (optional): Logical (TRUE or FALSE). If set to TRUE,
+#' the function will use color scales that are more accessible for people with color vision deficiencies.
+#' The default value is FALSE.
+#' @param colormap (optional) Applies if `colorblind_support = TRUE`. A character string indicating the colormap option to use.
+#' Default is "viridis". Eight options are available, derived from the Viridis package:
+#'   - "magma" (or "A")
+#'   - "inferno" (or "B")
+#'   - "plasma" (or "C")
+#'   - "viridis" (or "D")
+#'   - "cividis" (or "E")
+#'   - "rocket" (or "F")
+#'   - "mako" (or "G")
+#'   - "turbo" (or "H")
 #'
 #'
 #' @return A list containing the generated bar plot and processed data
@@ -101,7 +114,9 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
                              plot_text_position_dodge = 0.9,
                              plot_text_hjust = -0.1,
                              plot_text_vjust = 0.5,
-                             plot_text_colour = "black"){
+                             plot_text_colour = "black",
+                             colorblind_support = FALSE,
+                             colormap = "viridis"){
 
 
  #check if table is empty
@@ -177,6 +192,11 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
 
  if (flip_coords) {
     sum_plot <- sum_plot + coord_flip()
+ }
+
+ # add colorblind support
+ if(colorblind_support){
+     sum_plot<- colorbildsupport(sum_plot,colormap)
  }
 
 

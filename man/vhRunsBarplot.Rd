@@ -32,7 +32,9 @@ vhRunsBarplot(
   plot_text_position_dodge = 0.9,
   plot_text_hjust = -0.1,
   plot_text_vjust = 0.5,
-  plot_text_colour = "black"
+  plot_text_colour = "black",
+  colorblind_support = FALSE,
+  colormap = "viridis"
 )
 }
 \arguments{
@@ -94,6 +96,23 @@ Default is "default", which calculates the total number of datasets with hits an
 It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
 
 \item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
+
+\item{colorblind_support}{(optional): Logical (TRUE or FALSE). If set to TRUE,
+the function will use color scales that are more accessible for people with color vision deficiencies.
+The default value is FALSE.}
+
+\item{colormap}{(optional) Applies if \code{colorblind_support = TRUE}. A character string indicating the colormap option to use.
+Default is "viridis". Eight options are available, derived from the Viridis package:
+\itemize{
+\item "magma" (or "A")
+\item "inferno" (or "B")
+\item "plasma" (or "C")
+\item "viridis" (or "D")
+\item "cividis" (or "E")
+\item "rocket" (or "F")
+\item "mako" (or "G")
+\item "turbo" (or "H")
+}}
 }
 \value{
 A list containing the bar plot and optionally the generated table and processed data

@@ -30,7 +30,9 @@ VhgIdenFacetedScatterPlot(
   legend_text_size = 10,
   true_colour = "blue",
   false_colour = "red",
-  wrap_ncol = 2
+  wrap_ncol = 2,
+  colorblind_support = FALSE,
+  colormap = "viridis"
 )
 }
 \arguments{
@@ -88,6 +90,23 @@ Default is "minimal".}
 \item{false_colour}{(optional) The color for points that do not meet the cutoff condition. Default is "red".}
 
 \item{wrap_ncol}{(optional) The number of columns for faceting. Default is 2.}
+
+\item{colorblind_support}{(optional): Logical (TRUE or FALSE). If set to TRUE,
+the function will use color scales that are more accessible for people with color vision deficiencies.
+The default value is FALSE.}
+
+\item{colormap}{(optional) Applies if \code{colorblind_support = TRUE}. A character string indicating the colormap option to use.
+Default is "viridis". Eight options are available, derived from the Viridis package:
+\itemize{
+\item "magma" (or "A")
+\item "inferno" (or "B")
+\item "plasma" (or "C")
+\item "viridis" (or "D")
+\item "cividis" (or "E")
+\item "rocket" (or "F")
+\item "mako" (or "G")
+\item "turbo" (or "H")
+}}
 }
 \value{
 A ggplot object representing the scatterplot.
