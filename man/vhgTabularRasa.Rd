@@ -2,11 +2,10 @@
 % Please edit documentation in R/vhgTabularRasa.R
 \name{vhgTabularRasa}
 \alias{vhgTabularRasa}
-\title{vhgTabularRasa: Create a formatted table using the gt package for VhgBoxplot
-with eval_vs_iden="identity"}
+\title{vhgTabularRasa: Function for Generating Custom Formatted Graphical Tables}
 \usage{
 vhgTabularRasa(
-  summary_stats_identity,
+  file,
   title = "Summary Table for RefSeq Identity for each best query",
   title_align = "left",
   names_ = NULL,
@@ -24,17 +23,16 @@ vhgTabularRasa(
 )
 }
 \arguments{
-\item{summary_stats_identity}{A data frame containing summary statistics.}
+\item{file}{A data frame containing summary statistics.}
 
-\item{title}{(optional): a title for the summary title.
+\item{title}{(optional): a custom title.
 Default is "Summary Table for RefSeq Identity for each best query".}
 
 \item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
 Possible values are "left", "center", or "right". Default is "left".}
 
 \item{names_}{(optional): a vector of length 3 containing column names.
-Default is c("Best Query","median","Q1","Q3","min","max","\% of hits below Threshold",
-"Number Hits below Threshold")}
+Default is names(file)}
 
 \item{align}{(optional): a character vector specifying the alignment of text in the table columns.
 Possible values are "left", "center", or "right". Default is "left".}
@@ -66,16 +64,18 @@ should be filled with the colour from the cell_colour argument. col_everyrow = T
 row and col_everyrow = FALSE colours every second row. Default is FALSE.}
 }
 \value{
-A gt table representing the summary statistics
+Returns a \code{gt} table object formatted according to the specified parameters.
 }
 \description{
-This function takes the summary statistics output from VhgBoxplot
-and creates a formatted table using the gt package.Should only be used if the output stats were
-generated with eval_vs_iden="identity".
+This function creates a formatted table using the \code{gt} package.
 }
 \details{
-This function generates a table for the summary statistics output from the VhgBoxplot
-function.It formats summary statistics into a table using the gt package.
+This function creates a formatted table using the \code{gt} package, based on input data with specified column names.
+It is particularly useful for generating tables that cannot be produced with \code{vhEvalBoxTable} or \code{vhRunsTable},
+when the input data does not originate from the \code{vhRunsBarplot} or \code{VhgBoxplot} functions.
+
+The \code{vhgTabularRasa} function allows users to generate tables styled like Virusparies tables using their own input data.
+Additionally, users can create custom tables by adjusting the parameters within this function.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

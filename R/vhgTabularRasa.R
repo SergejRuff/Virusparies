@@ -1,18 +1,14 @@
-#' @title vhgTabularRasa: Create a formatted table using the gt package for VhgBoxplot
-#' with eval_vs_iden="identity"
+#' @title vhgTabularRasa: Function for Generating Custom Formatted Graphical Tables
 #'
-#' @description This function takes the summary statistics output from VhgBoxplot
-#' and creates a formatted table using the gt package.Should only be used if the output stats were
-#' generated with eval_vs_iden="identity".
+#' @description This function creates a formatted table using the `gt` package.
 #'
-#' @param summary_stats_identity A data frame containing summary statistics.
-#' @param title (optional): a title for the summary title.
+#' @param file A data frame containing summary statistics.
+#' @param title (optional): a custom title.
 #' Default is "Summary Table for RefSeq Identity for each best query".
 #' @param title_align (optional): a character vector specifying the alignment of title (and subtile) text.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param names_ (optional): a vector of length 3 containing column names.
-#' Default is c("Best Query","median","Q1","Q3","min","max","% of hits below Threshold",
-#' "Number Hits below Threshold")
+#' Default is names(file)
 #' @param align (optional): a character vector specifying the alignment of text in the table columns.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param subtit (optional): a character vector specifying the subtitle. Default is NULL.
@@ -32,11 +28,14 @@
 #' should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colours every
 #' row and col_everyrow = FALSE colours every second row. Default is FALSE.
 #'
-#' @return A gt table representing the summary statistics
+#' @return Returns a `gt` table object formatted according to the specified parameters.
 #'
-#' @details This function generates a table for the summary statistics output from the VhgBoxplot
-#' function.It formats summary statistics into a table using the gt package.
+#' @details This function creates a formatted table using the `gt` package, based on input data with specified column names.
+#' It is particularly useful for generating tables that cannot be produced with `vhEvalBoxTable` or `vhRunsTable`,
+#' when the input data does not originate from the `vhRunsBarplot` or `VhgBoxplot` functions.
 #'
+#' The `vhgTabularRasa` function allows users to generate tables styled like Virusparies tables using their own input data.
+#' Additionally, users can create custom tables by adjusting the parameters within this function.
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)
@@ -52,7 +51,7 @@
 #' @seealso \code{\link{VhgBoxplot}}
 #' @import gt
 #' @export
-vhgTabularRasa <- function(summary_stats_identity,title="Summary Table for RefSeq Identity for each best query",
+vhgTabularRasa <- function(file,title="Summary Table for RefSeq Identity for each best query",
                                title_align = "left",names_=NULL,align = "left",subtit =NULL,
                                data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                                title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
@@ -60,13 +59,13 @@ vhgTabularRasa <- function(summary_stats_identity,title="Summary Table for RefSe
 
 
   if(is.null(names_)){
-    names_ <- names(summary_stats_identity)
+    names_ <- names(file)
   }
 
-  summary_stats_identity <- setNames(summary_stats_identity, names_)
+  file <- setNames(file, names_)
 
   # Create gt table
-  gt_table <- summary_stats_identity %>%
+  gt_table <- file %>%
     gt()%>%
     tab_header(
       title = title
