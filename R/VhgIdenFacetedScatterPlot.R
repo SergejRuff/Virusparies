@@ -208,6 +208,8 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
 
 
   #plot(iden_refevalue_seperate)
-
+  message("Scatterplot generation completed.")
   return(iden_refevalue_seperate)
+
+
 }

@@ -214,9 +214,11 @@ vhRunsBarplot <- function(vh_file,
 
 
 
-
+  message("Barplot generation completed.")
   return(list(plot=run_bar,
               sample_run=sample_run))
+
+
 
 
 }

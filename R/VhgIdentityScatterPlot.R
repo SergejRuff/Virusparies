@@ -205,6 +205,7 @@ VhgIdentityScatterPlot <- function(vh_file,
 
 
   #plot(iden_refevalue)
-
+  message("Scatterplot generation completed.")
   return(iden_refevalue)
+
 }

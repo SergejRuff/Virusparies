@@ -336,7 +336,10 @@ VhgBoxplot <- function(vh_file,
   }
 
   # Return the results list
+  message("Boxplot generation completed.")
   return(results)
+
+
 
 
 
