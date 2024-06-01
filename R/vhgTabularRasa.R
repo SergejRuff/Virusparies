@@ -4,7 +4,7 @@
 #'
 #' @param file A data frame containing summary statistics.
 #' @param title (optional): a custom title.
-#' Default is "Summary Table for RefSeq Identity for each best query".
+#' Default is "Graphical Table".
 #' @param title_align (optional): a character vector specifying the alignment of title (and subtile) text.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param names_ (optional): a vector of length 3 containing column names.
@@ -51,7 +51,7 @@
 #' @seealso \code{\link{VhgBoxplot}}
 #' @import gt
 #' @export
-vhgTabularRasa <- function(file,title="Summary Table for RefSeq Identity for each best query",
+vhgTabularRasa <- function(file,title="Graphical Table",
                                title_align = "left",names_=NULL,align = "left",subtit =NULL,
                                data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                                title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,

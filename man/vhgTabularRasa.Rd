@@ -6,7 +6,7 @@
 \usage{
 vhgTabularRasa(
   file,
-  title = "Summary Table for RefSeq Identity for each best query",
+  title = "Graphical Table",
   title_align = "left",
   names_ = NULL,
   align = "left",
@@ -26,7 +26,7 @@ vhgTabularRasa(
 \item{file}{A data frame containing summary statistics.}
 
 \item{title}{(optional): a custom title.
-Default is "Summary Table for RefSeq Identity for each best query".}
+Default is "Graphical Table".}
 
 \item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
 Possible values are "left", "center", or "right". Default is "left".}
