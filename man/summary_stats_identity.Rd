@@ -29,4 +29,7 @@ This function is an internal utility function used within the package.
 It calculates summary statistics such as median, quartiles, minimum,
 and maximum identity values for each virus group from the input dataset.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

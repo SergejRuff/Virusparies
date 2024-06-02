@@ -148,3 +148,6 @@ plot_custom <- vhRunsBarplot(
 plot_custom
 
 }
+\author{
+Sergej Ruff
+}

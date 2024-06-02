@@ -12,4 +12,7 @@ arg_character(name)
 \description{
 checks if correct datatype is provided to function (character check)
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

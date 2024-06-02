@@ -63,3 +63,6 @@ vh_file <- importVirusTable(path)
 
 
 }
+\author{
+Sergej Ruff
+}

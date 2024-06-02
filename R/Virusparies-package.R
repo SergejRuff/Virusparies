@@ -43,8 +43,7 @@
 #' \strong{Graphical Tables(gt)}:
 #' \itemize{
 #'   \item \code{\link{vhRunsTable}}: Generate a gt-table for vhRunsBarplot.
-#'   \item \code{\link{vhEvalBoxTable}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="evalue") summary stats.
-#'   \item \code{\link{vhgTabularRasa}}: Generate a gt-table for vhEvalIdenBoxplot (eval_vs_iden="identity") summary stats.
+#'   \item \code{\link{vhgTabularRasa}}: Generate custome gt-tables.
 #' }
 #'
 #'\strong{Export}:
@@ -60,8 +59,10 @@
 #'
 #'
 #'
-#'@seealso
-#'VirusHunterGatherer is available on: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#' @seealso
+#' VirusHunterGatherer is available on: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
+#' If you encounter any errors or issues, please report them at: \url{https://github.com/SergejRuff/Virusparies/issues}.
 #'
 #'
 #'

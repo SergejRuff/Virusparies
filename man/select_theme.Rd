@@ -19,4 +19,7 @@ This function selects different themes for plots.
 This function is an internal utility function used within the package.
 It selects the theme to use for the different plots in this package.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

@@ -23,4 +23,7 @@ for each virus family, computes the percentage of the sum relative to the total 
 creates a string representation for visualization, and converts the "best_query" column
 to a factor.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

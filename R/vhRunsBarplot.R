@@ -48,7 +48,7 @@
 #'   - "turbo" (or "H")
 #'
 #' @return A list containing the bar plot and optionally the generated table and processed data
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)

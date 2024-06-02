@@ -10,7 +10,7 @@
 #' @param height The height of the output file. Default is 600 pixels.
 #' @param units The units of the width and height parameters. Can be one of "in", "cm", "mm", or "px". Default is "px".
 #' @param pointsize The point size of the font. Default is 12.
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)

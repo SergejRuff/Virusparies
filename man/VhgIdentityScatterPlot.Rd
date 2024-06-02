@@ -153,3 +153,6 @@ vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "SRA_run")
 vgplot
 
 }
+\author{
+Sergej Ruff
+}

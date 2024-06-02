@@ -57,7 +57,7 @@
 #' hits for each virus family from the input dataset. It then generates a bar plot showing
 #' the sum of hits for each virus family. Additionally, it returns the processed data
 #' for further analysis.
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)
@@ -87,7 +87,7 @@
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
-#'
+#' @importFrom stats reorder
 #' @export
 vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
                              theme_choice = "minimal",

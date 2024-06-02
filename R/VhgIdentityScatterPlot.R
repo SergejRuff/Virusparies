@@ -48,7 +48,7 @@
 #'   - "turbo" (or "H")
 #'
 #' @return A ggplot object representing the scatter plot.
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)

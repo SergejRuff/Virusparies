@@ -5,7 +5,7 @@
 #' @param theme_choice A character indicating which theme to use. Options include "minimal", "classic", "light", "dark", and "void".
 #'
 #' @return A ggplot2 theme object to be used in plots.
-#'
+#' @author Sergej Ruff
 #' @details This function is an internal utility function used within the package.
 #' It selects the theme to use for the different plots in this package.
 #'

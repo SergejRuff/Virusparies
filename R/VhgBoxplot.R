@@ -47,7 +47,7 @@
 #'   - "turbo" (or "H")
 #'
 #' @return A list containing the generated boxplot, summary statistics, and outliers
-#'
+#' @author Sergej Ruff
 #' @details This function generates boxplots comparing either E-values or identity for each virus
 #' group from the VirusHunter or Gatherer Hittable.
 #' It also calculates summary statistics and  identifies outliers for further analysis.
@@ -289,7 +289,7 @@ VhgBoxplot <- function(vh_file,
   if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
 
 
-    summary_stats <- vh_sum_stat_evavlue_boxplot(vh_file,cutoff)
+    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
     outlier <- find_outlier_eval_box(vh_file)
 
 

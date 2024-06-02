@@ -1,11 +1,9 @@
-bibentry(
-  bibtype  = "Article",
-  title    = ,
-  author   = ,
-  journal  = ,
-  year     = ,
-  volume   = ,
-  number   = ,
-  pages    = ,
-  doi      =
-)
+ bibentry(
+    bibtype  = "Manual",
+    title    = "Virusparies: Data Visualisations for VirusHunterGatherer hittables output",
+    author   = "Sergej Ruff",
+    url      = "https://github.com/SergejRuff/Virusparies",
+    year     = "2024",
+    note     = "R package version 1.0.0"
+  )
+

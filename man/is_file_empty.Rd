@@ -2,18 +2,21 @@
 % Please edit documentation in R/Helper-functions.R
 \name{is_file_empty}
 \alias{is_file_empty}
-\title{Check if hittable is empty}
+\title{Check if hittable or other files are empty}
 \usage{
 is_file_empty(file)
 }
 \arguments{
-\item{file}{a Virushuntegatherer hittable}
+\item{file}{a Virushuntegatherer hittable or another file}
 }
 \description{
-Check if hittable is empty
+Check if hittable or other files are empty
 }
 \details{
 Internal helper function which checks if input is empty.objects with 0 observations (hittable,summarystats)
 returns an error.
+}
+\author{
+Sergej Ruff
 }
 \keyword{internal}

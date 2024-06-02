@@ -16,4 +16,7 @@ check_input_type(vh_file, columns, option)
 \description{
 internal: check if datatype is correct
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

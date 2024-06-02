@@ -11,9 +11,9 @@
 #' @details This function is an internal utility function used within the package.
 #' It identifies outliers in a numeric vector or column of a data frame by comparing the values
 #' to the lower and upper bounds determined by the interquartile range (IQR) method.
-#'
+#' @author Sergej Ruff
 #' @import  dplyr
-#' @importFrom stats na.omit
+#' @importFrom stats na.omit IQR
 #' @keywords internal
 find_outlier_eval_box <- function(vh_file, group = "best_query", y_column = "ViralRefSeq_E") {
 

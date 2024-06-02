@@ -50,7 +50,7 @@
 #'   - "turbo" (or "H")
 #'
 #' @return A ggplot object representing the scatterplot.
-#'
+#' @author Sergej Ruff
 #' @details This function takes a data frame and a cutoff value as inputs, adds a new column to the
 #' data frame indicating whether each `ViralRefSeq_E` value meets the cutoff, and then plots the data.
 #' The plot includes:

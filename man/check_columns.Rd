@@ -14,4 +14,7 @@ check_columns(file, columns)
 \description{
 internal: check if all columns exist
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

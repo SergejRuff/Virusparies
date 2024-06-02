@@ -28,4 +28,7 @@ This function is an internal utility function used within the package.
 It identifies outliers in a numeric vector or column of a data frame by comparing the values
 to the lower and upper bounds determined by the interquartile range (IQR) method.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

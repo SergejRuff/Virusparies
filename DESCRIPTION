@@ -2,9 +2,13 @@ Package: Virusparies
 Title: Create Data Visualisations for VirusHuntergatherer hittables output
 Version: 1.0.0
 Authors@R: 
-    c(person("Ruff", "Sergej", email = "serijnh@gmail.com", role = c("aut", "cre")),
-    person("Lauber", "Chris", email = "chris.lauber@twincore.de", role = "aut"),
-    person("Li Chuin", "Chong",email = "lichuin.chong@twincore.de", role = "aut"))
+    c(
+    person("Ruff", "Sergej", email = "serijnh@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0000-8264-6347")),
+    person("Lauber", "Chris", email = "chris.lauber@twincore.de", role = "aut",
+           comment = c(ORCID = "0000-0002-2265-2953")),
+    person("Li Chuin", "Chong",email = "lichuin.chong@twincore.de", role = "aut",
+           comment = c(ORCID = "0000-0002-3574-1365")))
 Author: Sergej Ruff [aut, cre],
   Chris Lauber [aut],
   Li Chuin Chong [aut].de>

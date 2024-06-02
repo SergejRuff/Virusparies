@@ -15,4 +15,7 @@ checks if correct datatype is provided to function (numeric check)
 \details{
 currently not in use. Might be in a later version.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

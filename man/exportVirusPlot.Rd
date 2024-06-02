@@ -37,3 +37,6 @@ path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
 }
+\author{
+Sergej Ruff
+}

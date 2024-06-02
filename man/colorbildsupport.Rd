@@ -27,4 +27,7 @@ plot obj
 \description{
 internal: add colorblind support by using viridis color palettes
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

@@ -21,4 +21,7 @@ creating additional variables for visualization.
 This function is an internal utility function used within the package.
 It calculates the number of unique runs for each virus group from the VirusHunters Hittables.
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

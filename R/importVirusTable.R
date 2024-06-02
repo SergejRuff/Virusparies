@@ -9,7 +9,7 @@
 #' The first row should contain column headers.
 #'
 #' @return A dataframe containing the data from the VirusHunter or VirusGatherer hittable file.
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)

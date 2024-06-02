@@ -154,3 +154,6 @@ plot2 <- vhSumHitsBarplot(
 plot2
 
 }
+\author{
+Sergej Ruff
+}

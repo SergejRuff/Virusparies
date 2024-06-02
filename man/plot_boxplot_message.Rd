@@ -16,4 +16,7 @@ plot_boxplot_message(y_column, x_column, cutoff)
 \description{
 internal function: message to be printed in boxplot depending on chosen y-column
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

@@ -8,12 +8,13 @@
 #'
 #' @return A data frame containing summary statistics including median,
 #' Q1 (1st quartile), Q3 (3rd quartile), minimum, and maximum identity values for each virus group
-#'
+#' @author Sergej Ruff
 #' @details This function is an internal utility function used within the package.
 #' It calculates summary statistics such as median, quartiles, minimum,
 #' and maximum identity values for each virus group from the input dataset.
 #' @importFrom dplyr group_by summarise arrange desc
 #' @importFrom rlang .data
+#' @importFrom stats median quantile median
 #' @keywords internal
 summary_stats_identity <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
 

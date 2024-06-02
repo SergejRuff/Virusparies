@@ -1,11 +1,12 @@
-#' Check if hittable is empty
+#' Check if hittable or other files are empty
 #'
-#' @param file a Virushuntegatherer hittable
+#' @param file a Virushuntegatherer hittable or another file
 #'
 #' @details
 #' Internal helper function which checks if input is empty.objects with 0 observations (hittable,summarystats)
 #' returns an error.
 #'
+#' @author Sergej Ruff
 #'
 #' @keywords internal
 is_file_empty <- function(file) {
@@ -21,7 +22,7 @@ is_file_empty <- function(file) {
 #' @param x_column x_column
 #' @param cutoff cutoff
 #'
-#'
+#' @author Sergej Ruff
 #' @keywords internal
 plot_boxplot_message <- function(y_column, x_column, cutoff) {
   messages <- list(
@@ -46,7 +47,7 @@ plot_boxplot_message <- function(y_column, x_column, cutoff) {
 #' @param file file
 #' @param columns single column or list of columns
 #'
-#'
+#' @author Sergej Ruff
 #' @keywords internal
 check_columns <- function(file,columns){
 
@@ -72,7 +73,7 @@ check_columns <- function(file,columns){
 #' @param columns object single or list specifying column
 #' @param option 1 for chacter,2 for numeric
 #'
-#'
+#' @author Sergej Ruff
 #' @keywords internal
 check_input_type <- function(vh_file, columns, option) {
   # Check if the option is valid (either 1 or 2)
@@ -111,7 +112,7 @@ check_input_type <- function(vh_file, columns, option) {
 #'   - "turbo" (or "H")
 #'
 #' @return plot obj
-#'
+#' @author Sergej Ruff
 #' @importFrom viridis scale_fill_viridis
 #' @keywords internal
 colorbildsupport <- function(plot,option){
@@ -133,7 +134,7 @@ colorbildsupport <- function(plot,option){
 #'   - "turbo" (or "H")
 #'
 #' @return plot obj
-#'
+#' @author Sergej Ruff
 #' @importFrom viridis scale_color_viridis
 #' @keywords internal
 colorbildsupport_ <- function(plot,option){
@@ -145,7 +146,7 @@ colorbildsupport_ <- function(plot,option){
 #'
 #' @param name argument from function.
 #'
-#'
+#' @author Sergej Ruff
 #' @keywords internal
 arg_character <- function(name) {
   if (!is.character(name)) {
@@ -161,7 +162,7 @@ arg_character <- function(name) {
 #' @details
 #' currently not in use. Might be in a later version.
 #'
-#'
+#' @author Sergej Ruff
 #'
 #' @keywords internal
 arg_numeric_or_integer <- function(name) {
@@ -175,11 +176,50 @@ arg_numeric_or_integer <- function(name) {
 #'
 #' @param name argument from function.
 #'
-#'
+#' @author Sergej Ruff
 #' @keywords internal
 arg_logical <- function(name) {
   if (!is.logical(name)) {
     errorMessage <- paste("Input argument", deparse(substitute(name)), "must be logical")
     stop(errorMessage)
   }
+}
+
+
+
+#' check if obj is a dataframe
+#'
+#' @param obj obj
+#'
+#' @return An error if obj is not a dataframe
+#' @author Sergej Ruff
+#' @keywords internal
+check_is_dataframe <- function(obj) {
+  if (!is.data.frame(obj)) {
+    stop("The provided object is not a data.frame.")
+  }
+
+}
+
+
+
+#' check if dataframe has column names.
+#'
+#' @param df a dataframe obj
+#'
+#' @return error message, if df has no column names
+#' @author Sergej Ruff
+#' @keywords internal
+has_columnnames <- function(df) {
+
+
+  if (is.null(colnames(df))) {
+    stop("The data frame has no column names.")
+  }
+
+  if (any(colnames(df) == "")) {
+    stop("The data frame has empty column names.")
+  }
+
+
 }

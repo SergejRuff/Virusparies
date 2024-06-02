@@ -7,7 +7,7 @@
 #' @param vh_file A data frame containing VirusHunter Hittables results.
 #'
 #' @return A processed data frame for run_bar plot.
-#'
+#' @author Sergej Ruff
 #' @details This function is an internal utility function used within the package.
 #' It calculates the number of unique runs for each virus group from the VirusHunters Hittables.
 #'

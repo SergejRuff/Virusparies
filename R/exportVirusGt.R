@@ -25,7 +25,7 @@
 #' the filename or path (TRUE) or return an error (FALSE, default). If FALSE and run in an interactive session,
 #' a prompt will appear asking to create a new directory when necessary.
 #'
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- importVirusTable(path)

@@ -23,7 +23,7 @@ vhgTabularRasa(
 )
 }
 \arguments{
-\item{file}{A data frame containing summary statistics.}
+\item{file}{A data frame.}
 
 \item{title}{(optional): a custom title.
 Default is "Graphical Table".}
@@ -31,13 +31,13 @@ Default is "Graphical Table".}
 \item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
 Possible values are "left", "center", or "right". Default is "left".}
 
-\item{names_}{(optional): a vector of length 3 containing column names.
-Default is names(file)}
+\item{names_}{(optional): a vector containing column names, with a length matching the number
+of columns in the file argument. Default is names(file)}
 
 \item{align}{(optional): a character vector specifying the alignment of text in the table columns.
 Possible values are "left", "center", or "right". Default is "left".}
 
-\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL.}
+\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL (no subtitle).}
 
 \item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
 
@@ -71,25 +71,53 @@ This function creates a formatted table using the \code{gt} package.
 }
 \details{
 This function creates a formatted table using the \code{gt} package, based on input data with specified column names.
-It is particularly useful for generating tables that cannot be produced with \code{vhEvalBoxTable} or \code{vhRunsTable},
-when the input data does not originate from the \code{vhRunsBarplot} or \code{VhgBoxplot} functions.
+It is particularly useful for generating tables that cannot be produced with \code{vhRunsTable},
+when the input data does not originate from the \code{vhRunsBarplot} functions.
 
 The \code{vhgTabularRasa} function allows users to generate tables styled like Virusparies tables using their own input data.
 Additionally, users can create custom tables by adjusting the parameters within this function.
+
+\code{vhgTabularRasa} just like \code{vhRunsTable} empowers users to tailor their tables to suit their needs.
+With its customizable features, users can effortlessly modify titles, subtitles, and column names.
+By default, column names are derived from the dataframe's structure using \code{names(file)}.
+If the dataframe lacks column names, an error message is triggered. However, users can
+supply their own column names via the \code{names_} argument, requiring a vector of names matching the dataframe's column count.
+
+\code{vhgTabularRasa} takes dataframes as Input. Passing any other object type results in an error message.
+Users can fine-tune their tables with options to adjust text attributes, alignment, and size, as well as row padding
+and color schemes for titles, subtitles, columns, and backgrounds.
+If that is not enough, \code{vhgTabularRasa} returns an gt tables object, which
+can be further manipulated with the \code{gt} package available on CRAN.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
-#identity <- VhgBoxplot(vh_file,eval_vs_iden="identity",cut = 1e-5)
+identity <- VhgBoxplot(vh_file,y_column = "ViralRefSeq_ident")
 
 # generate table
-#iden_table <- vhEvalBoxTable(identity$summary_stats)
+vhgTabularRasa(identity$summary_stats)
 
-#iden_table
+
+# example 2: plot part of Vh_file (could be any other table)
+# using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
+vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
+
+vhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+"example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
+"Refrence E-Value","Refrence Identity"))
+
+
 
 }
+\references{
+Iannone R, Cheng J, Schloerke B, Hughes E, Lauer A, Seo J(2024). \emph{gt: Easily Create Presentation-Ready DisplayTables}.
+R package version 0.10.1,\url{https://CRAN.R-project.org/package=gt}.
+}
 \seealso{
-\code{\link{VhgBoxplot}}
+\code{\link{vhRunsTable}}
+}
+\author{
+Sergej Ruff
 }

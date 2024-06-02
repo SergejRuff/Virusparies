@@ -12,4 +12,7 @@ arg_logical(name)
 \description{
 checks if correct datatype is provided to function (logical check)
 }
+\author{
+Sergej Ruff
+}
 \keyword{internal}

@@ -6,7 +6,7 @@
 #' @param vh_file A data frame containing VirusHunter hittables results
 #'
 #' @return A processed data frame with columns "best_query", "sum", "perc", "res", and "cyl"
-#'
+#' @author Sergej Ruff
 #' @details This function preprocesses virus data for generating a bar plot showing the
 #' sum of hits for each virus family from the input dataset. It calculates the sum of hits
 #' for each virus family, computes the percentage of the sum relative to the total hits,
