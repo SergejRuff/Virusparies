@@ -283,46 +283,16 @@ VhgBoxplot <- function(vh_file,
 
 
 
+  summary_stats <- boxp_summary_stats(vh_file, group = x_column,ycol =y_column)
 
-
-
-  if(y_column=="ViralRefSeq_E"& x_column=="best_query"){
-
-
-    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
-    outlier <- find_outlier_eval_box(vh_file)
-
-
+  if (y_column == "ViralRefSeq_E") {
+    outlier <- find_outlier_eval_box(vh_file, group = x_column)
+  } else if (y_column == "contig_len") {
+    outlier <- find_outlier_eval_box(vh_file, group = x_column, y_column = y_column)
   }
 
 
 
-  if(y_column=="ViralRefSeq_ident"& x_column=="best_query"){
-
-
-
-    summary_stats <- summary_stats_identity(vh_file)
-
-
-  }
-
-  if(y_column=="ViralRefSeq_E"& x_column != "best_query"){
-    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
-    outlier <- find_outlier_eval_box(vh_file,group=x_column)
-  }
-
-  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
-    summary_stats <- summary_stats_identity(vh_file,group=x_column)
-  }
-
-  if(y_column=="ViralRefSeq_ident"& x_column != "best_query"){
-    summary_stats <- summary_stats_identity(vh_file,group=x_column)
-  }
-
-  if(y_column=="contig_len"& x_column != "best_query"){
-    summary_stats <- summary_stats_identity(vh_file,group=x_column,ycol =y_column)
-    outlier <- find_outlier_eval_box(vh_file,group=x_column,y_column=y_column)
-  }
 
 
 
@@ -336,6 +306,13 @@ VhgBoxplot <- function(vh_file,
   if (y_column == "ViralRefSeq_E" || y_column == "contig_len") {
     results$outlier <- outlier
   }
+
+  # extract rows below threshold
+  if (y_column == "ViralRefSeq_E") {
+    belowthres_boxp <- vhg_filter_belowthresholdboxplot(vh_file,cut)
+    results$rows_belowthres <- belowthres_boxp
+  }
+
 
   # Return the results list
   message("Boxplot generation completed.")

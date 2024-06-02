@@ -1,13 +1,13 @@
-#' @title Calculate summary statistics for identity
+#' @title boxp_summary_stats:  Calculate summary statistics for boxplot
 #'
-#' @description This function calculates summary statistics for identity based on the input virus data.
+#' @description This function calculates summary statistics for boxplots created by vhgBoxplot function.
 #'
 #' @param vh_file A data frame containing VirusHunter hittables.
 #' @param group column to group stats by
 #' @param ycol column, which specifies identity or evalue.
 #'
 #' @return A data frame containing summary statistics including median,
-#' Q1 (1st quartile), Q3 (3rd quartile), minimum, and maximum identity values for each virus group
+#' Q1 (1st quartile), Q3 (3rd quartile), minimum, and maximum values for each virus group
 #' @author Sergej Ruff
 #' @details This function is an internal utility function used within the package.
 #' It calculates summary statistics such as median, quartiles, minimum,
@@ -16,7 +16,7 @@
 #' @importFrom rlang .data
 #' @importFrom stats median quantile median
 #' @keywords internal
-summary_stats_identity <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
+boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
 
   if(ycol == "ViralRefSeq_E"){
 

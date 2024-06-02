@@ -223,3 +223,17 @@ has_columnnames <- function(df) {
 
 
 }
+
+
+#' internal function that extracts number of rows below threshold for vhgBoxplot function
+#'
+#' @param vh_file vh_file
+#' @param cut set cutoff in vhGBoxplot function
+#'
+#' @return filtered dataframe
+#'
+#' @keywords internal
+vhg_filter_belowthresholdboxplot <- function(vh_file,cut){
+
+  return(vh_file[vh_file$ViralRefSeq_E<cut,])
+}
