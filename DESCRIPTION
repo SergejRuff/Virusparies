@@ -23,7 +23,6 @@ Imports:
     chromote,
     dplyr,
     ggplot2,
-    grDevices,
     gt,
     rlang,
     stats,
