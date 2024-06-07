@@ -237,3 +237,27 @@ vhg_filter_belowthresholdboxplot <- function(vh_file,cut){
 
   return(vh_file[vh_file$ViralRefSeq_E<cut,])
 }
+
+
+
+#' Internal function to set default title and cutoff in boxplot function
+#'
+#' @param y_column y-column
+#' @param cut cutoff value
+#'
+#' @return list containing cutoff and title
+#'
+#' @keywords interlal
+get_plot_parameters <- function(y_column, cut) {
+  params <- list(
+    ViralRefSeq_E = list(cutoff = -log10(cut), ylabel = "-log10 of viral Reference E-values"),
+    ViralRefSeq_ident = list(cutoff = NULL, ylabel = "Viral Reference Identity in %"),
+    contig_len = list(cutoff = NULL, ylabel = "Contig Length")
+  )
+
+  if (!y_column %in% names(params)) {
+    stop("Invalid y_column value provided.")
+  }
+
+  return(params[[y_column]])
+}

@@ -148,19 +148,27 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  if (y_column == "ViralRefSeq_E") {
-    # define a cut off for evalue significance
-    cutoff <- -log10(cut)
-    default_ylabel <- "-log10 of viral Reference E-values"  # Default y-axis label
-  } else if (y_column == "ViralRefSeq_ident") {
-    cutoff <- NULL
-    default_ylabel <- "Viral Reference Identity in %"  # Default y-axis label
-  } else if (y_column == "contig_len") {
-    cutoff <- NULL
-    default_ylabel <- "Contig Length"  # Default y-axis label
-  } else {
-    stop("Invalid y_column value provided.")
-  }
+  # if (y_column == "ViralRefSeq_E") {
+  #   # define a cut off for evalue significance
+  #   cutoff <- -log10(cut)
+  #   default_ylabel <- "-log10 of viral Reference E-values"  # Default y-axis label
+  # } else if (y_column == "ViralRefSeq_ident") {
+  #   cutoff <- NULL
+  #   default_ylabel <- "Viral Reference Identity in %"  # Default y-axis label
+  # } else if (y_column == "contig_len") {
+  #   cutoff <- NULL
+  #   default_ylabel <- "Contig Length"  # Default y-axis label
+  # } else {
+  #   stop("Invalid y_column value provided.")
+  # }
+
+
+  # Get the parameters based on y_column
+  params <- get_plot_parameters(y_column, cut)
+
+  # Access the cutoff and ylabel from the returned list
+  cutoff <- params$cutoff
+  default_ylabel <- params$ylabel
 
 
   # Apply the selected theme
