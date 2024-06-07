@@ -113,7 +113,8 @@ This function generates boxplots comparing either E-values,identity or contig le
 for each group from VirusHunter or VirusGatherer Hittables results.
 }
 \details{
-'VhgBoxplot' generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+VhgBoxplot generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+
 The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 This means that 'VhgBoxplot' can generate three different types of boxplots.
 By default, 'y_column' is set to "ViralRefSeq_E" and will plot the Reference E-Value on the y-axis.
@@ -129,7 +130,6 @@ The 'cut' argument is used differently depending on the 'y_column' value:
 }
 
 This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
-.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

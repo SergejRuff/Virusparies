@@ -52,7 +52,7 @@
 #' 'vhRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
 #' each Virus group. It takes only VirusHunter hittables as Input.
 #'
-#' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are plotted.
+#' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are included in the plot.
 #'
 #'
 #'

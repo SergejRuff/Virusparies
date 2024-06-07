@@ -49,7 +49,8 @@
 #'
 #' @author Sergej Ruff
 #' @details
-#' 'VhgBoxplot' generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+#' VhgBoxplot generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+#'
 #' The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 #' This means that 'VhgBoxplot' can generate three different types of boxplots.
 #' By default, 'y_column' is set to "ViralRefSeq_E" and will plot the Reference E-Value on the y-axis.
@@ -63,7 +64,7 @@
 #' - For 'y_column' set to "ViralRefSeq_E", the rows are not filtered. Instead, a horizontal line (h_line) is shown in the plot to indicate the cutoff value.
 #'
 #' This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
-#' .
+#'
 #'
 #'
 #' @return A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).

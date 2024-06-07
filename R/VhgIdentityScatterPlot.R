@@ -48,10 +48,10 @@
 #'   - "turbo" (or "H")
 #'
 #' @details
-#' 'VhgIdentityScatterPlot' generates a Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-#'  Both VirusHunter and VirusGatherer Hittables can be used as input.
+#' VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
+#' It accepts both VirusHunter and VirusGatherer Hittables as input.
 #'
-#'  A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
+#' A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
 #'
 #' @return A ggplot object representing the scatter plot.
 #' @author Sergej Ruff

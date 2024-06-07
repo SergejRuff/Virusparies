@@ -53,12 +53,11 @@
 #'
 #'
 #'
-#' @details This function preprocesses virus data for plotting by calculating the sum of
-#' hits for each virus family from the input dataset (only takes VirusHunter Hittables as Input).
-#' It then generates a bar plot showing the sum of hits/ contigs for each virus family.
+#' @details
+#' vhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
+#' hits for each virus family from the input dataset (accepts only VirusHunter Hittables).
+#' It then generates a bar plot showing the sum of hits/contigs for each virus family.
 #' Additionally, it returns the processed data for further analysis.
-#'
-#' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are plotted.
 #'
 #' @return A list containing the generated bar plot and processed data
 #'
