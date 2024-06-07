@@ -26,6 +26,12 @@
 #' Supported devices include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", or "wmf" (Windows only).
 #' When 'device' is set to NULL, the file extension in 'filename' is used to determine the device.
 #'
+#' Depending on the plot, the final image might be cropped or truncated.
+#' We recommend experimenting with height, width, and resolution.
+#'
+#' The default theme for every plot is "minimal," resulting in a transparent plot.
+#' If you want to avoid transparent plots, please change the theme accordingly.
+#'
 #'
 #'
 #'
@@ -49,6 +55,8 @@
 #'
 #' }
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @importFrom ggplot2 ggsave
 #' @export

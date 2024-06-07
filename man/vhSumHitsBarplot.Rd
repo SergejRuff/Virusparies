@@ -154,6 +154,9 @@ plot2 <- vhSumHitsBarplot(
 plot2
 
 }
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+}
 \author{
 Sergej Ruff
 }

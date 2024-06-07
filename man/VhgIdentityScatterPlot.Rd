@@ -153,6 +153,9 @@ vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "SRA_run")
 vgplot
 
 }
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+}
 \author{
 Sergej Ruff
 }

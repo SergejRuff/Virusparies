@@ -22,6 +22,8 @@
 #'
 #' print(head(vg_file))
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @importFrom utils read.table
 #' @export

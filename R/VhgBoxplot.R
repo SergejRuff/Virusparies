@@ -88,6 +88,8 @@
 #' plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
 #' plot5
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
 #' @importFrom rlang .data

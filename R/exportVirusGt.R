@@ -58,6 +58,9 @@
 #'
 #' }
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #'
 #'
 #' @import dplyr

@@ -92,6 +92,9 @@
 #' vgplot <- VhgIdenFacetedScatterPlot(vg_file,groupby = "SRA_run")
 #' vgplot
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #'
 #' @import ggplot2
 #' @importFrom stats runif

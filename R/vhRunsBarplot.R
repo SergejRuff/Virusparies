@@ -75,6 +75,9 @@
 #' )
 #' plot_custom
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export

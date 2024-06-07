@@ -32,7 +32,9 @@ vg_file <- importVirusTable(path2)
 
 print(head(vg_file))
 
-
+}
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 }
 \author{
 Sergej Ruff

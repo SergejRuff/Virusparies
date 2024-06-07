@@ -85,6 +85,9 @@
 #'
 #' plot2
 #'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @importFrom stats reorder

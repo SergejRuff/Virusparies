@@ -73,8 +73,9 @@ exportVirusGt(gtable=table,filename="vh_parttable.docx")
 
 }
 
-
-
+}
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 }
 \author{
 Sergej Ruff

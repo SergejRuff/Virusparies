@@ -148,6 +148,9 @@ plot_custom <- vhRunsBarplot(
 plot_custom
 
 }
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+}
 \author{
 Sergej Ruff
 }

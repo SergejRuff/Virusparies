@@ -76,7 +76,7 @@
 #' R package version 0.10.1,\url{https://CRAN.R-project.org/package=gt}.
 #'
 #' @seealso
-#' \code{\link{vhRunsTable}}
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import gt
 #' @importFrom stats setNames
