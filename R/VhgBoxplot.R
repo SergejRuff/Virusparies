@@ -66,7 +66,7 @@
 #' .
 #'
 #'
-#' @return A list containing the generated boxplot, summary statistics,outliers (e-value and contig_len only) and rows_belowthres (evalue only).
+#' @return A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).
 #'
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

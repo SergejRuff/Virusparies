@@ -106,7 +106,7 @@ Default is "viridis". Eight options are available, derived from the Viridis pack
 }}
 }
 \value{
-A list containing the generated boxplot, summary statistics,outliers (e-value and contig_len only) and rows_belowthres (evalue only).
+A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).
 }
 \description{
 This function generates boxplots comparing either E-values,identity or contig length (Gatherer only)
