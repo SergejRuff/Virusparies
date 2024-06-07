@@ -7,16 +7,9 @@
 exportVirusGt(
   gtable,
   filename = "table.png",
-  device = NULL,
   path = NULL,
-  scale = 1,
-  width = NA,
-  height = NA,
-  units = c("in", "cm", "mm", "px"),
-  dpi = 300,
-  limitsize = TRUE,
-  bg = NULL,
-  create.dir = FALSE
+  create.dir = FALSE,
+  ...
 )
 }
 \arguments{
@@ -24,31 +17,14 @@ exportVirusGt(
 
 \item{filename}{Name of the output file. Default is "table.png".}
 
-\item{device}{Device to use. Can either be a device function (e.g. png), or one of "eps", "ps",
-"tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).
-If NULL (default), the device is guessed based on the filename extension.}
-
 \item{path}{Path of the directory to save plot to: path and filename are combined to create the
 fully qualified file name. Defaults to the working directory.}
-
-\item{scale}{The scaling factor for the output file. Default is 1.}
-
-\item{width}{The width of the output file. Default is NA. If not supplied, uses the size of the current graphics device.}
-
-\item{height}{The height of the output file. Default is NA. If not supplied, uses the size of the current graphics device.}
-
-\item{units}{The units of the width and height parameters. Can be one of "in", "cm", "mm", or "px". Default is "in".}
-
-\item{dpi}{Plot resolution. Also accepts a string input: "retina" (320), "print" (300), or "screen" (72). Applies only to raster output types.}
-
-\item{limitsize}{When TRUE (the default), ggsave() will not save images larger than 50x50 inches,
-to prevent the common error of specifying dimensions in pixels.}
-
-\item{bg}{Background colour. If NULL, uses the plot.background fill value from the plot theme.}
 
 \item{create.dir}{Whether to create new directories if a non-existing directory is specified in
 the filename or path (TRUE) or return an error (FALSE, default). If FALSE and run in an interactive session,
 a prompt will appear asking to create a new directory when necessary.}
+
+\item{...}{All other options passed to the appropriate internal saving function.}
 }
 \description{
 This function allows the user to export graphical tables in different formats.
