@@ -85,13 +85,16 @@ exportVirusGt <- function(gtable,
   if (create.dir && !is.null(path)) {
     if (!file.exists(path)) {
       dir.create(path, recursive = TRUE)
+      message("Directory created: ", path)
     }
   }
 
 
-  gtable%>% gtsave(filename=filename,
-                   path=path,
-                   ...)
-
-  message("Table export completed successfully.")
+  # Attempt to save the table
+  tryCatch({
+    gtable %>% gtsave(filename = filename, path = path, ...)
+    message("Table export completed successfully.")
+  }, error = function(e) {
+    warning("An error occurred during table export: ", e$message)
+  })
 }
