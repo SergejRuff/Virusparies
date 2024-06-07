@@ -5,7 +5,6 @@
 \title{Export Virusparies Plots}
 \usage{
 exportVirusPlot(
-  plot_object,
   file_name,
   plot = NULL,
   device = NULL,
@@ -22,8 +21,6 @@ exportVirusPlot(
 )
 }
 \arguments{
-\item{plot_object}{A plot object to be exported.}
-
 \item{file_name}{Name of the output file.}
 
 \item{plot}{The plot to be exported.}
@@ -75,7 +72,11 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 
 \dontrun{
 
-exportVirusPlot(plot_object=plot,file_name="testplot.png",width=8,height=6,units="in")
+# first export
+exportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
+
+# second export with device argument
+exportVirusPlot(plot=plot,file_name="testplot",width=8,height=6,units="in",device = "png")
 
 }
 
