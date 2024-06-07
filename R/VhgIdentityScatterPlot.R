@@ -6,7 +6,7 @@
 #' based on  best query  and adds a horizontal line representing the cutoff value.
 #'
 #'
-#' @param vh_file A data frame containing VirusHunter Hittable results.
+#' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param groupby (optional) A string indicating the column used for grouping the data points in the scatter plot.
 #' The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
@@ -46,6 +46,12 @@
 #'   - "rocket" (or "F")
 #'   - "mako" (or "G")
 #'   - "turbo" (or "H")
+#'
+#' @details
+#' 'VhgIdentityScatterPlot' generates a Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+#'  Both VirusHunter and VirusGatherer Hittables can be used as input.
+#'
+#'  A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
 #'
 #' @return A ggplot object representing the scatter plot.
 #' @author Sergej Ruff

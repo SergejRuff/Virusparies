@@ -2,7 +2,7 @@
 % Please edit documentation in R/vhRunsTable.R
 \name{vhRunsTable}
 \alias{vhRunsTable}
-\title{Generate a gt summary table of unique runs for each virus group}
+\title{vhRunsTable: Generate a gt summary table of unique runs for each virus group}
 \usage{
 vhRunsTable(
   vh_file,
@@ -75,8 +75,11 @@ This function generates a summary table of unique runs for each virus group
 based on the input dataset.
 }
 \details{
-This function is an internal utility function used within the package.
-It calculates the number of unique runs for each virus group from the input dataset.
+vhRunsTable calculates the number of unique runs for each virus group from the input dataset.
+It takes VirusHunter hittables as input and determines how many runs (SRA runs or local FastQ files) found a specific virus family.
+
+A graphical table is returned with two columns. The first column contains the name of the virus group,
+while the second column contains all IDs of SRA runs or local files that found that virus group.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

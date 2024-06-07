@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgBoxplot.R
 \name{VhgBoxplot}
 \alias{VhgBoxplot}
-\title{VhgBoxplot: Generate boxplots comparing E-values or identity for each virus group}
+\title{VhgBoxplot: Generate boxplots comparing E-values,identity or contig length (Gatherer only) for each virus group}
 \usage{
 VhgBoxplot(
   vh_file,
@@ -106,18 +106,30 @@ Default is "viridis". Eight options are available, derived from the Viridis pack
 }}
 }
 \value{
-A list containing the generated boxplot, summary statistics, and outliers
+A list containing the generated boxplot, summary statistics,outliers (e-value and contig_len only) and rows_belowthres (evalue only).
 }
 \description{
-This function generates boxplots comparing either E-values or identity
+This function generates boxplots comparing either E-values,identity or contig length (Gatherer only)
 for each group from VirusHunter or VirusGatherer Hittables results.
 }
 \details{
-This function generates boxplots comparing either E-values or identity for each virus
-group from the VirusHunter or Gatherer Hittable.
-It also calculates summary statistics and  identifies outliers for further analysis.
-The user can specify whether to generate boxplots for E-values or identity by setting
-the parameter .
+'VhgBoxplot' generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
+This means that 'VhgBoxplot' can generate three different types of boxplots.
+By default, 'y_column' is set to "ViralRefSeq_E" and will plot the Reference E-Value on the y-axis.
+Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
+
+Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
+When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the Hittable filtered for the rows below the threshold specified in the 'cut' argument.
+
+The 'cut' argument is used differently depending on the 'y_column' value:
+\itemize{
+\item For 'y_column' set to "contig_len" or "ViralRefSeq_ident", the 'cut' argument filters the data to plot only the values with a "ViralRefSeq_E" below the specified threshold (default is 0.0001).
+\item For 'y_column' set to "ViralRefSeq_E", the rows are not filtered. Instead, a horizontal line (h_line) is shown in the plot to indicate the cutoff value.
+}
+
+This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
+.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

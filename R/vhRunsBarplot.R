@@ -1,4 +1,4 @@
-#' vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+#' @title vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
 #' each Virus group.
 #'
 #' @param vh_file Dataframe containing Virushunter hittables results.
@@ -47,7 +47,16 @@
 #'   - "mako" (or "G")
 #'   - "turbo" (or "H")
 #'
-#' @return A list containing the bar plot and optionally the generated table and processed data
+#'
+#' @details
+#' 'vhRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
+#' each Virus group. It takes only VirusHunter hittables as Input.
+#'
+#' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are plotted.
+#'
+#'
+#'
+#' @return A list containing the bar plot and tabular data with information from the plot.
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

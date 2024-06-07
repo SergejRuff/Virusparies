@@ -2,8 +2,7 @@
 % Please edit documentation in R/VhgIdenFacetedScatterPlot.R
 \name{VhgIdenFacetedScatterPlot}
 \alias{VhgIdenFacetedScatterPlot}
-\title{Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value faceted by
-by a column specified by the user.}
+\title{VhgIdenFacetedScatterPlot: Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
   vh_file,
@@ -109,7 +108,7 @@ Default is "viridis". Eight options are available, derived from the Viridis pack
 }}
 }
 \value{
-A ggplot object representing the scatterplot.
+A ggplot object representing the faceted scatterplot.
 }
 \description{
 This function generates a scatterplot of viral RefSeq identity versus -log10 of viral reference e-value
@@ -117,8 +116,7 @@ for each virus group in the \code{best_query} column (or another column). The po
 e-value meets a specified cutoff and are faceted by the \code{best_query} column (or another column).
 }
 \details{
-This function takes a data frame and a cutoff value as inputs, adds a new column to the
-data frame indicating whether each \code{ViralRefSeq_E} value meets the cutoff, and then plots the data.
+'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs..
 The plot includes:
 \itemize{
 \item Points colored based on whether they meet the cutoff condition.
@@ -159,6 +157,7 @@ vg_file <- importVirusTable(path2)
 # vgplot: virusgatherer plot with SRA_run as custom grouping
 vgplot <- VhgIdenFacetedScatterPlot(vg_file,groupby = "SRA_run")
 vgplot
+
 
 }
 \seealso{

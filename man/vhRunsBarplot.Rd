@@ -115,11 +115,17 @@ Default is "viridis". Eight options are available, derived from the Viridis pack
 }}
 }
 \value{
-A list containing the bar plot and optionally the generated table and processed data
+A list containing the bar plot and tabular data with information from the plot.
 }
 \description{
 vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
 each Virus group.
+}
+\details{
+'vhRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
+each Virus group. It takes only VirusHunter hittables as Input.
+
+Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are plotted.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

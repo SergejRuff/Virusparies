@@ -2,7 +2,7 @@
 % Please edit documentation in R/vhSumHitsBarplot.R
 \name{vhSumHitsBarplot}
 \alias{vhSumHitsBarplot}
-\title{Generate a bar plot showing the sum of hits for each virus family}
+\title{vhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family}
 \usage{
 vhSumHitsBarplot(
   vh_file,
@@ -117,14 +117,16 @@ Default is "viridis". Eight options are available, derived from the Viridis pack
 A list containing the generated bar plot and processed data
 }
 \description{
-This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits
+This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
 for each virus family from the input dataset.
 }
 \details{
 This function preprocesses virus data for plotting by calculating the sum of
-hits for each virus family from the input dataset. It then generates a bar plot showing
-the sum of hits for each virus family. Additionally, it returns the processed data
-for further analysis.
+hits for each virus family from the input dataset (only takes VirusHunter Hittables as Input).
+It then generates a bar plot showing the sum of hits/ contigs for each virus family.
+Additionally, it returns the processed data for further analysis.
+
+Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are plotted.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

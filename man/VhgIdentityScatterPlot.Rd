@@ -33,7 +33,7 @@ VhgIdentityScatterPlot(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing VirusHunter Hittable results.}
+\item{vh_file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
@@ -107,6 +107,12 @@ A ggplot object representing the scatter plot.
 This function creates a scatter plot of viral RefSeq identity versus
 the negative logarithm (base 10) of viral RefSeq E-value. It colors the points
 based on  best query  and adds a horizontal line representing the cutoff value.
+}
+\details{
+'VhgIdentityScatterPlot' generates a Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+Both VirusHunter and VirusGatherer Hittables can be used as input.
+
+A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

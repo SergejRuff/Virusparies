@@ -1,6 +1,6 @@
-#' Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value faceted by
-#' by a column specified by the user.
+#' @title VhgIdenFacetedScatterPlot: Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.
 #'
+#' @description
 #' This function generates a scatterplot of viral RefSeq identity versus -log10 of viral reference e-value
 #' for each virus group in the `best_query` column (or another column). The points are colored based on whether the
 #' e-value meets a specified cutoff and are faceted by the `best_query` column (or another column).
@@ -49,10 +49,10 @@
 #'   - "mako" (or "G")
 #'   - "turbo" (or "H")
 #'
-#' @return A ggplot object representing the scatterplot.
+#' @return A ggplot object representing the faceted scatterplot.
 #' @author Sergej Ruff
-#' @details This function takes a data frame and a cutoff value as inputs, adds a new column to the
-#' data frame indicating whether each `ViralRefSeq_E` value meets the cutoff, and then plots the data.
+#' @details
+#' 'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs..
 #' The plot includes:
 #' - Points colored based on whether they meet the cutoff condition.
 #' - Faceting by the `best_query` column as the default column. The user can provide their own column
@@ -91,6 +91,7 @@
 #' # vgplot: virusgatherer plot with SRA_run as custom grouping
 #' vgplot <- VhgIdenFacetedScatterPlot(vg_file,groupby = "SRA_run")
 #' vgplot
+#'
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
