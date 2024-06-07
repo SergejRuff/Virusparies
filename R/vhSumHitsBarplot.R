@@ -8,7 +8,7 @@
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "minimal".
+#'  Default is "linedraw".
 #'
 #' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
 #' @param title (optional) A character specifying the title of the plot. Default is "sum of hits for each family".
@@ -93,7 +93,7 @@
 #' @importFrom stats reorder
 #' @export
 vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
-                             theme_choice = "minimal",
+                             theme_choice = "linedraw",
                              flip_coords = TRUE,
                              title = "sum of hits for each family",
                              title_size = 16,

@@ -12,7 +12,7 @@
 #' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "minimal".
+#'  Default is "linedraw".
 #' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
 #' @param title (optional) A character specifying the title of the plot. Default title is set based on y_column.
 #' @param title_size (optional) Numeric specifying the size of the title text. Default is 16.
@@ -99,7 +99,7 @@ VhgBoxplot <- function(vh_file,
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,
                               cut_colour = "#990000",
-                              theme_choice = "minimal",
+                              theme_choice = "linedraw",
                               flip_coords = TRUE,
                               title = "default",
                               title_size = 16,

@@ -65,9 +65,6 @@ When 'device' is set to NULL, the file extension in 'filename' is used to determ
 
 Depending on the plot, the final image might be cropped or truncated.
 We recommend experimenting with height, width, and resolution.
-
-The default theme for every plot is "minimal," resulting in a transparent plot.
-If you want to avoid transparent plots, please change the theme accordingly.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

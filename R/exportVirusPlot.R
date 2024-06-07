@@ -29,8 +29,7 @@
 #' Depending on the plot, the final image might be cropped or truncated.
 #' We recommend experimenting with height, width, and resolution.
 #'
-#' The default theme for every plot is "minimal," resulting in a transparent plot.
-#' If you want to avoid transparent plots, please change the theme accordingly.
+#'
 #'
 #'
 #'

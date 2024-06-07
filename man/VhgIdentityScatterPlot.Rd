@@ -8,7 +8,7 @@ VhgIdentityScatterPlot(
   vh_file,
   groupby = "best_query",
   cutoff = 1e-05,
-  theme_choice = "minimal",
+  theme_choice = "linedraw",
   cut_colour = "#990000",
   title = "scatterplot for refrence identity vs -log10 of refrence e-value",
   title_size = 16,
@@ -43,7 +43,7 @@ Note: Gatherer hittables do not have a "best_query" column. Please provide an ap
 with values larger than the cutoff value in the ViralRefSeq_E column.}
 
 \item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "minimal".}
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".}
 
 \item{cut_colour}{(optional) The color for the horizontal cutoff line. Default is "#990000".}
 

@@ -10,7 +10,7 @@ VhgBoxplot(
   y_column = "ViralRefSeq_E",
   cut = 1e-05,
   cut_colour = "#990000",
-  theme_choice = "minimal",
+  theme_choice = "linedraw",
   flip_coords = TRUE,
   title = "default",
   title_size = 16,
@@ -48,7 +48,7 @@ VhgBoxplot(
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-Default is "minimal".}
+Default is "linedraw".}
 
 \item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 

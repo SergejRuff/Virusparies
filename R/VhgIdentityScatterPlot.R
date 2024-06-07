@@ -13,7 +13,7 @@
 #' @param cutoff (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than the cutoff value in the ViralRefSeq_E column.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
-#' "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "minimal".
+#' "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".
 #' @param cut_colour (optional) The color for the horizontal cutoff line. Default is "#990000".
 #' @param title (optional) The title of the plot. Default is "scatterplot for reference identity vs -log10 of reference e-value".
 #' @param title_size (optional) The size of the title text. Default is 16.
@@ -102,7 +102,7 @@
 VhgIdentityScatterPlot <- function(vh_file,
                                   groupby = "best_query",
                                   cutoff = 1e-5,
-                                  theme_choice = "minimal",
+                                  theme_choice = "linedraw",
                                   cut_colour = "#990000",
                                   title = "scatterplot for refrence identity vs -log10 of refrence e-value",
                                   title_size = 16,

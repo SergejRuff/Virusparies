@@ -13,7 +13,7 @@
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "minimal".
+#'  Default is "linedraw".
 #' @param title (optional) The title of the plot. Default is "scatterplot for reference identity vs -log10 of reference e-value for each virus separately".
 #' @param title_size (optional) The size of the title text. Default is 16.
 #' @param title_face (optional) The face (bold, italic, etc.) of the title text. Default is "bold".
@@ -103,7 +103,7 @@
 VhgIdenFacetedScatterPlot <- function(vh_file,
                                      groupby = "best_query",
                                      cutoff = 1e-5,
-                                     theme_choice = "minimal",
+                                     theme_choice = "linedraw",
                                      title="identity vs -log10(E-val) for each group",
                                      title_size = 16,
                                      title_face = "bold",

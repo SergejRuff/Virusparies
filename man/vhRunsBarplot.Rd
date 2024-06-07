@@ -8,7 +8,7 @@ each Virus group.}
 vhRunsBarplot(
   vh_file,
   cut = 1e-05,
-  theme_choice = "minimal",
+  theme_choice = "linedraw",
   flip_coords = TRUE,
   title = "Number of datasets with hits found for each Virus group",
   title_size = 16,
@@ -44,7 +44,7 @@ vhRunsBarplot(
 Removes rows in vh_file with values larger than cutoff value in ViralRefSeq_E column.}
 
 \item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply.
-Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "minimal".}
+Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".}
 
 \item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
