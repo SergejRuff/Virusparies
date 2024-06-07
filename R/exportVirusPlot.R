@@ -42,7 +42,7 @@
 #'
 #' \dontrun{
 #'
-#' exportVirusPlot(plot_object=plot,file_name="testplot.png",width=1920,height=1080)
+#' exportVirusPlot(plot_object=plot,file_name="testplot.png",width=8,height=6,units="in")
 #'
 #' }
 #'
