@@ -4,6 +4,9 @@
 #' based on the input dataset.
 #'
 #' @param vh_file A data frame containing the Virushunter Hittables Results
+#' @param groupby (optional) A string indicating the column used for grouping the data.
+#' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+#' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param title (optional): a title for the summary title.
@@ -62,25 +65,34 @@
 #' @importFrom gt gt
 #' @importFrom rlang .data
 #' @export
-vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
+vhRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
                         title_align = "left",names_=NULL,align = "left",subtit =NULL,
                         data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                         title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
                         cell_colour="grey90",col_everyrow=FALSE){
 
+
+  if(groupby == "ViralRefSeq_taxonomy"){
+
+    vh_file <- taxonomy_group_preprocess(vh_file)
+
+  }
+
   if(is.null(names_)){
-    names_ <- c("Virus Group","Number of Unique SRA Runs","SRAs Found")
+    names_ <- c("Group","Number of Unique SRA Runs","SRAs Found")
   }
 
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
   which_runs <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(.data[[groupby]]) %>%
     summarise(unique_SRA_run = n_distinct(across(any_of(c("SRA_run", "run_id")))),
               SRAs_found = paste(unique(across(any_of(c("SRA_run", "run_id")))), collapse = ", "))
 
   # Remove "c()", "\", and quotation marks
   which_runs$SRAs_found <- gsub("[c()\\\\\"]", "", which_runs$SRAs_found)
+
+  which_runs <- setNames(which_runs, names_)
 
   row_number <- nrow(which_runs)
 
@@ -90,11 +102,6 @@ vhRunsTable <- function(vh_file,cut = 1e-5,title="Summary Table of Unique Runs f
     tab_header(
       title = title
     )%>%
-    cols_label(
-      best_query = names_[[1]],
-      unique_SRA_run = names_[[2]],
-      SRAs_found = names_[[3]]
-    ) %>%
     cols_align(
       align = align
     )%>%
