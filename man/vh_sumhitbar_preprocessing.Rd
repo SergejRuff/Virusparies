@@ -4,10 +4,12 @@
 \alias{vh_sumhitbar_preprocessing}
 \title{Preprocess virus data for generating a bar plot of the sum of hits for each virus family}
 \usage{
-vh_sumhitbar_preprocessing(vh_file)
+vh_sumhitbar_preprocessing(vh_file, groupby = "best_query")
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter hittables results}
+
+\item{groupby}{string indicating best_query or ViralRefSeq_taxonomy column}
 }
 \value{
 A processed data frame with columns "best_query", "sum", "perc", "res", and "cyl"

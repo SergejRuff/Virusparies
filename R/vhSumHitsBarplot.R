@@ -5,6 +5,9 @@
 #' for each virus family from the input dataset.
 #'
 #' @param vh_file A data frame containing VirusHunters hittables results.
+#' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
+#' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+#' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -96,7 +99,9 @@
 #' @importFrom rlang .data
 #' @importFrom stats reorder
 #' @export
-vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
+vhSumHitsBarplot <- function(vh_file,
+                             groupby = "best_query",
+                             cut = 1e-5,
                              theme_choice = "linedraw",
                              flip_coords = TRUE,
                              title = "sum of hits for each family",
@@ -131,11 +136,12 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
 
 
  # Define the required columns
- required_columns <- c("num_hits", "ViralRefSeq_E", "best_query")
+ required_columns <- c("num_hits", "ViralRefSeq_E", groupby)
 
  check_columns(vh_file,required_columns)
  check_input_type(vh_file,c("num_hits", "ViralRefSeq_E"),2)
- check_input_type(vh_file,"best_query",1)
+ check_input_type(vh_file,groupby,1)
+
 
  # check arguments
  arg_character(theme_choice)
@@ -144,10 +150,17 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
  arg_logical(flip_coords)
  arg_logical(colorblind_support)
 
+ if(groupby == "ViralRefSeq_taxonomy"){
+
+     vh_file <- taxonomy_group_preprocess(vh_file)
+
+ }
+
+
  ## preprocess data for plotting
  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
  is_file_empty(vh_file)
- vh_group <- vh_sumhitbar_preprocessing(vh_file)
+ vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby)
 
  # Apply the selected theme
  theme_selected <- select_theme(theme_choice)
@@ -170,7 +183,7 @@ vhSumHitsBarplot <- function(vh_file,cut = 1e-5,
  ########################
  ########################
 
- sum_plot <- ggplot(data = vh_group,aes(x=reorder(.data$best_query,.data$sum,FUN=max),y= .data$sum,fill=.data$best_query))+
+ sum_plot <- ggplot(data = vh_group,aes(x=reorder(.data[[groupby]],.data$sum,FUN=max),y= .data$sum,fill=.data[[groupby]]))+
    geom_bar(stat = "identity")+
    labs(title = title,
         x = xlabel,

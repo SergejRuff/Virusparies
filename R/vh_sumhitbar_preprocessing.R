@@ -4,6 +4,7 @@
 #' the sum of hits for each virus family from the input dataset.
 #'
 #' @param vh_file A data frame containing VirusHunter hittables results
+#' @param groupby string indicating best_query or ViralRefSeq_taxonomy column
 #'
 #' @return A processed data frame with columns "best_query", "sum", "perc", "res", and "cyl"
 #' @author Sergej Ruff
@@ -18,15 +19,17 @@
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
 #' @keywords internal
-vh_sumhitbar_preprocessing <- function(vh_file){
+vh_sumhitbar_preprocessing <- function(vh_file,groupby="best_query"){
+
+
 
   vh_group <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(.data[[groupby]]) %>%
     summarize(sum=sum(.data$num_hits))%>%
     mutate(
       perc = round(proportions(.data$sum) * 100, 2),
       res = str_c(.data$sum, " (", .data$perc, "%)"),
-      cyl = as.factor(.data$best_query)
+      cyl = as.factor(.data[[groupby]])
     )
 
   return(vh_group)

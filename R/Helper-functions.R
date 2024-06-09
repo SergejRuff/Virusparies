@@ -261,3 +261,65 @@ get_plot_parameters <- function(y_column, cut) {
 
   return(params[[y_column]])
 }
+
+
+
+#' remove sample(s) elements in taxonomy columns
+#'
+#' @param sublist ViralRefSeq_taxonomy column from Hittable file
+#'
+#' @details
+#' Internal hellper function used in 'taxonomy_group_preprocess' function.
+#' The ViralRefSeq_taxonomy column of Hittables sometimes contains entries such as "environmental sample"
+#' as the second element. We want to remove those "sample" elements since we want to use the virus name in the second
+#' element as the x_column/groupby instead of best_query. That way the third element becomes the second one.
+#'
+#'
+#'
+#' @return list with preprocessed ViralRefSeq_taxonomy elements
+#'
+#'
+#' @keywords internal
+remove_samples <- function(sublist) {
+  sublist[!grepl("samples|sample", sublist)]
+}
+
+
+#' preprocess ViralRefSeq_taxonomy elements
+#'
+#' @param vh_file hittables file
+#'
+#' @details
+#' Besides best_query the user can utilize the ViralRefSeq_taxonomy column as x_column or groupby
+#' in plots. That columns needs to be preprocessed as it it too long and has too many unique elements
+#' to be used for grouping. This function takes the second element after splitting ViralRefSeq_taxonomy
+#' for "|". The second element is used because the first one is the tax ID and the second one contains
+#' the virus name. NA are replaced by "unclassified" and existing "unclassified" are removed.
+#'
+#'
+#' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
+#'
+#' @keywords internal
+taxonomy_group_preprocess <- function(vh_file){
+
+  # split vh_file.
+  my_list <- strsplit(vh_file$ViralRefSeq_taxonomy,split = "|",fixed = TRUE)
+
+  # Apply the function to each sublist to remove "samples" elements
+  my_list <- lapply(my_list, remove_samples)
+
+
+  # Extract the second element of each sublist
+  second_elements <- sapply(my_list, function(x) x[2])
+
+  # Remove the word "unclassified" from any element containing it
+  virusnames <- gsub("unclassified ", "", second_elements)
+
+  virusnames[is.na(virusnames)] <- "unclassified"
+
+  vh_file$ViralRefSeq_taxonomy <- virusnames
+
+  return(vh_file)
+
+}
+

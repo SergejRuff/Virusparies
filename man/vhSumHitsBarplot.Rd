@@ -6,6 +6,7 @@
 \usage{
 vhSumHitsBarplot(
   vh_file,
+  groupby = "best_query",
   cut = 1e-05,
   theme_choice = "linedraw",
   flip_coords = TRUE,
@@ -38,6 +39,10 @@ vhSumHitsBarplot(
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunters hittables results.}
+
+\item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
+"best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
