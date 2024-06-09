@@ -2,6 +2,9 @@
 #' each Virus group.
 #'
 #' @param vh_file Dataframe containing Virushunter hittables results.
+#' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
+#' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+#' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' Removes rows in vh_file with values larger than cutoff value in ViralRefSeq_E column.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply.
@@ -91,6 +94,7 @@
 #' @importFrom rlang .data
 #' @export
 vhRunsBarplot <- function(vh_file,
+                          groupby = "best_query",
                           cut = 1e-5,
                           theme_choice = "linedraw",
                           flip_coords = TRUE,
@@ -137,7 +141,7 @@ vhRunsBarplot <- function(vh_file,
 
 
 
-  required_columns <- c("ViralRefSeq_E","best_query")
+  required_columns <- c("ViralRefSeq_E",groupby)
   all_names <- names(vh_file)
 
 
@@ -148,7 +152,13 @@ vhRunsBarplot <- function(vh_file,
   }
 
   check_input_type(vh_file,"ViralRefSeq_E",2)
-  check_input_type(vh_file,"best_query",1)
+  check_input_type(vh_file,groupby,1)
+
+  if(groupby == "ViralRefSeq_taxonomy"){
+
+    vh_file <- taxonomy_group_preprocess(vh_file)
+
+  }
 
   # Filter obj
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
@@ -161,7 +171,7 @@ vhRunsBarplot <- function(vh_file,
 
 
   # preprocess data for plot
-  sample_run <- preprocess_runs_bar(vh_file)
+  sample_run <- preprocess_runs_bar(vh_file,groupby)
 
   # Set the subtitle based on the input
   if (subtitle == "default") {
@@ -176,7 +186,7 @@ vhRunsBarplot <- function(vh_file,
   ### Generate Plot ###
   ### #################
 
-  run_bar <- ggplot(data = sample_run,aes(x=reorder(.data$best_query,.data$unique_SRA_run,FUN=max),y=.data$unique_SRA_run,fill= .data$best_query))+
+  run_bar <- ggplot(data = sample_run,aes(x=reorder(.data[[groupby]],.data$unique_SRA_run,FUN=max),y=.data$unique_SRA_run,fill= .data[[groupby]]))+
     geom_bar(stat = "identity")+
     labs(title = title,
          x= xlabel,

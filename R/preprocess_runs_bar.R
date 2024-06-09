@@ -5,6 +5,7 @@
 #' creating additional variables for visualization.
 #'
 #' @param vh_file A data frame containing VirusHunter Hittables results.
+#' @param groupby string indicating best_query or ViralRefSeq_taxonomy column
 #'
 #' @return A processed data frame for run_bar plot.
 #' @author Sergej Ruff
@@ -16,7 +17,7 @@
 #' @importFrom rlang .data
 #'
 #' @keywords internal
-preprocess_runs_bar <- function(vh_file){
+preprocess_runs_bar <- function(vh_file,groupby="best_query"){
 
   all_names <- names(vh_file)
   # Check if either "SRA_run" or "run_id" exists in vh_file
@@ -24,16 +25,16 @@ preprocess_runs_bar <- function(vh_file){
     stop("Neither 'SRA_run' nor 'run_id' found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
-  check_columns(vh_file,"best_query")
+  check_columns(vh_file,groupby)
 
 
   sample_run <- vh_file %>%
-    group_by(.data$best_query) %>%
+    group_by(.data[[groupby]]) %>%
     summarise(unique_SRA_run = n_distinct(across(any_of(c("SRA_run", "run_id"))))) %>%
     mutate(
       perc = round(proportions(.data$unique_SRA_run) * 100, 2),
       res = str_c(.data$unique_SRA_run, " (", .data$perc, "%)"),
-      cyl = as.factor(.data$best_query)
+      cyl = as.factor(.data[[groupby]])
     )
 
   return(sample_run)

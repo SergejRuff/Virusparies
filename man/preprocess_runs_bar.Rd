@@ -4,10 +4,12 @@
 \alias{preprocess_runs_bar}
 \title{Preprocess virus data for generating a bar plot}
 \usage{
-preprocess_runs_bar(vh_file)
+preprocess_runs_bar(vh_file, groupby = "best_query")
 }
 \arguments{
 \item{vh_file}{A data frame containing VirusHunter Hittables results.}
+
+\item{groupby}{string indicating best_query or ViralRefSeq_taxonomy column}
 }
 \value{
 A processed data frame for run_bar plot.
