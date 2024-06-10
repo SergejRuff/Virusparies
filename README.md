@@ -17,17 +17,17 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 
 
 ``` r
-# install.packages("pak")
-pak::pak("tidyverse/dplyr")
-```
-
 ### First install the "remotes" package
 
-`install.packages("remotes")`
+install.packages("remotes")
 
 ### Then install the Virusparies package
 
-`remotes::install_github("SergejRuff/Virusparies")`
+remotes::install_github("SergejRuff/Virusparies")
+
+```
+
+
 
 ## Overview
 
