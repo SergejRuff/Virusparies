@@ -217,6 +217,10 @@ plot
 
 ### VirusHunter GT - vhRunsTable
 
+`vhRunsTable()` takes VirusHunter Files as Input and generates a graphical table providing the user with information about which Run has found which virus group.
+This makes it a nice complement to the `vhRunsBarplot()`function as they provide the user with the same information but with more detail about the exact number of unique Runs in the plot
+and the Run-ID in the table.
+
 ``` r
 
 ### Load VirusHunter File
