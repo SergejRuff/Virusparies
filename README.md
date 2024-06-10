@@ -147,6 +147,23 @@ plot5
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Generate Plot
+
+plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
+
+plot
+
+
+
+```
+
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
