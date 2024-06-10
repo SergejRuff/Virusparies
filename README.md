@@ -15,6 +15,12 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 
 ## Installation
 
+
+``` r
+# install.packages("pak")
+pak::pak("tidyverse/dplyr")
+```
+
 ### First install the "remotes" package
 
 `install.packages("remotes")`
