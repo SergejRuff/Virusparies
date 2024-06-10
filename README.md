@@ -99,6 +99,27 @@ vg_file <- importVirusTable(path2)
 print(head(vg_file))  # print head of gatherer files
 ```
 
+### VirusHunterGatherer Plot - VhgBoxplot
+
+
+### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
+
+
+### VirusHunterGatherer Plot - VhgIdentityScatterPlot
+
+
+### VirusHunter Plot - vhRunsBarplot
+
+
+### VirusHunter Plot - vhSumHitsBarplot
+
+
+### VirusHunter GT - vhRunsTable
+
+
+### GT - vhgTabularRasa
+
+
 ### Export
 
 #### Export Plots
