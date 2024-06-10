@@ -101,26 +101,60 @@ print(head(vg_file))  # print head of gatherer files
 
 ### Export
 
+#### Export Plots
+
 Plots can be exported in different formats via `exportVirusPlot()`.
 Supported devices include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", or "wmf" (Windows only).
 When 'device' argument is set to NULL, the file extension in 'filename' is used to determine the device.
 
 ``` r
-### load VirusHunter File
+### Load VirusHunter File
+
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 vh_file <- importVirusTable(path)
 
 ### Generate Basic plot
+
 plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 
 
 ### Export plot
+
 exportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
 
 
 ```
 ***!*** Depending on the plot, the final image might be cropped or truncated.
 We recommend experimenting with height, width, and resolution.
+
+#### Export Graphical Tables
+
+`exportVirusPlot()` implements the `gtsave` function from the gt-package to export graphical tables in different formats.
+This feature is in an experimental phase and may not currently function as expected. 
+***!*** Google Chrome or a Chromium browser is required for png and pdf file export.
+
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
+
+vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
+
+### Generating a gt
+
+table <- vhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+"example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
+"Reference E-Value","Refrence Identity"))
+
+### Export gt as docx file
+
+exportVirusGt(gtable=table,filename="vh_parttable.docx")
+
+```
 
 ## Contributions
 
