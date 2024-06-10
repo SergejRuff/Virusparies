@@ -1,6 +1,9 @@
 # Virusparies
 
-[test](https://github.com/SergejRuff/Virusparies/tree/main#overview)
+- [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
+- [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
+- [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
+- [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
 
 VirusHunterGatherer is a data-driven tool designed for high-throughput virus discovery.
 The process involves Virushunter conducting sensitive homology-based detection of
