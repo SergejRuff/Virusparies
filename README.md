@@ -11,6 +11,8 @@ VirushunterGatherer Hittables. The name draws inspiration from the hunter-gather
 with "paries" derived from Latin meaning "wall". It symbolizes the parietal art left by
 ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
+VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGatherer .
+
 ## Installation
 
 ### First install the "remotes" package
