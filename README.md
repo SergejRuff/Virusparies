@@ -1,10 +1,5 @@
 # Virusparies
 
-- [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
-- [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
-- [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
-- [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
-
 VirusHunterGatherer is a data-driven tool designed for high-throughput virus discovery.
 The process involves Virushunter conducting sensitive homology-based detection of
 viral sequence reads in unprocessed data. This approach identifies the most conserved regions
@@ -17,6 +12,12 @@ with "paries" derived from Latin meaning "wall". It symbolizes the parietal art 
 ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
 VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGatherer .
+
+- [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
+- [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
+- [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
+- [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
+
 
 ## Installation
 
