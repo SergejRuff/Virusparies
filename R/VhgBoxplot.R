@@ -154,6 +154,14 @@ VhgBoxplot <- function(vh_file,
   arg_logical(flip_coords)
   arg_logical(colorblind_support)
 
+  if(x_column == "ViralRefSeq_taxonomy"){
+
+    tax_column <- vh_file$ViralRefSeq_taxonomy
+
+    vh_file <- taxonomy_group_preprocess(vh_file)
+
+  }
+
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
@@ -294,6 +302,13 @@ VhgBoxplot <- function(vh_file,
 
 
   summary_stats <- boxp_summary_stats(vh_file, group = x_column,ycol =y_column)
+
+  if(x_column == "ViralRefSeq_taxonomy"){
+
+
+    vh_file$ViralRefSeq_taxonomy <- tax_column
+
+  }
 
   if (y_column == "ViralRefSeq_E") {
     outlier <- find_outlier_eval_box(vh_file, group = x_column)

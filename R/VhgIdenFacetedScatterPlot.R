@@ -130,12 +130,21 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
                                      colormap = "viridis"
                                      ){
 
+
+
+
   # check if hittable is complete
   is_file_empty(vh_file)
   required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
   check_columns(vh_file,required_columns)
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(vh_file,groupby,1)
+
+  if(groupby == "ViralRefSeq_taxonomy"){
+
+    vh_file <- taxonomy_group_preprocess(vh_file)
+
+  }
 
   # check arguments
   arg_character(theme_choice)
