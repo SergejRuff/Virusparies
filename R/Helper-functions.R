@@ -264,26 +264,20 @@ get_plot_parameters <- function(y_column, cut) {
 
 
 
-#' remove sample(s) elements in taxonomy columns
+#' internal: extract viridae element
 #'
-#' @param sublist ViralRefSeq_taxonomy column from Hittable file
-#'
-#' @details
-#' Internal hellper function used in 'taxonomy_group_preprocess' function.
-#' The ViralRefSeq_taxonomy column of Hittables sometimes contains entries such as "environmental sample"
-#' as the second element. We want to remove those "sample" elements since we want to use the virus name in the second
-#' element as the x_column/groupby instead of best_query. That way the third element becomes the second one.
-#'
-#'
-#'
-#' @return list with preprocessed ViralRefSeq_taxonomy elements
+#' @param sublist taxonomy column
 #'
 #'
 #' @keywords internal
-remove_samples <- function(sublist) {
-  sublist[!grepl("samples|sample", sublist)]
+extract_viridae <- function(sublist) {
+  element <- subset(sublist, grepl("viridae", sublist))
+  if (length(element) > 0) {
+    return(element)
+  } else {
+    return(NA)  # Return NA if "viridae" is not found in the sublist
+  }
 }
-
 
 #' preprocess ViralRefSeq_taxonomy elements
 #'
@@ -292,9 +286,8 @@ remove_samples <- function(sublist) {
 #' @details
 #' Besides best_query the user can utilize the ViralRefSeq_taxonomy column as x_column or groupby
 #' in plots. That columns needs to be preprocessed as it it too long and has too many unique elements
-#' to be used for grouping. This function takes the second element after splitting ViralRefSeq_taxonomy
-#' for "|". The second element is used because the first one is the tax ID and the second one contains
-#' the virus name. NA are replaced by "unclassified" and existing "unclassified" are removed.
+#' to be used for grouping. The element containing "viridae" is used because the first one is the tax ID.
+#'  NA are replaced by "unclassified" and existing "unclassified" are removed.
 #'
 #'
 #' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
@@ -305,19 +298,17 @@ taxonomy_group_preprocess <- function(vh_file){
   # split vh_file.
   my_list <- strsplit(vh_file$ViralRefSeq_taxonomy,split = "|",fixed = TRUE)
 
-  # Apply the function to each sublist to remove "samples" elements
-  my_list <- lapply(my_list, remove_samples)
+  # Apply the function to each sublist
+  viridae_elements <- lapply(my_list, extract_viridae)
 
 
-  # Extract the second element of each sublist
-  second_elements <- sapply(my_list, function(x) x[2])
 
-  # Remove the word "unclassified" from any element containing it
-  virusnames <- gsub("unclassified ", "", second_elements)
+  # Remove elements containing "unclassified" outside the function
+  viridae_elements <- lapply(viridae_elements, function(x) x[!grepl("unclassified", x)])
 
-  virusnames[is.na(virusnames)] <- "unclassified"
+  viridae_elements[is.na(viridae_elements)] <- "unclassified"
 
-  vh_file$ViralRefSeq_taxonomy <- virusnames
+  vh_file$ViralRefSeq_taxonomy <- unlist(viridae_elements)
 
   return(vh_file)
 

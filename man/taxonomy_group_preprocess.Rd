@@ -18,8 +18,7 @@ preprocess ViralRefSeq_taxonomy elements
 \details{
 Besides best_query the user can utilize the ViralRefSeq_taxonomy column as x_column or groupby
 in plots. That columns needs to be preprocessed as it it too long and has too many unique elements
-to be used for grouping. This function takes the second element after splitting ViralRefSeq_taxonomy
-for "|". The second element is used because the first one is the tax ID and the second one contains
-the virus name. NA are replaced by "unclassified" and existing "unclassified" are removed.
+to be used for grouping. The element containing "viridae" is used because the first one is the tax ID.
+NA are replaced by "unclassified" and existing "unclassified" are removed.
 }
 \keyword{internal}
