@@ -21,6 +21,7 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 
 ## Installation
 
+You can choose to install the development version of Virusparies from GitHub:
 
 ``` r
 ### First install the "remotes" package
@@ -32,7 +33,7 @@ install.packages("remotes")
 remotes::install_github("SergejRuff/Virusparies")
 
 ```
-
+***!*** Bioconductor version comming soon ...
 
 
 ## Overview
