@@ -16,7 +16,9 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 - [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
 - [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
 - [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
+- [Citation](https://github.com/SergejRuff/Virusparies/blob/main/README.md#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
+
 
 
 ## Installation
