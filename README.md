@@ -33,7 +33,7 @@ install.packages("remotes")
 remotes::install_github("SergejRuff/Virusparies")
 
 ```
-***!*** Bioconductor version comming soon ...
+***!*** Bioconductor version coming soon ...
 
 
 ## Overview
