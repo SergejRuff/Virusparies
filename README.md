@@ -99,6 +99,29 @@ vg_file <- importVirusTable(path2)
 print(head(vg_file))  # print head of gatherer files
 ```
 
+### Export
+
+Plots can be exported in different formats via `exportVirusPlot()`.
+Supported devices include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", or "wmf" (Windows only).
+When 'device' argument is set to NULL, the file extension in 'filename' is used to determine the device.
+
+``` r
+### load VirusHunter File
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Generate Basic plot
+plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
+
+
+### Export plot
+exportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
+
+
+```
+***!*** Depending on the plot, the final image might be cropped or truncated.
+We recommend experimenting with height, width, and resolution.
+
 ## Contributions
 
 Sergej Ruff formulated the idea behind Virusparies and was responsible for its implementation.
