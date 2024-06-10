@@ -27,32 +27,32 @@ Virusparies includes the following functions:
 
 ### Import
 
-- `importVirusTable()` : Import VirusHunterGatherer hittables into R.
+- `importVirusTable()`  Import VirusHunterGatherer hittables into R.
 
 
 ### VirushunterGatherer Plots:
 
-- `VhgBoxplot()`: boxplot plotting RefSeq identity, evalues or contig length for each group.
-- `VhgIdenFacetedScatterPlot()`: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-- `VhgIdentityScatterPlot()`: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+- `VhgBoxplot()` Boxplot plotting RefSeq identity, evalues or contig length for each group.
+- `VhgIdenFacetedScatterPlot()` Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+- `VhgIdentityScatterPlot()` Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 
 
 ### Virushunter only Plots:
 
-- `vhRunsBarplot()`: barplot showing how many unique Runs map against each virus.
-- `vhSumHitsBarplot()`: barplot for the sum of hits for each virus found in group.
+- `vhRunsBarplot()` Bar plot showing how many unique Runs map against each virus.
+- `vhSumHitsBarplot()` Bar plot for the sum of hits for each virus found in group.
 
 
 ### Graphical Tables(gt):
 
-- `vhRunsTable()`: Generate a gt-table for vhRunsBarplot.
-- `vhgTabularRasa()`: Generate custome gt-tables.
+- `vhRunsTable()` Generate a gt-table for vhRunsBarplot.
+- `vhgTabularRasa()` Generate custome gt-tables.
 
 
 ### Export:
 
-- `exportVirusGt()` : Export Graphical Tables.
-- `exportVirusPlot()`: Export plots.
+- `exportVirusGt()`  Export Graphical Tables.
+- `exportVirusPlot()` Export plots.
 
 
 ## Contributions
