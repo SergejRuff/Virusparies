@@ -157,28 +157,99 @@ vh_file <- importVirusTable(path)
 ### Generate Plot
 
 plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
-
 plot
-
-
 
 ```
 
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Basic plot
+
+plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
+plot(plot)
+
+```
+
 
 ### VirusHunter Plot - vhRunsBarplot
+
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Generate Plot
+
+plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+plot
+
+
+```
 
 
 ### VirusHunter Plot - vhSumHitsBarplot
 
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Generate Plot
+
+plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
+plot
+
+```
+
 
 ### VirusHunter GT - vhRunsTable
+
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Generate table with defaul arguments
+
+table <- vhRunsTable(vh_file,cut = 1e-5)
+table
+
+```
 
 
 ### GT - vhgTabularRasa
 
+``` r
+
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Plot boxplot for "identity"
+
+identity <- VhgBoxplot(vh_file,y_column = "ViralRefSeq_ident")
+
+# Generate table
+
+vhgTabularRasa(identity$summary_stats)
+
+
+```
 
 ### Export
 
