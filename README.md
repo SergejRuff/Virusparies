@@ -11,18 +11,51 @@ VirushunterGatherer Hittables. The name draws inspiration from the hunter-gather
 with "paries" derived from Latin meaning "wall". It symbolizes the parietal art left by
 ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
-# Installation
+## Installation
 
-## First install the "remotes" package
+### First install the "remotes" package
 
-install.packages("remotes")
+`install.packages("remotes")`
 
-## Then install the Virusparies package
+### Then install the Virusparies package
 
-remotes::install_github("SergejRuff/Virusparies")
+`remotes::install_github("SergejRuff/Virusparies")`
+
+## Overview
+
+Virusparies includes the following functions:
+
+### Import
+
+- `importVirusTable()` : Import VirusHunterGatherer hittables into R.
 
 
-# Contributions
+### VirushunterGatherer Plots:
+
+- `VhgBoxplot()`: boxplot plotting RefSeq identity, evalues or contig length for each group.
+- `VhgIdenFacetedScatterPlot()`: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+- `VhgIdentityScatterPlot()`: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+
+
+### Virushunter only Plots:
+
+- `vhRunsBarplot()`: barplot showing how many unique Runs map against each virus.
+- `vhSumHitsBarplot()`: barplot for the sum of hits for each virus found in group.
+
+
+### Graphical Tables(gt):
+
+- `vhRunsTable()`: Generate a gt-table for vhRunsBarplot.
+- `vhgTabularRasa()`: Generate custome gt-tables.
+
+
+### Export:
+
+- `exportVirusGt()` : Export Graphical Tables.
+- `exportVirusPlot()`: Export plots.
+
+
+## Contributions
 
 Sergej Ruff formulated the idea behind Virusparies and was responsible for its implementation.
 
