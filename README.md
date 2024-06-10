@@ -130,6 +130,44 @@ path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 vg_file <- importVirusTable(path2)
 
 print(head(vg_file))  # print head of gatherer files
+
+#>       SRA_run SRA_sample SRA_study   host_taxon host_taxid                 contig_id
+#>  1   ERR206007  ERS074208 ERP000373 Homo sapiens       9606   ERR206007_cap3_Contig-1
+#>  2   ERR206007  ERS074208 ERP000373 Homo sapiens       9606   ERR206007_cap3_Contig-2
+#>  3   ERR206007  ERS074208 ERP000373 Homo sapiens       9606   ERR206007_cap3_Contig-3
+#>  4   ERR206007  ERS074208 ERP000373 Homo sapiens       9606   ERR206007_cap3_Contig-4
+#>  5   ERR206021  ERS074222 ERP000373 Homo sapiens       9606   ERR206021_cap3_Contig-1
+#>  6 SRR10822543 SRS5937532 SRP239389 Homo sapiens       9606 SRR10822543_cap3_Contig-1
+#>    contig_len ViralRefSeq_E ViralRefSeq_ident ViralRefSeq_aLen
+#>  1        603      4.22e-65            92.453              106
+#>  2        461      3.22e-65            85.612              139
+#>  3        364      2.46e-53            76.531               98
+#>  4        334      9.87e-67            93.636              110
+#>  5        323      8.91e-45            65.421              107
+#>  6       3321      0.00e+00            86.058              789
+#>                                                       ViralRefSeq_subject
+#>  1                            acc:YP_009505712|Orf1 [Torque teno virus 5]
+#>  2 acc:YP_003587853|hypothetical protein TTV10_gp4 [Torque teno virus 10]
+#>  3                            acc:YP_003587868|ORF1 [Torque teno virus 3]
+#>  4                           acc:YP_009505715|Orf1 [Torque teno virus 11]
+#>  5        acc:YP_009505729|unnamed protein product [Torque teno virus 24]
+#>  6                        acc:YP_009173866|polymerase [Hepatitis B virus]
+#>                                                                                                ViralRefSeq_taxonomy
+#>  1                                              taxid:687344|Alphatorquevirus homin5|Alphatorquevirus|Anelloviridae
+#>  2                                             taxid:687349|Alphatorquevirus homin10|Alphatorquevirus|Anelloviridae
+#>  3                                              taxid:687342|Alphatorquevirus homin3|Alphatorquevirus|Anelloviridae
+#>  4                                                                      taxid:687350|Alphatorquevirus|Anelloviridae
+#>  5                                             taxid:687363|Alphatorquevirus homin24|Alphatorquevirus|Anelloviridae
+#>  6 taxid:10407|Orthohepadnavirus|Hepadnaviridae|Blubervirales|Revtraviricetes|Artverviricota|Pararnavirae|Riboviria
+#>    date_analyzed
+#>  1    2024-05-18
+#>  2    2024-05-18
+#>  3    2024-05-18
+#>  4    2024-05-18
+#>  5    2024-05-17
+#>  6    2024-05-18
+
+
 ```
 
 ### VirusHunterGatherer Plot - VhgBoxplot
