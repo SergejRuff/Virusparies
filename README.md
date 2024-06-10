@@ -94,6 +94,36 @@ vh_file <- importVirusTable(path)
 
 print(head(vh_file))  # print head of hunter files
 
+#>      SRA_run SRA_sample SRA_study   host_taxon host_taxid num_queries num_hits  best_E
+#> 1 SRR10822543 SRS5937532 SRP239389 Homo_sapiens       9606           8       12 4.5e-05
+#> 2 SRR12567985 SRS7305728 SRP279687 Homo_sapiens       9606           6        9 9.7e-13
+#> 3 SRR12567985 SRS7305728 SRP279687 Homo_sapiens       9606           6        5 1.4e-08
+#> 4 SRR10822560 SRS5937549 SRP239389 Homo_sapiens       9606          11        3 1.1e-08
+#> 5 SRR12567985 SRS7305728 SRP279687 Homo_sapiens       9606           6        8 3.2e-10
+#> 6 SRR10822546 SRS5937535 SRP239389 Homo_sapiens       9606           7       20 1.0e-01
+#>       best_query ViralRefSeq_E ViralRefSeq_ident ViralRefSeq_aLen.sLen ViralRefSeq_contigs
+#> 1 Anello_ORF1core      2.59e-38              93.8             192 / 194                   1
+#> 2 Anello_ORF1core      8.44e-36              77.3             225 / 227                   6
+#> 3 Anello_ORF1core      3.95e-34              70.1             231 / 232                   1
+#> 4 Anello_ORF1core      3.69e-31              68.6             210 / 216                   1
+#> 5 Anello_ORF1core      5.85e-31              76.9             195 / 201                   3
+#> 6 Anello_ORF1core      8.63e-31              79.4             189 / 237                   1
+#>                                                                               ViralRefSeq_subject
+#> 1 gi:1464307144|Torque teno mini virus 11 isolate LIL-y2 ORF2, ORF1, and ORF3 genes, complete cds
+#> 2                   gi:1464307216|Torque teno midi virus 11 DNA, complete genome, isolate: MDJN47
+#> 3 gi:1464307144|Torque teno mini virus 11 isolate LIL-y2 ORF2, ORF1, and ORF3 genes, complete cds
+#> 4                                          gi:134133206|Torque teno midi virus 1, complete genome
+#> 5                   gi:1464307186|Torque teno midi virus 5 DNA, complete genome, isolate: MDJHem2
+#> 6                   gi:1464307221|Torque teno midi virus 12 DNA, complete genome, isolate: MDJN51
+#>                           ViralRefSeq_taxonomy date_analyzed
+#> 1  taxid:2065037|Betatorquevirus|Anelloviridae    2022-05-17
+#> 2 taxid:2065052|Gammatorquevirus|Anelloviridae    2022-05-06
+#> 3  taxid:2065037|Betatorquevirus|Anelloviridae    2022-05-06
+#> 4  taxid:687379|Gammatorquevirus|Anelloviridae    2022-05-17
+#> 5 taxid:2065046|Gammatorquevirus|Anelloviridae    2022-05-06
+#> 6 taxid:2065053|Gammatorquevirus|Anelloviridae    2022-05-17
+
+
 ### Import VirusGatherer Hittable.
 
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
