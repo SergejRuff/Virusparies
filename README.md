@@ -238,6 +238,9 @@ table
 
 ### GT - vhgTabularRasa
 
+This function creates a formatted table using the `gt` package, based on input data with specified column names.
+It is particularly useful for generating tables that cannot be produced with `vhRunsTable`.
+
 ``` r
 
 ### Load VirusHunter File
