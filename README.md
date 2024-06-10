@@ -107,6 +107,43 @@ print(head(vg_file))  # print head of gatherer files
 
 ### VirusHunterGatherer Plot - VhgBoxplot
 
+``` r
+### Load VirusHunter File
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+vh_file <- importVirusTable(path)
+
+### Plot 1 for evalues
+plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+plot1
+
+### Plot 2 for identity
+plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+plot2
+
+### Plot 3 custom arguments used
+plot3 <- VhgBoxplot(vh_file,
+                   x_column = "best_query",
+                   y_column = "ViralRefSeq_E",
+                   theme_choice = "grey",
+                   subtitle = "Custom subtitle: Identity for custom query",
+                   xlabel = "Custom x-axis label: Custom query",
+                   ylabel = "Custom y-axis label: Viral Reference Evalue in -log10 scale",
+                   legend_position = "right")
+plot3
+
+### Import gatherer files
+path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+vg_file <- importVirusTable(path2)
+
+### Plot 4: virusgatherer plot with SRA_run as custom grouping
+plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
+plot4
+
+### Plot 5: Virusgatherer plot for SRA_runs agains contig length
+plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
+plot5
+```
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
