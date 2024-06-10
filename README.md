@@ -378,6 +378,35 @@ exportVirusGt(gtable=table,filename="vh_parttable.docx")
 
 ```
 
+## Citation
+
+When utilizing Virusparies in your research or software development, kindly reference the R package using the citation obtained from the `citation()` function:
+
+
+``` r
+
+### Citation function
+
+citation("Virusparies")
+
+#> To cite package ‘Virusparies’ in publications use:
+#> 
+#>   Ruff S (2024). _Virusparies: Data Visualisations for
+#>   VirusHunterGatherer hittables output_. R package version
+#>   1.0.0, <https://github.com/SergejRuff/Virusparies>.
+
+#> A BibTeX entry for LaTeX users is
+
+#>   @Manual{,
+#>     title = {Virusparies: Data Visualisations for VirusHunterGatherer hittables output},
+#>     author = {Sergej Ruff},
+#>     url = {https://github.com/SergejRuff/Virusparies},
+#>     year = {2024},
+#>     note = {R package version 1.0.0},
+#>   }
+
+```
+
 ## Contributions
 
 Sergej Ruff formulated the idea behind Virusparies and was responsible for its implementation.
