@@ -301,10 +301,25 @@ taxonomy_group_preprocess <- function(vh_file){
   # Apply the function to each sublist
   viridae_elements <- lapply(my_list, extract_viridae)
 
+  # Initialize an empty vector to store the filtered names
+  filtered_names <- vector("list", length = length(viridae_elements))
+
+  # Iterate over each element in viridae_elements
+  for (i in seq_along(viridae_elements)) {
+    # Check if the element contains two or more strings
+    if (length(viridae_elements[[i]]) >= 2) {
+      # Extract only the virus family names without additional text
+      filtered_names[[i]] <- grep("^[[:alnum:]]+viridae$", viridae_elements[[i]], value = TRUE)
+    } else {
+      # If the element contains less than two strings, keep it unchanged
+      filtered_names[[i]] <- viridae_elements[[i]]
+    }
+  }
+
 
 
   # Remove elements containing "unclassified" outside the function
-  viridae_elements <- lapply(viridae_elements, function(x) x[!grepl("unclassified", x)])
+  viridae_elements <- lapply(filtered_names, function(x) x[!grepl("unclassified", x)])
 
   viridae_elements[is.na(viridae_elements)] <- "unclassified"
 
