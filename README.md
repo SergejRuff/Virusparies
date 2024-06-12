@@ -175,10 +175,7 @@ print(head(vg_file))  # print head of gatherer files
 ### VirusHunterGatherer Plot - VhgBoxplot
 
 ``` r
-### Load VirusHunter File
 
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Plot 1 for evalues
 plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
@@ -199,9 +196,6 @@ plot3 <- VhgBoxplot(vh_file,
                    legend_position = "right")
 plot3
 
-### Import gatherer files
-path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
 
 ### Plot 4: virusgatherer plot with SRA_run as custom grouping
 plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
@@ -216,11 +210,6 @@ plot5
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
-
 ### Generate Plot
 
 plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
@@ -232,11 +221,6 @@ plot
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
 ``` r
-
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Basic plot
 
@@ -250,11 +234,6 @@ plot(plot)
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
-
 ### Generate Plot
 
 plot <- vhRunsBarplot(vh_file,cut = 1e-5)
@@ -267,11 +246,6 @@ plot
 ### VirusHunter Plot - vhSumHitsBarplot
 
 ``` r
-
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Plot
 
@@ -288,10 +262,6 @@ The `vhRunsTable()` function takes VirusHunter files as input and generates a gr
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate table with defaul arguments
 
@@ -309,10 +279,6 @@ This function creates a formatted table using the gt package, based on input dat
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Plot boxplot for "identity"
 
@@ -333,10 +299,7 @@ Plots can be exported in various formats via the `exportVirusPlot()` function. S
 
 
 ``` r
-### Load VirusHunter File
 
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Basic plot
 
@@ -359,10 +322,6 @@ The `exportVirusPlot()` function utilizes the `gtsave` function from the gt pack
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 
