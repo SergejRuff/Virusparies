@@ -211,10 +211,21 @@ VhgIdentityScatterPlot <- function(vh_file,
       breaks = seq(0, 100, by = 10)
     )
 
+  if(groupby != "SRA_run"){
+
+    matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = groupby)
+    iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
+
+
+  }
+
   # add colorblind support
   if(colorblind_support){
     iden_refevalue<- colorbildsupport_(iden_refevalue,colormap)
   }
+
+
+
 
 
 

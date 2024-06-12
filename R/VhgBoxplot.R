@@ -96,13 +96,10 @@
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 #' vg_file <- importVirusTable(path2)
 #'
-#' # plot 4: virusgatherer plot with SRA_run as custom grouping
-#' plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
-#' plot4
 #'
-#' # plot 5: Virusgatherer plot for SRA_runs agains contig length
-#' plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
-#' plot5
+#' # plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length
+#' #plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
+#' #plot5
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
@@ -290,13 +287,21 @@ VhgBoxplot <- function(vh_file,
     boxp <- boxp+geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
 
+  if(x_column != "SRA_run"){
+
+    matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = x_column)
+    boxp <- boxp + scale_fill_manual(values = matched_vector)
+
+
+  }
+
+
 
 
   # add colorblind support
   if(colorblind_support){
     boxp<- colorbildsupport(boxp,colormap)
   }
-
 
 
 
@@ -337,6 +342,8 @@ VhgBoxplot <- function(vh_file,
     belowthres_boxp <- vhg_filter_belowthresholdboxplot(vh_file,cut)
     results$rows_belowthres <- belowthres_boxp
   }
+
+  #results$matched_vector <- matched_vector
 
 
   # Return the results list

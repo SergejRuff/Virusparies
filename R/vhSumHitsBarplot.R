@@ -221,10 +221,21 @@ vhSumHitsBarplot <- function(vh_file,
     sum_plot <- sum_plot + coord_flip()
  }
 
+ if(groupby != "SRA_run"){
+
+     matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = groupby)
+     sum_plot <- sum_plot + scale_fill_manual(values = matched_vector)
+
+
+ }
+
  # add colorblind support
  if(colorblind_support){
      sum_plot<- colorbildsupport(sum_plot,colormap)
  }
+
+
+
 
 
 

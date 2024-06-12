@@ -158,13 +158,10 @@ plot3
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 vg_file <- importVirusTable(path2)
 
-# plot 4: virusgatherer plot with SRA_run as custom grouping
-plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
-plot4
 
-# plot 5: Virusgatherer plot for SRA_runs agains contig length
-plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
-plot5
+# plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length
+#plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
+#plot5
 
 }
 \seealso{

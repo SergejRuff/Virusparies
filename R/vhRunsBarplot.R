@@ -227,10 +227,21 @@ vhRunsBarplot <- function(vh_file,
     run_bar <- run_bar + coord_flip()
   }
 
+  if(groupby != "SRA_run"){
+
+    matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = groupby)
+    run_bar  <- run_bar  + scale_fill_manual(values = matched_vector)
+
+
+  }
+
+
   # add colorblind support
   if(colorblind_support){
     run_bar<- colorbildsupport(run_bar,colormap)
   }
+
+
 
 
 
