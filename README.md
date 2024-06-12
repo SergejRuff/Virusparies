@@ -16,9 +16,17 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 - [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
 - [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
 - [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
+    - [Import](https://github.com/SergejRuff/Virusparies/blob/main/README.md#import-1)
+    - [VirusHunterGatherer Plot - VhgBoxplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgboxplot)
+    - [VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidenfacetedscatterplot)
+    - [VirusHunterGatherer Plot - VhgIdentityScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidentityscatterplot)
+    - [VirusHunter Plot - vhRunsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhrunsbarplot)
+    - [VirusHunter Plot - vhSumHitsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhsumhitsbarplot)
+    - [VirusHunter GT - vhRunsTable](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-gt---vhrunstable)
+    - [GT - vhgTabularRasa](https://github.com/SergejRuff/Virusparies/blob/main/README.md#gt---vhgtabularrasa)
+    - [Export](https://github.com/SergejRuff/Virusparies/blob/main/README.md#export-1)
 - [Citation](https://github.com/SergejRuff/Virusparies/blob/main/README.md#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
-
 
 
 ## Installation
@@ -174,19 +182,29 @@ print(head(vg_file))  # print head of gatherer files
 
 ### VirusHunterGatherer Plot - VhgBoxplot
 
-``` r
-### Load VirusHunter File
+#### Boxplot 1: "ViralRefSeq_E"
 
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+``` r
+
 
 ### Plot 1 for evalues
 plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
 plot1
 
+
+```
+#### Boxplot 2: "ViralRefSeq_ident"
+
+``` r
+
 ### Plot 2 for identity
 plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 plot2
+
+``` 
+#### Boxplot 3: Customization
+
+``` r
 
 ### Plot 3 custom arguments used
 plot3 <- VhgBoxplot(vh_file,
@@ -199,27 +217,31 @@ plot3 <- VhgBoxplot(vh_file,
                    legend_position = "right")
 plot3
 
-### Import gatherer files
-path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
+```
 
+#### Boxplot 4: "SRA_run" as custom group
+
+``` r
 ### Plot 4: virusgatherer plot with SRA_run as custom grouping
 plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
 plot4
 
+```
+
+#### Boxplot 5: "contig_len" (Gatherer Tables only)
+
+``` r
+
 ### Plot 5: Virusgatherer plot for SRA_runs agains contig length
 plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
 plot5
-```
+
+``` 
+
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
 ``` r
-
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Plot
 
@@ -233,11 +255,6 @@ plot
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
-
 ### Basic plot
 
 plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
@@ -249,11 +266,6 @@ plot(plot)
 ### VirusHunter Plot - vhRunsBarplot
 
 ``` r
-
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Plot
 
@@ -267,11 +279,6 @@ plot
 ### VirusHunter Plot - vhSumHitsBarplot
 
 ``` r
-
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Plot
 
@@ -288,10 +295,6 @@ The `vhRunsTable()` function takes VirusHunter files as input and generates a gr
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate table with defaul arguments
 
@@ -309,10 +312,6 @@ This function creates a formatted table using the gt package, based on input dat
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Plot boxplot for "identity"
 
@@ -333,10 +332,7 @@ Plots can be exported in various formats via the `exportVirusPlot()` function. S
 
 
 ``` r
-### Load VirusHunter File
 
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Generate Basic plot
 
@@ -359,10 +355,6 @@ The `exportVirusPlot()` function utilizes the `gtsave` function from the gt pack
 
 ``` r
 
-### Load VirusHunter File
-
-path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
 
 ### Using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 
