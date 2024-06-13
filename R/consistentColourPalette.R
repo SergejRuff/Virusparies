@@ -57,7 +57,9 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
 
   # After assigning the colors, remove "viridae" from the names of family_colors_vector
   names(family_colors_vector) <- sub("viridae$", "", names(family_colors_vector), ignore.case = TRUE)
-  #names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
+  # Rename "Pseudo" to "PseudoPseudo"
+  names(family_colors_vector)[names(family_colors_vector) == "Pseudo"] <- "PseudoPseudo"
+  names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
 
   # Get unique families in vh_file[groupby]
   unique_families_in_data <- unique(vh_file[[groupby]])
@@ -69,8 +71,10 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
   for (i in seq_along(family_colors_vector)) {
     color <- family_colors_vector[i]
 
+
     # Check for partial matches between color names and family names
     partial_matches <- grepl(names(color), unique_families_in_data, ignore.case = TRUE)
+    #print(partial_matches)
 
     # Assign the color to matched family names
     matched_colors[partial_matches] <- color
