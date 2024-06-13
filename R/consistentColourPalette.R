@@ -57,7 +57,7 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
 
   # After assigning the colors, remove "viridae" from the names of family_colors_vector
   names(family_colors_vector) <- sub("viridae$", "", names(family_colors_vector), ignore.case = TRUE)
-  names(family_colors_vector) <- gsub("^(Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
+  names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
 
   # Get unique families in vh_file[groupby]
   unique_families_in_data <- unique(vh_file[[groupby]])
