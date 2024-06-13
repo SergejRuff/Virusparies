@@ -88,8 +88,8 @@
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 #' vg_file <- importVirusTable(path2)
 #'
-#' # vgplot: virusgatherer plot with SRA_run as custom grouping
-#' vgplot <- VhgIdenFacetedScatterPlot(vg_file,groupby = "SRA_run")
+#' # vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
+#' vgplot <- VhgIdenFacetedScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
 #' vgplot
 #'
 #'
@@ -135,6 +135,11 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
 
   # check if hittable is complete
   is_file_empty(vh_file)
+
+  if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
+    stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
+  }
+
   required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
   check_columns(vh_file,required_columns)
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)

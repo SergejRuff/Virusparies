@@ -139,6 +139,13 @@ VhgBoxplot <- function(vh_file,
 
 
   is_file_empty(vh_file)
+
+
+  if (!(x_column %in% c("best_query", "ViralRefSeq_taxonomy"))) {
+    stop('Invalid value for x_column. Please use either "best_query" or "ViralRefSeq_taxonomy".')
+  }
+
+
   check_columns(vh_file,x_column)
   check_columns(vh_file,y_column)
   check_input_type(vh_file,y_column,2)

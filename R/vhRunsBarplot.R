@@ -131,6 +131,10 @@ vhRunsBarplot <- function(vh_file,
   # check if hittable is empty
   is_file_empty(vh_file)
 
+  if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
+    stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
+  }
+
   # check arguments
   arg_character(theme_choice)
   arg_character(legend_position)

@@ -135,8 +135,14 @@ vhSumHitsBarplot <- function(vh_file,
  is_file_empty(vh_file)
 
 
+
+
  # Define the required columns
  required_columns <- c("num_hits", "ViralRefSeq_E", groupby)
+
+ if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
+     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
+ }
 
  check_columns(vh_file,required_columns)
  check_input_type(vh_file,c("num_hits", "ViralRefSeq_E"),2)

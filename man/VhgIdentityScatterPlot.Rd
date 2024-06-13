@@ -154,8 +154,8 @@ plot(custom_plot)
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 vg_file <- importVirusTable(path2)
 
-# vgplot: virusgatherer plot with SRA_run as custom grouping
-vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "SRA_run")
+# vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
+vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
 vgplot
 
 }
