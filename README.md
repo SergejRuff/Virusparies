@@ -250,7 +250,7 @@ plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
 plot
 
 ```
-
+![VhgIdenFacetedScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdenFacetedScatterPlot.png)
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
@@ -262,34 +262,34 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 plot(plot)
 
 ```
+![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdentityScatterPlot.png)
 
-
-### VirusHunter Plot - vhRunsBarplot
+### VirusHunter Plot - VhgRunsBarplot
 
 ``` r
 
 ### Generate Plot
 
-plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+plot <- VhgRunsBarplot(vh_file,cut = 1e-5)
 plot
 
 
 ```
 
 
-### VirusHunter Plot - vhSumHitsBarplot
+### VirusHunter Plot - VhSumHitsBarplot
 
 ``` r
 
 ### Generate Plot
 
-plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
+plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
 plot
 
 ```
 
 
-### VirusHunter GT - vhRunsTable
+### VirusHunter GT - VhgRunsTable
 
 The `vhRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing the user with information about which run has found which virus group. This makes it a valuable complement to the `vhRunsBarplot()` function. While `vhRunsBarplot()` provides the information in a plot that quantifies the number of unique runs finding a virus group, `vhRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
 
@@ -299,13 +299,13 @@ The `vhRunsTable()` function takes VirusHunter files as input and generates a gr
 
 ### Generate table with defaul arguments
 
-table <- vhRunsTable(vh_file,cut = 1e-5)
+table <- VhgRunsTable(vh_file,cut = 1e-5)
 table
 
 ```
 
 
-### GT - vhgTabularRasa
+### GT - VhgTabularRasa
 
 
 This function creates a formatted table using the gt package, based on input data with specified column names. It is particularly useful for generating tables that cannot be produced with `vhRunsTable`.
@@ -320,7 +320,7 @@ identity <- VhgBoxplot(vh_file,y_column = "ViralRefSeq_ident")
 
 # Generate table
 
-vhgTabularRasa(identity$summary_stats)
+VhgTabularRasa(identity$summary_stats)
 
 
 ```
@@ -329,7 +329,7 @@ vhgTabularRasa(identity$summary_stats)
 
 #### Export Plots
 
-Plots can be exported in various formats via the `exportVirusPlot()` function. Supported formats include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", and "wmf" (Windows only). When the device argument is set to NULL, the file extension in filename is used to determine the export format.
+Plots can be exported in various formats via the `ExportVirusPlot()` function. Supported formats include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", and "wmf" (Windows only). When the device argument is set to NULL, the file extension in filename is used to determine the export format.
 
 
 ``` r
@@ -342,7 +342,7 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 
 ### Export plot
 
-exportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
+ExportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
 
 
 ```
@@ -351,7 +351,7 @@ We recommend experimenting with height, width, and resolution.
 
 #### Export Graphical Tables
 
-The `exportVirusPlot()` function utilizes the `gtsave` function from the gt package to export graphical tables in various formats. This feature is currently in an experimental phase and may not operate as expected. ***!*** Please note that exporting PNG and PDF files requires Google Chrome or a Chromium-based browser.
+The `ExportVirusGt()` function utilizes the `gtsave` function from the gt package to export graphical tables in various formats. This feature is currently in an experimental phase and may not operate as expected. ***!*** Please note that exporting PNG and PDF files requires Google Chrome or a Chromium-based browser.
 
 
 ``` r
@@ -363,13 +363,13 @@ vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
 
 ### Generating a gt
 
-table <- vhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
 "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
 "Reference E-Value","Refrence Identity"))
 
 ### Export gt as docx file
 
-exportVirusGt(gtable=table,filename="vh_parttable.docx")
+ExportVirusGt(gtable=table,filename="vh_parttable.docx")
 
 ```
 
