@@ -1,4 +1,4 @@
-#' @title vhRunsTable: Generate a gt summary table of unique runs for each virus group
+#' @title VhgRunsTable: Generate a gt summary table of unique runs for each virus group
 #'
 #' @description This function generates a summary table of unique runs for each virus group
 #' based on the input dataset.
@@ -37,7 +37,7 @@
 #' @return A formatted gt table summarizing unique runs for each virus group
 #'
 #' @details
-#' vhRunsTable calculates the number of unique runs for each virus group from the input dataset.
+#' VhgRunsTable calculates the number of unique runs for each virus group from the input dataset.
 #' It takes VirusHunter hittables as input and determines how many runs (SRA runs or local FastQ files) found a specific virus family.
 #'
 #' A graphical table is returned with two columns. The first column contains the name of the virus group,
@@ -48,13 +48,13 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # example 1: generate table with defaul arguments
-#' table <- vhRunsTable(vh_file,cut = 1e-5)
+#' table <- VhgRunsTable(vh_file,cut = 1e-5)
 #'
 #' table
 #'
 #' # example 2: generate table with custom arguments
 #'
-#' table_2 <- vhRunsTable(vh_file,title = "test",title_align="right",
+#' table_2 <- VhgRunsTable(vh_file,title = "test",title_align="right",
 #' names_ = c("column_1","column_2","column_3"),align = "right",subtit="subtitle")
 #'
 #' table_2
@@ -65,7 +65,7 @@
 #' @importFrom gt gt
 #' @importFrom rlang .data
 #' @export
-vhRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary of unique runs by virus group",
+VhgRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary of unique runs by virus group",
                         title_align = "left",names_=NULL,align = "left",subtit =NULL,
                         data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                         title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
@@ -79,7 +79,7 @@ vhRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary
   }
 
   if(is.null(names_)){
-    names_ <- c("Group","Number of Unique SRA Runs","SRAs Found")
+    names_ <- c("Virus Group","Number of Unique Runs","Runs Found")
   }
 
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]

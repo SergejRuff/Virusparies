@@ -1,4 +1,4 @@
-#' @title vhgTabularRasa: Function for Generating Custom Formatted Graphical Tables
+#' @title VhgTabularRasa: Function for Generating Custom Formatted Graphical Tables
 #'
 #' @description This function creates a formatted table using the `gt` package.
 #'
@@ -34,19 +34,19 @@
 #' It is particularly useful for generating tables that cannot be produced with `vhRunsTable`,
 #' when the input data does not originate from the `vhRunsBarplot` functions.
 #'
-#' The `vhgTabularRasa` function allows users to generate tables styled like Virusparies tables using their own input data.
+#' The `VhgTabularRasa` function allows users to generate tables styled like Virusparies tables using their own input data.
 #' Additionally, users can create custom tables by adjusting the parameters within this function.
 #'
-#' `vhgTabularRasa` just like `vhRunsTable` empowers users to tailor their tables to suit their needs.
+#' `VhgTabularRasa` just like `vhRunsTable` empowers users to tailor their tables to suit their needs.
 #' With its customizable features, users can effortlessly modify titles, subtitles, and column names.
 #' By default, column names are derived from the dataframe's structure using `names(file)`.
 #' If the dataframe lacks column names, an error message is triggered. However, users can
 #' supply their own column names via the `names_` argument, requiring a vector of names matching the dataframe's column count.
 #'
-#' `vhgTabularRasa` takes dataframes as Input. Passing any other object type results in an error message.
+#' `VhgTabularRasa` takes dataframes as Input. Passing any other object type results in an error message.
 #' Users can fine-tune their tables with options to adjust text attributes, alignment, and size, as well as row padding
 #' and color schemes for titles, subtitles, columns, and backgrounds.
-#' If that is not enough, `vhgTabularRasa` returns an gt tables object, which
+#' If that is not enough, `VhgTabularRasa` returns an gt tables object, which
 #' can be further manipulated with the `gt` package available on CRAN.
 #' @author Sergej Ruff
 #' @examples
@@ -57,14 +57,14 @@
 #' identity <- VhgBoxplot(vh_file,y_column = "ViralRefSeq_ident")
 #'
 #' # generate table
-#' vhgTabularRasa(identity$summary_stats)
+#' VhgTabularRasa(identity$summary_stats)
 #'
 #'
 #' # example 2: plot part of Vh_file (could be any other table)
 #' # using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 #' vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
 #'
-#' vhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+#' VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
 #' "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
 #' "Refrence E-Value","Refrence Identity"))
 #'
@@ -81,7 +81,7 @@
 #' @import gt
 #' @importFrom stats setNames
 #' @export
-vhgTabularRasa <- function(file,title="Graphical Table",
+VhgTabularRasa <- function(file,title="Graphical Table",
                                title_align = "left",names_=NULL,align = "left",subtit =NULL,
                                data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                                title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,

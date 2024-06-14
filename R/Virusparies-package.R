@@ -42,8 +42,8 @@
 #'
 #' \strong{Graphical Tables(gt)}:
 #' \itemize{
-#'   \item \code{\link{vhRunsTable}}: Generate a gt-table for vhRunsBarplot.
-#'   \item \code{\link{vhgTabularRasa}}: Generate custome gt-tables.
+#'   \item \code{\link{VhgRunsTable}}: Generate a gt-table for VhgRunsBarplot.
+#'   \item \code{\link{VhgTabularRasa}}: Generate custome gt-tables.
 #' }
 #'
 #'\strong{Export}:
