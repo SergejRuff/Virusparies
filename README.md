@@ -264,7 +264,7 @@ plot(plot)
 ```
 ![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdentityScatterPlot.png)
 
-### VirusHunter Plot - VhgRunsBarplot
+### VirusHunterGatherer Plot - VhgRunsBarplot
 
 ``` r
 
