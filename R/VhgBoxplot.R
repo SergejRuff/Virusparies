@@ -242,6 +242,21 @@ VhgBoxplot <- function(vh_file,
   ylabel <- ifelse(!is.null(ylabel), ylabel, default_ylabel)
 
 
+  color_data <- consistentColourPalette(vh_file, groupby = x_column)
+  legend_labels <- color_data$legend_labels
+  labels <- color_data$labels
+
+  # Extract unique values from vh_file$best_query
+  unique_queries <- unique(vh_file[[x_column]])
+
+  # Create a vector of corresponding names from legend_labels
+  pyhlum_names <- legend_labels[unique_queries]
+
+  # Match names to vh_file$best_query
+  vh_file$phylum <- pyhlum_names[match(vh_file[[x_column]], unique_queries)]
+
+
+
 
   ########################
   ### generate boxplot ###
@@ -255,7 +270,7 @@ VhgBoxplot <- function(vh_file,
 
 
   boxp <- ggplot(vh_file,aes(x=reorder(.data[[x_column]],y_aes,FUN=median),
-                             y=y_aes,fill=.data[[x_column]]))+
+                             y=y_aes,fill=.data$phylum))+
     geom_boxplot(staplewidth = 0.4)+
     labs(x=xlabel,
          y=ylabel,
@@ -296,8 +311,8 @@ VhgBoxplot <- function(vh_file,
 
   if(x_column != "SRA_run"){
 
-    matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = x_column)
-    boxp <- boxp + scale_fill_manual(values = matched_vector)
+    # matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = x_column)
+    boxp <- boxp + scale_fill_manual(values = labels)
 
 
   }
@@ -309,6 +324,9 @@ VhgBoxplot <- function(vh_file,
   if(colorblind_support){
     boxp<- colorbildsupport(boxp,colormap)
   }
+
+  # delete new column before sum statistics and export.
+  vh_file$phylum <- NULL
 
 
 

@@ -40,26 +40,24 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
   family_colors_vector <- character(length = length(unique(ICTV_data$Family)))
   names(family_colors_vector) <- unique(ICTV_data$Family)
 
-  # Iterate over each sublist of ICTV_data_split
+  phylum_mapping <- list()
+
   for (phylum_name in names(ICTV_data_split)) {
-    # Get the color corresponding to the current phylum
     phylum_color <- unique_phyla[phylum_name]
-
-    # Get unique families in the sublist
     unique_families <- unique(ICTV_data_split[[phylum_name]]$Family)
-
-    # Map each family to its corresponding color
     family_colors <- rep(phylum_color, length(unique_families))
-
-    # Assign colors to the virus family names
     family_colors_vector[unique_families] <- family_colors
+
+    phylum_mapping[unique_families] <- phylum_name
   }
 
-  # After assigning the colors, remove "viridae" from the names of family_colors_vector
   names(family_colors_vector) <- sub("viridae$", "", names(family_colors_vector), ignore.case = TRUE)
-  # Rename "Pseudo" to "PseudoPseudo"
   names(family_colors_vector)[names(family_colors_vector) == "Pseudo"] <- "PseudoPseudo"
   names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
+
+  names(phylum_mapping ) <- sub("viridae$", "", names(phylum_mapping ), ignore.case = TRUE)
+  names(phylum_mapping )[names(phylum_mapping ) == "Pseudo"] <- "PseudoPseudo"
+  names(phylum_mapping ) <- gsub("^(Allo|Ortho|Pseudo)", "", names(phylum_mapping ), ignore.case = TRUE)
 
   # Get unique families in vh_file[groupby]
   unique_families_in_data <- unique(vh_file[[groupby]])
@@ -96,6 +94,30 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
   matched_vector <- c(matched_colors)
   names(matched_vector) <- matched_families
 
-  return(matched_vector)
+
+  # Iterate over the colors in family_colors_vector
+  legend_labels <- matched_vector
+  for (i in seq_along(phylum_mapping)) {
+    color <- names(phylum_mapping)[i]
+    partial_matches <- grepl(color, names(legend_labels), ignore.case = TRUE)
+    if (!any(is.na(partial_matches)) && any(partial_matches) && !is.na(phylum_mapping[[color]])) {
+      legend_labels[partial_matches] <- phylum_mapping[[color]]
+    }
+  }
+
+  legend_labels[legend_labels == "#a9a9a9"]<- "unclassified"
+
+  # Extract unique names and corresponding values
+  unique_labels <- unique(legend_labels)
+  labels <- matched_vector[match(unique_labels, legend_labels)]
+
+  # Create a named vector
+  names(labels) <- unique_labels
+
+
+
+
+
+  return(list(legend_labels = legend_labels, labels = labels))
 }
 
