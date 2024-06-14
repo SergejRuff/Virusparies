@@ -59,7 +59,7 @@
 #'
 #' table_2
 #'
-#' # example 3
+#' # example 3: virusgatherer example
 #' # import gatherer files
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
 #' vg_file <- importVirusTable(path2)
@@ -67,7 +67,7 @@
 #'
 #' table_3 <- VhgRunsTable(vg_file,groupby = "ViralRefSeq_taxonomy")
 #'
-#' table_3: virusgatherer example
+#' table_3
 #'
 #' @seealso \code{\link{VhgRunsBarplot}}
 #'

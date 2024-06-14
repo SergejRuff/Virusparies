@@ -1,4 +1,4 @@
-#' @title exportVirusGt: (Experimental) Export Graphical Tables
+#' @title ExportVirusGt: (Experimental) Export Graphical Tables
 #'
 #' @description This function allows the user to export graphical tables in different formats.
 #'
@@ -59,7 +59,7 @@
 #'
 #' \dontrun{
 #'
-#' exportVirusGt(gtable=table,filename="vh_parttable.docx")
+#' ExportVirusGt(gtable=table,filename="vh_parttable.docx")
 #'
 #' }
 #'
@@ -73,7 +73,7 @@
 #' @importFrom tools file_ext
 #' @importFrom chromote find_chrome
 #' @export
-exportVirusGt <- function(gtable,
+ExportVirusGt <- function(gtable,
                           filename="table.docx",
                           path = NULL,
                           create.dir = FALSE,
