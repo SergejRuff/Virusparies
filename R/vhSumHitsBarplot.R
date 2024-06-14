@@ -183,13 +183,28 @@ vhSumHitsBarplot <- function(vh_file,
  }
 
 
+ color_data <- consistentColourPalette(vh_file, groupby = groupby)
+ legend_labels <- color_data$legend_labels
+ labels <- color_data$labels
+
+ # Extract unique values from vh_file$best_query
+ unique_queries <- unique(vh_group[[groupby]])
+
+ # Create a vector of corresponding names from legend_labels
+ pyhlum_names <- legend_labels[unique_queries]
+
+ # Match names to vh_group$best_query
+ vh_group$phylum <- pyhlum_names[match(vh_group[[groupby]], unique_queries)]
+
+
+
 
  ########################
  ### plot sum of hits ###
  ########################
  ########################
 
- sum_plot <- ggplot(data = vh_group,aes(x=reorder(.data[[groupby]],.data$sum,FUN=max),y= .data$sum,fill=.data[[groupby]]))+
+ sum_plot <- ggplot(data = vh_group,aes(x=reorder(.data[[groupby]],.data$sum,FUN=max),y= .data$sum,fill=.data$phylum))+
    geom_bar(stat = "identity")+
    labs(title = title,
         x = xlabel,
@@ -229,8 +244,7 @@ vhSumHitsBarplot <- function(vh_file,
 
  if(groupby != "SRA_run"){
 
-     matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = groupby)
-     sum_plot <- sum_plot + scale_fill_manual(values = matched_vector)
+     sum_plot <- sum_plot + scale_fill_manual(values = labels)
 
 
  }
