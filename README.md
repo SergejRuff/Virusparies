@@ -67,13 +67,15 @@ Virusparies includes the following functions:
 
 - `VhSumHitsBarplot()` Bar plot for the sum of hits for each virus found in group.
 
-Each plot function generates a plot object, and some also produce a summary statistics tibble and a processed dataframe suitable for further downstream analysis (see the Details section for more information).
+Each plot function generates a plot object, and some also produce a summary statistics tibble and a processed dataframe suitable for further downstream analysis (see the Details section for more information). The plot object can be further manipulated using functions from the ggplot2 package.
 
 
 ### Graphical Tables(gt):
 
 - `VhgRunsTable()` Generate a gt-table for vhRunsBarplot.
 - `VhgTabularRasa()` Generate custome gt-tables.
+
+The table functions generate gt objects, which can be further manipulated using the gt package (see the Details section for more information).
 
 
 ### Export:
