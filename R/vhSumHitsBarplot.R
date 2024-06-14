@@ -1,4 +1,4 @@
-#' @title vhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family
+#' @title VhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family
 #'
 #' @description
 #'  This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
@@ -57,7 +57,7 @@
 #'
 #'
 #' @details
-#' vhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
+#' VhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
 #' hits for each virus family from the input dataset (accepts only VirusHunter Hittables).
 #' It then generates a bar plot showing the sum of hits/contigs for each virus family.
 #' Additionally, it returns the processed data for further analysis.
@@ -70,7 +70,7 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1: plot boxplot for "identity"
-#' plot <- vhSumHitsBarplot(vh_file,cut = 1e-5)
+#' plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
 #' plot
 #'
 #' # return vh_group inside plot object
@@ -78,7 +78,7 @@
 #'
 #'
 #'# plot 2: Customized plot
-#' plot2 <- vhSumHitsBarplot(
+#' plot2 <- VhSumHitsBarplot(
 #'   vh_file,
 #'   cut = 1e-5,
 #'   title = "Customized Hits Plot",
@@ -99,7 +99,7 @@
 #' @importFrom rlang .data
 #' @importFrom stats reorder
 #' @export
-vhSumHitsBarplot <- function(vh_file,
+VhSumHitsBarplot <- function(vh_file,
                              groupby = "best_query",
                              cut = 1e-5,
                              theme_choice = "linedraw",

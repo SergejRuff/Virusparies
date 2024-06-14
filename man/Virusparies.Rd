@@ -40,7 +40,7 @@ This package includes the following functions:
 
 \strong{Virushunter only Plots}:
 \itemize{
-\item \code{\link{vhSumHitsBarplot}}: barplot for the sum of hits for each virus found in group.
+\item \code{\link{VhSumHitsBarplot}}: barplot for the sum of hits for each virus found in group.
 }
 
 \strong{Graphical Tables(gt)}:
