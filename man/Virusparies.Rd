@@ -52,7 +52,7 @@ This package includes the following functions:
 \strong{Export}:
 \itemize{
 \item \code{\link{ExportVirusGt}}: Export Graphical Tables.
-\item \code{\link{exportVirusPlot}}: Export plots.
+\item \code{\link{ExportVirusPlot}}: Export plots.
 }
 }
 

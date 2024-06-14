@@ -47,10 +47,10 @@
 #' \dontrun{
 #'
 #' # first export
-#' exportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
+#' ExportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
 #'
 #' # second export with device argument
-#' exportVirusPlot(plot=plot,file_name="testplot",width=8,height=6,units="in",device = "png")
+#' ExportVirusPlot(plot=plot,file_name="testplot",width=8,height=6,units="in",device = "png")
 #'
 #' }
 #'
@@ -59,7 +59,7 @@
 #'
 #' @importFrom ggplot2 ggsave
 #' @export
-exportVirusPlot <- function(
+ExportVirusPlot <- function(
                             file_name,
                             plot = NULL,
                             device = NULL,
