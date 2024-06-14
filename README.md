@@ -67,6 +67,8 @@ Virusparies includes the following functions:
 
 - `VhSumHitsBarplot()` Bar plot for the sum of hits for each virus found in group.
 
+Each plot function generates a plot object, and some also produce a summary statistics tibble and a processed dataframe suitable for further downstream analysis (see the Details section for more information).
+
 
 ### Graphical Tables(gt):
 
