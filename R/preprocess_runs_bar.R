@@ -12,7 +12,7 @@
 #' @details This function is an internal utility function used within the package.
 #' It calculates the number of unique runs for each virus group from the VirusHunters Hittables.
 #'
-#' @importFrom dplyr group_by summarise mutate n_distinct across any_of
+#' @importFrom dplyr group_by summarise mutate n_distinct across any_of coalesce
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
 #'
@@ -27,15 +27,21 @@ preprocess_runs_bar <- function(vh_file,groupby="best_query"){
 
   check_columns(vh_file,groupby)
 
+  total_unique_SRA_run <- n_distinct(coalesce(vh_file$SRA_run, vh_file$run_id))
+
 
   sample_run <- vh_file %>%
     group_by(.data[[groupby]]) %>%
     summarise(unique_SRA_run = n_distinct(across(any_of(c("SRA_run", "run_id"))))) %>%
     mutate(
-      perc = round(proportions(.data$unique_SRA_run) * 100, 2),
-      res = str_c(.data$unique_SRA_run, " (", .data$perc, "%)"),
+      perc = round(.data$unique_SRA_run / total_unique_SRA_run * 100, 2),
+      res = paste(.data$unique_SRA_run, " (", .data$perc, "%)"),
       cyl = as.factor(.data[[groupby]])
     )
+
+
+
+
 
   return(sample_run)
 }

@@ -91,6 +91,7 @@
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
+#' @importFrom  dplyr n_distinct coalesce
 #' @importFrom rlang .data
 #' @export
 vhRunsBarplot <- function(vh_file,
@@ -179,7 +180,7 @@ vhRunsBarplot <- function(vh_file,
 
   # Set the subtitle based on the input
   if (subtitle == "default") {
-    subtitle_text <- paste0("total number of datasets with hits: ", sum(sample_run$unique_SRA_run))
+    subtitle_text <- paste0("total number of datasets: ", n_distinct(coalesce(vh_file$SRA_run, vh_file$run_id)))
   } else {
     subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
   }
