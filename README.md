@@ -275,7 +275,7 @@ plot
 
 
 ```
-
+![VhgRunsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgRunsBarplot.png)
 
 ### VirusHunter Plot - VhSumHitsBarplot
 
@@ -287,7 +287,7 @@ plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
 plot
 
 ```
-
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhSumHitsBarplot.png)
 
 ### VirusHunter GT - VhgRunsTable
 
@@ -304,6 +304,7 @@ table
 
 ```
 
+![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Pasted image.png)
 
 ### GT - VhgTabularRasa
 
@@ -324,6 +325,7 @@ VhgTabularRasa(identity$summary_stats)
 
 
 ```
+![VhgTabularRasa](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/test_gt.png)
 
 ### Export
 
