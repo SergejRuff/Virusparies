@@ -59,6 +59,16 @@
 #'
 #' table_2
 #'
+#' # example 3
+#' # import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- importVirusTable(path2)
+#'
+#'
+#' table_3 <- VhgRunsTable(vg_file,groupby = "ViralRefSeq_taxonomy")
+#'
+#' table_3: virusgatherer example
+#'
 #' @seealso \code{\link{VhgRunsBarplot}}
 #'
 #' @importFrom dplyr group_by summarise n_distinct across any_of
