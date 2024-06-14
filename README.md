@@ -206,7 +206,9 @@ plot1
 plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 plot2
 
-``` 
+```
+![Boxplot ViralRefSeq_ident](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot2_boxiden.png)
+
 #### Boxplot 3: Customization
 
 ``` r
@@ -224,25 +226,19 @@ plot3
 
 ```
 
-#### Boxplot 4: "SRA_run" as custom group
+![Boxplot Customization](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot3_custom.png)
 
-``` r
-### Plot 4: virusgatherer plot with SRA_run as custom grouping
-plot4 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "ViralRefSeq_E")
-plot4
 
-```
-
-#### Boxplot 5: "contig_len" (Gatherer Tables only)
+#### Boxplot 4: "contig_len" (Gatherer Tables only)
 
 ``` r
 
 ### Plot 5: Virusgatherer plot for SRA_runs agains contig length
-plot5 <- VhgBoxplot(vg_file,x_column = "SRA_run",y_column = "contig_len")
-plot5
+plot4 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
+plot4
 
 ``` 
-
+![Boxplot Gatherer](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot4.png)
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
