@@ -87,6 +87,16 @@
 #' )
 #' plot_custom
 #'
+#'
+#' # import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- importVirusTable(path2)
+#'
+#'
+#  plot 3: Virusgatherer plot
+#  plot3 <- vhRunsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",cut = 1e-5)
+#  plot3
+#'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
