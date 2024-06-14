@@ -184,13 +184,27 @@ vhRunsBarplot <- function(vh_file,
     subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
   }
 
+  color_data <- consistentColourPalette(vh_file, groupby = groupby)
+  legend_labels <- color_data$legend_labels
+  labels <- color_data$labels
+
+  # Extract unique values from vh_file$best_query
+  unique_queries <- unique(sample_run[[groupby]])
+
+  # Create a vector of corresponding names from legend_labels
+  pyhlum_names <- legend_labels[unique_queries]
+
+  # Match names to sample_run$best_query
+  sample_run$phylum <- pyhlum_names[match(sample_run[[groupby]], unique_queries)]
+
+
 
 
   #####################
   ### Generate Plot ###
   ### #################
 
-  run_bar <- ggplot(data = sample_run,aes(x=reorder(.data[[groupby]],.data$unique_SRA_run,FUN=max),y=.data$unique_SRA_run,fill= .data[[groupby]]))+
+  run_bar <- ggplot(data = sample_run,aes(x=reorder(.data[[groupby]],.data$unique_SRA_run,FUN=max),y=.data$unique_SRA_run,fill= .data$phylum))+
     geom_bar(stat = "identity")+
     labs(title = title,
          x= xlabel,
@@ -233,8 +247,8 @@ vhRunsBarplot <- function(vh_file,
 
   if(groupby != "SRA_run"){
 
-    matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = groupby)
-    run_bar  <- run_bar  + scale_fill_manual(values = matched_vector)
+
+    run_bar  <- run_bar  + scale_fill_manual(values = labels)
 
 
   }
