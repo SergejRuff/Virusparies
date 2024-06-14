@@ -20,7 +20,7 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
     - [VirusHunterGatherer Plot - VhgBoxplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgboxplot)
     - [VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidenfacetedscatterplot)
     - [VirusHunterGatherer Plot - VhgIdentityScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidentityscatterplot)
-    - [VirusHunterGatherer Plot - VhgRunsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhrunsbarplot)
+    - [VirusHunterGatherer Plot - VhgRunsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgrunsbarplot)
     - [VirusHunter Plot - VhSumHitsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhsumhitsbarplot)
     - [VhgRun GT - VhgRunsTable](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-gt---vhrunstable)
     - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies/blob/main/README.md#gt---vhgtabularrasa)
