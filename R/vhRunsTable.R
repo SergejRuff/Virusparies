@@ -59,7 +59,7 @@
 #'
 #' table_2
 #'
-#' @seealso \code{\link{vhRunsBarplot}}
+#' @seealso \code{\link{VhgRunsBarplot}}
 #'
 #' @importFrom dplyr group_by summarise n_distinct across any_of
 #' @importFrom gt gt

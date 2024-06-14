@@ -35,11 +35,11 @@ This package includes the following functions:
 \item \code{\link{VhgBoxplot}}: boxplot plotting RefSeq identity, evalues or contig length for each group.
 \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 \item \code{\link{VhgIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+\item \code{\link{VhgRunsBarplot}}: barplot showing how many unique Runs map against each virus.
 }
 
 \strong{Virushunter only Plots}:
 \itemize{
-\item \code{\link{vhRunsBarplot}}: barplot showing how many unique Runs map against each virus.
 \item \code{\link{vhSumHitsBarplot}}: barplot for the sum of hits for each virus found in group.
 }
 

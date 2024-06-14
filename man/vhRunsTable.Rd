@@ -104,5 +104,5 @@ table_2
 
 }
 \seealso{
-\code{\link{vhRunsBarplot}}
+\code{\link{VhgRunsBarplot}}
 }

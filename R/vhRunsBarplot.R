@@ -1,4 +1,4 @@
-#' @title vhRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+#' @title VhgRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
 #' each Virus group.
 #'
 #' @param vh_file Dataframe containing Virushunter hittables results.
@@ -52,7 +52,7 @@
 #'
 #'
 #' @details
-#' 'vhRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
+#' 'VhgRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
 #' each Virus group. It takes only VirusHunter hittables as Input.
 #'
 #' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are included in the plot.
@@ -66,14 +66,14 @@
 #' vh_file <- importVirusTable(path)
 #'
 #' # plot 1: plot boxplot for "identity"
-#' plot <- vhRunsBarplot(vh_file,cut = 1e-5)
+#' plot <- VhgRunsBarplot(vh_file,cut = 1e-5)
 #' plot
 #'
 #' # return sample_run inside plot object
 #' print(plot$sample_run)
 #'
 #' # Plot 2: Customized plot with modified settings
-#' plot_custom <- vhRunsBarplot(
+#' plot_custom <- VhgRunsBarplot(
 #'   vh_file,
 #'   cut = 1e-6, # Lower cutoff value
 #'   theme_choice = "grey", # Classic theme
@@ -94,7 +94,7 @@
 #'
 #'
 #  plot 3: Virusgatherer plot
-#  plot3 <- vhRunsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",cut = 1e-5)
+#  plot3 <- VhgRunsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",cut = 1e-5)
 #  plot3
 #'
 #' @seealso
@@ -104,7 +104,7 @@
 #' @importFrom  dplyr n_distinct coalesce
 #' @importFrom rlang .data
 #' @export
-vhRunsBarplot <- function(vh_file,
+VhgRunsBarplot <- function(vh_file,
                           groupby = "best_query",
                           cut = 1e-5,
                           theme_choice = "linedraw",
