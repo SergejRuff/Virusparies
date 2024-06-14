@@ -94,7 +94,7 @@ library(Virusparies)
 
 ### Import
 
-VirusHunterGatherer hittables are tab-separated values (TSV) files, which can be imported with the `importVirusTable()` function. Here, we will use the example VirusHunter and VirusGatherer hittable files included in the Virusparies package as an example:
+VirusHunterGatherer hittables are tab-separated values (TSV) files, which can be imported with the `ImportVirusTable()` function. Here, we will use the example VirusHunter and VirusGatherer hittable files included in the Virusparies package as an example:
 
 ``` r
 ### Import VirusHunter Hittable.
@@ -291,7 +291,7 @@ plot
 
 ### VirusHunter GT - VhgRunsTable
 
-The `vhRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing the user with information about which run has found which virus group. This makes it a valuable complement to the `vhRunsBarplot()` function. While `vhRunsBarplot()` provides the information in a plot that quantifies the number of unique runs finding a virus group, `vhRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
+The `VhgRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing the user with information about which run has found which virus group. This makes it a valuable complement to the `VhgRunsBarplot()` function. While `VhgRunsBarplot()` provides the information in a plot that quantifies the number of unique runs finding a virus group, `VhgRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
 
 
 ``` r
@@ -309,7 +309,7 @@ table
 ### GT - VhgTabularRasa
 
 
-This function creates a formatted table using the gt package, based on input data with specified column names. It is particularly useful for generating tables that cannot be produced with `vhRunsTable`.
+This function creates a formatted table using the gt package, based on input data with specified column names. It is particularly useful for generating tables that cannot be produced with `VhgRunsTable`.
 
 
 ``` r
