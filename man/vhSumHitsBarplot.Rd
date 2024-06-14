@@ -10,7 +10,7 @@ vhSumHitsBarplot(
   cut = 1e-05,
   theme_choice = "linedraw",
   flip_coords = TRUE,
-  title = "sum of hits for each family",
+  title = "Distribution of hits for each virus group",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -18,12 +18,12 @@ vhSumHitsBarplot(
   subtitle_size = 12,
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
-  xlabel = "Virus family found in query",
-  ylabel = "sum of hits",
+  xlabel = "Viral group",
+  ylabel = "Total number of hits",
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "virus family",
+  legend_title = "Phylum",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -53,7 +53,7 @@ Default is "linedraw".}
 
 \item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
-\item{title}{(optional) A character specifying the title of the plot. Default is "sum of hits for each family".}
+\item{title}{(optional) A character specifying the title of the plot. Default is "Distribution of hits for each virus group".}
 
 \item{title_size}{(optional) The size of the plot title. Default is 16.}
 
@@ -70,9 +70,9 @@ Default is "total number of hits: " followed by the calculated number.empty stri
 
 \item{subtitle_colour}{(optional) The color of the plot subtitle. Default is "#1b2838".}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus family found in query".}
+\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Viral group".}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "sum of hits".}
+\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Total number of hits".}
 
 \item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
 
@@ -80,7 +80,7 @@ Default is "total number of hits: " followed by the calculated number.empty stri
 
 \item{ytext_size}{(optional) The size of y-axis text labels. Default is 10.}
 
-\item{legend_title}{(optional) A character specifying the title of the legend. Default is "virus family".}
+\item{legend_title}{(optional) A character specifying the title of the legend. Default is "Phylum".}
 
 \item{legend_position}{(optional) The position of the legend. Default is "bottom".}
 

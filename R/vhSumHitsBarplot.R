@@ -15,7 +15,7 @@
 #'  Default is "linedraw".
 #'
 #' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default is "sum of hits for each family".
+#' @param title (optional) A character specifying the title of the plot. Default is "Distribution of hits for each virus group".
 #' @param title_size (optional) The size of the plot title. Default is 16.
 #' @param title_face (optional) The font face of the plot title. Default is "bold".
 #' @param title_colour (optional) The color of the plot title. Default is "#2a475e".
@@ -24,12 +24,12 @@
 #' @param subtitle_size (optional) The size of the plot subtitle. Default is 12.
 #' @param subtitle_face (optional) The font face of the plot subtitle. Default is "bold".
 #' @param subtitle_colour (optional) The color of the plot subtitle. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Virus family found in query".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "sum of hits".
+#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Viral group".
+#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Total number of hits".
 #' @param axis_title_size (optional) The size of axis titles. Default is 12.
 #' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
 #' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
-#' @param legend_title (optional) A character specifying the title of the legend. Default is "virus family".
+#' @param legend_title (optional) A character specifying the title of the legend. Default is "Phylum".
 #' @param legend_position (optional) The position of the legend. Default is "bottom".
 #' @param legend_title_size (optional) The size of the legend title. Default is 12.
 #' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
@@ -104,7 +104,7 @@ vhSumHitsBarplot <- function(vh_file,
                              cut = 1e-5,
                              theme_choice = "linedraw",
                              flip_coords = TRUE,
-                             title = "sum of hits for each family",
+                             title = "Distribution of hits for each virus group",
                              title_size = 16,
                              title_face = "bold",
                              title_colour = "#2a475e",
@@ -112,12 +112,12 @@ vhSumHitsBarplot <- function(vh_file,
                              subtitle_size = 12,
                              subtitle_face = "bold",
                              subtitle_colour = "#1b2838",
-                             xlabel = "Virus family found in query",
-                             ylabel = "sum of hits",
+                             xlabel = "Viral group",
+                             ylabel = "Total number of hits",
                              axis_title_size = 12,
                              xtext_size = 10,
                              ytext_size = 10,
-                             legend_title = "virus family",
+                             legend_title = "Phylum",
                              legend_position = "bottom",
                              legend_title_size = 12,
                              legend_title_face = "bold",
@@ -175,7 +175,7 @@ vhSumHitsBarplot <- function(vh_file,
 
  # Set the subtitle based on the input
  if (subtitle == "default") {
-    subtitle_text <- paste0("total number of hits: ",sum(vh_group$sum))
+    subtitle_text <- paste0("Total number of hits: ",sum(vh_group$sum))
  } else if (is.null(subtitle) || subtitle == "") {
     subtitle_text <- NULL
  } else {

@@ -11,7 +11,7 @@ vhRunsBarplot(
   cut = 1e-05,
   theme_choice = "linedraw",
   flip_coords = TRUE,
-  title = "Number of datasets with hits found for each Virus group",
+  title = "Distribution of viral groups detected across query sequences",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -19,12 +19,12 @@ vhRunsBarplot(
   subtitle_size = 12,
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
-  xlabel = "Virus family found in query",
-  ylabel = "Number of datesets with hits",
+  xlabel = "Viral group",
+  ylabel = "Number of datasets with hits for group",
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "virus family",
+  legend_title = "Phylum",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -53,7 +53,7 @@ Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"
 
 \item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
-\item{title}{(optional) A character specifying the title of the plot. Default is "Number of datasets with hits found for each Virus group".}
+\item{title}{(optional) A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".}
 
 \item{title_size}{(optional) The size of the plot title. Default is 16.}
 
@@ -71,9 +71,9 @@ Default is "default", which calculates the total number of datasets with hits an
 
 \item{subtitle_colour}{(optional) The color of the plot subtitle. Default is "#1b2838".}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus family found in query".}
+\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Viral group".}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits".}
+\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits for group".}
 
 \item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
 
@@ -81,7 +81,7 @@ Default is "default", which calculates the total number of datasets with hits an
 
 \item{ytext_size}{(optional) The size of y-axis text labels. Default is 10.}
 
-\item{legend_title}{(optional) A character specifying the title of the legend. Default is "virus family".}
+\item{legend_title}{(optional) A character specifying the title of the legend. Default is "Phylum".}
 
 \item{legend_position}{(optional) The position of the legend. Default is "bottom"."none" removes legend.}
 

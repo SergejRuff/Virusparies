@@ -10,7 +10,7 @@
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply.
 #' Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".
 #' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default is "Number of datasets with hits found for each Virus group".
+#' @param title (optional) A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".
 #' @param title_size (optional) The size of the plot title. Default is 16.
 #' @param title_face (optional) The font face of the plot title. Default is "bold".
 #' @param title_colour (optional) The color of the plot title. Default is "#2a475e".
@@ -20,12 +20,12 @@
 #' @param subtitle_size (optional) The size of the plot subtitle. Default is 12.
 #' @param subtitle_face (optional) The font face of the plot subtitle. Default is "bold".
 #' @param subtitle_colour (optional) The color of the plot subtitle. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Virus family found in query".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits".
+#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Viral group".
+#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits for group".
 #' @param axis_title_size (optional) The size of axis titles. Default is 12.
 #' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
 #' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
-#' @param legend_title (optional) A character specifying the title of the legend. Default is "virus family".
+#' @param legend_title (optional) A character specifying the title of the legend. Default is "Phylum".
 #' @param legend_position (optional) The position of the legend. Default is "bottom"."none" removes legend.
 #' @param legend_title_size (optional) The size of the legend title. Default is 12.
 #' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
@@ -109,7 +109,7 @@ vhRunsBarplot <- function(vh_file,
                           cut = 1e-5,
                           theme_choice = "linedraw",
                           flip_coords = TRUE,
-                          title = "Number of datasets with hits found for each Virus group",
+                          title = "Distribution of viral groups detected across query sequences",
                           title_size = 16,
                           title_face = "bold",
                           title_colour = "#2a475e",
@@ -117,12 +117,12 @@ vhRunsBarplot <- function(vh_file,
                           subtitle_size = 12,
                           subtitle_face = "bold",
                           subtitle_colour = "#1b2838",
-                          xlabel = "Virus family found in query",
-                          ylabel = "Number of datesets with hits",
+                          xlabel = "Viral group",
+                          ylabel = "Number of datasets with hits for group",
                           axis_title_size = 12,
                           xtext_size = 10,
                           ytext_size = 10,
-                          legend_title = "virus family",
+                          legend_title = "Phylum",
                           legend_position = "bottom",
                           legend_title_size = 12,
                           legend_title_face = "bold",

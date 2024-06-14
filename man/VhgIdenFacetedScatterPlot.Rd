@@ -9,7 +9,7 @@ VhgIdenFacetedScatterPlot(
   groupby = "best_query",
   cutoff = 1e-05,
   theme_choice = "linedraw",
-  title = "identity vs -log10(E-val) for each group",
+  title = "Faceted scatterplot of viral reference e-values and identity",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -17,12 +17,11 @@ VhgIdenFacetedScatterPlot(
   subtitle_size = 12,
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
-  xlabel = "viral Refseq Identity in \%",
-  ylabel = "-log10 of viral Reference e-value",
+  xlabel = "Viral reference identity (\%)",
+  ylabel = "-log10 of viral reference e-values",
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "virus family",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -48,7 +47,7 @@ less than or equal to this value will be colored blue; otherwise, they will be c
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "linedraw".}
 
-\item{title}{(optional) The title of the plot. Default is "scatterplot for reference identity vs -log10 of reference e-value for each virus separately".}
+\item{title}{(optional) The title of the plot. Default is "Faceted scatterplot of viral reference e-values and identity".}
 
 \item{title_size}{(optional) The size of the title text. Default is 16.}
 
@@ -64,17 +63,15 @@ Default is "linedraw".}
 
 \item{subtitle_colour}{(optional) The color of the subtitle text. Default is "#1b2838".}
 
-\item{xlabel}{(optional) The label for the x-axis. Default is "viral RefSeq Identity in \%".}
+\item{xlabel}{(optional) The label for the x-axis. Default is "Viral reference identity (\%)".}
 
-\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral Reference e-value".}
+\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral reference e-values".}
 
 \item{axis_title_size}{(optional) The size of the axis titles. Default is 12.}
 
 \item{xtext_size}{(optional) The size of the x-axis text. Default is 10.}
 
 \item{ytext_size}{(optional) The size of the y-axis text. Default is 10.}
-
-\item{legend_title}{(optional) The title of the legend. Default is "virus family".}
 
 \item{legend_position}{(optional) The position of the legend. Default is "bottom".}
 

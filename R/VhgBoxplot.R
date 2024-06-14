@@ -27,7 +27,7 @@
 #' @param axis_title_size (optional) Numeric specifying the size of the axis title text. Default is 12.
 #' @param xtext_size (optional) Numeric specifying the size of the x-axis tick labels. Default is 10.
 #' @param ytext_size (optional) Numeric specifying the size of the y-axis tick labels. Default is 10.
-#' @param legend_title (optional) A character specifying the title for the legend. Default is "virus family".
+#' @param legend_title (optional) A character specifying the title for the legend. Default is "Phylum".
 #' @param legend_position (optional) A character specifying the position of the legend. Default is "bottom".
 #' @param legend_title_size (optional) Numeric specifying the size of the legend title text. Default is 12.
 #' @param legend_title_face (optional) A character specifying the font face for the legend title text. Default is "bold".
@@ -127,7 +127,7 @@ VhgBoxplot <- function(vh_file,
                               axis_title_size = 12,
                               xtext_size = 10,
                               ytext_size = 10,
-                              legend_title = "virus family",
+                              legend_title = "Phylum",
                               legend_position = "bottom",
                               legend_title_size = 12,
                               legend_title_face = "bold",
@@ -216,7 +216,7 @@ VhgBoxplot <- function(vh_file,
   # add default subtitle for E-values
   if(y_column=="ViralRefSeq_E"){
     # define a cut off fot evalue significance
-    default_sub <- paste0("red line shows viral Refrence E-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")")
+    default_sub <- paste0("Red line shows viral reference e-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")")
 
   }else{
 
@@ -226,9 +226,9 @@ VhgBoxplot <- function(vh_file,
   # set default titles
   default_titl <- switch(
     y_column,
-    "ViralRefSeq_E" = "Boxplot plotting viral Reference E-Values for each virus family",
-    "contig_len" = "Boxplot plotting contig length for each virus family",
-    "ViralRefSeq_ident" = "Boxplot plotting viral Reference Identity for each virus family"
+    "ViralRefSeq_E" = "Boxplot of viral reference e-values for each group",
+    "contig_len" = "Boxplot of contig length for each group",
+    "ViralRefSeq_ident" = "Boxplot of viral reference identity for each group"
   )
 
 
@@ -239,7 +239,7 @@ VhgBoxplot <- function(vh_file,
   subtitle_text <- if (subtitle == "default") default_sub else if (is.null(subtitle) || subtitle == "") NULL else subtitle
 
   # Update xlabel to use user-provided label if provided
-  xlabel <- ifelse(!is.null(xlabel), xlabel, "Group in query")
+  xlabel <- ifelse(!is.null(xlabel), xlabel, "Viral Group")
   # Determine the y-axis label based on user-provided ylabel or default label
   ylabel <- ifelse(!is.null(ylabel), ylabel, default_ylabel)
 

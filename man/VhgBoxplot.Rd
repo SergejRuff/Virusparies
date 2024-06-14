@@ -25,7 +25,7 @@ VhgBoxplot(
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "virus family",
+  legend_title = "Phylum",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -78,7 +78,7 @@ Default is "linedraw".}
 
 \item{ytext_size}{(optional) Numeric specifying the size of the y-axis tick labels. Default is 10.}
 
-\item{legend_title}{(optional) A character specifying the title for the legend. Default is "virus family".}
+\item{legend_title}{(optional) A character specifying the title for the legend. Default is "Phylum".}
 
 \item{legend_position}{(optional) A character specifying the position of the legend. Default is "bottom".}
 

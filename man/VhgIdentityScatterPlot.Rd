@@ -10,7 +10,7 @@ VhgIdentityScatterPlot(
   cutoff = 1e-05,
   theme_choice = "linedraw",
   cut_colour = "#990000",
-  title = "scatterplot for refrence identity vs -log10 of refrence e-value",
+  title = "Scatterplot of viral reference e-values and identity",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -18,12 +18,12 @@ VhgIdentityScatterPlot(
   subtitle_size = 12,
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
-  xlabel = "viral Refseq Identity in \%",
-  ylabel = "-log10 of viral Reference e-value",
+  xlabel = "Viral reference identity (\%)",
+  ylabel = "-log10 of viral reference e-values",
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "virus family",
+  legend_title = "Phylum",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -47,7 +47,7 @@ with values larger than the cutoff value in the ViralRefSeq_E column.}
 
 \item{cut_colour}{(optional) The color for the horizontal cutoff line. Default is "#990000".}
 
-\item{title}{(optional) The title of the plot. Default is "scatterplot for reference identity vs -log10 of reference e-value".}
+\item{title}{(optional) The title of the plot. Default is "Scatterplot of viral reference e-values and identity".}
 
 \item{title_size}{(optional) The size of the title text. Default is 16.}
 
@@ -63,9 +63,9 @@ with values larger than the cutoff value in the ViralRefSeq_E column.}
 
 \item{subtitle_colour}{(optional) The color of the subtitle text. Default is "#1b2838".}
 
-\item{xlabel}{(optional) The label for the x-axis. Default is "viral RefSeq Identity in \%".}
+\item{xlabel}{(optional) The label for the x-axis. Default is "Viral reference identity (\%)".}
 
-\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral Reference e-value".}
+\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral reference e-values".}
 
 \item{axis_title_size}{(optional) The size of the axis titles. Default is 12.}
 
@@ -73,7 +73,7 @@ with values larger than the cutoff value in the ViralRefSeq_E column.}
 
 \item{ytext_size}{(optional) The size of the y-axis text. Default is 10.}
 
-\item{legend_title}{(optional) The title of the legend. Default is "virus family".}
+\item{legend_title}{(optional) The title of the legend. Default is "Phylum".}
 
 \item{legend_position}{(optional) The position of the legend. Default is "bottom".}
 

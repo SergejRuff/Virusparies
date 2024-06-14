@@ -8,7 +8,7 @@ vhRunsTable(
   vh_file,
   groupby = "best_query",
   cut = 1e-05,
-  title = "Summary Table of Unique Runs for Each Virus Group",
+  title = "Summary of unique runs by virus group",
   title_align = "left",
   names_ = NULL,
   align = "left",
@@ -35,7 +35,7 @@ Note: Gatherer hittables do not have a "best_query" column. Please provide an ap
 with values larger than cutoff value in ViralRefSeq_E column.}
 
 \item{title}{(optional): a title for the summary title.
-Default is "Summary Table of Unique Runs for Each Virus Group"}
+Default is "Summary of unique runs by virus group"}
 
 \item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
 Possible values are "left", "center", or "right". Default is "left".}

@@ -10,7 +10,7 @@
 #' @param cut The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param title (optional): a title for the summary title.
-#' Default is "Summary Table of Unique Runs for Each Virus Group"
+#' Default is "Summary of unique runs by virus group"
 #' @param title_align (optional): a character vector specifying the alignment of title (and subtile) text.
 #' Possible values are "left", "center", or "right". Default is "left".
 #' @param names_ (optional): a vector of length 3 containing column names.
@@ -65,7 +65,7 @@
 #' @importFrom gt gt
 #' @importFrom rlang .data
 #' @export
-vhRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary Table of Unique Runs for Each Virus Group",
+vhRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summary of unique runs by virus group",
                         title_align = "left",names_=NULL,align = "left",subtit =NULL,
                         data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                         title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
