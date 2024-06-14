@@ -98,8 +98,8 @@
 #'
 #'
 #' # plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length
-#' #plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
-#' #plot5
+#' plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
+#' plot5
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
@@ -158,13 +158,7 @@ VhgBoxplot <- function(vh_file,
   arg_logical(flip_coords)
   arg_logical(colorblind_support)
 
-  if(x_column == "ViralRefSeq_taxonomy"){
 
-    tax_column <- vh_file$ViralRefSeq_taxonomy
-
-    vh_file <- taxonomy_group_preprocess(vh_file)
-
-  }
 
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
@@ -198,6 +192,14 @@ VhgBoxplot <- function(vh_file,
 
     message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
     is_file_empty(vh_file)
+
+  }
+
+  if(x_column == "ViralRefSeq_taxonomy"){
+
+    tax_column <- vh_file$ViralRefSeq_taxonomy
+
+    vh_file <- taxonomy_group_preprocess(vh_file)
 
   }
 

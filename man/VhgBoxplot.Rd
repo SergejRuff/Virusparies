@@ -160,8 +160,8 @@ vg_file <- importVirusTable(path2)
 
 
 # plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length
-#plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
-#plot5
+plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
+plot5
 
 }
 \seealso{
