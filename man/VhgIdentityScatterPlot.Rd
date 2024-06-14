@@ -116,7 +116,7 @@ A line indicates whether the observed values are above or below the cutoff speci
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+vh_file <- ImportVirusTable(path)
 
 
 # Basic plot
@@ -152,7 +152,7 @@ plot(custom_plot)
 
 # import gatherer files
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
+vg_file <- ImportVirusTable(path2)
 
 # vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
 vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")

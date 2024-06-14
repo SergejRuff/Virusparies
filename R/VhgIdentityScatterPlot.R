@@ -57,7 +57,7 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #'
 #' # Basic plot
@@ -93,7 +93,7 @@
 #'
 #'# import gatherer files
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-#' vg_file <- importVirusTable(path2)
+#' vg_file <- ImportVirusTable(path2)
 #'
 #' # vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
 #' vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")

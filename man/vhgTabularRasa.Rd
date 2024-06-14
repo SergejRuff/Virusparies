@@ -91,7 +91,7 @@ can be further manipulated with the \code{gt} package available on CRAN.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+vh_file <- ImportVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
 identity <- VhgBoxplot(vh_file,y_column = "ViralRefSeq_ident")

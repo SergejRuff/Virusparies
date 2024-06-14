@@ -71,7 +71,7 @@
 #'
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #' # plot 1 for evalues
 #' plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
@@ -94,7 +94,7 @@
 #'
 #' # import gatherer files
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-#' vg_file <- importVirusTable(path2)
+#' vg_file <- ImportVirusTable(path2)
 #'
 #'
 #' # plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length

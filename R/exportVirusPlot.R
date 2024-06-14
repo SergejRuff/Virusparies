@@ -39,7 +39,7 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #' # Basic plot
 #' plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)

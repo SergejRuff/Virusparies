@@ -46,7 +46,7 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #'
 #' # using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.

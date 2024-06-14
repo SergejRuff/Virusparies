@@ -67,7 +67,7 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #' # plot 1: plot boxplot for "identity"
 #' plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)

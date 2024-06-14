@@ -1,4 +1,4 @@
-#' @title importVirusTable: Import VirusHunterGatherer hittables into R
+#' @title ImportVirusTable: Import VirusHunterGatherer hittables into R
 #'
 #' @description This function imports VirusHunterGatherer hittables into R.
 #'
@@ -12,13 +12,13 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- importVirusTable(path)
+#' vh_file <- ImportVirusTable(path)
 #'
 #' print(head(vh_file))
 #'
 #' # import gatherer files
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-#' vg_file <- importVirusTable(path2)
+#' vg_file <- ImportVirusTable(path2)
 #'
 #' print(head(vg_file))
 #'
@@ -27,7 +27,7 @@
 #'
 #' @importFrom utils read.table
 #' @export
-importVirusTable <- function(path) {
+ImportVirusTable <- function(path) {
   if (!is.character(path)) {
     stop("Error: 'path' argument must be a character string.")
   }

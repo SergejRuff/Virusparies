@@ -52,7 +52,7 @@ Virusparies includes the following functions:
 
 ### Import
 
-- `importVirusTable()`  Import VirusHunterGatherer Hittables into R.
+- `ImportVirusTable()`  Import VirusHunterGatherer Hittables into R.
 
 
 ### VirushunterGatherer Plots:
@@ -100,7 +100,7 @@ VirusHunterGatherer hittables are tab-separated values (TSV) files, which can be
 ### Import VirusHunter Hittable.
 
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+vh_file <- ImportVirusTable(path)
 
 print(head(vh_file))  # print head of hunter files
 
@@ -137,7 +137,7 @@ print(head(vh_file))  # print head of hunter files
 ### Import VirusGatherer Hittable.
 
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
+vg_file <- ImportVirusTable(path2)
 
 print(head(vg_file))  # print head of gatherer files
 

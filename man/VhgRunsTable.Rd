@@ -88,7 +88,7 @@ while the second column contains all IDs of SRA runs or local files that found t
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+vh_file <- ImportVirusTable(path)
 
 # example 1: generate table with defaul arguments
 table <- VhgRunsTable(vh_file,cut = 1e-5)
@@ -105,7 +105,7 @@ table_2
 # example 3: virusgatherer example
 # import gatherer files
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
+vg_file <- ImportVirusTable(path2)
 
 
 table_3 <- VhgRunsTable(vg_file,groupby = "ViralRefSeq_taxonomy")

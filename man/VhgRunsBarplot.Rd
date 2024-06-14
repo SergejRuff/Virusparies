@@ -134,7 +134,7 @@ Only significant values below the threshold specified by the 'cut' argument (def
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- importVirusTable(path)
+vh_file <- ImportVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
 plot <- VhgRunsBarplot(vh_file,cut = 1e-5)
@@ -161,7 +161,7 @@ plot_custom
 
 # import gatherer files
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-vg_file <- importVirusTable(path2)
+vg_file <- ImportVirusTable(path2)
 
 
 

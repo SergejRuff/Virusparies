@@ -27,7 +27,7 @@ This package includes the following functions:
 
 \strong{Import}:
 \itemize{
-\item \code{\link{importVirusTable}}: Import VirusHunterGatherer hittables into R.
+\item \code{\link{ImportVirusTable}}: Import VirusHunterGatherer hittables into R.
 }
 
 \strong{VirushunterGatherer Plots}:
