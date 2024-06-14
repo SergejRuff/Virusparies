@@ -20,10 +20,10 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
     - [VirusHunterGatherer Plot - VhgBoxplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgboxplot)
     - [VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidenfacetedscatterplot)
     - [VirusHunterGatherer Plot - VhgIdentityScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidentityscatterplot)
-    - [VirusHunter Plot - vhRunsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhrunsbarplot)
-    - [VirusHunter Plot - vhSumHitsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhsumhitsbarplot)
-    - [VirusHunter GT - vhRunsTable](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-gt---vhrunstable)
-    - [GT - vhgTabularRasa](https://github.com/SergejRuff/Virusparies/blob/main/README.md#gt---vhgtabularrasa)
+    - [VirusHunterGatherer Plot - VhgRunsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhrunsbarplot)
+    - [VirusHunter Plot - VhSumHitsBarplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-plot---vhsumhitsbarplot)
+    - [VhgRun GT - VhgRunsTable](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushunter-gt---vhrunstable)
+    - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies/blob/main/README.md#gt---vhgtabularrasa)
     - [Export](https://github.com/SergejRuff/Virusparies/blob/main/README.md#export-1)
 - [Citation](https://github.com/SergejRuff/Virusparies/blob/main/README.md#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
@@ -60,24 +60,24 @@ Virusparies includes the following functions:
 - `VhgBoxplot()` Boxplot plotting RefSeq identity, evalues or contig length for each group.
 - `VhgIdenFacetedScatterPlot()` Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 - `VhgIdentityScatterPlot()` Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+- `VhgRunsBarplot()` Bar plot showing how many unique Runs map against each virus.
 
 
 ### Virushunter only Plots:
 
-- `vhRunsBarplot()` Bar plot showing how many unique Runs map against each virus.
-- `vhSumHitsBarplot()` Bar plot for the sum of hits for each virus found in group.
+- `VhSumHitsBarplot()` Bar plot for the sum of hits for each virus found in group.
 
 
 ### Graphical Tables(gt):
 
-- `vhRunsTable()` Generate a gt-table for vhRunsBarplot.
-- `vhgTabularRasa()` Generate custome gt-tables.
+- `VhgRunsTable()` Generate a gt-table for vhRunsBarplot.
+- `VhgTabularRasa()` Generate custome gt-tables.
 
 
 ### Export:
 
-- `exportVirusGt()`  Export Graphical Tables.
-- `exportVirusPlot()` Export plots.
+- `ExportVirusGt()`  Export Graphical Tables.
+- `ExportVirusPlot()` Export plots.
 
 
 ## Details
