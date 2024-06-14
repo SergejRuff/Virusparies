@@ -304,7 +304,7 @@ table
 
 ```
 
-![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Pasted image.png)
+![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Pasted%20image.png)
 
 ### GT - VhgTabularRasa
 
