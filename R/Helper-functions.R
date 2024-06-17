@@ -292,11 +292,13 @@ extract_viridae <- function(sublist) {
 #'
 #' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
 #'
+#' @import dplyr
+#' @importFrom rlang .data
 #' @keywords internal
-taxonomy_group_preprocess <- function(vh_file){
+taxonomy_group_preprocess <- function(vh_file) {
 
-  # split vh_file.
-  my_list <- strsplit(vh_file$ViralRefSeq_taxonomy,split = "|",fixed = TRUE)
+  # Split vh_file.
+  my_list <- strsplit(vh_file$ViralRefSeq_taxonomy, split = "|", fixed = TRUE)
 
   # Apply the function to each sublist
   viridae_elements <- lapply(my_list, extract_viridae)
@@ -316,16 +318,39 @@ taxonomy_group_preprocess <- function(vh_file){
     }
   }
 
+  # Load ICTV data (assuming the ICTV data is properly loaded and formatted)
+  ICTV_data <- ICTV_data
 
 
-  # Remove elements containing "unclassified" outside the function
-  viridae_elements <- lapply(filtered_names, function(x) x[!grepl("unclassified", x)])
+  # Initialize a vector to store the processed taxonomy names
+  processed_taxonomy <- vector("character", length = length(unlist(filtered_names)))
 
-  viridae_elements[is.na(viridae_elements)] <- "unclassified"
+  for (i in seq_along(filtered_names)) {
+    entry <- filtered_names[[i]]
 
-  vh_file$ViralRefSeq_taxonomy <- unlist(viridae_elements)
+    if (is.na(entry) || length(entry) == 0) {
+      # Find matching rows in ICTV_data based on various taxonomic levels
+      match_row <- ICTV_data %>%
+        filter(.data$Subphylum %in% my_list[[i]] |
+                 .data$Class %in% my_list[[i]] |
+                 .data$Subclass %in% my_list[[i]] |
+                 .data$Order %in% my_list[[i]] |
+                 .data$Suborder %in% my_list[[i]] |
+                 .data$Family %in% my_list[[i]])
+
+      if (nrow(match_row) > 0) {
+        phylum <- match_row$Phylum[1]
+        processed_taxonomy[i] <- paste("unclassified", phylum)
+      } else {
+        processed_taxonomy[i] <- "unclassified"
+      }
+    } else {
+      processed_taxonomy[i] <- entry
+    }
+  }
+
+  # Update the ViralRefSeq_taxonomy column in vh_file
+  vh_file$ViralRefSeq_taxonomy <- unlist(processed_taxonomy)
 
   return(vh_file)
-
 }
-
