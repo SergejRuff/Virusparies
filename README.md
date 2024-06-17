@@ -316,7 +316,7 @@ plot
 
 ### VirusHunter Plot - VhSumHitsBarplot
 
-The "best_query" column shows the number of hits in your samples that match the sequences in the blast blast database (filtering step of VirusHunter). `VhSumHitsBarplot()` plots the sum of hits ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold. Since the "best_query" column only exists in VirusHunter hittables, this function can only generate plots for VirusHunter hittables.
+The "best_query" column shows the number of hits in your samples that match the sequences in the blast database (filtering step of VirusHunter). `VhSumHitsBarplot()` plots the sum of hits ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold. Since the "best_query" column only exists in VirusHunter hittables, this function can only generate plots for VirusHunter hittables.
 
 The example below shows that a total of 12704 hits exist in our data, but almost 89 % of the hits belong to Hepadna-Nackedna_TP, followed by Anello_ORF1core with 11.24 % and less than 1 % for both Genomo_Rep and Gemini_Rep. 
 
