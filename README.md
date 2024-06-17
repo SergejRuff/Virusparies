@@ -236,6 +236,9 @@ plot2
 
 #### Boxplot 3: Customization
 
+Plots and tables in Virusparies are highly customizable. This is true for all functions in Virusparies. Example 3 demonstrates it by changing the text of the subtitle and axis-labels, changing the position of the legend and changing the background theme. 
+
+
 ``` r
 
 ### Plot 3 custom arguments used
