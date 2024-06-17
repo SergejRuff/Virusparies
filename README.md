@@ -279,6 +279,9 @@ plot
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
+`VhgIdentityScatterPlot()` generates a scatter plot with viral refrence identity ("ViralRefSeq_ident" column) on the x-axis and the -log10 of Viral reference e-values ("ViralRefSeq_E") on the y-axis. Here the cutoff is not used for filtering of values based on e-value threshold. 
+Instead a red horizontal line is drawn (see figure below), which indicates whether observation is above or belo threshold. As the y-axis is on a -log10 scale values above the red line are below the specified threshold and values below the red line are above.
+
 ``` r
 
 ### Basic plot
