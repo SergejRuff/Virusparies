@@ -114,6 +114,14 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
   # Create a named vector
   names(labels) <- unique_labels
 
+  # Loop through legend_labels to substitute "unclassified" entries
+  for (label in names(legend_labels)) {
+    if (grepl("^unclassified", label)) {  # Check if label starts with "unclassified"
+      phylum <- sub("^unclassified (.*)", "\\1", label)  # Extract the phylum name
+      legend_labels[label] <- phylum  # Replace "unclassified" with the phylum name
+    }
+  }
+
 
 
 
