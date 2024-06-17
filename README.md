@@ -89,7 +89,7 @@ The Virusparies package provides a set of plotting functions tailored for visual
 Each function takes a VirusHunterGatherer file (***vh_file*** argument), a column that should be used for grouping on the x-axis (sometimes called ***x_column*** or ***groupby*** argument), a ***y_column*** argument and a ***cutoff*** for removing (or highlighting the amount of) observations below the user defined e-value threshold.
 The following points are important:
 - Both ***x_column*** (or ***groupby***) and ***y_column*** argument must be a string (character) specifying a column name in the VirusHunterGatherer Inputfile.
-- Accepted ***x_column*** (or ***groupby***) arguments are "best_query" (only for VirusHunter hittables) or "ViralRefSeq_taxonomy".
+- Accepted ***x_column*** (or ***groupby***) arguments are "best_query" (only for VirusHunter hittables) or "ViralRefSeq_taxonomy" (Default: "best_query").
 - The cutoff is defined by the "ViralRefSeq_E" column.
 - Default cutoff value is 1e⁻⁵, but the user is free to set their own cutoff value for e-values.
 - cutoffs are used for filtering out observations above the defined threshold. Unless the thing being used for plotting is the "ViralRefSeq_E" column (see :Boxplot 1: "ViralRefSeq_E" or both scatterplots as an example). In those cases the unfiltered hittable is plotted and the cutoff is used to highlight the proportion of e-values above and below the threshold.
@@ -201,7 +201,11 @@ Accepted ***y_column*** are:
 - "ViralRefSeq_ident"
 - "contig_len" (Gatherer Tables only)
 
+Below are 4 examples for different boxplots.
+
 #### Boxplot 1: "ViralRefSeq_E"
+
+
 
 ``` r
 
@@ -284,6 +288,10 @@ plot(plot)
 ![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdentityScatterPlot.png)
 
 ### VirusHunterGatherer Plot - VhgRunsBarplot
+
+`VhgRunsBarplot` takes a VirusHunterGatherer file as Input and plots the distribution of viral groups detected across query sequences. Here the cutoff is applied to filter out specific observations above a specified threshold. Meaning that if 10 unique SRA-Runs (or local FASTQ Files) detect a viral group, but only 9 have values below the threshold, then only 9 will be plotted.
+
+In the example below we have 9 datasets (SRA_runs). We use "best_query" (***groupby***) for grouping on the x-axis (here inverted) and see the total number of datasets with hits for each group on the y-axis. Anello_ORF1core is found in all 9 files. 5 datasets contain observations for Hepadna-Nackedna_TP and both Gemini_Rep and Genomo_Rep have only 1.
 
 ``` r
 
