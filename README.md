@@ -90,7 +90,7 @@ The Virusparies package provides a set of plotting functions tailored for visual
 
 Each function takes a VirusHunterGatherer file (***vh_file*** argument), a column that should be used for grouping on the x-axis (sometimes called ***x_column*** or ***groupby*** argument), a ***y_column*** argument and a ***cutoff*** for removing (or highlighting the amount of) observations below the user defined e-value threshold.
 The following points are important:
-- Both **x_column*** (or ***groupby***) and ***y_column*** argument must be a string specifying a column name in the VirusHunterGatherer Inputfile.
+- Both **x_column*** (or ***groupby***) and ***y_column*** argument must be a string (character) specifying a column name in the VirusHunterGatherer Inputfile.
 - The cutoff is defined by the "ViralRefSeq_E" column.
 - Default cutoff value is 1e⁻⁵, but the user is free to set their own cutoff vaue for e-values.
 - cutoffs are used for filtering out observations above the defined threshold. Unless the thing being used for plotting is the "ViralRefSeq_E" column (see :Boxplot 1: "ViralRefSeq_E" or both scatterplots as an example). In those cases the unfiltered hittable is plotted and the cutoff is used to highlight the proportion of e-values above and below the threshold.
