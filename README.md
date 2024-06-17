@@ -267,6 +267,8 @@ plot4
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
+`VhgIdenFacetedScatterPlot()`  generates a scatter plot with viral refrence identity ("ViralRefSeq_ident" column) on the x-axis and the -log10 of Viral reference e-values ("ViralRefSeq_E") on the y-axis. Here the cutoff is not used for filtering of values based on e-value threshold. Instead observations are coloured based on whether they are below or above the specified threshold. By default blue points indicate observations with e-values below the threshold and red indicates points above the threshold. Unlike `VhgIdentityScatterPlot()`, which plots every family in one plot, the `VhgIdenFacetedScatterPlot()` creates faceted plots for each group defined by ***groupby***. This allows the user to better seperate virus groups into seperate plots, in cases where multiple groups cluster to closely together and groups are no longer distinguishable in the `VhgIdentityScatterPlot()` plot.
+
 ``` r
 
 ### Generate Plot
