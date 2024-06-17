@@ -13,9 +13,9 @@ ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
 VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGatherer .
 
-- [Installation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#installation)
-- [Overview](https://github.com/SergejRuff/Virusparies/tree/main#overview)
-- [Details](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#details)
+- [Installation](https://github.com/SergejRuff/Virusparies#installation)
+- [Overview](https://github.com/SergejRuff/Virusparies#overview)
+- [Details](https://github.com/SergejRuff/Virusparies#details)
     - [Import](https://github.com/SergejRuff/Virusparies/blob/main/README.md#import-1)
     - [VirusHunterGatherer Plot - VhgBoxplot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgboxplot)
     - [VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot](https://github.com/SergejRuff/Virusparies/blob/main/README.md#virushuntergatherer-plot---vhgidenfacetedscatterplot)
