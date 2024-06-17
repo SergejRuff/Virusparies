@@ -122,7 +122,11 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
     }
   }
 
-
+  missing_phyla <- setdiff(names(labels), unique(legend_labels))
+  # Add missing phyla names to legend_labels with their corresponding colors
+  for (phylum in missing_phyla) {
+    labels[phylum] <- unique_phyla[phylum]
+  }
 
 
 
