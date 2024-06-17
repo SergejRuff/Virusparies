@@ -308,7 +308,7 @@ plot
 ```
 ![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhSumHitsBarplot.png)
 
-### VirusHunter GT - VhgRunsTable
+### GT - VhgRunsTable
 
 The `VhgRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing the user with information about which run has found which virus group. This makes it a valuable complement to the `VhgRunsBarplot()` function. While `VhgRunsBarplot()` provides the information in a plot that quantifies the number of unique runs finding a virus group, `VhgRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
 
