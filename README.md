@@ -23,9 +23,9 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
     - [VirusHunterGatherer Plot - VhgRunsBarplot](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virushuntergatherer-plot---vhgrunsbarplot)
     - [VirusHunter Plot - VhSumHitsBarplot](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virushunter-plot---vhsumhitsbarplot)
     - [GT - VhgRunsTable](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgrunstable)
-    - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies/blob/main/README.md#gt---vhgtabularrasa)
-    - [Export](https://github.com/SergejRuff/Virusparies/blob/main/README.md#export-1)
-- [Citation](https://github.com/SergejRuff/Virusparies/blob/main/README.md#citation)
+    - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgtabularrasa)
+    - [Export](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#export-1)
+- [Citation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
 
 
