@@ -320,6 +320,8 @@ plot
 
 The `VhgRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing the user with information about which run has found which virus group. This makes it a valuable complement to the `VhgRunsBarplot()` function. While `VhgRunsBarplot()` provides the information in a plot that quantifies the number of unique runs finding a virus group, `VhgRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
 
+`VhgRunsBarplot()` plots the distribution of viral groups detected across query sequences, but does not provide us with information about, which dataset detects a specific virus group. In the example above we see that 5 datasets contain observations for Hepadna-Nackedna_TP, but only `VhgRunsTable()` shows which file specificly detect Hepadna-Nackedna_TP (see table below).
+
 
 ``` r
 
