@@ -42,7 +42,8 @@ VgConLenViolin(
 
 \item{log10_scale}{(optinal) transform y-axis to log10 scale (default: TRUE)}
 
-\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').}
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+NULL sorts alphabetically.}
 
 \item{jitter_point}{(optional) logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
 

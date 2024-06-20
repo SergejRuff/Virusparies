@@ -10,6 +10,7 @@ VhgBoxplot(
   y_column = "ViralRefSeq_E",
   cut = 1e-05,
   cut_colour = "#990000",
+  reorder_criteria = "median",
   theme_choice = "linedraw",
   flip_coords = TRUE,
   title = "default",
@@ -45,6 +46,9 @@ VhgBoxplot(
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
 
 \item{cut_colour}{(optional) The color for the significance cutoff line (default: "#990000").}
+
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+NULL sorts alphabetically.}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".

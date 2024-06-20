@@ -10,6 +10,8 @@
 #' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+#' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
@@ -112,6 +114,7 @@ VhgBoxplot <- function(vh_file,
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,
                               cut_colour = "#990000",
+                              reorder_criteria = "median",
                               theme_choice = "linedraw",
                               flip_coords = TRUE,
                               title = "default",
@@ -258,6 +261,13 @@ VhgBoxplot <- function(vh_file,
   vh_file$phylum <- pyhlum_names[match(vh_file[[x_column]], unique_queries)]
 
 
+  # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min", "median", "mean")
+  if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean.")
+  }
+
+
 
 
   ########################
@@ -271,7 +281,18 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  boxp <- ggplot(vh_file,aes(x=reorder(.data[[x_column]],y_aes,FUN=median),
+
+
+  boxp <- ggplot(vh_file,aes(x= if (!is.null(reorder_criteria)) {
+    reorder(.data[[x_column]], y_aes,
+            FUN = switch(reorder_criteria,
+                         "max" = max,
+                         "min" = min,
+                         "median" = median,
+                         "mean" = mean))
+  } else {
+    factor(.data[[x_column]], levels = rev(unique(sort(.data[[x_column]]))))
+  },
                              y=y_aes,fill=.data$phylum))+
     geom_boxplot(staplewidth = 0.4)+
     labs(x=xlabel,
