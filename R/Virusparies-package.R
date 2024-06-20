@@ -33,8 +33,13 @@
 #'   \item \code{\link{VhgRunsBarplot}}: barplot showing how many unique Runs map against each virus.
 #' }
 #'
+#' \strong{VirusGatherer only Plots}:
+#' \itemize{
+#'   \item \code{\link{VgConLenViolin}}: violin plot to visualize the distribution of contig lengths.
+#' }
 #'
-#' \strong{Virushunter only Plots}:
+#'
+#' \strong{VirusHunter only Plots}:
 #' \itemize{
 #'   \item \code{\link{VhSumHitsBarplot}}: barplot for the sum of hits for each virus found in group.
 #' }

@@ -3,6 +3,7 @@
 export(ExportVirusGt)
 export(ExportVirusPlot)
 export(ImportVirusTable)
+export(VgConLenViolin)
 export(VhSumHitsBarplot)
 export(VhgBoxplot)
 export(VhgIdenFacetedScatterPlot)
