@@ -182,18 +182,22 @@ VgConLenViolin <- function(vg_file=vg_file,
 
   # Check for valid reorder_criteria
   valid_criteria <- c("max", "min", "median", "mean")
-  if (!(reorder_criteria %in% valid_criteria)) {
+  if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
     stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean.")
   }
 
 
-
   # Plotting with tryCatch to handle warning
-  p <- ggplot(vg_file,aes(x=reorder(.data$ViralRefSeq_taxonomy,.data$contig_len,FUN = switch(reorder_criteria,
-                                                                                             "max" = max,
-                                                                                             "min" = min,
-                                                                                             "median" = median,
-                                                                                             "mean" = mean)),
+  p <- ggplot(vg_file,aes(x= if (!is.null(reorder_criteria)) {
+    reorder(.data$ViralRefSeq_taxonomy, .data$contig_len,
+            FUN = switch(reorder_criteria,
+                         "max" = max,
+                         "min" = min,
+                         "median" = median,
+                         "mean" = mean))
+  } else {
+    factor(.data$ViralRefSeq_taxonomy, levels = rev(unique(sort(.data$ViralRefSeq_taxonomy))))
+  },
                           y=.data$contig_len,fill=.data$phylum))+
     geom_violin(drop=FALSE) +  # Create violin plot
     labs(x=xlabel,
