@@ -8,6 +8,7 @@
 #' @param vg_file A data frame containing VirusGatherer Hittable results.
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' @param log10_scale (optinal) transform y-axis to log10 scale (default: TRUE)
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 #' @param jitter_point (optional) logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.
 #' @param jitter_point_colour (optional) colour of jitter points. Default is "blue"
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -79,6 +80,7 @@
 VgConLenViolin <- function(vg_file=vg_file,
                            cut = 1e-5,
                            log10_scale = TRUE,
+                           reorder_criteria = "median",
                            jitter_point=FALSE,
                            jitter_point_colour = "blue",
                            theme_choice = "linedraw",
@@ -175,8 +177,23 @@ VgConLenViolin <- function(vg_file=vg_file,
   vg_file_filtered <- vg_file %>%
     filter(.data$observations < 2)
 
+
+
+
+  # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min", "median", "mean")
+  if (!(reorder_criteria %in% valid_criteria)) {
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean.")
+  }
+
+
+
   # Plotting with tryCatch to handle warning
-  p <- ggplot(vg_file,aes(x=reorder(.data$ViralRefSeq_taxonomy,.data$contig_len,FUN=median),
+  p <- ggplot(vg_file,aes(x=reorder(.data$ViralRefSeq_taxonomy,.data$contig_len,FUN = switch(reorder_criteria,
+                                                                                             "max" = max,
+                                                                                             "min" = min,
+                                                                                             "median" = median,
+                                                                                             "mean" = mean)),
                           y=.data$contig_len,fill=.data$phylum))+
     geom_violin(drop=FALSE) +  # Create violin plot
     labs(x=xlabel,

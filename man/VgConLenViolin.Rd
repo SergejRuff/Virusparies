@@ -8,6 +8,7 @@ VgConLenViolin(
   vg_file = vg_file,
   cut = 1e-05,
   log10_scale = TRUE,
+  reorder_criteria = "median",
   jitter_point = FALSE,
   jitter_point_colour = "blue",
   theme_choice = "linedraw",
@@ -40,6 +41,8 @@ VgConLenViolin(
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
 
 \item{log10_scale}{(optinal) transform y-axis to log10 scale (default: TRUE)}
+
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').}
 
 \item{jitter_point}{(optional) logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
 
