@@ -226,13 +226,8 @@ VhgRunsBarplot <- function(vh_file,
 
 
 
-
-
   run_bar <- ggplot(data = sample_run,aes(x=if (!is.null(reorder_criteria)) {
-    reorder(.data[[groupby]], .data$unique_SRA_run,
-            FUN = switch(reorder_criteria,
-                         "max" = max,
-                         "min" = min))
+    reorder(.data[[groupby]], if (reorder_criteria == "max") .data$unique_SRA_run else -.data$unique_SRA_run)
   } else {
     factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
   },y=.data$unique_SRA_run,fill= .data$phylum))+
