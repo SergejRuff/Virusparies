@@ -216,10 +216,7 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  sum_plot <- ggplot(data = vh_group,aes(x=if (!is.null(reorder_criteria)) {
-     reorder(.data[[groupby]], .data$sum,
-             FUN = switch(reorder_criteria,
-                          "max" = max,
-                          "min" = min))
+   reorder(.data[[groupby]], if (reorder_criteria == "max") .data$sum else -.data$sum)
  } else {
      factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
  },y= .data$sum,fill=.data$phylum))+
