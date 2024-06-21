@@ -8,6 +8,7 @@ VhSumHitsBarplot(
   vh_file,
   groupby = "best_query",
   cut = 1e-05,
+  reorder_criteria = "max",
   theme_choice = "linedraw",
   flip_coords = TRUE,
   title = "Distribution of hits for each virus group",
@@ -46,6 +47,9 @@ Note: Gatherer hittables do not have a "best_query" column. Please provide an ap
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}
+
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+NULL sorts alphabetically.}
 
 \item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".

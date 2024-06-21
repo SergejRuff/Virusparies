@@ -10,6 +10,8 @@
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' NULL sorts alphabetically.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
@@ -102,6 +104,7 @@
 VhSumHitsBarplot <- function(vh_file,
                              groupby = "best_query",
                              cut = 1e-5,
+                             reorder_criteria = "max",
                              theme_choice = "linedraw",
                              flip_coords = TRUE,
                              title = "Distribution of hits for each virus group",
@@ -196,6 +199,12 @@ VhSumHitsBarplot <- function(vh_file,
  # Match names to vh_group$best_query
  vh_group$phylum <- pyhlum_names[match(vh_group[[groupby]], unique_queries)]
 
+ # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min")
+  if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
+    stop("Invalid reorder_criteria. Please choose one of: max, min.")
+  }
+
 
 
 
@@ -204,7 +213,16 @@ VhSumHitsBarplot <- function(vh_file,
  ########################
  ########################
 
- sum_plot <- ggplot(data = vh_group,aes(x=reorder(.data[[groupby]],.data$sum,FUN=max),y= .data$sum,fill=.data$phylum))+
+
+
+ sum_plot <- ggplot(data = vh_group,aes(x=if (!is.null(reorder_criteria)) {
+     reorder(.data[[groupby]], .data$sum,
+             FUN = switch(reorder_criteria,
+                          "max" = max,
+                          "min" = min))
+ } else {
+     factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
+ },y= .data$sum,fill=.data$phylum))+
    geom_bar(stat = "identity")+
    labs(title = title,
         x = xlabel,
