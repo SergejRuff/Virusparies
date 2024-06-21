@@ -7,6 +7,8 @@
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' Removes rows in vh_file with values larger than cutoff value in ViralRefSeq_E column.
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' NULL sorts alphabetically.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply.
 #' Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".
 #' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
@@ -107,6 +109,7 @@
 VhgRunsBarplot <- function(vh_file,
                           groupby = "best_query",
                           cut = 1e-5,
+                          reorder_criteria = "max",
                           theme_choice = "linedraw",
                           flip_coords = TRUE,
                           title = "Distribution of viral groups detected across query sequences",
@@ -208,6 +211,12 @@ VhgRunsBarplot <- function(vh_file,
   # Match names to sample_run$best_query
   sample_run$phylum <- pyhlum_names[match(sample_run[[groupby]], unique_queries)]
 
+  # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min")
+  if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
+    stop("Invalid reorder_criteria. Please choose one of: max, min.")
+  }
+
 
 
 
@@ -215,7 +224,18 @@ VhgRunsBarplot <- function(vh_file,
   ### Generate Plot ###
   ### #################
 
-  run_bar <- ggplot(data = sample_run,aes(x=reorder(.data[[groupby]],.data$unique_SRA_run,FUN=max),y=.data$unique_SRA_run,fill= .data$phylum))+
+
+
+
+
+  run_bar <- ggplot(data = sample_run,aes(x=if (!is.null(reorder_criteria)) {
+    reorder(.data[[groupby]], .data$unique_SRA_run,
+            FUN = switch(reorder_criteria,
+                         "max" = max,
+                         "min" = min))
+  } else {
+    factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
+  },y=.data$unique_SRA_run,fill= .data$phylum))+
     geom_bar(stat = "identity")+
     labs(title = title,
          x= xlabel,
