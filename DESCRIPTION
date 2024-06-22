@@ -28,6 +28,7 @@ Imports:
     rlang,
     stats,
     stringr,
+    tools,
     utils,
     viridis
 Depends: 

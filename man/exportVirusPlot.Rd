@@ -6,6 +6,7 @@
 \usage{
 ExportVirusPlot(
   file_name,
+  export_plotobj = FALSE,
   plot = NULL,
   device = NULL,
   path = NULL,
@@ -38,6 +39,8 @@ ExportVirusPlot(
 }
 \arguments{
 \item{file_name}{Name of the output file.}
+
+\item{export_plotobj}{(optional): If TRUE, exports the plot object in .rds format with the same name as specified in file_name. Default is FALSE.}
 
 \item{plot}{The plot to be exported.}
 
@@ -128,6 +131,10 @@ The following arguments are only used for export with grid layout:
 \item \code{greedy}: Determines margin adjustments during alignment.
 \item \code{byrow}: Specifies the arrangement of plots in the grid.
 }
+
+\code{export_plotobj} = TRUE exports the plot in the specified format (e.g., PNG, PDF, etc.)
+and also saves the plot object in .rds format with the same file name. This allows the user to
+import the plot object into R using the \code{readRDS} function and modify the plot further as needed.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
