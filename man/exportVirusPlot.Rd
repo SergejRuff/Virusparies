@@ -15,9 +15,25 @@ ExportVirusPlot(
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
   limitsize = TRUE,
-  bg = NULL,
-  create.dir = FALSE,
-  ...
+  ...,
+  align = "v",
+  axis = "l",
+  nrow = NULL,
+  ncol = NULL,
+  rel_widths = 1,
+  rel_heights = 1,
+  labels = NULL,
+  label_size = 14,
+  label_fontfamily = NULL,
+  label_fontface = "bold",
+  label_colour = NULL,
+  label_x = 0,
+  label_y = 1,
+  hjust = -0.5,
+  vjust = 1.5,
+  scale_grid = 1,
+  greedy = TRUE,
+  byrow = TRUE
 )
 }
 \arguments{
@@ -44,11 +60,43 @@ Can be one of "in", "cm", "mm", or "px". Default is "px".}
 
 \item{limitsize}{Whether to limit the size of the output file to the dimensions of the plot. Default is TRUE.}
 
-\item{bg}{The background color of the plot. Default is NULL.}
-
-\item{create.dir}{Whether to create the directory specified in the path if it does not exist. Default is FALSE.}
-
 \item{...}{Additional arguments passed to.}
+
+\item{align}{Specifies alignment of plots in the grid: "none" (default), "hv" (both directions), "h" (horizontally), or "v" (vertically).}
+
+\item{axis}{Specifies alignment of plots by margins: "none" (default), or any combo of left ("l"), right ("r"), top ("t"), or bottom ("b")(e.g., "tblr" or "rlbt").}
+
+\item{nrow}{(optional): Number of rows in the plot grid. Default is NULL.}
+
+\item{ncol}{(optional): Number of columns in the plot grid. Default is NULL.}
+
+\item{rel_widths}{Numeric vector of relative column widths. Default is 1 (equal widths).}
+
+\item{rel_heights}{Numeric vector of relative row heights. Default is 1 (equal heights).}
+
+\item{labels}{List of labels for plots. Default is NULL (no labels).labels="auto" and labels="AUTO" auto-generate lower and upper-case labels.}
+
+\item{label_size}{Numeric label size. Default is 14.}
+
+\item{label_fontfamily}{Font family for labels. Default is NULL (theme default).}
+
+\item{label_fontface}{Font face for labels. Default is "bold".}
+
+\item{label_colour}{Color for labels. Default is NULL (theme default).}
+
+\item{label_x}{Single value/vector of x positions for labels,relative to each subplot. Default is 0 (left).}
+
+\item{label_y}{Single value/vector of y positions for labels, relative to each subplot. Default is 1 (top).}
+
+\item{hjust}{Horizontal adjustment for labels. Default is -0.5.}
+
+\item{vjust}{Vertical adjustment for labels. Default is 1.5.}
+
+\item{scale_grid}{Single value/vector > 0. Enables you to scale the size of all or select plots.}
+
+\item{greedy}{Margin adjustment during alignment. Default is TRUE.}
+
+\item{byrow}{Arrange plots by row (TRUE) or column (FALSE). Default is TRUE.}
 }
 \value{
 a message indicating that export was successful.
@@ -65,6 +113,21 @@ When 'device' is set to NULL, the file extension in 'filename' is used to determ
 
 Depending on the plot, the final image might be cropped or truncated.
 We recommend experimenting with height, width, and resolution.
+
+In addition, users can generate a grid layout containing multiple plots when a list containing multiple plots is provided as input.
+This will then be exported using the chosen device.
+
+The following arguments are only used for export with grid layout:
+\itemize{
+\item \code{align}: Specifies how plots are aligned within the grid.
+\item \code{axis}: Controls alignment of plots by margins.
+\item \code{nrow}, \code{ncol}: Define the structure of the plot grid.
+\item \code{rel_widths}, \code{rel_heights}: Adjust relative column and row sizes.
+\item \code{labels}, \code{label_size}, \code{label_fontfamily}, \code{label_fontface}, \code{label_colour}, \code{label_x}, \code{label_y}, \code{hjust}, \code{vjust}: Customize plot labels.
+\item \code{scale_grid}: Enables you to scale the size of all or select plots.
+\item \code{greedy}: Determines margin adjustments during alignment.
+\item \code{byrow}: Specifies the arrangement of plots in the grid.
+}
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
@@ -80,6 +143,32 @@ ExportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
 
 # second export with device argument
 ExportVirusPlot(plot=plot,file_name="testplot",width=8,height=6,units="in",device = "png")
+
+}
+
+## example 2 for multiple plots in 1 pdf file.
+
+path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+vg_file <- ImportVirusTable(path2)
+
+# Generate 3 plots
+violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE,
+legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
+                             theme_choice = "minimal")
+srarun <- VhgRunsBarplot(vh_file = vg_file,groupby = "ViralRefSeq_taxonomy",
+legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
+                         theme_choice = "minimal")
+boxplot <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "ViralRefSeq_ident",
+legend_position = "bottom",title = "",xlabel = "",
+                      reorder_criteria = NULL,theme_choice = "minimal")
+
+# add plots to a list
+plot_list <- list(violinplot,srarun$plot,boxplot$boxp)
+
+\dontrun{
+
+ExportVirusPlot(plot=plot_list,file_name="grid_testplot.pdf",width=16,height=12,
+units="in",nrow = 3,ncol = 1)
 
 }
 

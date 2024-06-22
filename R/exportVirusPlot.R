@@ -17,9 +17,25 @@
 #' Can be one of "in", "cm", "mm", or "px". Default is "px".
 #' @param dpi The resolution of the output device in dots per inch. Default is 300.
 #' @param limitsize Whether to limit the size of the output file to the dimensions of the plot. Default is TRUE.
-#' @param bg The background color of the plot. Default is NULL.
-#' @param create.dir Whether to create the directory specified in the path if it does not exist. Default is FALSE.
 #' @param ... Additional arguments passed to.
+#' @param align Specifies alignment of plots in the grid: "none" (default), "hv" (both directions), "h" (horizontally), or "v" (vertically).
+#' @param axis Specifies alignment of plots by margins: "none" (default), or any combo of left ("l"), right ("r"), top ("t"), or bottom ("b")(e.g., "tblr" or "rlbt").
+#' @param nrow (optional): Number of rows in the plot grid. Default is NULL.
+#' @param ncol (optional): Number of columns in the plot grid. Default is NULL.
+#' @param rel_widths Numeric vector of relative column widths. Default is 1 (equal widths).
+#' @param rel_heights Numeric vector of relative row heights. Default is 1 (equal heights).
+#' @param labels List of labels for plots. Default is NULL (no labels).labels="auto" and labels="AUTO" auto-generate lower and upper-case labels.
+#' @param label_size Numeric label size. Default is 14.
+#' @param label_fontfamily Font family for labels. Default is NULL (theme default).
+#' @param label_fontface Font face for labels. Default is "bold".
+#' @param label_colour Color for labels. Default is NULL (theme default).
+#' @param label_x Single value/vector of x positions for labels,relative to each subplot. Default is 0 (left).
+#' @param label_y Single value/vector of y positions for labels, relative to each subplot. Default is 1 (top).
+#' @param hjust Horizontal adjustment for labels. Default is -0.5.
+#' @param vjust Vertical adjustment for labels. Default is 1.5.
+#' @param scale_grid Single value/vector > 0. Enables you to scale the size of all or select plots.
+#' @param greedy Margin adjustment during alignment. Default is TRUE.
+#' @param byrow Arrange plots by row (TRUE) or column (FALSE). Default is TRUE.
 #'
 #' @details
 #' This function exports plots in various formats supported by Virusparies.
@@ -29,9 +45,18 @@
 #' Depending on the plot, the final image might be cropped or truncated.
 #' We recommend experimenting with height, width, and resolution.
 #'
+#' In addition, users can generate a grid layout containing multiple plots when a list containing multiple plots is provided as input.
+#' This will then be exported using the chosen device.
 #'
-#'
-#'
+#' The following arguments are only used for export with grid layout:
+#' - `align`: Specifies how plots are aligned within the grid.
+#' - `axis`: Controls alignment of plots by margins.
+#' - `nrow`, `ncol`: Define the structure of the plot grid.
+#' - `rel_widths`, `rel_heights`: Adjust relative column and row sizes.
+#' - `labels`, `label_size`, `label_fontfamily`, `label_fontface`, `label_colour`, `label_x`, `label_y`, `hjust`, `vjust`: Customize plot labels.
+#' - `scale_grid`: Enables you to scale the size of all or select plots.
+#' - `greedy`: Determines margin adjustments during alignment.
+#' - `byrow`: Specifies the arrangement of plots in the grid.
 #'
 #'
 #' @return a message indicating that export was successful.
@@ -54,25 +79,72 @@
 #'
 #' }
 #'
+#' ## example 2 for multiple plots in 1 pdf file.
+#'
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- ImportVirusTable(path2)
+#'
+#' # Generate 3 plots
+#' violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE,
+#' legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
+#'                              theme_choice = "minimal")
+#' srarun <- VhgRunsBarplot(vh_file = vg_file,groupby = "ViralRefSeq_taxonomy",
+#' legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
+#'                          theme_choice = "minimal")
+#' boxplot <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "ViralRefSeq_ident",
+#' legend_position = "bottom",title = "",xlabel = "",
+#'                       reorder_criteria = NULL,theme_choice = "minimal")
+#'
+#' # add plots to a list
+#' plot_list <- list(violinplot,srarun$plot,boxplot$boxp)
+#'
+#' \dontrun{
+#'
+#' ExportVirusPlot(plot=plot_list,file_name="grid_testplot.pdf",width=16,height=12,
+#' units="in",nrow = 3,ncol = 1)
+#'
+#' }
+#'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
-#' @importFrom ggplot2 ggsave
+#' @importFrom cowplot ggsave2 plot_grid
 #' @export
 ExportVirusPlot <- function(
-                            file_name,
-                            plot = NULL,
-                            device = NULL,
-                            path = NULL,
-                            scale = 1,
-                            width = NA,
-                            height = NA,
-                            units = c("in", "cm", "mm", "px"),
-                            dpi = 300,
-                            limitsize = TRUE,
-                            bg = NULL,
-                            create.dir = FALSE,
-                            ...) {
+    file_name,
+    plot = NULL,
+    device = NULL,
+    path = NULL,
+    scale = 1,
+    width = NA,
+    height = NA,
+    units = c("in", "cm", "mm", "px"),
+    dpi = 300,
+    limitsize = TRUE,
+    ...,
+    align = "v",
+    axis = "l",
+    nrow = NULL,
+    ncol = NULL,
+    rel_widths = 1,
+    rel_heights = 1,
+    labels = NULL,
+    label_size = 14,
+    label_fontfamily = NULL,
+    label_fontface = "bold",
+    label_colour = NULL,
+    label_x = 0,
+    label_y = 1,
+    hjust = -0.5,
+    vjust = 1.5,
+    scale_grid = 1,
+    greedy = TRUE,
+    byrow = TRUE) {
+
+  if (is.null(plot)) {
+    stop("No plot object provided.")
+  }
+
   format <- sub('.*\\.', '', tolower(file_name))
 
   if (!is.null(device) && !(device %in% c("eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", "wmf"))) {
@@ -85,19 +157,65 @@ ExportVirusPlot <- function(
 
   message(paste0(file_name, " will be exported in the following format: ", width, "X", height, " using ", device, " device."))
 
-  ggsave(filename = file_name,
-         plot = plot,
-         device = device,
-         path = path,
-         scale = scale,
-         width = width,
-         height = height,
-         units = units,
-         dpi = dpi,
-         limitsize = limitsize,
-         bg = bg,
-         create.dir = create.dir,
-         ...)
+  if(inherits(plot, "ggplot")){
 
-  message("Plot export completed successfully.")
+    ggsave2(filename = file_name,
+            plot = plot,
+            device = device,
+            path = path,
+            scale = scale,
+            width = width,
+            height = height,
+            units = units,
+            dpi = dpi,
+            limitsize = limitsize,
+            ...)
+
+    return("Plot export completed successfully.")
+
+
+  } else if (is.list(plot) && all(sapply(plot, function(x) inherits(x, "ggplot")))) {
+
+    message("A list of plots was provided.Arranging multiple plots into a grid layout")
+
+    grid_plot <- plot_grid(
+      plotlist = plot,
+      align = align,
+      axis = axis,
+      nrow = nrow,
+      ncol = ncol,
+      rel_widths = rel_widths,
+      rel_heights = rel_heights,
+      labels = labels,
+      label_size = label_size,
+      label_fontfamily = label_fontfamily,
+      label_fontface = label_fontface,
+      label_colour = label_colour,
+      label_x = label_x,
+      label_y = label_y,
+      hjust = hjust,
+      vjust = vjust,
+      scale = scale_grid,
+      greedy = greedy,
+      byrow = byrow
+    )
+
+    ggsave2(filename = file_name,
+           plot = grid_plot,
+           device = device,
+           path = path,
+           scale = scale,
+           width = width,
+           height = height,
+           units = units,
+           dpi = dpi,
+           limitsize = limitsize,
+           ...)
+
+    return("Plot export completed successfully.")
+
+
+  }else {
+    stop("Unsupported plot format. Please provide either a single ggplot object or a list of ggplot objects.")
+  }
 }
