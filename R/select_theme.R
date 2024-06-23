@@ -10,27 +10,36 @@
 #' It selects the theme to use for the different plots in this package.
 #'
 #' @importFrom ggplot2 theme_minimal theme_classic theme_light theme_dark theme_void theme_gray
-#' theme_bw theme_linedraw theme_test
+#' theme_bw theme_linedraw theme_test theme
 #'
 #' @keywords internal
 select_theme <- function(theme_choice) {
-  theme_selected <- theme_minimal()
+  base_theme <- theme_minimal()
+
   if (theme_choice == "classic") {
-    theme_selected <- theme_classic()
+    base_theme <- theme_classic()
   } else if (theme_choice == "light") {
-    theme_selected <- theme_light()
+    base_theme <- theme_light()
   } else if (theme_choice == "dark") {
-    theme_selected <- theme_dark()
+    return(theme_dark())
   } else if (theme_choice == "void") {
-    theme_selected <- theme_void()
+    base_theme <- theme_void()
   } else if (theme_choice == "grey" || theme_choice == "gray") {
-    theme_selected <- theme_gray()
+    base_theme <- theme_gray()
   } else if (theme_choice == "bw") {
-    theme_selected <- theme_bw()
+    base_theme <- theme_bw()
   } else if (theme_choice == "linedraw") {
-    theme_selected <- theme_linedraw()
+    base_theme <- theme_linedraw()
   } else if (theme_choice == "test") {
-    theme_selected <- theme_test()
+    base_theme <- theme_test()
   }
-  return(theme_selected)
+
+  # Add custom grid lines
+  base_theme <- base_theme +
+    theme(
+      panel.grid.major = element_line(linewidth = 0.5, linetype = "dotted", colour = "grey50"),  # Dotted major grid lines
+      panel.grid.minor = element_line(linewidth = 0.25, linetype = "dotted", colour = "grey75")   # Dotted minor grid lines
+    )
+
+  return(base_theme)
 }
