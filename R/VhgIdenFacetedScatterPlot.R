@@ -9,6 +9,16 @@
 #' @param groupby (optional) A string indicating the column used for grouping the data points in the scatter plot.
 #' The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
+#' @param taxa_rank (optional) When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' Supported ranks are:
+#' - "Subphylum"
+#' - "Class"
+#' - "Subclass"
+#' - "Order"
+#' - "Suborder"
+#' - "Family" (default)
+#' - "Subfamily"
+#' - "Genus" (including Subgenus)
 #' @param cutoff (optional) A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -102,6 +112,7 @@
 #' @export
 VhgIdenFacetedScatterPlot <- function(vh_file,
                                      groupby = "best_query",
+                                     taxa_rank = "Family",
                                      cutoff = 1e-5,
                                      theme_choice = "linedraw",
                                      title="Faceted scatterplot of viral reference e-values and identity",
@@ -149,7 +160,7 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
 
   if(groupby == "ViralRefSeq_taxonomy"){
 
-    vh_file <- taxonomy_group_preprocess(vh_file)
+    vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
 
   }
 

@@ -266,14 +266,60 @@ get_plot_parameters <- function(y_column, cut) {
 
 
 
+
+#' define taxa string
+#'
+#' @param taxa_rank a character indicating the taxa rank
+#'
+#' @return a character with the taxa suffix
+#'
+#' @keywords internal
+taxonomy_rank_hierarchy<- function(taxa_rank){
+
+
+  if(taxa_rank=="Subphylum"){
+    return("viricotina")
+  }
+
+  if(taxa_rank=="Class"){
+    return("viricetes")
+  }
+
+  if(taxa_rank=="Subclass"){
+    return("viricetidae")
+  }
+
+  if(taxa_rank=="Order"){
+    return("virales")
+  }
+
+  if(taxa_rank=="Suborder"){
+    return("virineae")
+  }
+
+  if(taxa_rank=="Family"){
+    return("viridae")
+  }
+
+  if(taxa_rank=="Subfamily"){
+    return("virinae")
+  }
+
+  if(taxa_rank=="Genus"){
+    return("virus")
+  }
+
+
+}
+
 #' internal: extract viridae element
 #'
 #' @param sublist taxonomy column
 #'
 #'
 #' @keywords internal
-extract_viridae <- function(sublist) {
-  element <- subset(sublist, grepl("viridae", sublist))
+extract_taxa <- function(sublist, taxa_rank) {
+  element <- subset(sublist, grepl(taxa_rank, sublist))
   if (length(element) > 0) {
     return(element)
   } else {
@@ -281,42 +327,74 @@ extract_viridae <- function(sublist) {
   }
 }
 
-#' preprocess ViralRefSeq_taxonomy elements
+#' @title VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements
 #'
-#' @param vh_file hittables file
+#' @param vh_file VirusHunter or VirusGatherer hittable
+#' @param taxa_rank Specify the taxonomic rank to group your data by.
+#' Supported ranks are:
+#' - "Subphylum"
+#' - "Class"
+#' - "Subclass"
+#' - "Order"
+#' - "Suborder"
+#' - "Family" (default)
+#' - "Subfamily"
+#' - "Genus" (including Subgenus)
 #'
 #' @details
-#' Besides best_query the user can utilize the ViralRefSeq_taxonomy column as x_column or groupby
-#' in plots. That columns needs to be preprocessed as it it too long and has too many unique elements
-#' to be used for grouping. The element containing "viridae" is used because the first one is the tax ID.
-#'  NA are replaced by "unclassified" and existing "unclassified" are removed.
+#' Besides `best_query`, the user can utilize the `ViralRefSeq_taxonomy` column as `x_column` or `groupby` in plots.
+#' This column needs preprocessing because it is too long and has too many unique elements for effective grouping.
+#' The element containing the taxa suffix specified by the `taxa_rank` argument is used. NA values are replaced by "unclassified".
+#'
+#' This function is used internally by every function that can use the `ViralRefSeq_taxonomy` column as input.
+#' The user can also apply this function independently to process the taxonomy column and filter for the selected taxa rank in their data.
 #'
 #'
 #' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
 #'
+#' @examples
+#' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+#' vh_file <- ImportVirusTable(path)
+#'
+#' vh_file_filtered <- VhgPreprocessTaxa(vh_file,"Family")
+#'
+#' print("ViralRefSeq_taxonomy before processing:\n")
+#' print(head(vh_file$ViralRefSeq_taxonomy,5))
+#'
+#' print("ViralRefSeq_taxonomy after processing:\n")
+#' print(head(vh_file_filtered$ViralRefSeq_taxonomy,5))
+#'
+#'
+#'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #' @import dplyr
 #' @importFrom rlang .data
-#' @keywords internal
-taxonomy_group_preprocess <- function(vh_file) {
+#' @export
+VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
+
+  taxa_rank <- taxonomy_rank_hierarchy(taxa_rank)
 
   # Split vh_file.
   my_list <- strsplit(vh_file$ViralRefSeq_taxonomy, split = "|", fixed = TRUE)
 
   # Apply the function to each sublist
-  viridae_elements <- lapply(my_list, extract_viridae)
+  taxa_elements <- lapply(my_list, function(x) extract_taxa(x, taxa_rank))
 
   # Initialize an empty vector to store the filtered names
-  filtered_names <- vector("list", length = length(viridae_elements))
+  filtered_names <- vector("list", length = length(taxa_elements))
 
-  # Iterate over each element in viridae_elements
-  for (i in seq_along(viridae_elements)) {
+  # Iterate over each element in taxa_elements
+  for (i in seq_along(taxa_elements)) {
     # Check if the element contains two or more strings
-    if (length(viridae_elements[[i]]) >= 2) {
+    if (length(taxa_elements[[i]]) >= 2) {
       # Extract only the virus family names without additional text
-      filtered_names[[i]] <- grep("^[[:alnum:]]+viridae$", viridae_elements[[i]], value = TRUE)
+      term <- paste0("^[[:alnum:]]+",taxa_rank,"$")
+      filtered_names[[i]] <- grep(term, taxa_elements[[i]], value = TRUE)
     } else {
       # If the element contains less than two strings, keep it unchanged
-      filtered_names[[i]] <- viridae_elements[[i]]
+      filtered_names[[i]] <- taxa_elements[[i]]
     }
   }
 
@@ -351,8 +429,15 @@ taxonomy_group_preprocess <- function(vh_file) {
     }
   }
 
+
+
   # Update the ViralRefSeq_taxonomy column in vh_file
   vh_file$ViralRefSeq_taxonomy <- unlist(processed_taxonomy)
+
+  # Using base R
+  vh_file$ViralRefSeq_taxonomy <- ifelse(vh_file$ViralRefSeq_taxonomy ==
+                                           "unclassified unclassified", "unclassified", vh_file$ViralRefSeq_taxonomy)
+
 
   return(vh_file)
 }

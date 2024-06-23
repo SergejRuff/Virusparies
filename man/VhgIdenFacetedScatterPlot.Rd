@@ -7,6 +7,7 @@
 VhgIdenFacetedScatterPlot(
   vh_file,
   groupby = "best_query",
+  taxa_rank = "Family",
   cutoff = 1e-05,
   theme_choice = "linedraw",
   title = "Faceted scatterplot of viral reference e-values and identity",
@@ -39,6 +40,19 @@ VhgIdenFacetedScatterPlot(
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
+
+\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+Supported ranks are:
+\itemize{
+\item "Subphylum"
+\item "Class"
+\item "Subclass"
+\item "Order"
+\item "Suborder"
+\item "Family" (default)
+\item "Subfamily"
+\item "Genus" (including Subgenus)
+}}
 
 \item{cutoff}{(optional) A numeric value representing the cutoff for the viral reference e-value. Points with \code{ViralRefSeq_E}
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}

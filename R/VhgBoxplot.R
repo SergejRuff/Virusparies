@@ -6,6 +6,16 @@
 #'
 #' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param x_column A character specifying the column containing the groups (Default:"best_query").
+#' @param taxa_rank (optional) When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' Supported ranks are:
+#' - "Subphylum"
+#' - "Class"
+#' - "Subclass"
+#' - "Order"
+#' - "Suborder"
+#' - "Family" (default)
+#' - "Subfamily"
+#' - "Genus" (including Subgenus)
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 #' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
@@ -112,6 +122,7 @@
 #' @export
 VhgBoxplot <- function(vh_file,
                               x_column ="best_query",
+                              taxa_rank = "Family",
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,
                               add_cutoff_line = TRUE,
@@ -212,7 +223,7 @@ VhgBoxplot <- function(vh_file,
 
     tax_column <- vh_file$ViralRefSeq_taxonomy
 
-    vh_file <- taxonomy_group_preprocess(vh_file)
+    vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
 
   }
 

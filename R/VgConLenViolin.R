@@ -6,6 +6,16 @@
 #'
 #'
 #' @param vg_file A data frame containing VirusGatherer Hittable results.
+#' @param taxa_rank (optional) Specify the taxonomic rank to group your data by.
+#' Supported ranks are:
+#' - "Subphylum"
+#' - "Class"
+#' - "Subclass"
+#' - "Order"
+#' - "Suborder"
+#' - "Family" (default)
+#' - "Subfamily"
+#' - "Genus" (including Subgenus)
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' @param log10_scale (optinal) transform y-axis to log10 scale (default: TRUE)
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
@@ -79,6 +89,7 @@
 #' @importFrom rlang .data
 #' @export
 VgConLenViolin <- function(vg_file=vg_file,
+                           taxa_rank = "Family",
                            cut = 1e-5,
                            log10_scale = TRUE,
                            reorder_criteria = "median",
@@ -130,7 +141,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   arg_logical(flip_coords)
   arg_logical(colorblind_support)
 
-  vg_file <- taxonomy_group_preprocess(vg_file)
+  vg_file <- VhgPreprocessTaxa(vg_file,taxa_rank)
 
   ## preprocess data for plotting
   vg_file <- vg_file[vg_file$ViralRefSeq_E < cut,]

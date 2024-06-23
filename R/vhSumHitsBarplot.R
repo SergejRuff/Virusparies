@@ -8,6 +8,16 @@
 #' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
 #' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
+#' @param taxa_rank (optional) When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' Supported ranks are:
+#' - "Subphylum"
+#' - "Class"
+#' - "Subclass"
+#' - "Order"
+#' - "Suborder"
+#' - "Family" (default)
+#' - "Subfamily"
+#' - "Genus" (including Subgenus)
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in ViralRefSeq_E column.
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
@@ -103,6 +113,7 @@
 #' @export
 VhSumHitsBarplot <- function(vh_file,
                              groupby = "best_query",
+                             taxa_rank = "Family",
                              cut = 1e-5,
                              reorder_criteria = "max",
                              theme_choice = "linedraw",
@@ -165,7 +176,7 @@ VhSumHitsBarplot <- function(vh_file,
 
  if(groupby == "ViralRefSeq_taxonomy"){
 
-     vh_file <- taxonomy_group_preprocess(vh_file)
+     vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
 
  }
 

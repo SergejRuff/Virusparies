@@ -6,6 +6,7 @@
 \usage{
 VgConLenViolin(
   vg_file = vg_file,
+  taxa_rank = "Family",
   cut = 1e-05,
   log10_scale = TRUE,
   reorder_criteria = "median",
@@ -37,6 +38,19 @@ VgConLenViolin(
 }
 \arguments{
 \item{vg_file}{A data frame containing VirusGatherer Hittable results.}
+
+\item{taxa_rank}{(optional) Specify the taxonomic rank to group your data by.
+Supported ranks are:
+\itemize{
+\item "Subphylum"
+\item "Class"
+\item "Subclass"
+\item "Order"
+\item "Suborder"
+\item "Family" (default)
+\item "Subfamily"
+\item "Genus" (including Subgenus)
+}}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
 

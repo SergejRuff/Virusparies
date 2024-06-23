@@ -7,6 +7,7 @@
 VhSumHitsBarplot(
   vh_file,
   groupby = "best_query",
+  taxa_rank = "Family",
   cut = 1e-05,
   reorder_criteria = "max",
   theme_choice = "linedraw",
@@ -44,6 +45,19 @@ VhSumHitsBarplot(
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
 "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
+
+\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+Supported ranks are:
+\itemize{
+\item "Subphylum"
+\item "Class"
+\item "Subclass"
+\item "Order"
+\item "Suborder"
+\item "Family" (default)
+\item "Subfamily"
+\item "Genus" (including Subgenus)
+}}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in ViralRefSeq_E column.}

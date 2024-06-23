@@ -59,6 +59,11 @@ This package includes the following functions:
 \item \code{\link{ExportVirusGt}}: Export Graphical Tables.
 \item \code{\link{ExportVirusPlot}}: Export plots.
 }
+
+\strong{Utils}:
+\itemize{
+\item \code{\link{VhgPreprocessTaxa}}: process ViralRefSeq_taxonomy column.
+}
 }
 
 \seealso{

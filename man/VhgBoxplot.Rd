@@ -7,6 +7,7 @@
 VhgBoxplot(
   vh_file,
   x_column = "best_query",
+  taxa_rank = "Family",
   y_column = "ViralRefSeq_E",
   cut = 1e-05,
   add_cutoff_line = TRUE,
@@ -40,6 +41,19 @@ VhgBoxplot(
 \item{vh_file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
 
 \item{x_column}{A character specifying the column containing the groups (Default:"best_query").}
+
+\item{taxa_rank}{(optional) When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+Supported ranks are:
+\itemize{
+\item "Subphylum"
+\item "Class"
+\item "Subclass"
+\item "Order"
+\item "Suborder"
+\item "Family" (default)
+\item "Subfamily"
+\item "Genus" (including Subgenus)
+}}
 
 \item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
