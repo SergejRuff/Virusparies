@@ -438,6 +438,9 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
   vh_file$ViralRefSeq_taxonomy <- ifelse(vh_file$ViralRefSeq_taxonomy ==
                                            "unclassified unclassified", "unclassified", vh_file$ViralRefSeq_taxonomy)
 
+  vh_file$ViralRefSeq_taxonomy <- ifelse(vh_file$ViralRefSeq_taxonomy ==
+                                           "unclassified NA", "unclassified", vh_file$ViralRefSeq_taxonomy)
+
 
   return(vh_file)
 }
