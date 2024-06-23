@@ -89,7 +89,11 @@ VhgTabularRasa <- function(file,title="Graphical Table",
 
   # check file and arguments
   check_is_dataframe(file)
-  is_file_empty(file)
+  #is_file_empty(file)
+  if (is_file_empty(file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
   has_columnnames(file)
   arg_character(title_align)
   arg_character(align)

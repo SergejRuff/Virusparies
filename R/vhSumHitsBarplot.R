@@ -135,7 +135,11 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  #check if table is empty
- is_file_empty(vh_file)
+ #is_file_empty(vh_file)
+ if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
 
 
@@ -168,7 +172,11 @@ VhSumHitsBarplot <- function(vh_file,
 
  ## preprocess data for plotting
  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
- is_file_empty(vh_file)
+ #is_file_empty(vh_file)
+ if (is_file_empty(vh_file)) {
+   #message("Skipping VhgBoxplot generation due to empty data.")
+   return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+ }
  vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby)
 
  # Apply the selected theme

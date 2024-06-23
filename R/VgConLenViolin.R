@@ -108,7 +108,11 @@ VgConLenViolin <- function(vg_file=vg_file,
                            colormap = "viridis") {
 
   #check if table is empty
-  is_file_empty(vg_file)
+  #is_file_empty(vg_file)
+  if (is_file_empty(vg_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
   # Define the required columns
   required_columns <- c("contig_len", "ViralRefSeq_E", "ViralRefSeq_taxonomy")
@@ -130,7 +134,11 @@ VgConLenViolin <- function(vg_file=vg_file,
 
   ## preprocess data for plotting
   vg_file <- vg_file[vg_file$ViralRefSeq_E < cut,]
-  is_file_empty(vg_file)
+  #is_file_empty(vg_file)
+  if (is_file_empty(vg_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)

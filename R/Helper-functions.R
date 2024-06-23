@@ -11,8 +11,10 @@
 #' @keywords internal
 is_file_empty <- function(file) {
   if (nrow(file) == 0) {
-    stop("Error: Input has zero rows.")
+    message("Warning: Input has zero rows. Skipping further processing.")
+    return(TRUE)  # Return TRUE to indicate empty data
   }
+  return(FALSE)  # Return FALSE if data is not empty
 }
 
 

@@ -143,7 +143,11 @@ VhgRunsBarplot <- function(vh_file,
 
 
   # check if hittable is empty
-  is_file_empty(vh_file)
+  #is_file_empty(vh_file)
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
@@ -182,7 +186,11 @@ VhgRunsBarplot <- function(vh_file,
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
   message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
   #check if obj has 0 ob after filtering
-  is_file_empty(vh_file)
+  #is_file_empty(vh_file)
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)

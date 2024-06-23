@@ -141,7 +141,11 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  is_file_empty(vh_file)
+  #is_file_empty(vh_file)
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
 
   if (!(x_column %in% c("best_query", "ViralRefSeq_taxonomy"))) {
@@ -194,7 +198,11 @@ VhgBoxplot <- function(vh_file,
     vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
 
     message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
-    is_file_empty(vh_file)
+    #is_file_empty(vh_file)
+    if (is_file_empty(vh_file)) {
+      #message("Skipping VhgBoxplot generation due to empty data.")
+      return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+    }
 
   }
 
