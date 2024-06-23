@@ -82,6 +82,11 @@ ExportVirusGt <- function(gtable,
                           ...
                           ){
 
+  if (is.null(gtable) || nrow(gtable$data) == 0) {
+    message("Skipping export due to NULL gtable or empty dataframe.")
+    return(invisible(NULL))  # Stop further execution
+  }
+
   fileext <- file_ext(filename)
 
   if ((fileext %in% c("png", "pdf")) && is.null(find_chrome())) {

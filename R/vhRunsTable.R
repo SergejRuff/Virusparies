@@ -82,6 +82,11 @@ VhgRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summar
                         cell_colour="grey90",col_everyrow=FALSE){
 
 
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
+
   if(groupby == "ViralRefSeq_taxonomy"){
 
     vh_file <- taxonomy_group_preprocess(vh_file)
@@ -93,6 +98,11 @@ VhgRunsTable <- function(vh_file,groupby = "best_query",cut = 1e-5,title="Summar
   }
 
   vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
+
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
 
   which_runs <- vh_file %>%
     group_by(.data[[groupby]]) %>%

@@ -148,7 +148,8 @@ ExportVirusPlot <- function(
     byrow = TRUE) {
 
   if (is.null(plot)) {
-    stop("No plot object provided.")
+    message("No plot object provided. Skipping plot export.")
+    return(invisible(NULL))  # Stop further execution
   }
 
 
