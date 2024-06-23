@@ -9,6 +9,7 @@
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 #' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
+#' @param add_cutoff_line (optional): whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
 #' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 #' NULL sorts alphabetically.
@@ -113,6 +114,7 @@ VhgBoxplot <- function(vh_file,
                               x_column ="best_query",
                               y_column = "ViralRefSeq_E",
                               cut = 1e-5,
+                              add_cutoff_line = TRUE,
                               cut_colour = "#990000",
                               reorder_criteria = "median",
                               theme_choice = "linedraw",
@@ -335,7 +337,7 @@ VhgBoxplot <- function(vh_file,
     boxp <- boxp + coord_flip()
   }
 
-  if(y_column=="ViralRefSeq_E"){
+  if(y_column=="ViralRefSeq_E" && add_cutoff_line){
 
     boxp <- boxp+geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }

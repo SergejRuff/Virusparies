@@ -9,6 +9,7 @@ VhgBoxplot(
   x_column = "best_query",
   y_column = "ViralRefSeq_E",
   cut = 1e-05,
+  add_cutoff_line = TRUE,
   cut_colour = "#990000",
   reorder_criteria = "median",
   theme_choice = "linedraw",
@@ -44,6 +45,8 @@ VhgBoxplot(
 "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
+
+\item{add_cutoff_line}{(optional): whether to add a horizontal line based on \code{cut} for \code{"ViralRefSeq_E"} column (default: TRUE).}
 
 \item{cut_colour}{(optional) The color for the significance cutoff line (default: "#990000").}
 
