@@ -9,6 +9,7 @@
 #' @param filename Name of the output file. Default is "table.docx".Make sure to provide an extension
 #' compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 #' the file extension is ignored.
+#' @param export_csv (optional): If TRUE, exports the input data frame in csv format with the same name as specified in filename. Default is FALSE.
 #' @param path Path of the directory to save plot to: path and filename are combined to create the
 #' fully qualified file name. Defaults to the working directory.
 #' @param create.dir Whether to create new directories if a non-existing directory is specified in
@@ -75,6 +76,7 @@
 #' @export
 ExportVirusGt <- function(gtable,
                           filename="table.docx",
+                          export_csv = FALSE,
                           path = NULL,
                           create.dir = FALSE,
                           ...
@@ -92,6 +94,17 @@ ExportVirusGt <- function(gtable,
       dir.create(path, recursive = TRUE)
       message("Directory created: ", path)
     }
+  }
+
+  if(export_csv){
+
+    if(is.null(path)){
+      path <- getwd()
+    }
+
+    filename_without_extension <- tools::file_path_sans_ext(filename)
+    new_filename <- paste0(filename_without_extension, ".csv")
+    saveRDS(plot, file = paste0(path,"/",new_filename))
   }
 
 

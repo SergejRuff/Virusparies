@@ -40,7 +40,7 @@ ExportVirusPlot(
 \arguments{
 \item{file_name}{Name of the output file.}
 
-\item{export_plotobj}{(optional): If TRUE, exports the plot object in .rds format with the same name as specified in file_name. Default is FALSE.}
+\item{export_plotobj}{(optional): If TRUE, exports the plot object in rds format with the same name as specified in file_name. Default is FALSE.}
 
 \item{plot}{The plot to be exported.}
 

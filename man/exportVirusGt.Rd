@@ -7,6 +7,7 @@
 ExportVirusGt(
   gtable,
   filename = "table.docx",
+  export_csv = FALSE,
   path = NULL,
   create.dir = FALSE,
   ...
@@ -18,6 +19,8 @@ ExportVirusGt(
 \item{filename}{Name of the output file. Default is "table.docx".Make sure to provide an extension
 compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 the file extension is ignored.}
+
+\item{export_csv}{(optional): If TRUE, exports the input data frame in csv format with the same name as specified in filename. Default is FALSE.}
 
 \item{path}{Path of the directory to save plot to: path and filename are combined to create the
 fully qualified file name. Defaults to the working directory.}
