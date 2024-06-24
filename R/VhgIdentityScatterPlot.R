@@ -198,23 +198,24 @@ VhgIdentityScatterPlot <- function(vh_file,
 
 
 
-  color_data <- consistentColourPalette(vh_file, groupby = groupby)
-  legend_labels <- color_data$legend_labels
-  labels <- color_data$labels
+  color_data <- consistentColourPalette(vh_file, groupby = groupby,taxa_rank=taxa_rank)
+  #legend_labels <- color_data$legend_labels
+  #labels <- color_data$labels
+  matched_vector <- color_data$matched_vector
 
   # Extract unique values from vh_file$best_query
-  unique_queries <- unique(vh_file[[groupby]])
+  #unique_queries <- unique(vh_file[[groupby]])
 
   # Create a vector of corresponding names from legend_labels
-  pyhlum_names <- legend_labels[unique_queries]
+  #pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to vh_file$best_query
-  vh_file$phylum <- pyhlum_names[match(vh_file[[groupby]], unique_queries)]
+  #vh_file$phylum <- pyhlum_names[match(vh_file[[groupby]], unique_queries)]
 
 
   # Plot the data and color points based on the cutoff condition
   iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
-    geom_point(aes(color=.data$phylum))+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
+    geom_point(aes(color=.data[[groupby]]))+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
     labs(x= xlabel,
          y= ylabel,
          title=title,
@@ -247,7 +248,7 @@ VhgIdentityScatterPlot <- function(vh_file,
     )
 
 
-  iden_refevalue  <- iden_refevalue  + scale_color_manual(values = labels)
+  iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
 
   # add colorblind support
   if(colorblind_support){

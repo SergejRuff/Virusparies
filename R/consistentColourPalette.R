@@ -3,10 +3,11 @@
 #'
 #' @param vh_file vhfile
 #' @param groupby x_column
+#' @param taxa_rank taxa rank
 #'
 #' @importFrom utils data
 #' @keywords internal
-consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
+consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",taxa_rank = "Family") {
 
   unique_phyla <- c(
     Taleaviricota = "#800000",
@@ -31,20 +32,20 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
   )
 
   # Assuming ICTV_data is properly loaded and formatted
-  ICTV_data <- ICTV_data  # Replace with your actual ICTV_data
+  ICTV_data <- ICTV_data
 
   # Split the data frame by the 'Phylum' column
   ICTV_data_split <- split(ICTV_data, ICTV_data$Phylum)
 
   # Initialize family colors vector
-  family_colors_vector <- character(length = length(unique(ICTV_data$Family)))
-  names(family_colors_vector) <- unique(ICTV_data$Family)
+  family_colors_vector <- character(length = length(unique(ICTV_data[[taxa_rank]])))
+  names(family_colors_vector) <- unique(ICTV_data[[taxa_rank]])
 
   phylum_mapping <- list()
 
   for (phylum_name in names(ICTV_data_split)) {
     phylum_color <- unique_phyla[phylum_name]
-    unique_families <- unique(ICTV_data_split[[phylum_name]]$Family)
+    unique_families <- unique(ICTV_data_split[[phylum_name]][[taxa_rank]])
     family_colors <- rep(phylum_color, length(unique_families))
     family_colors_vector[unique_families] <- family_colors
 
@@ -130,6 +131,5 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query") {
 
 
 
-  return(list(legend_labels = legend_labels, labels = labels))
+  return(list(legend_labels = legend_labels, labels = labels,matched_vector=matched_vector))
 }
-

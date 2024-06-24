@@ -163,7 +163,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   }
 
 
-  color_data <- consistentColourPalette(vg_file, groupby = "ViralRefSeq_taxonomy")
+  color_data <- consistentColourPalette(vg_file, groupby = "ViralRefSeq_taxonomy",taxa_rank=taxa_rank)
   legend_labels <- color_data$legend_labels
   labels <- color_data$labels
 

@@ -4,12 +4,18 @@
 \alias{consistentColourPalette}
 \title{keep colours constistent for each virusgroup}
 \usage{
-consistentColourPalette(vh_file = vh_file, groupby = "best_query")
+consistentColourPalette(
+  vh_file = vh_file,
+  groupby = "best_query",
+  taxa_rank = "Family"
+)
 }
 \arguments{
 \item{vh_file}{vhfile}
 
 \item{groupby}{x_column}
+
+\item{taxa_rank}{taxa rank}
 }
 \description{
 keep colours constistent for each virusgroup

@@ -217,7 +217,7 @@ VhgRunsBarplot <- function(vh_file,
     subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
   }
 
-  color_data <- consistentColourPalette(vh_file, groupby = groupby)
+  color_data <- consistentColourPalette(vh_file, groupby = groupby,taxa_rank=taxa_rank)
   legend_labels <- color_data$legend_labels
   labels <- color_data$labels
 
