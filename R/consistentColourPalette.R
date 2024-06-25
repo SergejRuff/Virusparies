@@ -52,13 +52,15 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
     phylum_mapping[unique_families] <- phylum_name
   }
 
-  names(family_colors_vector) <- sub("viridae$", "", names(family_colors_vector), ignore.case = TRUE)
-  names(family_colors_vector)[names(family_colors_vector) == "Pseudo"] <- "PseudoPseudo"
-  names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
+  if(taxa_rank=="Family"){
+    names(family_colors_vector) <- sub("viridae$", "", names(family_colors_vector), ignore.case = TRUE)
+    names(family_colors_vector)[names(family_colors_vector) == "Pseudo"] <- "PseudoPseudo"
+    names(family_colors_vector) <- gsub("^(Allo|Ortho|Pseudo)", "", names(family_colors_vector), ignore.case = TRUE)
 
-  names(phylum_mapping ) <- sub("viridae$", "", names(phylum_mapping ), ignore.case = TRUE)
-  names(phylum_mapping )[names(phylum_mapping ) == "Pseudo"] <- "PseudoPseudo"
-  names(phylum_mapping ) <- gsub("^(Allo|Ortho|Pseudo)", "", names(phylum_mapping ), ignore.case = TRUE)
+    names(phylum_mapping ) <- sub("viridae$", "", names(phylum_mapping ), ignore.case = TRUE)
+    names(phylum_mapping )[names(phylum_mapping ) == "Pseudo"] <- "PseudoPseudo"
+    names(phylum_mapping ) <- gsub("^(Allo|Ortho|Pseudo)", "", names(phylum_mapping ), ignore.case = TRUE)
+  }
 
   # Get unique families in vh_file[groupby]
   unique_families_in_data <- unique(vh_file[[groupby]])
@@ -128,6 +130,7 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
   for (phylum in missing_phyla) {
     labels[phylum] <- unique_phyla[phylum]
   }
+
 
 
 
