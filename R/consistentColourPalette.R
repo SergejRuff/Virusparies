@@ -133,6 +133,26 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
 
 
 
+  for(i in 1:length(matched_vector)){
+    name <- names(matched_vector)[i]
+    #print(name)
+    if(sub("^unclassified (.*)", "\\1", name) %in% names(unique_phyla)){
+      matched_vector[[i]] <- unique_phyla[sub("^unclassified (.*)", "\\1", name)]
+    }
+  }
+
+  # Identify missing legend_labels in labels
+  missing_labels <- setdiff(legend_labels, names(labels))
+
+  # Match missing labels with colors from matched_vector
+  missing_colors <- matched_vector[match(missing_labels, legend_labels)]
+
+  # Update labels with missing values
+  labels <- c(labels, setNames(missing_colors, missing_labels))
+
+
+
+
 
   return(list(legend_labels = legend_labels, labels = labels,matched_vector=matched_vector))
 }
