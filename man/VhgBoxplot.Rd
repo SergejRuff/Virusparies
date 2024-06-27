@@ -9,6 +9,7 @@ VhgBoxplot(
   x_column = "best_query",
   taxa_rank = "Family",
   y_column = "ViralRefSeq_E",
+  contiglen_log10_scale = FALSE,
   cut = 1e-05,
   add_cutoff_line = TRUE,
   cut_colour = "#990000",
@@ -55,6 +56,8 @@ Supported ranks are:
 
 \item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").}
+
+\item{contiglen_log10_scale}{(optional): When \code{y_column} is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
 

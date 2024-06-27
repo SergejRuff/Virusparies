@@ -18,6 +18,7 @@
 #' - "Genus" (including Subgenus)
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 #' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
+#' @param contiglen_log10_scale (optional): When `y_column` is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
 #' @param add_cutoff_line (optional): whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
 #' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
@@ -111,6 +112,7 @@ VhgBoxplot <- function(vh_file,
                               x_column ="best_query",
                               taxa_rank = "Family",
                               y_column = "ViralRefSeq_E",
+                              contiglen_log10_scale = FALSE,
                               cut = 1e-5,
                               add_cutoff_line = TRUE,
                               cut_colour = "#990000",
@@ -336,6 +338,10 @@ VhgBoxplot <- function(vh_file,
   if(y_column=="ViralRefSeq_E" && add_cutoff_line){
 
     boxp <- boxp+geom_hline(aes(yintercept=cutoff), colour=cut_colour)
+  }
+
+  if(y_column == "contig_len" && contiglen_log10_scale){
+    boxp <- boxp + scale_y_log10()
   }
 
   if(x_column != "SRA_run"){
