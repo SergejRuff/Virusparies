@@ -48,19 +48,6 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
-#' @param colorblind_support (optional): Logical (TRUE or FALSE). If set to TRUE,
-#' the function will use color scales that are more accessible for people with color vision deficiencies.
-#' The default value is FALSE.
-#' @param colormap (optional) Applies if `colorblind_support = TRUE`. A character string indicating the colormap option to use.
-#' Default is "viridis". Eight options are available, derived from the Viridis package:
-#'   - "magma" (or "A")
-#'   - "inferno" (or "B")
-#'   - "plasma" (or "C")
-#'   - "viridis" (or "D")
-#'   - "cividis" (or "E")
-#'   - "rocket" (or "F")
-#'   - "mako" (or "G")
-#'   - "turbo" (or "H")
 #'
 #'
 #' @details
@@ -145,9 +132,7 @@ VhgRunsBarplot <- function(vh_file,
                           plot_text_position_dodge = 0.9,
                           plot_text_hjust = -0.1,
                           plot_text_vjust = 0.5,
-                          plot_text_colour = "black",
-                          colorblind_support = FALSE,
-                          colormap = "viridis"
+                          plot_text_colour = "black"
                           ){
 
 
@@ -167,9 +152,9 @@ VhgRunsBarplot <- function(vh_file,
   # check arguments
   arg_character(theme_choice)
   arg_character(legend_position)
-  arg_character(colormap)
+
   arg_logical(flip_coords)
-  arg_logical(colorblind_support)
+
 
 
 
@@ -299,10 +284,7 @@ VhgRunsBarplot <- function(vh_file,
   }
 
 
-  # add colorblind support
-  if(colorblind_support){
-    run_bar<- colorbildsupport(run_bar,colormap)
-  }
+
 
 
 

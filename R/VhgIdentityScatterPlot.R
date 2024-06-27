@@ -43,19 +43,7 @@
 #' @param legend_title_size (optional) The size of the legend title text. Default is 12.
 #' @param legend_title_face (optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".
 #' @param legend_text_size (optional) The size of the legend text. Default is 10.
-#' @param colorblind_support (optional): Logical (TRUE or FALSE). If set to TRUE,
-#' the function will use color scales that are more accessible for people with color vision deficiencies.
-#' The default value is FALSE.
-#' @param colormap (optional) Applies if `colorblind_support = TRUE`. A character string indicating the colormap option to use.
-#' Default is "viridis". Eight options are available, derived from the Viridis package:
-#'   - "magma" (or "A")
-#'   - "inferno" (or "B")
-#'   - "plasma" (or "C")
-#'   - "viridis" (or "D")
-#'   - "cividis" (or "E")
-#'   - "rocket" (or "F")
-#'   - "mako" (or "G")
-#'   - "turbo" (or "H")
+
 #'
 #' @details
 #' VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
@@ -138,9 +126,7 @@ VhgIdentityScatterPlot <- function(vh_file,
                                   legend_position = "bottom",
                                   legend_title_size = 12,
                                   legend_title_face = "bold",
-                                  legend_text_size = 10,
-                                  colorblind_support = FALSE,
-                                  colormap = "viridis"){
+                                  legend_text_size = 10){
 
   cutoff <- -log10(cutoff)
 
@@ -171,8 +157,7 @@ VhgIdentityScatterPlot <- function(vh_file,
   # check arguments
   arg_character(theme_choice)
   arg_character(legend_position)
-  arg_character(colormap)
-  arg_logical(colorblind_support)
+
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
@@ -250,10 +235,7 @@ VhgIdentityScatterPlot <- function(vh_file,
 
   iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
 
-  # add colorblind support
-  if(colorblind_support){
-    iden_refevalue<- colorbildsupport_(iden_refevalue,colormap)
-  }
+
 
 
 

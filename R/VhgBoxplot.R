@@ -45,19 +45,6 @@
 #' @param legend_title_size (optional) Numeric specifying the size of the legend title text. Default is 12.
 #' @param legend_title_face (optional) A character specifying the font face for the legend title text. Default is "bold".
 #' @param legend_text_size (optional) Numeric specifying the size of the legend text. Default is 10.
-#' @param colorblind_support (optional): Logical (TRUE or FALSE). If set to TRUE,
-#' the function will use color scales that are more accessible for people with color vision deficiencies.
-#' The default value is FALSE.
-#' @param colormap (optional) Applies if `colorblind_support = TRUE`. A character string indicating the colormap option to use.
-#' Default is "viridis". Eight options are available, derived from the Viridis package:
-#'   - "magma" (or "A")
-#'   - "inferno" (or "B")
-#'   - "plasma" (or "C")
-#'   - "viridis" (or "D")
-#'   - "cividis" (or "E")
-#'   - "rocket" (or "F")
-#'   - "mako" (or "G")
-#'   - "turbo" (or "H")
 #'
 #'
 #' @author Sergej Ruff
@@ -147,9 +134,7 @@ VhgBoxplot <- function(vh_file,
                               legend_position = "bottom",
                               legend_title_size = 12,
                               legend_title_face = "bold",
-                              legend_text_size = 10,
-                              colorblind_support = FALSE,
-                              colormap = "viridis"
+                              legend_text_size = 10
                               ){
 
 
@@ -174,9 +159,9 @@ VhgBoxplot <- function(vh_file,
   # check arguments
   arg_character(theme_choice)
   arg_character(legend_position)
-  arg_character(colormap)
+
   arg_logical(flip_coords)
-  arg_logical(colorblind_support)
+
 
 
 
@@ -364,10 +349,6 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  # add colorblind support
-  if(colorblind_support){
-    boxp<- colorbildsupport(boxp,colormap)
-  }
 
   # delete new column before sum statistics and export.
   vh_file$phylum <- NULL

@@ -100,48 +100,8 @@ check_input_type <- function(vh_file, columns, option) {
   }
 }
 
-#' internal: add colorblind support by using viridis color palettes
-#'
-#' @param plot plot obj.
-#' @param option A character string indicating the color map option to use. Eight options are available:
-#'   - "magma" (or "A")
-#'   - "inferno" (or "B")
-#'   - "plasma" (or "C")
-#'   - "viridis" (or "D")
-#'   - "cividis" (or "E")
-#'   - "rocket" (or "F")
-#'   - "mako" (or "G")
-#'   - "turbo" (or "H")
-#'
-#' @return plot obj
-#' @author Sergej Ruff
-#' @importFrom viridis scale_fill_viridis
-#' @keywords internal
-colorbildsupport <- function(plot,option){
-  return(plot+
-           scale_fill_viridis(option=option,discrete = TRUE) )
-}
 
-#' internal: add colorblind support by using viridis color palettes for identity scatterplot
-#'
-#' @param plot plot obj.
-#' @param option A character string indicating the color map option to use. Eight options are available:
-#'   - "magma" (or "A")
-#'   - "inferno" (or "B")
-#'   - "plasma" (or "C")
-#'   - "viridis" (or "D")
-#'   - "cividis" (or "E")
-#'   - "rocket" (or "F")
-#'   - "mako" (or "G")
-#'   - "turbo" (or "H")
-#'
-#' @return plot obj
-#' @author Sergej Ruff
-#' @importFrom viridis scale_color_viridis
-#' @keywords internal
-colorbildsupport_ <- function(plot,option){
-  return(plot+scale_color_viridis(option=option,discrete = TRUE) )
-}
+
 
 
 #' checks if correct datatype is provided to function (character check)

@@ -31,9 +31,7 @@ VgConLenViolin(
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
-  legend_text_size = 10,
-  colorblind_support = FALSE,
-  colormap = "viridis"
+  legend_text_size = 10
 )
 }
 \arguments{
@@ -104,23 +102,6 @@ Default is "linedraw".}
 \item{legend_title_face}{(optional) A character specifying the font face for the legend title text. Default is "bold".}
 
 \item{legend_text_size}{(optional) Numeric specifying the size of the legend text. Default is 10.}
-
-\item{colorblind_support}{(optional): Logical (TRUE or FALSE). If set to TRUE,
-the function will use color scales that are more accessible for people with color vision deficiencies.
-The default value is FALSE.}
-
-\item{colormap}{(optional) Applies if \code{colorblind_support = TRUE}. A character string indicating the colormap option to use.
-Default is "viridis". Eight options are available, derived from the Viridis package:
-\itemize{
-\item "magma" (or "A")
-\item "inferno" (or "B")
-\item "plasma" (or "C")
-\item "viridis" (or "D")
-\item "cividis" (or "E")
-\item "rocket" (or "F")
-\item "mako" (or "G")
-\item "turbo" (or "H")
-}}
 }
 \value{
 a plot object
