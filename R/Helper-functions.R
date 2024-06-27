@@ -404,3 +404,27 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
   return(vh_file)
 }
+
+
+#' remove group text
+#'
+#' @param plot plot
+#' @param remove_x_axis_labels remove_x_axis_labels
+#' @param flip_coords flip_coords
+#'
+#'
+#'
+#' @keywords internal
+remove_group_text <- function(plot,remove_x_axis_labels,flip_coords){
+
+  if(remove_x_axis_labels && flip_coords){
+    plot <- plot + theme(axis.text.y = element_blank())
+
+  } else if(remove_x_axis_labels && !flip_coords){
+
+    plot <- plot + theme(axis.text.x = element_blank())
+  }
+
+  return(plot)
+
+}

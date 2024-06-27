@@ -32,6 +32,7 @@ VhgBoxplot(
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
+  remove_group_labels = FALSE,
   legend_title = "Phylum",
   legend_position = "bottom",
   legend_title_size = 12,
@@ -108,6 +109,8 @@ Default is "linedraw".}
 \item{xtext_size}{(optional): Numeric specifying the size of the x-axis tick labels. Default is 10.}
 
 \item{ytext_size}{(optional): Numeric specifying the size of the y-axis tick labels. Default is 10.}
+
+\item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
 \item{legend_title}{(optional): A character specifying the title for the legend. Default is "Phylum".}
 

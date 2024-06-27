@@ -44,6 +44,7 @@
 #' @param axis_title_size (optional): Numeric specifying the size of the axis title text. Default is 12.
 #' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels. Default is 10.
 #' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels. Default is 10.
+#' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #' @param legend_title (optional): A character specifying the title for the legend. Default is "Phylum".
 #' @param legend_position (optional): A character specifying the position of the legend. Default is "bottom".
 #' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
@@ -138,6 +139,7 @@ VhgBoxplot <- function(vh_file,
                               axis_title_size = 12,
                               xtext_size = 10,
                               ytext_size = 10,
+                              remove_group_labels = FALSE,
                               legend_title = "Phylum",
                               legend_position = "bottom",
                               legend_title_size = 12,
@@ -324,7 +326,7 @@ VhgBoxplot <- function(vh_file,
         face = title_face,
         color = title_colour),
       axis.text.y = element_text(size = ytext_size),
-      axis.text.x = element_text(size = xtext_size),
+      axis.text.x =  element_text(size = xtext_size),
       axis.title = element_text(size = axis_title_size),
       legend.text = element_text(size = legend_text_size),
       legend.key.size = unit(1.5, "lines"),
@@ -369,6 +371,13 @@ VhgBoxplot <- function(vh_file,
 
 
   }
+
+  boxp <- remove_group_text(boxp,remove_group_labels,flip_coords)
+
+
+
+
+
 
 
 
