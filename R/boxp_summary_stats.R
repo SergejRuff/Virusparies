@@ -14,7 +14,7 @@
 #' and maximum identity values for each virus group from the input dataset.
 #' @importFrom dplyr group_by summarise arrange desc
 #' @importFrom rlang .data
-#' @importFrom stats median quantile median
+#' @importFrom stats median quantile median sd
 #' @keywords internal
 boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
 
@@ -31,6 +31,8 @@ boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ide
       median = median(.data[[ycol]]),
       Q1 = quantile(.data[[ycol]], 0.25),
       Q3 = quantile(.data[[ycol]], 0.75),
+      mean = mean(.data[[ycol]]),       # Calculate mean
+      sd = sd(.data[[ycol]]),           # Calculate standard deviation
       min= min(.data[[ycol]]),
       max = max(.data[[ycol]])
     ) %>%
