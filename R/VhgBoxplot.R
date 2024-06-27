@@ -6,7 +6,7 @@
 #'
 #' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param x_column A character specifying the column containing the groups (Default:"best_query").
-#' @param taxa_rank (optional) When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -19,33 +19,36 @@
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
 #' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
 #' @param contiglen_log10_scale (optional): When `y_column` is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).
-#' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
+#' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
 #' @param add_cutoff_line (optional): whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
-#' @param cut_colour (optional) The color for the significance cutoff line (default: "#990000").
+#' @param cut_colour (optional): The color for the significance cutoff line (default: "#990000").
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 #' NULL sorts alphabetically.
-#' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+#' @param theme_choice (optional):: A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
-#' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default title is set based on y_column.
-#' @param title_size (optional) Numeric specifying the size of the title text. Default is 16.
-#' @param title_face (optional) A character specifying the font face for the title text. Default is "bold".
-#' @param title_colour (optional) A character specifying the color for the title text. Default is "#2a475e".
-#' @param subtitle (optional) A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
-#' @param subtitle_size (optional) Numeric specifying the size of the subtitle text. Default is 12.
-#' @param subtitle_face (optional) A character specifying the font face for the subtitle text. Default is "bold".
-#' @param subtitle_colour (optional) A character specifying the color for the subtitle text. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Virus found in query".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is set based on y_column.
-#' @param axis_title_size (optional) Numeric specifying the size of the axis title text. Default is 12.
-#' @param xtext_size (optional) Numeric specifying the size of the x-axis tick labels. Default is 10.
-#' @param ytext_size (optional) Numeric specifying the size of the y-axis tick labels. Default is 10.
-#' @param legend_title (optional) A character specifying the title for the legend. Default is "Phylum".
-#' @param legend_position (optional) A character specifying the position of the legend. Default is "bottom".
-#' @param legend_title_size (optional) Numeric specifying the size of the legend title text. Default is 12.
-#' @param legend_title_face (optional) A character specifying the font face for the legend title text. Default is "bold".
-#' @param legend_text_size (optional) Numeric specifying the size of the legend text. Default is 10.
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
+#' @param add_mean_point (optional): Logical indicating whether to add mean points to the boxplot. Default is FALSE.
+#' @param mean_color (optional): change color of point indicating mean value in box plot (default: "white").
+#' @param mean_point_size (optional): change size of point indicating mean value in box plot (default: 2)
+#' @param title (optional): A character specifying the title of the plot. Default title is set based on y_column.
+#' @param title_size (optional): Numeric specifying the size of the title text. Default is 16.
+#' @param title_face (optional): A character specifying the font face for the title text. Default is "bold".
+#' @param title_colour (optional): A character specifying the color for the title text. Default is "#2a475e".
+#' @param subtitle (optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text. Default is 12.
+#' @param subtitle_face (optional): A character specifying the font face for the subtitle text. Default is "bold".
+#' @param subtitle_colour (optional): A character specifying the color for the subtitle text. Default is "#1b2838".
+#' @param xlabel (optional): A character specifying the label for the x-axis. Default is "Virus found in query".
+#' @param ylabel (optional): A character specifying the label for the y-axis. Default is set based on y_column.
+#' @param axis_title_size (optional): Numeric specifying the size of the axis title text. Default is 12.
+#' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels. Default is 10.
+#' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels. Default is 10.
+#' @param legend_title (optional): A character specifying the title for the legend. Default is "Phylum".
+#' @param legend_position (optional): A character specifying the position of the legend. Default is "bottom".
+#' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
+#' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
+#' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
 #'
 #'
 #' @author Sergej Ruff
@@ -119,6 +122,9 @@ VhgBoxplot <- function(vh_file,
                               reorder_criteria = "median",
                               theme_choice = "linedraw",
                               flip_coords = TRUE,
+                              add_mean_point = FALSE,
+                              mean_color = "white",
+                              mean_point_size = 2,
                               title = "default",
                               title_size = 16,
                               title_face = "bold",
@@ -351,6 +357,20 @@ VhgBoxplot <- function(vh_file,
 
 
   }
+
+
+  if (add_mean_point) {
+
+    # Update the aes() inside geom_point to correctly reference mean_values
+    boxp <- boxp + stat_summary(fun=mean, geom="point", size=mean_point_size,
+                                shape = 21,      # Use shape 21 for filled circle with outline
+                                fill = mean_color,  # Set fill color to white
+                                color = "black",show.legend = FALSE)
+
+
+  }
+
+
 
 
 

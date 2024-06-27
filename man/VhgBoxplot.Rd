@@ -16,6 +16,9 @@ VhgBoxplot(
   reorder_criteria = "median",
   theme_choice = "linedraw",
   flip_coords = TRUE,
+  add_mean_point = FALSE,
+  mean_color = "white",
+  mean_point_size = 2,
   title = "default",
   title_size = 16,
   title_face = "bold",
@@ -41,7 +44,7 @@ VhgBoxplot(
 
 \item{x_column}{A character specifying the column containing the groups (Default:"best_query").}
 
-\item{taxa_rank}{(optional) When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -59,56 +62,62 @@ Supported ranks are:
 
 \item{contiglen_log10_scale}{(optional): When \code{y_column} is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).}
 
-\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
+\item{cut}{(optional): The significance cutoff value for E-values (default: 1e-5).}
 
 \item{add_cutoff_line}{(optional): whether to add a horizontal line based on \code{cut} for \code{"ViralRefSeq_E"} column (default: TRUE).}
 
-\item{cut_colour}{(optional) The color for the significance cutoff line (default: "#990000").}
+\item{cut_colour}{(optional): The color for the significance cutoff line (default: "#990000").}
 
 \item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 NULL sorts alphabetically.}
 
-\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+\item{theme_choice}{(optional):: A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "linedraw".}
 
-\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
-\item{title}{(optional) A character specifying the title of the plot. Default title is set based on y_column.}
+\item{add_mean_point}{(optional): Logical indicating whether to add mean points to the boxplot. Default is FALSE.}
 
-\item{title_size}{(optional) Numeric specifying the size of the title text. Default is 16.}
+\item{mean_color}{(optional): change color of point indicating mean value in box plot (default: "white").}
 
-\item{title_face}{(optional) A character specifying the font face for the title text. Default is "bold".}
+\item{mean_point_size}{(optional): change size of point indicating mean value in box plot (default: 2)}
 
-\item{title_colour}{(optional) A character specifying the color for the title text. Default is "#2a475e".}
+\item{title}{(optional): A character specifying the title of the plot. Default title is set based on y_column.}
 
-\item{subtitle}{(optional) A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
+\item{title_size}{(optional): Numeric specifying the size of the title text. Default is 16.}
 
-\item{subtitle_size}{(optional) Numeric specifying the size of the subtitle text. Default is 12.}
+\item{title_face}{(optional): A character specifying the font face for the title text. Default is "bold".}
 
-\item{subtitle_face}{(optional) A character specifying the font face for the subtitle text. Default is "bold".}
+\item{title_colour}{(optional): A character specifying the color for the title text. Default is "#2a475e".}
 
-\item{subtitle_colour}{(optional) A character specifying the color for the subtitle text. Default is "#1b2838".}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus found in query".}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text. Default is 12.}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is set based on y_column.}
+\item{subtitle_face}{(optional): A character specifying the font face for the subtitle text. Default is "bold".}
 
-\item{axis_title_size}{(optional) Numeric specifying the size of the axis title text. Default is 12.}
+\item{subtitle_colour}{(optional): A character specifying the color for the subtitle text. Default is "#1b2838".}
 
-\item{xtext_size}{(optional) Numeric specifying the size of the x-axis tick labels. Default is 10.}
+\item{xlabel}{(optional): A character specifying the label for the x-axis. Default is "Virus found in query".}
 
-\item{ytext_size}{(optional) Numeric specifying the size of the y-axis tick labels. Default is 10.}
+\item{ylabel}{(optional): A character specifying the label for the y-axis. Default is set based on y_column.}
 
-\item{legend_title}{(optional) A character specifying the title for the legend. Default is "Phylum".}
+\item{axis_title_size}{(optional): Numeric specifying the size of the axis title text. Default is 12.}
 
-\item{legend_position}{(optional) A character specifying the position of the legend. Default is "bottom".}
+\item{xtext_size}{(optional): Numeric specifying the size of the x-axis tick labels. Default is 10.}
 
-\item{legend_title_size}{(optional) Numeric specifying the size of the legend title text. Default is 12.}
+\item{ytext_size}{(optional): Numeric specifying the size of the y-axis tick labels. Default is 10.}
 
-\item{legend_title_face}{(optional) A character specifying the font face for the legend title text. Default is "bold".}
+\item{legend_title}{(optional): A character specifying the title for the legend. Default is "Phylum".}
 
-\item{legend_text_size}{(optional) Numeric specifying the size of the legend text. Default is 10.}
+\item{legend_position}{(optional): A character specifying the position of the legend. Default is "bottom".}
+
+\item{legend_title_size}{(optional): Numeric specifying the size of the legend title text. Default is 12.}
+
+\item{legend_title_face}{(optional): A character specifying the font face for the legend title text. Default is "bold".}
+
+\item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
 }
 \value{
 A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).
