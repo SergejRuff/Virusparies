@@ -267,10 +267,18 @@ VgConLenViolin <- function(vg_file=vg_file,
     message("Warning: Some groups have fewer than two observations. These groups will be represented as points in the violin plot.")
   }
 
+
+  contiglen_stats <- boxp_summary_stats(vg_file, group = "ViralRefSeq_taxonomy",ycol ="contig_len")
+
+
+  # Prepare the results list
+  results <- list(plot = p, contiglen_stats=contiglen_stats)
+
+
   #plot(sum_plot)
   message("Violinplot generation completed.")
 
-  return(p)
+  return(results)
 
 
 

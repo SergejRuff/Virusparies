@@ -117,7 +117,7 @@ vh_file <- ImportVirusTable(path)
 # Basic plot
 plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 
-plot(plot)
+plot(plot$plot)
 
 # Custom plot with additional arguments
 custom_plot <- VhgIdentityScatterPlot(vh_file,
@@ -143,7 +143,7 @@ custom_plot <- VhgIdentityScatterPlot(vh_file,
                                      legend_title_face = "italic",
                                      legend_text_size = 12)
 
-plot(custom_plot)
+plot(custom_plot$plot)
 
 # import gatherer files
 path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
@@ -151,7 +151,7 @@ vg_file <- ImportVirusTable(path2)
 
 # vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
 vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
-vgplot
+vgplot$plot
 
 }
 \seealso{

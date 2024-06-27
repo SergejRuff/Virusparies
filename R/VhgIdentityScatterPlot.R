@@ -61,7 +61,7 @@
 #' # Basic plot
 #' plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 #'
-#' plot(plot)
+#' plot(plot$plot)
 #'
 #'# Custom plot with additional arguments
 #' custom_plot <- VhgIdentityScatterPlot(vh_file,
@@ -87,7 +87,7 @@
 #'                                      legend_title_face = "italic",
 #'                                      legend_text_size = 12)
 #'
-#'plot(custom_plot)
+#'plot(custom_plot$plot)
 #'
 #'# import gatherer files
 #' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
@@ -95,7 +95,7 @@
 #'
 #' # vgplot: virusgatherer plot with ViralRefSeq_taxonomy as custom grouping
 #' vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
-#' vgplot
+#' vgplot$plot
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
@@ -236,6 +236,16 @@ VhgIdentityScatterPlot <- function(vh_file,
   iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
 
 
+  # reuse summary stats from boxplot to calculate stats.
+  evalue_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_E")
+  identity_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_ident")
+
+
+  # Prepare the results list
+  results <- list(plot = iden_refevalue, evalue_stats = evalue_stats,
+                  identity_stats=identity_stats)
+
+
 
 
 
@@ -245,6 +255,6 @@ VhgIdentityScatterPlot <- function(vh_file,
 
   #plot(iden_refevalue)
   message("Scatterplot generation completed.")
-  return(iden_refevalue)
+  return(results)
 
 }

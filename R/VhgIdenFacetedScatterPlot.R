@@ -214,6 +214,15 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
       breaks = seq(0, 100, by = 10)
     )
 
+  # reuse summary stats from boxplot to calculate stats.
+  evalue_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_E")
+  identity_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_ident")
+
+
+  # Prepare the results list
+  results <- list(plot = iden_refevalue_seperate, evalue_stats = evalue_stats,
+                  identity_stats=identity_stats)
+
 
 
 
@@ -223,7 +232,7 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
 
   #plot(iden_refevalue_seperate)
   message("Scatterplot generation completed.")
-  return(iden_refevalue_seperate)
+  return(results)
 
 
 }
