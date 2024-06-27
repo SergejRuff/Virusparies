@@ -39,6 +39,7 @@
 #' @param axis_title_size (optional) Numeric specifying the size of the axis title text. Default is 12.
 #' @param xtext_size (optional) Numeric specifying the size of the x-axis tick labels. Default is 10.
 #' @param ytext_size (optional) Numeric specifying the size of the y-axis tick labels. Default is 10.
+#' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #' @param legend_title (optional) A character specifying the title for the legend. Default is "Phylum".
 #' @param legend_position (optional) A character specifying the position of the legend. Default is "bottom".
 #' @param legend_title_size (optional) Numeric specifying the size of the legend title text. Default is 12.
@@ -97,6 +98,7 @@ VgConLenViolin <- function(vg_file=vg_file,
                            axis_title_size = 12,
                            xtext_size = 10,
                            ytext_size = 10,
+                           remove_group_labels = FALSE,
                            legend_title = "Phylum",
                            legend_position = "bottom",
                            legend_title_size = 12,
@@ -252,6 +254,9 @@ VgConLenViolin <- function(vg_file=vg_file,
   }
 
   p <- p + scale_fill_manual(values = labels)
+
+
+  p <- remove_group_text(p,remove_group_labels,flip_coords)
 
 
 

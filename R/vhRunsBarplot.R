@@ -37,6 +37,7 @@
 #' @param axis_title_size (optional) The size of axis titles. Default is 12.
 #' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
 #' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
+#' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #' @param legend_title (optional) A character specifying the title of the legend. Default is "Phylum".
 #' @param legend_position (optional) The position of the legend. Default is "bottom"."none" removes legend.
 #' @param legend_title_size (optional) The size of the legend title. Default is 12.
@@ -123,6 +124,7 @@ VhgRunsBarplot <- function(vh_file,
                           axis_title_size = 12,
                           xtext_size = 10,
                           ytext_size = 10,
+                          remove_group_labels = FALSE,
                           legend_title = "Phylum",
                           legend_position = "bottom",
                           legend_title_size = 12,
@@ -274,6 +276,8 @@ VhgRunsBarplot <- function(vh_file,
   if (flip_coords) {
     run_bar <- run_bar + coord_flip()
   }
+
+  run_bar <- remove_group_text(run_bar,remove_group_labels,flip_coords)
 
   if(groupby != "SRA_run"){
 
