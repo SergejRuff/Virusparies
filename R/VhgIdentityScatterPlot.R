@@ -232,7 +232,8 @@ VhgIdentityScatterPlot <- function(vh_file,
 
   } else {
     iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
-      geom_point(aes(color=.data[[groupby]]))+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
+      geom_point(aes(color = .data[[groupby]]), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data[[groupby]]), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
 
 
@@ -245,7 +246,7 @@ VhgIdentityScatterPlot <- function(vh_file,
          subtitle = subtitle)+
     theme_selected+
     theme(legend.position = legend_position)+
-    guides(fill=guide_legend(title=legend_title))+
+    guides(color=guide_legend(title=legend_title))+
     theme(
       plot.title = element_text(
         size = title_size,

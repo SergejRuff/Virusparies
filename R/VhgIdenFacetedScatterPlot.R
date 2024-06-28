@@ -21,6 +21,9 @@
 #' - "Genus" (including Subgenus)
 #' @param cutoff (optional) A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
+#' @param conlen_bubble_plot (optional) Logical value indicating whether the `contig_len` column
+#'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.
+#' @param contiglen_breaks (optional) number of breaks for the bubble plot (for `conlen_bubble_plot`=TRUE). Default is 5.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
@@ -101,6 +104,8 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
                                      groupby = "best_query",
                                      taxa_rank = "Family",
                                      cutoff = 1e-5,
+                                     conlen_bubble_plot = FALSE,
+                                     contiglen_breaks = 5,
                                      theme_choice = "linedraw",
                                      title="Faceted scatterplot of viral reference e-values and identity",
                                      title_size = 16,
@@ -139,6 +144,9 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
   }
 
   required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
+  if (conlen_bubble_plot) {
+    required_columns <- c(required_columns, "contig_len")
+  }
   check_columns(vh_file,required_columns)
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(vh_file,groupby,1)
@@ -179,10 +187,30 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
   min_y <- ifelse(min_y > 0, 0, min_y)
 
 
+
+  if (conlen_bubble_plot) {
+    dynamic_max <- max(vh_file$contig_len)
+    dynamic_min <- min(vh_file$contig_len)
+
+    breaks <- round(seq(dynamic_min, dynamic_max, length.out = contiglen_breaks))
+    labels <- breaks
+
+    # Reorder vh_file by contig_len in descending order
+    vh_file <- vh_file[order(-vh_file$contig_len), ]
+
+    iden_refevalue_seperate <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
+      geom_point(aes(color = .data$cutoff_met, size = .data$contig_len), alpha = 0.5,stroke = 0.5)+
+      scale_size(name = 'Contig Length', range = c(.1, 15),breaks = breaks, labels = labels)
+
+  } else {
+    iden_refevalue_seperate <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
+      geom_point(aes(color = .data$cutoff_met), alpha = 0.5,stroke = 0.5)
+  }
+
+
   # Plot the data and color points based on the cutoff condition, faceted by 'best_query'
-  iden_refevalue_seperate <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
-    geom_point(aes(color = .data$cutoff_met)) +  # Map color to the cutoff condition
-    scale_color_manual(values = c("TRUE" = true_colour, "FALSE" = false_colour)) +  # Define colors for TRUE and FALSE
+  iden_refevalue_seperate <- iden_refevalue_seperate +  # Map color to the cutoff condition
+    scale_color_manual(name = "Cutoff Met",values = c("TRUE" = true_colour, "FALSE" = false_colour)) +  # Define colors for TRUE and FALSE
     facet_wrap(~.data[[groupby]], ncol = wrap_ncol)+
     labs(x=xlabel,
          y=ylabel,
@@ -222,6 +250,13 @@ VhgIdenFacetedScatterPlot <- function(vh_file,
   # Prepare the results list
   results <- list(plot = iden_refevalue_seperate, evalue_stats = evalue_stats,
                   identity_stats=identity_stats)
+
+  if (conlen_bubble_plot){
+
+    contig_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="contig_len")
+
+    results$contig_stats <- contig_stats
+  }
 
 
 
