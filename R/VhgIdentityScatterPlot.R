@@ -100,6 +100,12 @@
 #' vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
 #' vgplot$plot
 #'
+#' # plot as bubble plot with contig length as size
+#' vgplot_con <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy",
+#' conlen_bubble_plot = TRUE,contiglen_breaks = 4,legend_position = "right")
+#'
+#' vgplot_con
+#'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
@@ -278,9 +284,18 @@ VhgIdentityScatterPlot <- function(vh_file,
   identity_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_ident")
 
 
+
+
   # Prepare the results list
   results <- list(plot = iden_refevalue, evalue_stats = evalue_stats,
                   identity_stats=identity_stats)
+
+  if (conlen_bubble_plot){
+
+    contig_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="contig_len")
+
+    results$contig_stats <- contig_stats
+  }
 
 
 

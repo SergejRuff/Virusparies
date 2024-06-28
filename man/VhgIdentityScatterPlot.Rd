@@ -160,6 +160,12 @@ vg_file <- ImportVirusTable(path2)
 vgplot <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy")
 vgplot$plot
 
+# plot as bubble plot with contig length as size
+vgplot_con <- VhgIdentityScatterPlot(vg_file,groupby = "ViralRefSeq_taxonomy",
+conlen_bubble_plot = TRUE,contiglen_breaks = 4,legend_position = "right")
+
+vgplot_con
+
 }
 \seealso{
 VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
