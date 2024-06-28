@@ -33,7 +33,8 @@ VgConLenViolin(
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
-  legend_text_size = 10
+  legend_text_size = 10,
+  min_observations = 1
 )
 }
 \arguments{
@@ -110,6 +111,8 @@ Default is "linedraw".}
 \item{legend_title_face}{(optional): A character specifying the font face for the legend title text. Default is "bold".}
 
 \item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
+
+\item{min_observations}{(optional): Minimum number of observations required per group to be included in the plot (default: 1).}
 }
 \value{
 a plot object

@@ -48,6 +48,7 @@
 #' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
 #' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
+#' @param min_observations (optional): Minimum number of observations required per group to be included in the plot (default: 1).
 #'
 #'
 #' @details
@@ -107,7 +108,8 @@ VgConLenViolin <- function(vg_file=vg_file,
                            legend_position = "bottom",
                            legend_title_size = 12,
                            legend_title_face = "bold",
-                           legend_text_size = 10) {
+                           legend_text_size = 10,
+                           min_observations = 1) {
 
   #check if table is empty
   #is_file_empty(vg_file)
@@ -168,8 +170,11 @@ VgConLenViolin <- function(vg_file=vg_file,
 
 
 
-
-
+  # Filter out groups with fewer than the specified minimum number of observations
+  vg_file <- vg_file %>%
+    group_by(.data$ViralRefSeq_taxonomy) %>%
+    filter(n() >= min_observations) %>%
+    ungroup()
 
 
   # Calculate number of observations per group
