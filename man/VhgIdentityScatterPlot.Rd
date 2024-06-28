@@ -9,6 +9,8 @@ VhgIdentityScatterPlot(
   groupby = "best_query",
   taxa_rank = "Family",
   cutoff = 1e-05,
+  conlen_bubble_plot = FALSE,
+  contiglen_breaks = 5,
   theme_choice = "linedraw",
   cut_colour = "#990000",
   title = "Scatterplot of viral reference e-values and identity",
@@ -53,6 +55,11 @@ Supported ranks are:
 
 \item{cutoff}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 with values larger than the cutoff value in the ViralRefSeq_E column.}
+
+\item{conlen_bubble_plot}{(optional) Logical value indicating whether the \code{contig_len} column
+should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.}
+
+\item{contiglen_breaks}{(optional) number of breaks for the bubble plot (for \code{conlen_bubble_plot}=TRUE). Default is 5.}
 
 \item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".}

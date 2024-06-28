@@ -22,6 +22,9 @@
 #' - "Genus" (including Subgenus)
 #' @param cutoff (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
 #' with values larger than the cutoff value in the ViralRefSeq_E column.
+#' @param conlen_bubble_plot (optional) Logical value indicating whether the `contig_len` column
+#'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.
+#' @param contiglen_breaks (optional) number of breaks for the bubble plot (for `conlen_bubble_plot`=TRUE). Default is 5.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #' "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".
 #' @param cut_colour (optional) The color for the horizontal cutoff line. Default is "#990000".
@@ -107,6 +110,8 @@ VhgIdentityScatterPlot <- function(vh_file,
                                   groupby = "best_query",
                                   taxa_rank = "Family",
                                   cutoff = 1e-5,
+                                  conlen_bubble_plot = FALSE,
+                                  contiglen_breaks = 5,
                                   theme_choice = "linedraw",
                                   cut_colour = "#990000",
                                   title = "Scatterplot of viral reference e-values and identity",
@@ -144,9 +149,14 @@ VhgIdentityScatterPlot <- function(vh_file,
   }
 
   required_columns <- c("ViralRefSeq_E",groupby,"ViralRefSeq_ident")
+  if (conlen_bubble_plot) {
+    required_columns <- c(required_columns, "contig_len")
+  }
   check_columns(vh_file,required_columns)
   check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(vh_file,groupby,1)
+
+
 
   if(groupby == "ViralRefSeq_taxonomy"){
 
@@ -198,9 +208,31 @@ VhgIdentityScatterPlot <- function(vh_file,
   #vh_file$phylum <- pyhlum_names[match(vh_file[[groupby]], unique_queries)]
 
 
+
+  if (conlen_bubble_plot) {
+    dynamic_max <- max(vh_file$contig_len)
+    dynamic_min <- min(vh_file$contig_len)
+
+    breaks <- round(seq(dynamic_min, dynamic_max, length.out = contiglen_breaks))
+    labels <- breaks
+
+    # Reorder vh_file by contig_len in descending order
+    vh_file <- vh_file[order(-vh_file$contig_len), ]
+
+    iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E), size = .data$contig_len))+
+      geom_point(aes(color = .data[[groupby]]), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data[[groupby]]),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
+      scale_size(name = 'Contig Length', range = c(.1, 15),breaks = breaks, labels = labels)
+
+  } else {
+    iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
+      geom_point(aes(color=.data[[groupby]]))+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
+  }
+
+
+
   # Plot the data and color points based on the cutoff condition
-  iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E))) +
-    geom_point(aes(color=.data[[groupby]]))+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
+  iden_refevalue <- iden_refevalue+
     labs(x= xlabel,
          y= ylabel,
          title=title,
@@ -233,7 +265,12 @@ VhgIdentityScatterPlot <- function(vh_file,
     )
 
 
+
   iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
+
+
+
+
 
 
   # reuse summary stats from boxplot to calculate stats.
