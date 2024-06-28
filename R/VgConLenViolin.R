@@ -6,7 +6,7 @@
 #'
 #'
 #' @param vg_file A data frame containing VirusGatherer Hittable results.
-#' @param taxa_rank (optional) Specify the taxonomic rank to group your data by.
+#' @param taxa_rank (optional): Specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -16,35 +16,38 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
+#' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
 #' @param log10_scale (optinal) transform y-axis to log10 scale (default: TRUE)
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 #' NULL sorts alphabetically.
-#' @param jitter_point (optional) logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.
-#' @param jitter_point_colour (optional) colour of jitter points. Default is "blue"
+#' @param adjust_bw (optional): control the bandwidth of the kernel density estimator used to create the violin plot.
+#' A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier.
+#' Default is 1.
+#' @param jitter_point (optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.
+#' @param jitter_point_colour (optional): colour of jitter points. Default is "blue"
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
-#' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default title is set based on y_column.
-#' @param title_size (optional) Numeric specifying the size of the title text. Default is 16.
-#' @param title_face (optional) A character specifying the font face for the title text. Default is "bold".
-#' @param title_colour (optional) A character specifying the color for the title text. Default is "#2a475e".
-#' @param subtitle (optional) A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
-#' @param subtitle_size (optional) Numeric specifying the size of the subtitle text. Default is 12.
-#' @param subtitle_face (optional) A character specifying the font face for the subtitle text. Default is "bold".
-#' @param subtitle_colour (optional) A character specifying the color for the subtitle text. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Virus found in query".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is set based on y_column.
-#' @param axis_title_size (optional) Numeric specifying the size of the axis title text. Default is 12.
-#' @param xtext_size (optional) Numeric specifying the size of the x-axis tick labels. Default is 10.
-#' @param ytext_size (optional) Numeric specifying the size of the y-axis tick labels. Default is 10.
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
+#' @param title (optional): A character specifying the title of the plot. Default title is set based on y_column.
+#' @param title_size (optional): Numeric specifying the size of the title text. Default is 16.
+#' @param title_face (optional): A character specifying the font face for the title text. Default is "bold".
+#' @param title_colour (optional): A character specifying the color for the title text. Default is "#2a475e".
+#' @param subtitle (optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text. Default is 12.
+#' @param subtitle_face (optional): A character specifying the font face for the subtitle text. Default is "bold".
+#' @param subtitle_colour (optional): A character specifying the color for the subtitle text. Default is "#1b2838".
+#' @param xlabel (optional): A character specifying the label for the x-axis. Default is "Virus found in query".
+#' @param ylabel (optional): A character specifying the label for the y-axis. Default is set based on y_column.
+#' @param axis_title_size (optional): Numeric specifying the size of the axis title text. Default is 12.
+#' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels. Default is 10.
+#' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels. Default is 10.
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
-#' @param legend_title (optional) A character specifying the title for the legend. Default is "Phylum".
-#' @param legend_position (optional) A character specifying the position of the legend. Default is "bottom".
-#' @param legend_title_size (optional) Numeric specifying the size of the legend title text. Default is 12.
-#' @param legend_title_face (optional) A character specifying the font face for the legend title text. Default is "bold".
-#' @param legend_text_size (optional) Numeric specifying the size of the legend text. Default is 10.
+#' @param legend_title (optional): A character specifying the title for the legend. Default is "Phylum".
+#' @param legend_position (optional): A character specifying the position of the legend. Default is "bottom".
+#' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
+#' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
+#' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
 #'
 #'
 #' @details
@@ -81,6 +84,7 @@ VgConLenViolin <- function(vg_file=vg_file,
                            cut = 1e-5,
                            log10_scale = TRUE,
                            reorder_criteria = "median",
+                           adjust_bw = 1,
                            jitter_point=FALSE,
                            jitter_point_colour = "blue",
                            theme_choice = "linedraw",
@@ -205,7 +209,7 @@ VgConLenViolin <- function(vg_file=vg_file,
     factor(.data$ViralRefSeq_taxonomy, levels = rev(unique(sort(.data$ViralRefSeq_taxonomy))))
   },
                           y=.data$contig_len,fill=.data$phylum))+
-    geom_violin(drop=FALSE) +  # Create violin plot
+    geom_violin(drop=FALSE,adjust=adjust_bw) +  # Create violin plot
     labs(x=xlabel,
          y=ylabel,
          title=title,

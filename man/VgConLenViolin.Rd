@@ -10,6 +10,7 @@ VgConLenViolin(
   cut = 1e-05,
   log10_scale = TRUE,
   reorder_criteria = "median",
+  adjust_bw = 1,
   jitter_point = FALSE,
   jitter_point_colour = "blue",
   theme_choice = "linedraw",
@@ -38,7 +39,7 @@ VgConLenViolin(
 \arguments{
 \item{vg_file}{A data frame containing VirusGatherer Hittable results.}
 
-\item{taxa_rank}{(optional) Specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): Specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -51,60 +52,64 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).}
+\item{cut}{(optional): The significance cutoff value for E-values (default: 1e-5).}
 
 \item{log10_scale}{(optinal) transform y-axis to log10 scale (default: TRUE)}
 
 \item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 NULL sorts alphabetically.}
 
-\item{jitter_point}{(optional) logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
+\item{adjust_bw}{(optional): control the bandwidth of the kernel density estimator used to create the violin plot.
+A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier.
+Default is 1.}
 
-\item{jitter_point_colour}{(optional) colour of jitter points. Default is "blue"}
+\item{jitter_point}{(optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
+
+\item{jitter_point_colour}{(optional): colour of jitter points. Default is "blue"}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "linedraw".}
 
-\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
-\item{title}{(optional) A character specifying the title of the plot. Default title is set based on y_column.}
+\item{title}{(optional): A character specifying the title of the plot. Default title is set based on y_column.}
 
-\item{title_size}{(optional) Numeric specifying the size of the title text. Default is 16.}
+\item{title_size}{(optional): Numeric specifying the size of the title text. Default is 16.}
 
-\item{title_face}{(optional) A character specifying the font face for the title text. Default is "bold".}
+\item{title_face}{(optional): A character specifying the font face for the title text. Default is "bold".}
 
-\item{title_colour}{(optional) A character specifying the color for the title text. Default is "#2a475e".}
+\item{title_colour}{(optional): A character specifying the color for the title text. Default is "#2a475e".}
 
-\item{subtitle}{(optional) A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
 
-\item{subtitle_size}{(optional) Numeric specifying the size of the subtitle text. Default is 12.}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text. Default is 12.}
 
-\item{subtitle_face}{(optional) A character specifying the font face for the subtitle text. Default is "bold".}
+\item{subtitle_face}{(optional): A character specifying the font face for the subtitle text. Default is "bold".}
 
-\item{subtitle_colour}{(optional) A character specifying the color for the subtitle text. Default is "#1b2838".}
+\item{subtitle_colour}{(optional): A character specifying the color for the subtitle text. Default is "#1b2838".}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Virus found in query".}
+\item{xlabel}{(optional): A character specifying the label for the x-axis. Default is "Virus found in query".}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is set based on y_column.}
+\item{ylabel}{(optional): A character specifying the label for the y-axis. Default is set based on y_column.}
 
-\item{axis_title_size}{(optional) Numeric specifying the size of the axis title text. Default is 12.}
+\item{axis_title_size}{(optional): Numeric specifying the size of the axis title text. Default is 12.}
 
-\item{xtext_size}{(optional) Numeric specifying the size of the x-axis tick labels. Default is 10.}
+\item{xtext_size}{(optional): Numeric specifying the size of the x-axis tick labels. Default is 10.}
 
-\item{ytext_size}{(optional) Numeric specifying the size of the y-axis tick labels. Default is 10.}
+\item{ytext_size}{(optional): Numeric specifying the size of the y-axis tick labels. Default is 10.}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
-\item{legend_title}{(optional) A character specifying the title for the legend. Default is "Phylum".}
+\item{legend_title}{(optional): A character specifying the title for the legend. Default is "Phylum".}
 
-\item{legend_position}{(optional) A character specifying the position of the legend. Default is "bottom".}
+\item{legend_position}{(optional): A character specifying the position of the legend. Default is "bottom".}
 
-\item{legend_title_size}{(optional) Numeric specifying the size of the legend title text. Default is 12.}
+\item{legend_title_size}{(optional): Numeric specifying the size of the legend title text. Default is 12.}
 
-\item{legend_title_face}{(optional) A character specifying the font face for the legend title text. Default is "bold".}
+\item{legend_title_face}{(optional): A character specifying the font face for the legend title text. Default is "bold".}
 
-\item{legend_text_size}{(optional) Numeric specifying the size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
 }
 \value{
 a plot object
