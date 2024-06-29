@@ -1,5 +1,5 @@
 Package: Virusparies
-Title: Create Data Visualisations for VirusHuntergatherer hittables output
+Title: Create Data Visualisations for VirusHunterGatherer hittables output
 Version: 1.0.0
 Authors@R: 
     c(
