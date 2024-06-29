@@ -1,7 +1,7 @@
-#' @title VhgIdenFacetedScatterPlot: Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.
+#' @title VhgIdenFacetedScatterPlot: Create a Scatter plot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.
 #'
 #' @description
-#' This function generates a scatterplot of viral RefSeq identity versus -log10 of viral reference e-value
+#' This function generates a scatter plot of viral RefSeq identity versus -log10 of viral reference e-value
 #' for each virus group in the `best_query` column (or another column). The points are colored based on whether the
 #' e-value meets a specified cutoff and are faceted by the `best_query` column (or another column).
 #'
@@ -27,7 +27,7 @@
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
-#' @param title (optional) The title of the plot. Default is "Faceted scatterplot of viral reference e-values and identity".
+#' @param title (optional) The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".
 #' @param title_size (optional) The size of the title text. Default is 16.
 #' @param title_face (optional) The face (bold, italic, etc.) of the title text. Default is "bold".
 #' @param title_colour (optional) The color of the title text. Default is "#2a475e".
@@ -49,7 +49,7 @@
 #' @param wrap_ncol (optional) The number of columns for faceting. Default is 2.
 #'
 #' @return A list containing the following components:
-#' - plot: A plot object representing the faceted scatterplot.
+#' - plot: A plot object representing the faceted scatter plot.
 #' - evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
 #' - identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
 #' - contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with `conlen_bubble_plot=TRUE`.
@@ -275,7 +275,7 @@ VhgIdenFacetedScatterPlot <- function(file,
 
 
   #plot(iden_refevalue_seperate)
-  message("Scatterplot generation completed.")
+  message("Scatter plot generation completed.")
   return(results)
 
 

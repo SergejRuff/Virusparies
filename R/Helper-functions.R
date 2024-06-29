@@ -289,6 +289,10 @@ extract_taxa <- function(sublist, taxa_rank) {
 
 #' @title VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements
 #'
+#' @details
+#' Process the `ViralRefSeq_taxonomy` column.
+#'
+#'
 #' @param vh_file VirusHunter or VirusGatherer hittable
 #' @param taxa_rank Specify the taxonomic rank to group your data by.
 #' Supported ranks are:
@@ -311,7 +315,7 @@ extract_taxa <- function(sublist, taxa_rank) {
 #'
 #'
 #' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
-#'
+#' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' vh_file <- ImportVirusTable(path)

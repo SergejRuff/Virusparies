@@ -1,7 +1,7 @@
 #' @title VhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family
 #'
 #' @description
-#'  This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
+#' This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
 #' for each virus family from the input dataset.
 #'
 #' @param vh_file A data frame containing VirusHunters hittables results.
@@ -62,7 +62,7 @@
 #' It then generates a bar plot showing the sum of hits/contigs for each virus family.
 #' Additionally, it returns the processed data for further analysis.
 #'
-#' @return A list containing the generated bar plot and processed data
+#' @return A list containing the generated bar plot and processed data.
 #'
 #' @author Sergej Ruff
 #' @examples
@@ -280,7 +280,7 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  #plot(sum_plot)
- message("Barplot generation completed.")
+ message("Bar chart generation completed.")
 
  return(list(plot=sum_plot,vh_group=vh_group))
 

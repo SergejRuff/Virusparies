@@ -2,11 +2,11 @@
 % Please edit documentation in R/vhRunsBarplot.R
 \name{VhgRunsBarplot}
 \alias{VhgRunsBarplot}
-\title{VhgRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+\title{VhgRunsBarplot: Generate a bar plot showing the number of data sets with unique runs found for
 each Virus group.}
 \usage{
 VhgRunsBarplot(
-  vh_file,
+  file,
   groupby = "best_query",
   taxa_rank = "Family",
   cut = 1e-05,
@@ -40,7 +40,7 @@ VhgRunsBarplot(
 )
 }
 \arguments{
-\item{vh_file}{Dataframe containing Virushunter hittables results.}
+\item{file}{Data frame containing Virushunter or VirusGatherer hittables results.}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
 "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
@@ -60,7 +60,7 @@ Supported ranks are:
 }}
 
 \item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).
-Removes rows in vh_file with values larger than cutoff value in ViralRefSeq_E column.}
+Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.}
 
 \item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 NULL sorts alphabetically.}
@@ -79,8 +79,8 @@ Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"
 \item{title_colour}{(optional) The color of the plot title. Default is "#2a475e".}
 
 \item{subtitle}{(optional) A character specifying the subtitle of the plot.
-Default is "default", which calculates the total number of datasets with hits and returns it as
-"total number of datasets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.}
+Default is "default", which calculates the total number of data sets with hits and returns it as
+"total number of data sets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.}
 
 \item{subtitle_size}{(optional) The size of the plot subtitle. Default is 12.}
 
@@ -90,7 +90,7 @@ Default is "default", which calculates the total number of datasets with hits an
 
 \item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Viral group".}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits for group".}
+\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".}
 
 \item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
 
@@ -125,21 +125,21 @@ It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}
 A list containing the bar plot and tabular data with information from the plot.
 }
 \description{
-VhgRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+VhgRunsBarplot: Generate a bar plot showing the number of data sets with unique runs found for
 each Virus group.
 }
 \details{
 'VhgRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
-each Virus group. It takes only VirusHunter hittables as Input.
+each Virus group. It takes VirusHunter and VirusGatherer hittables as Input.
 
 Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are included in the plot.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- ImportVirusTable(path)
+file <- ImportVirusTable(path)
 
 # plot 1: plot boxplot for "identity"
-plot <- VhgRunsBarplot(vh_file,cut = 1e-5)
+plot <- VhgRunsBarplot(file,cut = 1e-5)
 plot
 
 # return sample_run inside plot object
@@ -147,7 +147,7 @@ print(plot$sample_run)
 
 # Plot 2: Customized plot with modified settings
 plot_custom <- VhgRunsBarplot(
-  vh_file,
+  file,
   cut = 1e-6, # Lower cutoff value
   theme_choice = "grey", # Classic theme
   title = "Customized Bar Plot", # Custom title

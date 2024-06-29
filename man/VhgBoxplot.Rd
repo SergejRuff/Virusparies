@@ -2,10 +2,10 @@
 % Please edit documentation in R/VhgBoxplot.R
 \name{VhgBoxplot}
 \alias{VhgBoxplot}
-\title{VhgBoxplot: Generate boxplots comparing E-values,identity or contig length (Gatherer only) for each virus group}
+\title{VhgBoxplot: Generate box plots comparing E-values,identity or contig length (Gatherer only) for each virus group}
 \usage{
 VhgBoxplot(
-  vh_file,
+  file,
   x_column = "best_query",
   taxa_rank = "Family",
   y_column = "ViralRefSeq_E",
@@ -41,7 +41,7 @@ VhgBoxplot(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
+\item{file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
 
 \item{x_column}{A character specifying the column containing the groups (Default:"best_query").}
 
@@ -123,14 +123,20 @@ Default is "linedraw".}
 \item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
 }
 \value{
-A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).
+A list containing:
+\itemize{
+\item the generated box plot.
+\item summary statistics.
+\item outliers ("ViralRefSeq_E" and "contig_len" only).
+\item and rows_belowthres ("ViralRefSeq_E" only).
+}
 }
 \description{
-This function generates boxplots comparing either E-values,identity or contig length (Gatherer only)
-for each group from VirusHunter or VirusGatherer Hittables results.
+This function generates box plots comparing either E-values,identity or contig length (Gatherer only)
+for each group from VirusHunter or VirusGatherer hittables results.
 }
 \details{
-VhgBoxplot generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
 
 The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 This means that 'VhgBoxplot' can generate three different types of boxplots.
@@ -138,7 +144,7 @@ By default, 'y_column' is set to "ViralRefSeq_E" and will plot the Reference E-V
 Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
 
 Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
-When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the Hittable filtered for the rows below the threshold specified in the 'cut' argument.
+When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the hittable filtered for the rows below the threshold specified in the 'cut' argument.
 
 The 'cut' argument is used differently depending on the 'y_column' value:
 \itemize{
@@ -150,18 +156,18 @@ This allows the user to plot only the significant contig lengths and identities 
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- ImportVirusTable(path)
+file <- ImportVirusTable(path)
 
 # plot 1 for evalues
-plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+plot1 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_E")
 plot1
 
 # plot 2 for identity
-plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+plot2 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 plot2
 
 # plot 3 custom arguments used
-plot3 <- VhgBoxplot(vh_file,
+plot3 <- VhgBoxplot(file,
                   x_column = "best_query",
                   y_column = "ViralRefSeq_E",
                   theme_choice = "grey",
@@ -179,6 +185,8 @@ vg_file <- ImportVirusTable(path2)
 # plot 4: Virusgatherer plot for ViralRefSeq_taxonomy agains contig length
 plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
 plot5
+
+
 
 }
 \seealso{

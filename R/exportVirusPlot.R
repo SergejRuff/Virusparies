@@ -41,7 +41,7 @@
 #' @details
 #' This function exports plots in various formats supported by Virusparies.
 #' Supported devices include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", or "wmf" (Windows only).
-#' When 'device' is set to NULL, the file extension in 'filename' is used to determine the device.
+#' When 'device' is set to NULL, the file extension in `filename` is used to determine the device.
 #'
 #' Depending on the plot, the final image might be cropped or truncated.
 #' We recommend experimenting with height, width, and resolution.
@@ -92,7 +92,7 @@
 #' violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE,
 #' legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
 #'                              theme_choice = "minimal")
-#' srarun <- VhgRunsBarplot(vh_file = vg_file,groupby = "ViralRefSeq_taxonomy",
+#' srarun <- VhgRunsBarplot(file = vg_file,groupby = "ViralRefSeq_taxonomy",
 #' legend_position = "none",title = "",xlabel = "",reorder_criteria = NULL,
 #'                          theme_choice = "minimal")
 #' boxplot <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "ViralRefSeq_ident",

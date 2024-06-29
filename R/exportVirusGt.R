@@ -25,21 +25,23 @@
 #'
 #' The exportVirusGt function utilizes the gt package for table manipulation and formatting.
 #'
-#' For HTML output filenames with .html or .htm extensions, an HTML document is generated using the gt package.
+#' For HTML output file names with .html or .htm extensions, an HTML document is generated using the gt package.
 #' Pass TRUE or FALSE to inline_css to include or exclude CSS styles inline (default is FALSE).
-#' Additional options can be passed through .... For RTF output filenames with .rtf extension,
+#' Additional options can be passed through .... For RTF output file names with .rtf extension,
 #' an RTF file is created. Use the page_numbering option to control page numbering (default is none).
 #'
 #' For image files, use .png for PNG and .pdf for PDF. The gt package relies on Google Chrome installation
 #' for PNG and PDF images. Pass options to webshot2::webshot() through .... Useful PNG options include zoom
 #' (default: 2) and expand (default: 5).
 #'
-#' For LaTeX output filenames with .tex, .ltx, or .rnw extensions, and .rtf for RTF, the corresponding
+#' For LaTeX output file names with .tex, .ltx, or .rnw extensions, and .rtf for RTF, the corresponding
 #' documents are generated. No additional options available.
 #'
 #' For .docx output, requires rmarkdown package.
 #'
 #' When 'create.dir' is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
+#'
+#' The optional `export_csv` argument enables the user to export the data frame as a CSV file alongside the graphical table.
 #'
 #' @return a message indicating that export was sucessful.
 #'
@@ -55,7 +57,7 @@
 #'
 #' table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
 #' "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
-#' "Refrence E-Value","Refrence Identity"))
+#' "Reference E-Value","Reference Identity"))
 #'
 #'
 #' \dontrun{
@@ -73,6 +75,7 @@
 #' @importFrom gt gtsave
 #' @importFrom tools file_ext
 #' @importFrom chromote find_chrome
+#' @importFrom utils write.csv
 #' @export
 ExportVirusGt <- function(gtable,
                           filename="table.docx",
@@ -109,7 +112,7 @@ ExportVirusGt <- function(gtable,
 
     filename_without_extension <- tools::file_path_sans_ext(filename)
     new_filename <- paste0(filename_without_extension, ".csv")
-    saveRDS(plot, file = paste0(path,"/",new_filename))
+    write.csv(plot, file = paste0(path,"/",new_filename))
   }
 
 

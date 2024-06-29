@@ -1,10 +1,10 @@
-#' @title VhgBoxplot: Generate boxplots comparing E-values,identity or contig length (Gatherer only) for each virus group
+#' @title VhgBoxplot: Generate box plots comparing E-values,identity or contig length (Gatherer only) for each virus group
 #'
 #' @description
-#'  This function generates boxplots comparing either E-values,identity or contig length (Gatherer only)
-#' for each group from VirusHunter or VirusGatherer Hittables results.
+#'  This function generates box plots comparing either E-values,identity or contig length (Gatherer only)
+#' for each group from VirusHunter or VirusGatherer hittables results.
 #'
-#' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
+#' @param file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param x_column A character specifying the column containing the groups (Default:"best_query").
 #' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
@@ -52,9 +52,8 @@
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
 #'
 #'
-#' @author Sergej Ruff
 #' @details
-#' VhgBoxplot generates boxplots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+#' VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
 #'
 #' The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 #' This means that 'VhgBoxplot' can generate three different types of boxplots.
@@ -62,7 +61,7 @@
 #' Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
 #'
 #' Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
-#' When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the Hittable filtered for the rows below the threshold specified in the 'cut' argument.
+#' When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the hittable filtered for the rows below the threshold specified in the 'cut' argument.
 #'
 #' The 'cut' argument is used differently depending on the 'y_column' value:
 #' - For 'y_column' set to "contig_len" or "ViralRefSeq_ident", the 'cut' argument filters the data to plot only the values with a "ViralRefSeq_E" below the specified threshold (default is 0.0001).
@@ -72,22 +71,31 @@
 #'
 #'
 #'
-#' @return A list containing the generated boxplot, summary statistics,outliers ("ViralRefSeq_E" and "contig_len" only) and rows_belowthres ("ViralRefSeq_E" only).
+#' @return A list containing:
+#' - the generated box plot.
+#' - summary statistics.
+#' - outliers ("ViralRefSeq_E" and "contig_len" only).
+#' - and rows_belowthres ("ViralRefSeq_E" only).
+#'
+#' @author Sergej Ruff
+#'
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- ImportVirusTable(path)
+#' file <- ImportVirusTable(path)
 #'
 #' # plot 1 for evalues
-#' plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+#' plot1 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_E")
 #' plot1
 #'
 #' # plot 2 for identity
-#' plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_ident")
+#' plot2 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_ident")
 #' plot2
 #'
 #' # plot 3 custom arguments used
-#' plot3 <- VhgBoxplot(vh_file,
+#' plot3 <- VhgBoxplot(file,
 #'                   x_column = "best_query",
 #'                   y_column = "ViralRefSeq_E",
 #'                   theme_choice = "grey",
@@ -106,13 +114,12 @@
 #' plot5 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig_len")
 #' plot5
 #'
-#' @seealso
-#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#'
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-VhgBoxplot <- function(vh_file,
+VhgBoxplot <- function(file,
                               x_column ="best_query",
                               taxa_rank = "Family",
                               y_column = "ViralRefSeq_E",
@@ -149,8 +156,8 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  #is_file_empty(vh_file)
-  if (is_file_empty(vh_file)) {
+  #is_file_empty(file)
+  if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
@@ -161,10 +168,10 @@ VhgBoxplot <- function(vh_file,
   }
 
 
-  check_columns(vh_file,x_column)
-  check_columns(vh_file,y_column)
-  check_input_type(vh_file,y_column,2)
-  check_input_type(vh_file,x_column,1)
+  check_columns(file,x_column)
+  check_columns(file,y_column)
+  check_input_type(file,y_column,2)
+  check_input_type(file,x_column,1)
 
   # check arguments
   arg_character(theme_choice)
@@ -177,10 +184,10 @@ VhgBoxplot <- function(vh_file,
 
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
-  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+  min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])
 
   # Replace all 0 values with the smallest positive value
-  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+  file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
 
 
 
@@ -203,11 +210,11 @@ VhgBoxplot <- function(vh_file,
     message(paste(y_column," column was selected."))
     message(paste("Removing values with E-values higher than: ",cut,"."))
 
-    vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
+    file <- file[file$ViralRefSeq_E < cut,]
 
-    message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
-    #is_file_empty(vh_file)
-    if (is_file_empty(vh_file)) {
+    message(paste0("after removing rows based on evalue the hittable has ",nrow(file)," rows left."))
+    #is_file_empty(file)
+    if (is_file_empty(file)) {
       #message("Skipping VhgBoxplot generation due to empty data.")
       return(invisible(NULL))  # Return invisible(NULL) to stop further execution
     }
@@ -216,9 +223,9 @@ VhgBoxplot <- function(vh_file,
 
   if(x_column == "ViralRefSeq_taxonomy"){
 
-    tax_column <- vh_file$ViralRefSeq_taxonomy
+    tax_column <- file$ViralRefSeq_taxonomy
 
-    vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
+    file <- VhgPreprocessTaxa(file,taxa_rank)
 
   }
 
@@ -226,9 +233,9 @@ VhgBoxplot <- function(vh_file,
   # change values of evalues to -log10
   if(y_column == "ViralRefSeq_E"){
 
-    y_aes <- -log10(vh_file[[y_column]])
+    y_aes <- -log10(file[[y_column]])
   }else{
-    y_aes <- vh_file[[y_column]]
+    y_aes <- file[[y_column]]
   }
 
 
@@ -263,18 +270,18 @@ VhgBoxplot <- function(vh_file,
   ylabel <- ifelse(!is.null(ylabel), ylabel, default_ylabel)
 
 
-  color_data <- consistentColourPalette(vh_file, groupby = x_column,taxa_rank=taxa_rank)
+  color_data <- consistentColourPalette(file, groupby = x_column,taxa_rank=taxa_rank)
   legend_labels <- color_data$legend_labels
   labels <- color_data$labels
 
-  # Extract unique values from vh_file$best_query
-  unique_queries <- unique(vh_file[[x_column]])
+  # Extract unique values from file$best_query
+  unique_queries <- unique(file[[x_column]])
 
   # Create a vector of corresponding names from legend_labels
   pyhlum_names <- legend_labels[unique_queries]
 
-  # Match names to vh_file$best_query
-  vh_file$phylum <- pyhlum_names[match(vh_file[[x_column]], unique_queries)]
+  # Match names to file$best_query
+  file$phylum <- pyhlum_names[match(file[[x_column]], unique_queries)]
 
 
   # Check for valid reorder_criteria
@@ -299,7 +306,7 @@ VhgBoxplot <- function(vh_file,
 
 
 
-  boxp <- ggplot(vh_file,aes(x= if (!is.null(reorder_criteria)) {
+  boxp <- ggplot(file,aes(x= if (!is.null(reorder_criteria)) {
     reorder(.data[[x_column]], y_aes,
             FUN = switch(reorder_criteria,
                          "max" = max,
@@ -354,7 +361,7 @@ VhgBoxplot <- function(vh_file,
 
   if(x_column != "SRA_run"){
 
-    # matched_vector <- consistentColourPalette(vh_file = vh_file, groupby = x_column)
+    # matched_vector <- consistentColourPalette(file = file, groupby = x_column)
     boxp <- boxp + scale_fill_manual(values = labels)
 
 
@@ -386,24 +393,24 @@ VhgBoxplot <- function(vh_file,
 
 
   # delete new column before sum statistics and export.
-  vh_file$phylum <- NULL
+  file$phylum <- NULL
 
 
 
 
-  summary_stats <- boxp_summary_stats(vh_file, group = x_column,ycol =y_column)
+  summary_stats <- boxp_summary_stats(file, group = x_column,ycol =y_column)
 
   if(x_column == "ViralRefSeq_taxonomy"){
 
 
-    vh_file$ViralRefSeq_taxonomy <- tax_column
+    file$ViralRefSeq_taxonomy <- tax_column
 
   }
 
   if (y_column == "ViralRefSeq_E") {
-    outlier <- find_outlier_eval_box(vh_file, group = x_column)
+    outlier <- find_outlier_eval_box(file, group = x_column)
   } else if (y_column == "contig_len") {
-    outlier <- find_outlier_eval_box(vh_file, group = x_column, y_column = y_column)
+    outlier <- find_outlier_eval_box(file, group = x_column, y_column = y_column)
   }
 
 
@@ -424,7 +431,7 @@ VhgBoxplot <- function(vh_file,
 
   # extract rows below threshold
   if (y_column == "ViralRefSeq_E") {
-    belowthres_boxp <- vhg_filter_belowthresholdboxplot(vh_file,cut)
+    belowthres_boxp <- vhg_filter_belowthresholdboxplot(file,cut)
     results$rows_belowthres <- belowthres_boxp
   }
 
@@ -432,7 +439,7 @@ VhgBoxplot <- function(vh_file,
 
 
   # Return the results list
-  message("Boxplot generation completed.")
+  message("Box plot generation completed.")
   return(results)
 
 

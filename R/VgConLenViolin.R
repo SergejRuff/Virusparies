@@ -61,6 +61,11 @@
 #' in contig lengths across groups. This transformation can be disabled by setting the
 #' `log10_scale` argument to FALSE.
 #'
+#' `min_observations` filters the datasets to include only groups with at least the specified number of observations
+#'  before plotting them. This feature allows users to exclude groups with insufficient data.
+#'  By default, every group is plotted, as the minimum requirement is set to at least one observation per group.
+#'
+#'
 #' @examples
 #'
 #' # import gatherer files
@@ -73,9 +78,14 @@
 #' violinplot
 #'
 #'
+#' @return A list containing the following components:
+#' - plot: A plot object representing the violin plot.
+#' - contiglen_stats: A tibble data frame with summary statistics for "contig_len" values.
+#'
 #' @author Sergej Ruff
 #'
-#' @return a plot object
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
 #' @importFrom rlang .data

@@ -1,7 +1,7 @@
-#' @title VhgRunsBarplot: Generate a bar plot showing the number of datasets with unique runs found for
+#' @title VhgRunsBarplot: Generate a bar plot showing the number of data sets with unique runs found for
 #' each Virus group.
 #'
-#' @param vh_file Dataframe containing Virushunter hittables results.
+#' @param file Data frame containing Virushunter or VirusGatherer hittables results.
 #' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
 #' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
@@ -16,7 +16,7 @@
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
-#' Removes rows in vh_file with values larger than cutoff value in ViralRefSeq_E column.
+#' Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional) A character indicating the ggplot2 theme to apply.
@@ -27,13 +27,13 @@
 #' @param title_face (optional) The font face of the plot title. Default is "bold".
 #' @param title_colour (optional) The color of the plot title. Default is "#2a475e".
 #' @param subtitle (optional) A character specifying the subtitle of the plot.
-#' Default is "default", which calculates the total number of datasets with hits and returns it as
-#' "total number of datasets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.
+#' Default is "default", which calculates the total number of data sets with hits and returns it as
+#' "total number of data sets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.
 #' @param subtitle_size (optional) The size of the plot subtitle. Default is 12.
 #' @param subtitle_face (optional) The font face of the plot subtitle. Default is "bold".
 #' @param subtitle_colour (optional) The color of the plot subtitle. Default is "#1b2838".
 #' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Viral group".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Number of datasets with hits for group".
+#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".
 #' @param axis_title_size (optional) The size of axis titles. Default is 12.
 #' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
 #' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
@@ -53,7 +53,7 @@
 #'
 #' @details
 #' 'VhgRunsBarplot' generates a bar plot showing the number of data sets with unique runs found for
-#' each Virus group. It takes only VirusHunter hittables as Input.
+#' each Virus group. It takes VirusHunter and VirusGatherer hittables as Input.
 #'
 #' Only significant values below the threshold specified by the 'cut' argument (default: 1e-5) are included in the plot.
 #'
@@ -63,10 +63,10 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- ImportVirusTable(path)
+#' file <- ImportVirusTable(path)
 #'
 #' # plot 1: plot boxplot for "identity"
-#' plot <- VhgRunsBarplot(vh_file,cut = 1e-5)
+#' plot <- VhgRunsBarplot(file,cut = 1e-5)
 #' plot
 #'
 #' # return sample_run inside plot object
@@ -74,7 +74,7 @@
 #'
 #' # Plot 2: Customized plot with modified settings
 #' plot_custom <- VhgRunsBarplot(
-#'   vh_file,
+#'   file,
 #'   cut = 1e-6, # Lower cutoff value
 #'   theme_choice = "grey", # Classic theme
 #'   title = "Customized Bar Plot", # Custom title
@@ -104,7 +104,7 @@
 #' @importFrom  dplyr n_distinct coalesce
 #' @importFrom rlang .data
 #' @export
-VhgRunsBarplot <- function(vh_file,
+VhgRunsBarplot <- function(file,
                           groupby = "best_query",
                           taxa_rank = "Family",
                           cut = 1e-5,
@@ -141,8 +141,8 @@ VhgRunsBarplot <- function(vh_file,
 
 
   # check if hittable is empty
-  #is_file_empty(vh_file)
-  if (is_file_empty(vh_file)) {
+  #is_file_empty(file)
+  if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
@@ -162,30 +162,30 @@ VhgRunsBarplot <- function(vh_file,
 
 
   required_columns <- c("ViralRefSeq_E",groupby)
-  all_names <- names(vh_file)
+  all_names <- names(file)
 
 
-  check_columns(vh_file,required_columns)
-  # Check if either "SRA_run" or "run_id" exists in vh_file
+  check_columns(file,required_columns)
+  # Check if either "SRA_run" or "run_id" exists in file
   if (!("SRA_run" %in% all_names) && !("run_id" %in% all_names)) {
-    stop("Neither 'SRA_run' nor 'run_id' found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
+    stop("Neither 'SRA_run' nor 'run_id' found in file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
-  check_input_type(vh_file,"ViralRefSeq_E",2)
-  check_input_type(vh_file,groupby,1)
+  check_input_type(file,"ViralRefSeq_E",2)
+  check_input_type(file,groupby,1)
 
   if(groupby == "ViralRefSeq_taxonomy"){
 
-    vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
+    file <- VhgPreprocessTaxa(file,taxa_rank)
 
   }
 
   # Filter obj
-  vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
-  message(paste0("after removing rows based on evalue the hittable has ",nrow(vh_file)," rows left."))
+  file <- file[file$ViralRefSeq_E < cut,]
+  message(paste0("after removing rows based on evalue the hittable has ",nrow(file)," rows left."))
   #check if obj has 0 ob after filtering
-  #is_file_empty(vh_file)
-  if (is_file_empty(vh_file)) {
+  #is_file_empty(file)
+  if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
@@ -195,20 +195,20 @@ VhgRunsBarplot <- function(vh_file,
 
 
   # preprocess data for plot
-  sample_run <- preprocess_runs_bar(vh_file,groupby)
+  sample_run <- preprocess_runs_bar(file,groupby)
 
   # Set the subtitle based on the input
   if (subtitle == "default") {
-    subtitle_text <- paste0("total number of datasets: ", n_distinct(coalesce(vh_file$SRA_run, vh_file$run_id)))
+    subtitle_text <- paste0("total number of datasets: ", n_distinct(coalesce(file$SRA_run, file$run_id)))
   } else {
     subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
   }
 
-  color_data <- consistentColourPalette(vh_file, groupby = groupby,taxa_rank=taxa_rank)
+  color_data <- consistentColourPalette(file, groupby = groupby,taxa_rank=taxa_rank)
   legend_labels <- color_data$legend_labels
   labels <- color_data$labels
 
-  # Extract unique values from vh_file$best_query
+  # Extract unique values from file$best_query
   unique_queries <- unique(sample_run[[groupby]])
 
   # Create a vector of corresponding names from legend_labels
@@ -296,7 +296,7 @@ VhgRunsBarplot <- function(vh_file,
 
 
 
-  message("Barplot generation completed.")
+  message("Bar chart generation completed.")
   return(list(plot=run_bar,
               sample_run=sample_run))
 

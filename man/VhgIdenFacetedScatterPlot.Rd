@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdenFacetedScatterPlot.R
 \name{VhgIdenFacetedScatterPlot}
 \alias{VhgIdenFacetedScatterPlot}
-\title{VhgIdenFacetedScatterPlot: Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.}
+\title{VhgIdenFacetedScatterPlot: Create a Scatter plot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
   file,
@@ -66,7 +66,7 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "linedraw".}
 
-\item{title}{(optional) The title of the plot. Default is "Faceted scatterplot of viral reference e-values and identity".}
+\item{title}{(optional) The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".}
 
 \item{title_size}{(optional) The size of the title text. Default is 16.}
 
@@ -109,14 +109,14 @@ Default is "linedraw".}
 \value{
 A list containing the following components:
 \itemize{
-\item plot: A plot object representing the faceted scatterplot.
+\item plot: A plot object representing the faceted scatter plot.
 \item evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
 \item identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
 \item contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with \code{conlen_bubble_plot=TRUE}.
 }
 }
 \description{
-This function generates a scatterplot of viral RefSeq identity versus -log10 of viral reference e-value
+This function generates a scatter plot of viral RefSeq identity versus -log10 of viral reference e-value
 for each virus group in the \code{best_query} column (or another column). The points are colored based on whether the
 e-value meets a specified cutoff and are faceted by the \code{best_query} column (or another column).
 }

@@ -29,6 +29,8 @@ vh_file with preprocessed ViralRefSeq_taxonomy elements
 VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements
 }
 \details{
+Process the \code{ViralRefSeq_taxonomy} column.
+
 Besides \code{best_query}, the user can utilize the \code{ViralRefSeq_taxonomy} column as \code{x_column} or \code{groupby} in plots.
 This column needs preprocessing because it is too long and has too many unique elements for effective grouping.
 The element containing the taxa suffix specified by the \code{taxa_rank} argument is used. NA values are replaced by "unclassified".
@@ -53,4 +55,7 @@ print(head(vh_file_filtered$ViralRefSeq_taxonomy,5))
 }
 \seealso{
 VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+}
+\author{
+Sergej Ruff
 }

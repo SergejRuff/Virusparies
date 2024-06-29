@@ -115,7 +115,11 @@ Default is "linedraw".}
 \item{min_observations}{(optional): Minimum number of observations required per group to be included in the plot (default: 1).}
 }
 \value{
-a plot object
+A list containing the following components:
+\itemize{
+\item plot: A plot object representing the violin plot.
+\item contiglen_stats: A tibble data frame with summary statistics for "contig_len" values.
+}
 }
 \description{
 This function creates a violin plot to visualize the distribution of contig lengths
@@ -130,6 +134,10 @@ and the y-axis represents the contig lengths.
 By default, the y-axis is transformed to a log10 scale to better visualize differences
 in contig lengths across groups. This transformation can be disabled by setting the
 \code{log10_scale} argument to FALSE.
+
+\code{min_observations} filters the datasets to include only groups with at least the specified number of observations
+before plotting them. This feature allows users to exclude groups with insufficient data.
+By default, every group is plotted, as the minimum requirement is set to at least one observation per group.
 }
 \examples{
 
@@ -143,6 +151,9 @@ violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE)
 violinplot
 
 
+}
+\seealso{
+VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 }
 \author{
 Sergej Ruff
