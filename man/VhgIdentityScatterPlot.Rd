@@ -26,7 +26,7 @@ VhgIdentityScatterPlot(
   axis_title_size = 12,
   xtext_size = 10,
   ytext_size = 10,
-  legend_title = "Phylum",
+  legend_title = "Group",
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
@@ -92,7 +92,7 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 
 \item{ytext_size}{(optional) The size of the y-axis text. Default is 10.}
 
-\item{legend_title}{(optional) The title of the legend. Default is "Phylum".}
+\item{legend_title}{(optional) The title of the legend. Default is "Group".}
 
 \item{legend_position}{(optional) The position of the legend. Default is "bottom".}
 
