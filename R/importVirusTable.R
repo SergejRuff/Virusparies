@@ -34,7 +34,12 @@ ImportVirusTable <- function(path) {
 
   # Try to read the file and handle any potential errors
   tryCatch({
-    vh_file <- read.table(file = path, sep = "\t", header = TRUE)
+    vh_file <- read.table(file = path, sep = "\t", header = TRUE,fill = TRUE)
+
+    vh_file[vh_file == ""] <- NA
+
+    # replace NA with value.
+    vh_file[is.na(vh_file[,"ViralRefSeq_taxonomy"]),"ViralRefSeq_taxonomy"] <- "taxid:"
 
     # Print success message
     message("File successfully imported.")
