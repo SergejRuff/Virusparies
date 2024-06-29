@@ -9,7 +9,6 @@
 #' @param filename Name of the output file. Default is "table.docx".Make sure to provide an extension
 #' compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 #' the file extension is ignored.
-#' @param export_csv (optional): If TRUE, exports the input data frame in csv format with the same name as specified in filename. Default is FALSE.
 #' @param path Path of the directory to save plot to: path and filename are combined to create the
 #' fully qualified file name. Defaults to the working directory.
 #' @param create.dir Whether to create new directories if a non-existing directory is specified in
@@ -41,7 +40,7 @@
 #'
 #' When 'create.dir' is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
 #'
-#' The optional `export_csv` argument enables the user to export the data frame as a CSV file alongside the graphical table.
+#'
 #'
 #' @return a message indicating that export was sucessful.
 #'
@@ -79,16 +78,12 @@
 #' @export
 ExportVirusGt <- function(gtable,
                           filename="table.docx",
-                          export_csv = FALSE,
                           path = NULL,
                           create.dir = FALSE,
                           ...
                           ){
 
-  if (is.null(gtable) || nrow(gtable$data) == 0) {
-    message("Skipping export due to NULL gtable or empty dataframe.")
-    return(invisible(NULL))  # Stop further execution
-  }
+
 
   fileext <- file_ext(filename)
 
@@ -104,16 +99,6 @@ ExportVirusGt <- function(gtable,
     }
   }
 
-  if(export_csv){
-
-    if(is.null(path)){
-      path <- getwd()
-    }
-
-    filename_without_extension <- tools::file_path_sans_ext(filename)
-    new_filename <- paste0(filename_without_extension, ".csv")
-    write.csv(plot, file = paste0(path,"/",new_filename))
-  }
 
 
   # Attempt to save the table
