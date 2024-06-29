@@ -7,6 +7,7 @@
 ExportVirusGt(
   gtable,
   filename = "table.docx",
+  export_gt_obj = FALSE,
   path = NULL,
   create.dir = FALSE,
   ...
@@ -19,6 +20,8 @@ ExportVirusGt(
 compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 the file extension is ignored.}
 
+\item{export_gt_obj}{(optional): If TRUE, exports the input data frame in .rds format with the same name as specified in filename. Default is FALSE.}
+
 \item{path}{Path of the directory to save plot to: path and filename are combined to create the
 fully qualified file name. Defaults to the working directory.}
 
@@ -29,7 +32,7 @@ a prompt will appear asking to create a new directory when necessary.}
 \item{...}{Pass any other options to the corresponding internal saving function.}
 }
 \value{
-a message indicating that export was sucessful.
+a message indicating that export was successful.
 }
 \description{
 This function allows the user to export graphical tables in different formats.
@@ -56,6 +59,8 @@ documents are generated. No additional options available.
 For .docx output, requires rmarkdown package.
 
 When 'create.dir' is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
+
+The optional \code{export_gt_obj} argument enables the user to export the data frame as a .rds file alongside the graphical table.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

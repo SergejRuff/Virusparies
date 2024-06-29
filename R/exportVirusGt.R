@@ -9,6 +9,7 @@
 #' @param filename Name of the output file. Default is "table.docx".Make sure to provide an extension
 #' compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 #' the file extension is ignored.
+#' @param export_gt_obj (optional): If TRUE, exports the input data frame in .rds format with the same name as specified in filename. Default is FALSE.
 #' @param path Path of the directory to save plot to: path and filename are combined to create the
 #' fully qualified file name. Defaults to the working directory.
 #' @param create.dir Whether to create new directories if a non-existing directory is specified in
@@ -40,9 +41,9 @@
 #'
 #' When 'create.dir' is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
 #'
+#' The optional `export_gt_obj` argument enables the user to export the data frame as a .rds file alongside the graphical table.
 #'
-#'
-#' @return a message indicating that export was sucessful.
+#' @return a message indicating that export was successful.
 #'
 #'
 #' @author Sergej Ruff
@@ -78,6 +79,7 @@
 #' @export
 ExportVirusGt <- function(gtable,
                           filename="table.docx",
+                          export_gt_obj = FALSE,
                           path = NULL,
                           create.dir = FALSE,
                           ...
@@ -97,6 +99,17 @@ ExportVirusGt <- function(gtable,
       dir.create(path, recursive = TRUE)
       message("Directory created: ", path)
     }
+  }
+
+  if(export_gt_obj){
+
+    if(is.null(path)){
+      path <- getwd()
+    }
+
+    filename_without_extension <- tools::file_path_sans_ext(filename)
+    new_filename <- paste0(filename_without_extension, ".rds")
+    saveRDS(gtable, file = paste0(path,"/",new_filename))
   }
 
 
