@@ -237,6 +237,16 @@ get_plot_parameters <- function(y_column, cut) {
 taxonomy_rank_hierarchy<- function(taxa_rank){
 
 
+  # Define valid taxa ranks
+  valid_ranks <- c("Subphylum", "Class", "Subclass", "Order",
+                   "Suborder", "Family", "Subfamily", "Genus")
+
+  # Check if the provided taxa_rank is valid
+  if (!(taxa_rank %in% valid_ranks)) {
+    stop("Error: Invalid taxa rank provided. Please provide one of: Subphylum, Class, Subclass, Order, Suborder, Family, Subfamily, Genus")
+  }
+
+
   if(taxa_rank=="Subphylum"){
     return("viricotina")
   }
