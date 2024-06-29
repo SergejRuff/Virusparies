@@ -5,7 +5,7 @@
 \title{VhgIdenFacetedScatterPlot: Create a Scatterplot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
-  vh_file,
+  file,
   groupby = "best_query",
   taxa_rank = "Family",
   cutoff = 1e-05,
@@ -35,7 +35,7 @@ VhgIdenFacetedScatterPlot(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing at least the columns \code{ViralRefSeq_E}, \code{ViralRefSeq_ident}, and the specified grouping column.}
+\item{file}{A data frame containing at least the columns \code{ViralRefSeq_E}, \code{ViralRefSeq_ident}, and the specified grouping column.}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
@@ -107,7 +107,13 @@ Default is "linedraw".}
 \item{wrap_ncol}{(optional) The number of columns for faceting. Default is 2.}
 }
 \value{
-A ggplot object representing the faceted scatterplot.
+A list containing the following components:
+\itemize{
+\item plot: A plot object representing the faceted scatterplot.
+\item evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
+\item identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
+\item contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with \code{conlen_bubble_plot=TRUE}.
+}
 }
 \description{
 This function generates a scatterplot of viral RefSeq identity versus -log10 of viral reference e-value
@@ -115,25 +121,30 @@ for each virus group in the \code{best_query} column (or another column). The po
 e-value meets a specified cutoff and are faceted by the \code{best_query} column (or another column).
 }
 \details{
-'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs..
+'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs.
 The plot includes:
 \itemize{
 \item Points colored based on whether they meet the cutoff condition.
 \item Faceting by the \code{best_query} column as the default column. The user can provide their own column
 for grouping.
+\item The option \code{conlen_bubble_plot} = TRUE generates a bubble plot where the size of points corresponds to "contig_len" (exclusive to VirusGatherer).
 }
+
+Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
+and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
+are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- ImportVirusTable(path)
+file <- ImportVirusTable(path)
 
 # plot 1
-plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
+plot <- VhgIdenFacetedScatterPlot(file,cutoff = 1e-5)
 
 plot
 
 # plot 2 with custom data
-custom_plot <- VhgIdenFacetedScatterPlot(vh_file,
+custom_plot <- VhgIdenFacetedScatterPlot(file,
                                          cutoff = 1e-4,
                                          theme_choice = "dark",
                                          title = "Custom Scatterplot",

@@ -5,7 +5,7 @@
 \title{VhgIdentityScatterPlot: Scatter Plot for Reference Identity vs -log10 of Reference E-value}
 \usage{
 VhgIdentityScatterPlot(
-  vh_file,
+  file,
   groupby = "best_query",
   taxa_rank = "Family",
   cutoff = 1e-05,
@@ -34,7 +34,7 @@ VhgIdentityScatterPlot(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
+\item{file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
@@ -53,7 +53,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+\item{cutoff}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in file
 with values larger than the cutoff value in the ViralRefSeq_E column.}
 
 \item{conlen_bubble_plot}{(optional) Logical value indicating whether the \code{contig_len} column
@@ -103,7 +103,13 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 \item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
 }
 \value{
-A ggplot object representing the scatter plot.
+A list containing the following components:
+\itemize{
+\item plot: A plot object representing the faceted scatterplot.
+\item evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
+\item identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
+\item contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with \code{conlen_bubble_plot=TRUE}.
+}
 }
 \description{
 This function creates a scatter plot of viral RefSeq identity versus
@@ -113,21 +119,28 @@ based on  best query  and adds a horizontal line representing the cutoff value.
 \details{
 VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
 It accepts both VirusHunter and VirusGatherer Hittables as input.
+The plot includes:
+\itemize{
+\item A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
+\item The option \code{conlen_bubble_plot} = TRUE generates a bubble plot where the size of points corresponds to "contig_len" (exclusive to VirusGatherer).
+}
 
-A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
+Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
+and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
+are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- ImportVirusTable(path)
+file <- ImportVirusTable(path)
 
 
 # Basic plot
-plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
+plot <- VhgIdentityScatterPlot(file,cutoff = 1e-5)
 
 plot(plot$plot)
 
 # Custom plot with additional arguments
-custom_plot <- VhgIdentityScatterPlot(vh_file,
+custom_plot <- VhgIdentityScatterPlot(file,
                                      cutoff = 1e-5,
                                      theme_choice = "dark",
                                      cut_colour = "blue",

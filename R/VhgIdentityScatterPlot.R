@@ -6,7 +6,7 @@
 #' based on  best query  and adds a horizontal line representing the cutoff value.
 #'
 #'
-#' @param vh_file A data frame containing VirusHunter or VirusGatherer Hittable results.
+#' @param file A data frame containing VirusHunter or VirusGatherer Hittable results.
 #' @param groupby (optional) A string indicating the column used for grouping the data points in the scatter plot.
 #' The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
@@ -20,7 +20,7 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cutoff (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
+#' @param cutoff (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in file
 #' with values larger than the cutoff value in the ViralRefSeq_E column.
 #' @param conlen_bubble_plot (optional) Logical value indicating whether the `contig_len` column
 #'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.
@@ -51,23 +51,32 @@
 #' @details
 #' VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
 #' It accepts both VirusHunter and VirusGatherer Hittables as input.
+#' The plot includes:
+#' - A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
+#' - The option `conlen_bubble_plot` = TRUE generates a bubble plot where the size of points corresponds to "contig_len" (exclusive to VirusGatherer).
 #'
-#' A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
+#' Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
+#' and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
+#' are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 #'
-#' @return A ggplot object representing the scatter plot.
+#' @return A list containing the following components:
+#' - plot: A plot object representing the faceted scatterplot.
+#' - evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
+#' - identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
+#' - contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with `conlen_bubble_plot=TRUE`.
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- ImportVirusTable(path)
+#' file <- ImportVirusTable(path)
 #'
 #'
 #' # Basic plot
-#' plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
+#' plot <- VhgIdentityScatterPlot(file,cutoff = 1e-5)
 #'
 #' plot(plot$plot)
 #'
 #'# Custom plot with additional arguments
-#' custom_plot <- VhgIdentityScatterPlot(vh_file,
+#' custom_plot <- VhgIdentityScatterPlot(file,
 #'                                      cutoff = 1e-5,
 #'                                      theme_choice = "dark",
 #'                                      cut_colour = "blue",
@@ -112,7 +121,7 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @export
-VhgIdentityScatterPlot <- function(vh_file,
+VhgIdentityScatterPlot <- function(file,
                                   groupby = "best_query",
                                   taxa_rank = "Family",
                                   cutoff = 1e-5,
@@ -144,8 +153,8 @@ VhgIdentityScatterPlot <- function(vh_file,
 
 
   # check if hittable is complete
-  #is_file_empty(vh_file)
-  if (is_file_empty(vh_file)) {
+  #is_file_empty(file)
+  if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
@@ -158,15 +167,15 @@ VhgIdentityScatterPlot <- function(vh_file,
   if (conlen_bubble_plot) {
     required_columns <- c(required_columns, "contig_len")
   }
-  check_columns(vh_file,required_columns)
-  check_input_type(vh_file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
-  check_input_type(vh_file,groupby,1)
+  check_columns(file,required_columns)
+  check_input_type(file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
+  check_input_type(file,groupby,1)
 
 
 
   if(groupby == "ViralRefSeq_taxonomy"){
 
-    vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
+    file <- VhgPreprocessTaxa(file,taxa_rank)
 
   }
 
@@ -176,62 +185,62 @@ VhgIdentityScatterPlot <- function(vh_file,
 
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
-  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+  min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])
 
   # Replace all 0 values with the smallest positive value
-  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+  file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
-  min_positive_value <- min(vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E > 0])
+  min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])
 
   # Replace all 0 values with the smallest positive value
-  vh_file$ViralRefSeq_E[vh_file$ViralRefSeq_E == 0] <- min_positive_value
+  file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
 
   # Calculate the maximum y-value
-  max_y <- max(-log10(vh_file$ViralRefSeq_E)) + 5
+  max_y <- max(-log10(file$ViralRefSeq_E)) + 5
 
   # Calculate the minimum y-value
-  min_y <- min(-log10(vh_file$ViralRefSeq_E))
+  min_y <- min(-log10(file$ViralRefSeq_E))
   min_y <- ifelse(min_y > 0, 0, min_y)
 
 
 
-  color_data <- consistentColourPalette(vh_file, groupby = groupby,taxa_rank=taxa_rank)
+  color_data <- consistentColourPalette(file, groupby = groupby,taxa_rank=taxa_rank)
   #legend_labels <- color_data$legend_labels
   #labels <- color_data$labels
   matched_vector <- color_data$matched_vector
 
-  # Extract unique values from vh_file$best_query
-  #unique_queries <- unique(vh_file[[groupby]])
+  # Extract unique values from file$best_query
+  #unique_queries <- unique(file[[groupby]])
 
   # Create a vector of corresponding names from legend_labels
   #pyhlum_names <- legend_labels[unique_queries]
 
-  # Match names to vh_file$best_query
-  #vh_file$phylum <- pyhlum_names[match(vh_file[[groupby]], unique_queries)]
+  # Match names to file$best_query
+  #file$phylum <- pyhlum_names[match(file[[groupby]], unique_queries)]
 
 
 
   if (conlen_bubble_plot) {
-    dynamic_max <- max(vh_file$contig_len)
-    dynamic_min <- min(vh_file$contig_len)
+    dynamic_max <- max(file$contig_len)
+    dynamic_min <- min(file$contig_len)
 
     breaks <- round(seq(dynamic_min, dynamic_max, length.out = contiglen_breaks))
     labels <- breaks
 
-    # Reorder vh_file by contig_len in descending order
-    vh_file <- vh_file[order(-vh_file$contig_len), ]
+    # Reorder file by contig_len in descending order
+    file <- file[order(-file$contig_len), ]
 
-    iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E), size = .data$contig_len))+
+    iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E), size = .data$contig_len))+
       geom_point(aes(color = .data[[groupby]]), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
       geom_point(aes(color=.data[[groupby]]),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
       scale_size(name = 'Contig Length', range = c(.1, 15),breaks = breaks, labels = labels)
 
   } else {
-    iden_refevalue <- ggplot(vh_file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
+    iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
       geom_point(aes(color = .data[[groupby]]), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
       geom_point(aes(color=.data[[groupby]]), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
@@ -281,8 +290,8 @@ VhgIdentityScatterPlot <- function(vh_file,
 
 
   # reuse summary stats from boxplot to calculate stats.
-  evalue_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_E")
-  identity_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="ViralRefSeq_ident")
+  evalue_stats <- boxp_summary_stats(file, group = groupby,ycol ="ViralRefSeq_E")
+  identity_stats <- boxp_summary_stats(file, group = groupby,ycol ="ViralRefSeq_ident")
 
 
 
@@ -293,7 +302,7 @@ VhgIdentityScatterPlot <- function(vh_file,
 
   if (conlen_bubble_plot){
 
-    contig_stats <- boxp_summary_stats(vh_file, group = groupby,ycol ="contig_len")
+    contig_stats <- boxp_summary_stats(file, group = groupby,ycol ="contig_len")
 
     results$contig_stats <- contig_stats
   }
