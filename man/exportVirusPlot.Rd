@@ -146,10 +146,10 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 \dontrun{
 
 # first export
-ExportVirusPlot(plot=plot,file_name="testplot.png",width=8,height=6,units="in")
+ExportVirusPlot(plot=plot$plot,file_name="testplot.png",width=8,height=6,units="in")
 
 # second export with device argument
-ExportVirusPlot(plot=plot,file_name="testplot",width=8,height=6,units="in",device = "png")
+ExportVirusPlot(plot=plot$plot,file_name="testplot",width=8,height=6,units="in",device = "png")
 
 }
 
@@ -170,7 +170,7 @@ legend_position = "bottom",title = "",xlabel = "",
                       reorder_criteria = NULL,theme_choice = "minimal")
 
 # add plots to a list
-plot_list <- list(violinplot,srarun$plot,boxplot$boxp)
+plot_list <- list(violinplot$plot,srarun$plot,boxplot$boxp)
 
 \dontrun{
 
