@@ -34,7 +34,8 @@ ImportVirusTable <- function(path) {
 
   # Try to read the file and handle any potential errors
   tryCatch({
-    vh_file <- read.table(file = path, sep = "\t", header = TRUE,fill = TRUE)
+    vh_file <- read.table(file = path, sep = "\t", header = TRUE,fill = TRUE,quote = NULL,
+                          comment.char = "")
 
     vh_file[vh_file == ""] <- NA
 
