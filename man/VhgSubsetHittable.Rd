@@ -78,6 +78,8 @@ num_hits_min = 4,ViralRefSeq_ident_criteria = -90,ViralRefSeq_E_criteria = 0.000
 # check dimensions after filtering
 cat("The dimensions of the VirusHunter Hittable after filtering are: \n");dim(file_filtered)
 # Summary statistics after filtering
+cat("\nCounts of 'best_query' values after filtering:\n")
+table(file_filtered$best_query)
 cat("\nSummary statistics of 'num_hits' column after filtering:\n")
 summary(file_filtered$num_hits)
 cat("\nSummary statistics of 'ViralRefSeq_ident' column after filtering:\n")
