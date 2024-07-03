@@ -139,6 +139,28 @@ for grouping.
 \item The option \code{conlen_bubble_plot} = TRUE generates a bubble plot where the size of points corresponds to "contig_len" (exclusive to VirusGatherer).
 }
 
+\code{filter_group_criteria}: Allows filtering of viral groups by specifying either a single character
+string or a vector of character strings that match unique entries in \code{groupby}.
+Alternatively, a single numeric value, a range, or a vector of numeric values can be used to filter groups.
+
+For example, if \code{groupby} is "best_query" with the following unique groups:
+\itemize{
+\item Anello_ORF1core
+\item Gemini_Rep
+\item Genomo_Rep
+\item Hepadna-Nackedna_TP
+}
+
+Setting \code{filter_group_criteria} to \code{c("Anello_ORF1core", "Genomo_Rep")} will filter the data to only
+include observations where the "best_query" column has 'Anello_ORF1core' or 'Genomo_Rep'.
+Alternatively, setting \code{filter_group_criteria} to \code{2:3} will return only the second and third
+alphabetically ordered viral groups from "best_query".
+The order also matches the order of the viral groups in the faceted scatter plot.
+
+This is particularly useful when there are too many viral groups to be plotted in a single plot,
+allowing for separation into different groups.
+It also enables the user to focus on specific groups of interest for more detailed analysis.
+
 Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
 and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
