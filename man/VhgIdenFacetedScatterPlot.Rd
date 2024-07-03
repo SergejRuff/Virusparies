@@ -31,17 +31,18 @@ VhgIdenFacetedScatterPlot(
   legend_text_size = 10,
   true_colour = "blue",
   false_colour = "red",
-  wrap_ncol = 2
+  wrap_ncol = 2,
+  filter_group_criteria = NULL
 )
 }
 \arguments{
 \item{file}{A data frame containing at least the columns \code{ViralRefSeq_E}, \code{ViralRefSeq_ident}, and the specified grouping column.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
+\item{groupby}{(optional):  A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
-\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional):  When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -54,57 +55,65 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional) A numeric value representing the cutoff for the viral reference e-value. Points with \code{ViralRefSeq_E}
+\item{cutoff}{(optional):  A numeric value representing the cutoff for the viral reference e-value. Points with \code{ViralRefSeq_E}
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}
 
-\item{conlen_bubble_plot}{(optional) Logical value indicating whether the \code{contig_len} column
+\item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
 should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.}
 
-\item{contiglen_breaks}{(optional) number of breaks for the bubble plot (for \code{conlen_bubble_plot}=TRUE). Default is 5.}
+\item{contiglen_breaks}{(optional):  number of breaks for the bubble plot (for \code{conlen_bubble_plot}=TRUE). Default is 5.}
 
-\item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
+\item{theme_choice}{(optional):  A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 Default is "linedraw".}
 
-\item{title}{(optional) The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".}
+\item{title}{(optional):  The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".}
 
-\item{title_size}{(optional) The size of the title text. Default is 16.}
+\item{title_size}{(optional):  The size of the title text. Default is 16.}
 
-\item{title_face}{(optional) The face (bold, italic, etc.) of the title text. Default is "bold".}
+\item{title_face}{(optional):  The face (bold, italic, etc.) of the title text. Default is "bold".}
 
-\item{title_colour}{(optional) The color of the title text. Default is "#2a475e".}
+\item{title_colour}{(optional):  The color of the title text. Default is "#2a475e".}
 
-\item{subtitle}{(optional) The subtitle of the plot. Default is NULL.}
+\item{subtitle}{(optional):  The subtitle of the plot. Default is NULL.}
 
-\item{subtitle_size}{(optional) The size of the subtitle text. Default is 12.}
+\item{subtitle_size}{(optional):  The size of the subtitle text. Default is 12.}
 
-\item{subtitle_face}{(optional) The face (bold, italic, etc.) of the subtitle text. Default is "bold".}
+\item{subtitle_face}{(optional):  The face (bold, italic, etc.) of the subtitle text. Default is "bold".}
 
-\item{subtitle_colour}{(optional) The color of the subtitle text. Default is "#1b2838".}
+\item{subtitle_colour}{(optional):  The color of the subtitle text. Default is "#1b2838".}
 
-\item{xlabel}{(optional) The label for the x-axis. Default is "Viral reference identity (\%)".}
+\item{xlabel}{(optional):  The label for the x-axis. Default is "Viral reference identity (\%)".}
 
-\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral reference e-values".}
+\item{ylabel}{(optional):  The label for the y-axis. Default is "-log10 of viral reference e-values".}
 
-\item{axis_title_size}{(optional) The size of the axis titles. Default is 12.}
+\item{axis_title_size}{(optional):  The size of the axis titles. Default is 12.}
 
-\item{xtext_size}{(optional) The size of the x-axis text. Default is 10.}
+\item{xtext_size}{(optional):  The size of the x-axis text. Default is 10.}
 
-\item{ytext_size}{(optional) The size of the y-axis text. Default is 10.}
+\item{ytext_size}{(optional):  The size of the y-axis text. Default is 10.}
 
-\item{legend_position}{(optional) The position of the legend. Default is "bottom".}
+\item{legend_position}{(optional):  The position of the legend. Default is "bottom".}
 
-\item{legend_title_size}{(optional) The size of the legend title text. Default is 12.}
+\item{legend_title_size}{(optional):  The size of the legend title text. Default is 12.}
 
-\item{legend_title_face}{(optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".}
+\item{legend_title_face}{(optional):  The face (bold, italic, etc.) of the legend title text. Default is "bold".}
 
-\item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional):  The size of the legend text. Default is 10.}
 
-\item{true_colour}{(optional) The color for points that meet the cutoff condition. Default is "blue".}
+\item{true_colour}{(optional):  The color for points that meet the cutoff condition. Default is "blue".}
 
-\item{false_colour}{(optional) The color for points that do not meet the cutoff condition. Default is "red".}
+\item{false_colour}{(optional):  The color for points that do not meet the cutoff condition. Default is "red".}
 
-\item{wrap_ncol}{(optional) The number of columns for faceting. Default is 2.}
+\item{wrap_ncol}{(optional):  The number of columns for faceting. Default is 2.}
+
+\item{filter_group_criteria}{(optional):  Character vector, numeric vector, or single character/numeric value.
+\itemize{
+\item Character vector: Names of viral groups to filter.
+\item Numeric vector: Indices of viral groups to filter.
+\item Single character or numeric value: Filter a single viral group.
+\item NULL: No filtering is performed.
+}}
 }
 \value{
 A list containing the following components:

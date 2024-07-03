@@ -6,10 +6,10 @@
 #' e-value meets a specified cutoff and are faceted by the `best_query` column (or another column).
 #'
 #' @param file A data frame containing at least the columns `ViralRefSeq_E`, `ViralRefSeq_ident`, and the specified grouping column.
-#' @param groupby (optional) A string indicating the column used for grouping the data points in the scatter plot.
+#' @param groupby (optional):  A string indicating the column used for grouping the data points in the scatter plot.
 #' The values in this column determine the color of each point in the scatter plot. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
-#' @param taxa_rank (optional) When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' @param taxa_rank (optional):  When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -19,34 +19,39 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cutoff (optional) A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
+#' @param cutoff (optional):  A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
-#' @param conlen_bubble_plot (optional) Logical value indicating whether the `contig_len` column
+#' @param conlen_bubble_plot (optional):  Logical value indicating whether the `contig_len` column
 #'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.
-#' @param contiglen_breaks (optional) number of breaks for the bubble plot (for `conlen_bubble_plot`=TRUE). Default is 5.
-#' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
+#' @param contiglen_breaks (optional):  number of breaks for the bubble plot (for `conlen_bubble_plot`=TRUE). Default is 5.
+#' @param theme_choice (optional):  A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
-#' @param title (optional) The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".
-#' @param title_size (optional) The size of the title text. Default is 16.
-#' @param title_face (optional) The face (bold, italic, etc.) of the title text. Default is "bold".
-#' @param title_colour (optional) The color of the title text. Default is "#2a475e".
-#' @param subtitle (optional) The subtitle of the plot. Default is NULL.
-#' @param subtitle_size (optional) The size of the subtitle text. Default is 12.
-#' @param subtitle_face (optional) The face (bold, italic, etc.) of the subtitle text. Default is "bold".
-#' @param subtitle_colour (optional) The color of the subtitle text. Default is "#1b2838".
-#' @param xlabel (optional) The label for the x-axis. Default is "Viral reference identity (%)".
-#' @param ylabel (optional) The label for the y-axis. Default is "-log10 of viral reference e-values".
-#' @param axis_title_size (optional) The size of the axis titles. Default is 12.
-#' @param xtext_size (optional) The size of the x-axis text. Default is 10.
-#' @param ytext_size (optional) The size of the y-axis text. Default is 10.
-#' @param legend_position (optional) The position of the legend. Default is "bottom".
-#' @param legend_title_size (optional) The size of the legend title text. Default is 12.
-#' @param legend_title_face (optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".
-#' @param legend_text_size (optional) The size of the legend text. Default is 10.
-#' @param true_colour (optional) The color for points that meet the cutoff condition. Default is "blue".
-#' @param false_colour (optional) The color for points that do not meet the cutoff condition. Default is "red".
-#' @param wrap_ncol (optional) The number of columns for faceting. Default is 2.
+#' @param title (optional):  The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".
+#' @param title_size (optional):  The size of the title text. Default is 16.
+#' @param title_face (optional):  The face (bold, italic, etc.) of the title text. Default is "bold".
+#' @param title_colour (optional):  The color of the title text. Default is "#2a475e".
+#' @param subtitle (optional):  The subtitle of the plot. Default is NULL.
+#' @param subtitle_size (optional):  The size of the subtitle text. Default is 12.
+#' @param subtitle_face (optional):  The face (bold, italic, etc.) of the subtitle text. Default is "bold".
+#' @param subtitle_colour (optional):  The color of the subtitle text. Default is "#1b2838".
+#' @param xlabel (optional):  The label for the x-axis. Default is "Viral reference identity (%)".
+#' @param ylabel (optional):  The label for the y-axis. Default is "-log10 of viral reference e-values".
+#' @param axis_title_size (optional):  The size of the axis titles. Default is 12.
+#' @param xtext_size (optional):  The size of the x-axis text. Default is 10.
+#' @param ytext_size (optional):  The size of the y-axis text. Default is 10.
+#' @param legend_position (optional):  The position of the legend. Default is "bottom".
+#' @param legend_title_size (optional):  The size of the legend title text. Default is 12.
+#' @param legend_title_face (optional):  The face (bold, italic, etc.) of the legend title text. Default is "bold".
+#' @param legend_text_size (optional):  The size of the legend text. Default is 10.
+#' @param true_colour (optional):  The color for points that meet the cutoff condition. Default is "blue".
+#' @param false_colour (optional):  The color for points that do not meet the cutoff condition. Default is "red".
+#' @param wrap_ncol (optional):  The number of columns for faceting. Default is 2.
+#' @param filter_group_criteria (optional):  Character vector, numeric vector, or single character/numeric value.
+#'   - Character vector: Names of viral groups to filter.
+#'   - Numeric vector: Indices of viral groups to filter.
+#'   - Single character or numeric value: Filter a single viral group.
+#'   - NULL: No filtering is performed.
 #'
 #' @return A list containing the following components:
 #' - plot: A plot object representing the faceted scatter plot.
@@ -135,7 +140,8 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      legend_text_size = 10,
                                      true_colour = "blue",
                                      false_colour = "red",
-                                     wrap_ncol = 2
+                                     wrap_ncol = 2,
+                                     filter_group_criteria = NULL
                                      ){
 
 
@@ -194,6 +200,9 @@ VhgIdenFacetedScatterPlot <- function(file,
   # Calculate the minimum y-value
   min_y <- min(-log10(file$ViralRefSeq_E))
   min_y <- ifelse(min_y > 0, 0, min_y)
+
+
+  file <- filter_specific_group(file,groupby,filter_group_criteria)
 
 
 

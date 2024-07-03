@@ -442,3 +442,56 @@ remove_group_text <- function(plot,remove_x_axis_labels,flip_coords){
   return(plot)
 
 }
+
+
+#' internal function filter_specific_group
+#'
+#' @param file a hittable file
+#' @param groupby groupby column
+#' @param filter_group_criteria string,number or vector of character or number to filte by.
+#'
+#' @return  preprocessed hittable
+#'
+#' @keywords internal
+filter_specific_group <- function(file,groupby, filter_group_criteria) {
+
+  # Check if filter_group_criteria is NULL
+  if (is.null(filter_group_criteria)) {
+    return(file)
+  }
+
+
+  if (!is.atomic(filter_group_criteria)) {
+    stop("Error: filter_group_criteria must be a vector, single character, or single numeric value.")
+  }
+
+
+
+  # Check if filter_group_criteria is character
+  if (is.character(filter_group_criteria)) {
+    file <- file[file[[groupby]] %in% filter_group_criteria, ]
+    return(file)
+  }
+
+  # Check if filter_group_criteria is numeric
+  if (is.numeric(filter_group_criteria)) {
+    # Get unique values of the grouping variable
+    unique_groups <- unique(file[[groupby]])
+
+    # Check if any number in filter_group_criteria exceeds the number of groups
+    if (any(filter_group_criteria > length(unique_groups))) {
+      stop("Error: filter_group_criteria contains numbers larger than the amount of groups.")
+    }
+
+    # Extract the names of the specified groups based on numeric indices
+    taxonomies_of_interest <- unique_groups[filter_group_criteria]
+
+    # Filter the dataframe for rows where groupby matches the specified categories
+    file <- file[file[[groupby]] %in% taxonomies_of_interest, ]
+
+    return(file)
+  }
+
+  # Return an error if filter_group_criteria is not character or numeric
+  stop("Error: filter_group_criteria must be either character or numeric.")
+}
