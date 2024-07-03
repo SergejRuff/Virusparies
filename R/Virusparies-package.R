@@ -60,6 +60,7 @@
 #' \strong{Utils}:
 #' \itemize{
 #'   \item \code{\link{VhgPreprocessTaxa}}: process ViralRefSeq_taxonomy column.
+#'   \item \code{\link{VhgSubsetHittable}}: Filter VirusHunterGatherer data based on criteria.
 #' }
 #'
 #'
