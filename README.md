@@ -29,6 +29,10 @@ VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGat
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
 
 
+#### Tags
+Virus discovery, Viral discovery, virus scanning, R, R-Package,package, VirusHunter, VirusGatherer, VirusHunterGatherer, plots  
+
+
 ## Installation
 
 You can choose to install the development version of Virusparies from GitHub:
@@ -458,5 +462,3 @@ Chris Lauber and Li Chuin Chong from Twincore - Centre for Experimental and Clin
 Chris Lauber is the main developer behind the VirusHuntergatherer software and the Group Leader of the Computational Virology working group at the Institute for Experimental Virology, TWINCORE.
 
 
-#### Tags
-Virus / Viral discovery, virus scanning, R, R-Package,package, VirusHunter, VirusGatherer, VirusHunterGatherer, plots  
