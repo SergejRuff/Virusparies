@@ -31,6 +31,7 @@ VhSumHitsBarplot(
   legend_title_size = 12,
   legend_title_face = "bold",
   legend_text_size = 10,
+  plot_text = 3,
   plot_text_size = 3.5,
   plot_text_position_dodge = 0.9,
   plot_text_hjust = -0.1,
@@ -108,6 +109,14 @@ Default is "total number of hits: " followed by the calculated number.empty stri
 \item{legend_title_face}{(optional) The font face of the legend title. Default is "bold".}
 
 \item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+
+\item{plot_text}{An index (0-3) to select the variable for text labels.
+\itemize{
+\item 0 = None.
+\item 1 = Number of hits for each viral group.
+\item 2 = Only the percentage.
+\item 3 = Both (Default).
+}}
 
 \item{plot_text_size}{(optional) The size of the text labels added to the plot. Default is 3.5.}
 
