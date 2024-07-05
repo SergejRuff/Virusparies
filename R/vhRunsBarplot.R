@@ -43,6 +43,11 @@
 #' @param legend_title_size (optional) The size of the legend title. Default is 12.
 #' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
 #' @param legend_text_size (optional) The size of the legend text. Default is 10.
+#' @param plot_text An index (0-3) to select the variable for text labels.
+#' - 0 = None.
+#' - 1 = Number of viral groups detected across query sequences.
+#' - 2 = Only the percentage.
+#' - 3 = Both (Default).
 #' @param plot_text_size (optional) The size of the text labels added to the plot. Default is 3.5.
 #' @param plot_text_position_dodge (optional) The degree of dodging for positioning text labels. Default is 0.9.
 #' @param plot_text_hjust (optional) The horizontal justification of text labels. Default is -0.1.
@@ -130,6 +135,7 @@ VhgRunsBarplot <- function(file,
                           legend_title_size = 12,
                           legend_title_face = "bold",
                           legend_text_size = 10,
+                          plot_text = 3,
                           plot_text_size = 3.5,
                           plot_text_position_dodge = 0.9,
                           plot_text_hjust = -0.1,
@@ -223,6 +229,17 @@ VhgRunsBarplot <- function(file,
     stop("Invalid reorder_criteria. Please choose one of: max, min.")
   }
 
+  text_var_names <- c("none", "unique_SRA_run", "perc", "res")
+
+  # Check if the provided index is valid
+  if (plot_text < 0 || plot_text >= length(text_var_names)) {
+    stop("Invalid plot_text. Choose an index from 0 to 3.")
+  }
+
+  text_var <- text_var_names[plot_text + 1]
+
+  sample_run <- sample_run %>% mutate(perc=paste(.data$perc,"%"))
+
 
 
 
@@ -251,12 +268,6 @@ VhgRunsBarplot <- function(file,
           legend.key.size = unit(1.5, "lines"),
           legend.title = element_text(size = legend_title_size, face = legend_title_face))+
     guides(fill=guide_legend(title=legend_title))+
-    geom_text(aes(label = .data$res),
-              hjust = plot_text_hjust,
-              vjust= plot_text_vjust,
-              color = plot_text_colour,
-              position = position_dodge(plot_text_position_dodge),
-              size = plot_text_size)+
     scale_y_continuous(expand = c(0, 0), limits = c(0, max(sample_run$unique_SRA_run)+max(sample_run$unique_SRA_run)/10))+
     theme(
       # This is the new default font in the plot
@@ -272,6 +283,22 @@ VhgRunsBarplot <- function(file,
         face = subtitle_face,
         color= subtitle_colour
       ))
+
+
+
+
+  if (text_var != "none") {
+
+
+    run_bar <- run_bar + geom_text(aes(label = .data[[text_var]]),
+                       hjust = plot_text_hjust,
+                       vjust = plot_text_vjust,
+                       color = plot_text_colour,
+                       position = position_dodge(plot_text_position_dodge),
+                       size = plot_text_size)
+  }
+
+
 
   if (flip_coords) {
     run_bar <- run_bar + coord_flip()
