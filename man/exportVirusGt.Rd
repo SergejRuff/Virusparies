@@ -32,7 +32,7 @@ a prompt will appear asking to create a new directory when necessary.}
 \item{...}{Pass any other options to the corresponding internal saving function.}
 }
 \value{
-a message indicating that export was successful.
+A message indicating that export was successful.
 }
 \description{
 This function allows the user to export graphical tables in different formats.

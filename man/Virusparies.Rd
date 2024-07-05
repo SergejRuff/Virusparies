@@ -56,8 +56,9 @@ This package includes the following functions:
 
 \strong{Export}:
 \itemize{
+\item \code{\link{ExportVirusDataFrame}}: Export Data Frames.
 \item \code{\link{ExportVirusGt}}: Export Graphical Tables.
-\item \code{\link{ExportVirusPlot}}: Export plots.
+\item \code{\link{ExportVirusPlot}}: Export Plots.
 }
 
 \strong{Utils}:

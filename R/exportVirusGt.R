@@ -43,7 +43,7 @@
 #'
 #' The optional `export_gt_obj` argument enables the user to export the data frame as a .rds file alongside the graphical table.
 #'
-#' @return a message indicating that export was successful.
+#' @return A message indicating that export was successful.
 #'
 #'
 #' @author Sergej Ruff
