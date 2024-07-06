@@ -38,6 +38,21 @@ boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ide
     ) %>%
     arrange(desc(median))
 
+
+  # Round the results except when ycol is "ViralRefSeq_E"
+  # if(ycol != "ViralRefSeq_E") {
+  #   summary_stats_identity <- summary_stats_identity %>%
+  #     mutate(
+  #       median = round(.data$median, 2),
+  #       Q1 = round(.data$Q1, 2),
+  #       Q3 = round(.data$Q3, 2),
+  #       mean = round(.data$mean, 2),
+  #       sd = round(.data$sd, 2),
+  #       min = round(.data$min, 2),
+  #       max = round(.data$max, 2)
+  #     )
+  # }
+
   return(summary_stats_identity)
 
 }
