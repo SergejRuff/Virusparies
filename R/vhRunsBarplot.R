@@ -282,7 +282,8 @@ VhgRunsBarplot <- function(file,
         size = subtitle_size,
         face = subtitle_face,
         color= subtitle_colour
-      ))
+      ))+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
 
 

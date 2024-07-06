@@ -291,6 +291,22 @@ VhgBoxplot <- function(file,
   }
 
 
+  if (y_column == "ViralRefSeq_ident") {
+    max_y <- 100
+    min_y <- 0
+    y_limits <- c(min_y, max_y)
+  } else if (y_column == "ViralRefSeq_E") {
+    max_y <- max(y_aes) + 5
+    min_y <- min(y_aes)
+    min_y <- ifelse(min_y > 0, 0, min_y)
+    y_limits <- c(min_y, max_y)
+  } else if (y_column == "contig_len") {
+    min_y <- 0
+    max_y <- max(y_aes) + 10
+    y_limits <- c(min_y, max_y)
+  }
+
+
 
 
   ########################
@@ -344,7 +360,9 @@ VhgBoxplot <- function(file,
         face = subtitle_face,
         color= subtitle_colour
       )
-    )
+    )+
+    scale_y_continuous(expand = c(0, 0), limits = y_limits)+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
   if (flip_coords) {
     boxp <- boxp + coord_flip()

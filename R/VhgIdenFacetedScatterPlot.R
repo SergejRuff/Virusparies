@@ -280,7 +280,8 @@ VhgIdenFacetedScatterPlot <- function(file,
       expand = c(0, 0),
       limits = c(0, 105),
       breaks = seq(0, 100, by = 10)
-    )
+    )+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
   # reuse summary stats from boxplot to calculate stats.
   evalue_stats <- boxp_summary_stats(file, group = groupby,ycol ="ViralRefSeq_E")

@@ -269,7 +269,8 @@ VhSumHitsBarplot <- function(vh_file,
        size = subtitle_size,
         face = subtitle_face,
         color = subtitle_colour
-     ))
+     ))+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
   if (text_var != "none") {
 

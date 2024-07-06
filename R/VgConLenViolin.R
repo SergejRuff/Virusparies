@@ -203,6 +203,11 @@ VgConLenViolin <- function(vg_file=vg_file,
     filter(.data$observations < 2)
 
 
+  min_y <- 0
+  max_y <- max(vg_file$contig_len) + 10
+  y_limits <- c(min_y, max_y)
+
+
 
 
   # Check for valid reorder_criteria
@@ -251,7 +256,9 @@ VgConLenViolin <- function(vg_file=vg_file,
         face = subtitle_face,
         color= subtitle_colour
       )
-    )
+    )+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))+
+    scale_y_continuous(expand = c(0, 0), limits = y_limits)
 
   if(jitter_point){
     p <- p + geom_jitter(width = 0.1, size = 1, color = jitter_point_colour)

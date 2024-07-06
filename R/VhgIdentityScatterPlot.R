@@ -278,7 +278,8 @@ VhgIdentityScatterPlot <- function(file,
       expand = c(0, 0),
       limits = c(0, 105),
       breaks = seq(0, 100, by = 10)
-    )
+    )+
+    theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
 
 
