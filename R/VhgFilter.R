@@ -66,6 +66,25 @@
 #' cat("\nSummary statistics of 'ViralRefSeq_E' column after filtering:\n")
 #' summary(file_filtered$ViralRefSeq_E)
 #'
+#' # other examples for viral_group
+#' \dontrun{
+#'
+#' # Include a single group:
+#' result1 <- VhgSubsetHittable(file, virus_groups = "Hepadna-Nackedna_TP")
+#'
+#' # Include multiple groups:
+#' result2 <- VhgSubsetHittable(file, virus_groups = c("Hepadna-Nackedna_TP", "Gemini_Rep"))
+#'
+#' # Exclude a single group:
+#' result3 <- VhgSubsetHittable(file, virus_groups = list(exclude = "Hepadna-Nackedna_TP"))
+#'
+#' # Exclude multiple groups:
+#' result <- VhgSubsetHittable(file, virus_groups = list(exclude =
+#'  c("Hepadna-Nackedna_TP", "Anello_ORF1core")))
+#'
+#'
+#' }
+#'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #' @export
@@ -78,6 +97,25 @@ VhgSubsetHittable <- function(file,
                       contig_len_criteria = NULL) {
 
 
+  # Helper function to validate and process group criteria
+  process_groups <- function(groups, include_exclude) {
+    if (!is.null(groups) && !is.character(groups)) {
+      stop(paste("Error: 'virus_groups$", include_exclude, "' must be a character vector."))
+    }
+    if (is.character(groups)) {
+      unique_groups <- unique(file[[group_column]])
+      if (!all(groups %in% unique_groups)) {
+        stop(paste("Error:", include_exclude, "groups contain entries that do not match unique values in group_column."))
+      }
+      if (include_exclude == "include") {
+        return(file[file[[group_column]] %in% groups, ])
+      } else if (include_exclude == "exclude") {
+        return(file[!file[[group_column]] %in% groups, ])
+      }
+    }
+    return(file)
+  }
+
   # Apply user-defined virus_groups criteria if provided
   if (!is.null(virus_groups)) {
 
@@ -86,18 +124,12 @@ VhgSubsetHittable <- function(file,
       stop("Error: 'group_column' must be either 'ViralRefSeq_taxonomy' or 'best_query'.")
     }
 
-    unique_groups <- unique(file[[group_column]])
-    if (!all(virus_groups %in% unique_groups)) {
-      stop("Error: virus_groups contain entries that do not match unique values in group_column.")
+    if (is.list(virus_groups)) {
+      file <- process_groups(virus_groups$include, "include")
+      file <- process_groups(virus_groups$exclude, "exclude")
+    } else {
+      file <- process_groups(virus_groups, "include")
     }
-
-    if (!is.character(virus_groups)) {
-      stop("Error: 'virus_groups' must be a character vector.")
-    }
-
-
-
-    file <- file[file[[group_column]] %in% virus_groups, ]
   }
 
   # Apply user-defined filtering criteria if provided

@@ -87,6 +87,25 @@ summary(file_filtered$ViralRefSeq_ident)
 cat("\nSummary statistics of 'ViralRefSeq_E' column after filtering:\n")
 summary(file_filtered$ViralRefSeq_E)
 
+# other examples for viral_group
+\dontrun{
+
+# Include a single group:
+result1 <- VhgSubsetHittable(file, virus_groups = "Hepadna-Nackedna_TP")
+
+# Include multiple groups:
+result2 <- VhgSubsetHittable(file, virus_groups = c("Hepadna-Nackedna_TP", "Gemini_Rep"))
+
+# Exclude a single group:
+result3 <- VhgSubsetHittable(file, virus_groups = list(exclude = "Hepadna-Nackedna_TP"))
+
+# Exclude multiple groups:
+result <- VhgSubsetHittable(file, virus_groups = list(exclude =
+ c("Hepadna-Nackedna_TP", "Anello_ORF1core")))
+
+
+}
+
 }
 \seealso{
 VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
