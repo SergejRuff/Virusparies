@@ -36,7 +36,8 @@ VhSumHitsBarplot(
   plot_text_position_dodge = 0.9,
   plot_text_hjust = -0.1,
   plot_text_vjust = 0.5,
-  plot_text_colour = "black"
+  plot_text_colour = "black",
+  facet_ncol = NULL
 )
 }
 \arguments{
@@ -128,6 +129,9 @@ Default is "total number of hits: " followed by the calculated number.empty stri
 It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
 
 \item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
+
+\item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
+It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
 }
 \value{
 A list containing the generated bar plot and processed data.

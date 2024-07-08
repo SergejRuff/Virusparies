@@ -505,3 +505,24 @@ filter_specific_group <- function(file,groupby, filter_group_criteria) {
   # Return an error if filter_group_criteria is not character or numeric
   stop("Error: filter_group_criteria must be either character or numeric.")
 }
+
+
+#' facet_plot
+#'
+#' @param plot plot object
+#' @param facet_ncol number of columns to facet by. Default NULL
+#' @param flip_coords flip_coords
+#'
+#' @return plot
+#'
+#' @keywords internal
+facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
+
+  if(!is.null(facet_ncol)){
+
+    plot <- plot +  # Define colors for TRUE and FALSE
+      facet_wrap(~.data$phylum, ncol = facet_ncol,scales = ifelse(flip_coords, "free_y", "free_x"))
+  }
+
+  return(plot)
+}

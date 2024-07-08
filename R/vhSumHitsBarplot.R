@@ -58,6 +58,8 @@
 #' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
 #' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
+#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #'
 #'
 #'
@@ -135,7 +137,8 @@ VhSumHitsBarplot <- function(vh_file,
                              plot_text_position_dodge = 0.9,
                              plot_text_hjust = -0.1,
                              plot_text_vjust = 0.5,
-                             plot_text_colour = "black"){
+                             plot_text_colour = "black",
+                             facet_ncol = NULL){
 
 
  #check if table is empty
@@ -302,6 +305,8 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  }
+
+  sum_plot <- facet_plot(sum_plot,facet_ncol,flip_coords)
 
 
 

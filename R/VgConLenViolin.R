@@ -49,6 +49,8 @@
 #' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
 #' @param min_observations (optional): Minimum number of observations required per group to be included in the plot (default: 1).
+#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #'
 #'
 #' @details
@@ -119,7 +121,8 @@ VgConLenViolin <- function(vg_file=vg_file,
                            legend_title_size = 12,
                            legend_title_face = "bold",
                            legend_text_size = 10,
-                           min_observations = 1) {
+                           min_observations = 1,
+                           facet_ncol = NULL) {
 
   #check if table is empty
   #is_file_empty(vg_file)
@@ -283,6 +286,8 @@ VgConLenViolin <- function(vg_file=vg_file,
 
 
   p <- remove_group_text(p,remove_group_labels,flip_coords)
+
+  p <- facet_plot(p,facet_ncol,flip_coords)
 
 
 

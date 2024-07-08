@@ -34,7 +34,8 @@ VgConLenViolin(
   legend_title_size = 12,
   legend_title_face = "bold",
   legend_text_size = 10,
-  min_observations = 1
+  min_observations = 1,
+  facet_ncol = NULL
 )
 }
 \arguments{
@@ -113,6 +114,9 @@ Default is "linedraw".}
 \item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
 
 \item{min_observations}{(optional): Minimum number of observations required per group to be included in the plot (default: 1).}
+
+\item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
+It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
 }
 \value{
 A list containing the following components:

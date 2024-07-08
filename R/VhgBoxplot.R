@@ -50,6 +50,8 @@
 #' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
 #' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
+#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #'
 #'
 #' @details
@@ -151,7 +153,8 @@ VhgBoxplot <- function(file,
                               legend_position = "bottom",
                               legend_title_size = 12,
                               legend_title_face = "bold",
-                              legend_text_size = 10
+                              legend_text_size = 10,
+                              facet_ncol = NULL
                               ){
 
 
@@ -398,6 +401,8 @@ VhgBoxplot <- function(file,
   }
 
   boxp <- remove_group_text(boxp,remove_group_labels,flip_coords)
+
+  boxp <- facet_plot(boxp,facet_ncol,flip_coords)
 
 
 
