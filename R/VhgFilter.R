@@ -32,57 +32,28 @@
 #'
 #' @examples
 #'
-#' # import file
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' file <- ImportVirusTable(path)
 #'
-#' # check dimensions before filtering
 #' cat("The dimensions of the VirusHunter Hittable before filtering are: \n");dim(file)
-#' # we only want the Anello_ORF1core from "best_query" col in this example
-#' cat("\nCounts of 'best_query' values before filtering:\n")
-#' table(file$best_query)
-#' # summary stats
-#' # Summary statistics before filtering
-#' cat("\nSummary statistics of 'num_hits' column before filtering:\n")
-#' summary(file$num_hits)
-#' cat("\nSummary statistics of 'ViralRefSeq_ident' column before filtering:\n")
-#' summary(file$ViralRefSeq_ident)
-#' cat("\nSummary statistics of 'ViralRefSeq_E' column before filtering:\n")
-#' summary(file$ViralRefSeq_E)
 #'
 #' file_filtered <- VhgSubsetHittable(file,group_column = "best_query",
 #' virus_groups = "Anello_ORF1core",
 #' num_hits_min = 4,ViralRefSeq_ident_criteria = -90,ViralRefSeq_E_criteria = 0.00001)
 #'
-#' # check dimensions after filtering
 #' cat("The dimensions of the VirusHunter Hittable after filtering are: \n");dim(file_filtered)
-#' # Summary statistics after filtering
-#' cat("\nCounts of 'best_query' values after filtering:\n")
-#' table(file_filtered$best_query)
-#' cat("\nSummary statistics of 'num_hits' column after filtering:\n")
-#' summary(file_filtered$num_hits)
-#' cat("\nSummary statistics of 'ViralRefSeq_ident' column after filtering:\n")
-#' summary(file_filtered$ViralRefSeq_ident)
-#' cat("\nSummary statistics of 'ViralRefSeq_E' column after filtering:\n")
-#' summary(file_filtered$ViralRefSeq_E)
 #'
 #' # other examples for viral_group
 #' \dontrun{
-#'
-#' # Include a single group:
+#'# Include a single group:
 #' result1 <- VhgSubsetHittable(file, virus_groups = "Hepadna-Nackedna_TP")
-#'
 #' # Include multiple groups:
 #' result2 <- VhgSubsetHittable(file, virus_groups = c("Hepadna-Nackedna_TP", "Gemini_Rep"))
-#'
 #' # Exclude a single group:
 #' result3 <- VhgSubsetHittable(file, virus_groups = list(exclude = "Hepadna-Nackedna_TP"))
-#'
 #' # Exclude multiple groups:
-#' result <- VhgSubsetHittable(file, virus_groups = list(exclude =
+#' result4 <- VhgSubsetHittable(file, virus_groups = list(exclude =
 #'  c("Hepadna-Nackedna_TP", "Anello_ORF1core")))
-#'
-#'
 #' }
 #'
 #' @seealso
