@@ -348,6 +348,16 @@ extract_taxa <- function(sublist, taxa_rank) {
 #' @export
 VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
+  if (!all(grepl("^taxid:", vh_file$ViralRefSeq_taxonomy))) {
+
+    message("The 'ViralRefSeq_taxonomy' column is expected to start with 'taxid:' followed by taxa ranks separated by '|'.\n",
+            "However, Your column has a different structure, possibly indicating that the data has already been processed by 'VhgPreprocessTaxa'.\n",
+            "Skipping Taxonomy processing ...")
+
+    return(vh_file)
+
+  }
+
   taxa_rank <- taxonomy_rank_hierarchy(taxa_rank)
 
   # Split vh_file.
