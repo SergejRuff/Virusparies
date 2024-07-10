@@ -295,7 +295,7 @@ VhgBoxplot <- function(file,
 
 
   if (y_column == "ViralRefSeq_ident") {
-    max_y <- 100
+    max_y <- 105
     min_y <- 0
     y_limits <- c(min_y, max_y)
   } else if (y_column == "ViralRefSeq_E") {
