@@ -32,7 +32,7 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
   )
 
   # Assuming ICTV_data is properly loaded and formatted
-  ICTV_data <- ICTV_data
+  #ICTV_data <- ICTV_data
 
   # Split the data frame by the 'Phylum' column
   ICTV_data_split <- split(ICTV_data, ICTV_data$Phylum)

@@ -383,7 +383,7 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
   }
 
   # Load ICTV data (assuming the ICTV data is properly loaded and formatted)
-  ICTV_data <- ICTV_data
+  #ICTV_data <- ICTV_data
 
 
   # Initialize a vector to store the processed taxonomy names
