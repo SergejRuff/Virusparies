@@ -112,11 +112,7 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
 
 
-  ictv_formatted <- ICTV_data %>%
-    select(.data$Phylum:.data$Subgenus) %>%
-    pivot_longer(.data$Subphylum:.data$Subgenus, names_to = "level", values_to = "name") %>%
-    na.omit() %>%
-    distinct()
+  ictv_formatted <- format_ICTV()
 
 
 

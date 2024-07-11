@@ -325,3 +325,25 @@ facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
 
   return(plot)
 }
+
+
+
+#' pivort ICVT Data
+#'
+#' @return pivotted ICTV_data
+#'
+#' @importFrom tidyr pivot_longer
+#' @keywords internal
+format_ICTV <- function(){
+
+
+
+  return(ICTV_data %>%
+           select(.data$Phylum:.data$Subgenus) %>%
+           pivot_longer(.data$Subphylum:.data$Subgenus, names_to = "level", values_to = "name") %>%
+           na.omit() %>%
+           distinct())
+
+}
+
+
