@@ -29,6 +29,7 @@ Imports:
     rlang,
     stats,
     stringr,
+    tidyr,
     tools,
     utils
 Depends: 
