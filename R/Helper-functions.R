@@ -234,52 +234,25 @@ get_plot_parameters <- function(y_column, cut) {
 #' @return a character with the taxa suffix
 #'
 #' @keywords internal
-taxonomy_rank_hierarchy<- function(taxa_rank){
+taxonomy_rank_hierarchy <- function(taxa_rank) {
 
+  taxa_list <- list(
+    Subphylum = "viricotina",
+    Class = "viricetes",
+    Subclass = "viricetidae",
+    Order = "virales",
+    Suborder = "virineae",
+    Family = "viridae",
+    Subfamily = "virinae",
+    Genus = "virus"
+  )
+  valid_ranks <- names(taxa_list)
 
-  # Define valid taxa ranks
-  valid_ranks <- c("Subphylum", "Class", "Subclass", "Order",
-                   "Suborder", "Family", "Subfamily", "Genus")
-
-  # Check if the provided taxa_rank is valid
   if (!(taxa_rank %in% valid_ranks)) {
     stop("Error: Invalid taxa rank provided. Please provide one of: Subphylum, Class, Subclass, Order, Suborder, Family, Subfamily, Genus")
   }
 
-
-  if(taxa_rank=="Subphylum"){
-    return("viricotina")
-  }
-
-  if(taxa_rank=="Class"){
-    return("viricetes")
-  }
-
-  if(taxa_rank=="Subclass"){
-    return("viricetidae")
-  }
-
-  if(taxa_rank=="Order"){
-    return("virales")
-  }
-
-  if(taxa_rank=="Suborder"){
-    return("virineae")
-  }
-
-  if(taxa_rank=="Family"){
-    return("viridae")
-  }
-
-  if(taxa_rank=="Subfamily"){
-    return("virinae")
-  }
-
-  if(taxa_rank=="Genus"){
-    return("virus")
-  }
-
-
+  return(taxa_list[[taxa_rank]])
 }
 
 #' internal: extract viridae element
