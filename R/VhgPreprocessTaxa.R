@@ -145,14 +145,11 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
 
 
-  # Consolidate and update ViralRefSeq_taxonomy column
   vh_file <- vh_file %>%
-    mutate(
-      ViralRefSeq_taxonomy = case_when(
-        grepl("^unclassified", .data$ViralRefSeq_taxonomy) ~ "unclassified",
-        TRUE ~ .data$ViralRefSeq_taxonomy
-      )
-    )
+    mutate(ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified unclassified",
+                                          "unclassified", .data$ViralRefSeq_taxonomy)) %>%
+    mutate(ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified NA",
+                                          "unclassified", .data$ViralRefSeq_taxonomy))
 
 
   return(vh_file)
