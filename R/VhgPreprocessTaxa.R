@@ -131,19 +131,12 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
         is.na(.data$ViralRefSeq_taxonomy) ~ paste("unclassified", .data$Phylum),
         .default = .data$ViralRefSeq_taxonomy
       )
-    ) %>% select(-c(.data$name:.data$level))
+    ) %>% select(-c(.data$name:.data$level))%>%
+    mutate(
+      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified unclassified", "unclassified", .data$ViralRefSeq_taxonomy),
+      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified NA", "unclassified", .data$ViralRefSeq_taxonomy)
+    )
 
-
-
-
-
-
-
-  vh_file <- vh_file %>%
-    mutate(ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified unclassified",
-                                          "unclassified", .data$ViralRefSeq_taxonomy)) %>%
-    mutate(ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified NA",
-                                          "unclassified", .data$ViralRefSeq_taxonomy))
 
 
   return(vh_file)
