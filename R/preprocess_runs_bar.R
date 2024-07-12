@@ -16,7 +16,7 @@
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
 #'
-#' @keywords internal
+#' @noRd
 preprocess_runs_bar <- function(vh_file,groupby="best_query"){
 
   all_names <- names(vh_file)

@@ -18,7 +18,7 @@
 #' @importFrom dplyr group_by summarize mutate
 #' @importFrom stringr str_c
 #' @importFrom rlang .data
-#' @keywords internal
+#' @noRd
 vh_sumhitbar_preprocessing <- function(vh_file,groupby="best_query"){
 
 

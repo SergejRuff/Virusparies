@@ -15,7 +15,7 @@
 #' @importFrom dplyr group_by summarise arrange desc
 #' @importFrom rlang .data
 #' @importFrom stats median quantile median sd
-#' @keywords internal
+#' @noRd
 boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ident"){
 
   if(ycol == "ViralRefSeq_E"){

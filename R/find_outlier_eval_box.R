@@ -14,7 +14,7 @@
 #' @author Sergej Ruff
 #' @import  dplyr
 #' @importFrom stats na.omit IQR
-#' @keywords internal
+#' @noRd
 find_outlier_eval_box <- function(vh_file, group = "best_query", y_column = "ViralRefSeq_E") {
 
   ## detect outlier in boxplot

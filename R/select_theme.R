@@ -12,7 +12,7 @@
 #' @importFrom ggplot2 theme_minimal theme_classic theme_light theme_dark theme_void theme_gray
 #' theme_bw theme_linedraw theme_test theme
 #'
-#' @keywords internal
+#' @noRd
 select_theme <- function(theme_choice) {
   base_theme <- theme_minimal()
 

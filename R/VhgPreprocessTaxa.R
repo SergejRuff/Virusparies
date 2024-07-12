@@ -4,7 +4,7 @@
 #'
 #' @return a character with the taxa suffix
 #'
-#' @keywords internal
+#' @noRd
 taxonomy_rank_hierarchy <- function(taxa_rank) {
 
   # Define the list with values

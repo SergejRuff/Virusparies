@@ -8,7 +8,7 @@
 #'
 #' @author Sergej Ruff
 #'
-#' @keywords internal
+#' @noRd
 is_file_empty <- function(file) {
   if (nrow(file) == 0) {
     message("Warning: Input has zero rows. Skipping further processing.")
@@ -25,7 +25,7 @@ is_file_empty <- function(file) {
 #' @param cutoff cutoff
 #'
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 plot_boxplot_message <- function(y_column, x_column, cutoff) {
   messages <- list(
     "ViralRefSeq_E" = paste0("boxplot plotting RefSeq evalues for specified groups (", x_column, ")\nusing the following cut off: ", cutoff),
@@ -50,7 +50,7 @@ plot_boxplot_message <- function(y_column, x_column, cutoff) {
 #' @param columns single column or list of columns
 #'
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 check_columns <- function(file,columns){
 
   # Get all column names from file
@@ -76,7 +76,7 @@ check_columns <- function(file,columns){
 #' @param option 1 for chacter,2 for numeric
 #'
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 check_input_type <- function(vh_file, columns, option) {
   # Check if the option is valid (either 1 or 2)
   if (!option %in% c(1, 2)) {
@@ -109,7 +109,7 @@ check_input_type <- function(vh_file, columns, option) {
 #' @param name argument from function.
 #'
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 arg_character <- function(name) {
   if (!is.character(name)) {
     errorMessage <- paste("Input argument", deparse(substitute(name)), "must be a character")
@@ -126,7 +126,7 @@ arg_character <- function(name) {
 #'
 #' @author Sergej Ruff
 #'
-#' @keywords internal
+#' @noRd
 arg_numeric_or_integer <- function(name) {
   if (!(is.numeric(name) || is.integer(name))) {
     errorMessage <- paste("Input argument", deparse(substitute(name)), "must be numeric or integer")
@@ -139,7 +139,7 @@ arg_numeric_or_integer <- function(name) {
 #' @param name argument from function.
 #'
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 arg_logical <- function(name) {
   if (!is.logical(name)) {
     errorMessage <- paste("Input argument", deparse(substitute(name)), "must be logical")
@@ -155,7 +155,7 @@ arg_logical <- function(name) {
 #'
 #' @return An error if obj is not a dataframe
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 check_is_dataframe <- function(obj) {
   if (!is.data.frame(obj)) {
     stop("The provided object is not a data.frame.")
@@ -171,7 +171,7 @@ check_is_dataframe <- function(obj) {
 #'
 #' @return error message, if df has no column names
 #' @author Sergej Ruff
-#' @keywords internal
+#' @noRd
 has_columnnames <- function(df) {
 
 
@@ -194,7 +194,7 @@ has_columnnames <- function(df) {
 #'
 #' @return filtered dataframe
 #'
-#' @keywords internal
+#' @noRd
 vhg_filter_belowthresholdboxplot <- function(vh_file,cut){
 
   return(vh_file[vh_file$ViralRefSeq_E<cut,])
@@ -237,7 +237,7 @@ get_plot_parameters <- function(y_column, cut) {
 #'
 #'
 #'
-#' @keywords internal
+#' @noRd
 remove_group_text <- function(plot,remove_x_axis_labels,flip_coords){
 
   if(remove_x_axis_labels && flip_coords){
@@ -261,7 +261,7 @@ remove_group_text <- function(plot,remove_x_axis_labels,flip_coords){
 #'
 #' @return  preprocessed hittable
 #'
-#' @keywords internal
+#' @noRd
 filter_specific_group <- function(file,groupby, filter_group_criteria) {
 
   # Check if filter_group_criteria is NULL
@@ -314,7 +314,7 @@ filter_specific_group <- function(file,groupby, filter_group_criteria) {
 #'
 #' @return plot
 #'
-#' @keywords internal
+#' @noRd
 facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
 
   if(!is.null(facet_ncol)){
@@ -333,7 +333,7 @@ facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
 #' @return pivotted ICTV_data
 #'
 #' @importFrom tidyr pivot_longer
-#' @keywords internal
+#' @noRd
 format_ICTV <- function(){
 
 
