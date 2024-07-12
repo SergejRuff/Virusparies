@@ -94,7 +94,7 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' @import dplyr
 #' @importFrom rlang .data
 #' @importFrom tidyr unnest pivot_longer
-#' @importFrom stringr str_split str_extract
+#' @importFrom stringr  str_extract str_remove_all str_detect
 #' @export
 VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
@@ -112,28 +112,26 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
 
 
-  ictv_formatted <- format_ICTV()
+  ictv_formatted <- format_ICTV(taxa_rank)
 
+
+  taxon_filter <- paste(unique(ictv_formatted$name), collapse = "|")
 
 
   vh_file <- vh_file %>%
     mutate(
-      ViralRefSeq_taxonomy_split = str_split(.data$ViralRefSeq_taxonomy, "\\|"),
+      ViralRefSeq_taxonomy = str_remove_all(.data$ViralRefSeq_taxonomy, "taxid:\\d+\\||\\w+\\s\\w+\\|"),
+      name = str_extract(.data$ViralRefSeq_taxonomy, taxon_filter),
+      ViralRefSeq_taxonomy = str_extract(.data$ViralRefSeq_taxonomy, paste0("\\w+", taxa_rank))
     ) %>%
-    unnest(.data$ViralRefSeq_taxonomy_split) %>%
-    left_join(ictv_formatted, join_by("ViralRefSeq_taxonomy_split" == "name")) %>%
+    left_join(ictv_formatted, join_by("name" == "name")) %>%
     mutate(
       ViralRefSeq_taxonomy = case_when(
-        !is.na(str_extract(.data$ViralRefSeq_taxonomy, paste0("\\w+", taxa_rank))) ~ str_extract(.data$ViralRefSeq_taxonomy, paste0("\\w+", taxa_rank)),
-        !is.na(.data$Phylum) ~ paste("unclassified", .data$Phylum),
-        .default = "unclassified"
+        is.na(.data$ViralRefSeq_taxonomy) & is.na(.data$Phylum) ~ "unclassified",
+        is.na(.data$ViralRefSeq_taxonomy) ~ paste("unclassified", .data$Phylum),
+        .default = .data$ViralRefSeq_taxonomy
       )
-    ) %>%
-    select(!c(.data$ViralRefSeq_taxonomy_split:.data$level))%>%
-    group_by(across(-.data$ViralRefSeq_taxonomy)) %>%  # Specify your grouping columns here
-    slice(which.min(.data$ViralRefSeq_taxonomy == "unclassified")) %>%
-    ungroup() %>%
-    distinct()
+    ) %>% select(-c(.data$name:.data$level))
 
 
 

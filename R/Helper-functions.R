@@ -330,19 +330,24 @@ facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
 
 #' pivort ICVT Data
 #'
+#' @param taxa_rank taxa_rank
+#'
 #' @return pivotted ICTV_data
 #'
 #' @importFrom tidyr pivot_longer
 #' @noRd
-format_ICTV <- function(){
+format_ICTV <- function(taxa_rank){
 
 
 
   return(ICTV_data %>%
-           select(.data$Phylum:.data$Subgenus) %>%
-           pivot_longer(.data$Subphylum:.data$Subgenus, names_to = "level", values_to = "name") %>%
-           na.omit() %>%
-           distinct())
+            select(.data$Phylum:.data$Subgenus) %>%
+            pivot_longer(.data$Subphylum:.data$Subgenus, names_to = "level", values_to = "name") %>%
+            filter(str_detect(.data$name, paste0("\\w+", taxa_rank), negate = TRUE)) %>%
+            na.omit() %>%
+            distinct())
+
+
 
 }
 
