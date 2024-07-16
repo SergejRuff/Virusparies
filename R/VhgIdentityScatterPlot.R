@@ -59,6 +59,9 @@
 #' and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 #' are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 #'
+#' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+#' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
+#'
 #' @return A list containing the following components:
 #' - plot: A plot object representing the faceted scatterplot.
 #' - evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
@@ -184,11 +187,6 @@ VhgIdentityScatterPlot <- function(file,
   arg_character(legend_position)
 
 
-  # Find the smallest value greater than 0 in ViralRefSeq_E
-  min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])
-
-  # Replace all 0 values with the smallest positive value
-  file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
 
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])

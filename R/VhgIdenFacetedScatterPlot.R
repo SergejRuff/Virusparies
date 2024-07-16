@@ -93,6 +93,9 @@
 #' and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 #' are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 #'
+#' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+#' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
+#'
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' file <- ImportVirusTable(path)

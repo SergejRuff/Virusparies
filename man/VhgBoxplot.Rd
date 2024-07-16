@@ -157,6 +157,9 @@ The 'cut' argument is used differently depending on the 'y_column' value:
 }
 
 This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
+
+Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
