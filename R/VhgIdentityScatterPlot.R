@@ -61,6 +61,7 @@
 #'
 #' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
 #' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
+#' If the smallest E-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
 #'
 #' @return A list containing the following components:
 #' - plot: A plot object representing the faceted scatterplot.
@@ -191,8 +192,15 @@ VhgIdentityScatterPlot <- function(file,
   # Find the smallest value greater than 0 in ViralRefSeq_E
   min_positive_value <- min(file$ViralRefSeq_E[file$ViralRefSeq_E > 0])
 
-  # Replace all 0 values with the smallest positive value
-  file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
+  # Check if the minimum positive value is below the cutoff
+  if (min_positive_value < cutoff) {
+    # Replace all 0 values with the smallest positive value
+    file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- min_positive_value
+  } else {
+
+    # Add 10^-10 to the cutoff value and use that for the 0 values
+    file$ViralRefSeq_E[file$ViralRefSeq_E == 0] <- cutoff * 10^-10
+  }
 
   # Apply the selected theme
   theme_selected <- select_theme(theme_choice)
