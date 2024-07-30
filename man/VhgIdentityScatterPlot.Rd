@@ -30,7 +30,8 @@ VhgIdentityScatterPlot(
   legend_position = "bottom",
   legend_title_size = 12,
   legend_title_face = "bold",
-  legend_text_size = 10
+  legend_text_size = 10,
+  highlight_groups = NULL
 )
 }
 \arguments{
@@ -101,6 +102,8 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 \item{legend_title_face}{(optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".}
 
 \item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+
+\item{highlight_groups}{(optional) A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).}
 }
 \value{
 A list containing the following components:
@@ -128,6 +131,8 @@ The plot includes:
 Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
 and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
+
+\code{highlight_groups} enables the user to specify one or more viral groups from the column indicated in the \code{groupby} argument. These groups will be highlighted in the plot.
 
 Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
 returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.

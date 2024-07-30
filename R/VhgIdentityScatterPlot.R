@@ -46,7 +46,8 @@
 #' @param legend_title_size (optional) The size of the legend title text. Default is 12.
 #' @param legend_title_face (optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".
 #' @param legend_text_size (optional) The size of the legend text. Default is 10.
-
+#' @param highlight_groups (optional) A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).
+#'
 #'
 #' @details
 #' VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
@@ -58,6 +59,8 @@
 #' Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min, and max) for 'ViralRefSeq_E'
 #' and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 #' are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
+#'
+#' `highlight_groups` enables the user to specify one or more viral groups from the column indicated in the `groupby` argument. These groups will be highlighted in the plot.
 #'
 #' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
 #' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
@@ -124,6 +127,7 @@
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
+#' @importFrom scales hue_pal
 #' @export
 VhgIdentityScatterPlot <- function(file,
                                   groupby = "best_query",
@@ -150,7 +154,8 @@ VhgIdentityScatterPlot <- function(file,
                                   legend_position = "bottom",
                                   legend_title_size = 12,
                                   legend_title_face = "bold",
-                                  legend_text_size = 10){
+                                  legend_text_size = 10,
+                                  highlight_groups = NULL){
 
   cutoff <- -log10(cutoff)
 
@@ -163,6 +168,7 @@ VhgIdentityScatterPlot <- function(file,
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
 
+
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
   }
@@ -172,6 +178,9 @@ VhgIdentityScatterPlot <- function(file,
     required_columns <- c(required_columns, "contig_len")
   }
   check_columns(file,required_columns)
+
+
+
   check_input_type(file,c("ViralRefSeq_E","ViralRefSeq_ident"),2)
   check_input_type(file,groupby,1)
 
@@ -186,6 +195,7 @@ VhgIdentityScatterPlot <- function(file,
   # check arguments
   arg_character(theme_choice)
   arg_character(legend_position)
+
 
 
 
@@ -215,18 +225,19 @@ VhgIdentityScatterPlot <- function(file,
 
 
   color_data <- consistentColourPalette(file, groupby = groupby,taxa_rank=taxa_rank)
-  #legend_labels <- color_data$legend_labels
-  #labels <- color_data$labels
-  matched_vector <- color_data$matched_vector
+  legend_labels <- color_data$legend_labels
+  labels_manualcol <- color_data$labels
+  # matched_vector <- color_data$matched_vector
 
   # Extract unique values from file$best_query
-  #unique_queries <- unique(file[[groupby]])
+  unique_queries <- unique(file[[groupby]])
 
   # Create a vector of corresponding names from legend_labels
-  #pyhlum_names <- legend_labels[unique_queries]
+  pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to file$best_query
-  #file$phylum <- pyhlum_names[match(file[[groupby]], unique_queries)]
+  file$phylum <- pyhlum_names[match(file[[groupby]], unique_queries)]
+
 
 
 
@@ -241,14 +252,14 @@ VhgIdentityScatterPlot <- function(file,
     file <- file[order(-file$contig_len), ]
 
     iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E), size = .data$contig_len))+
-      geom_point(aes(color = .data[[groupby]]), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
-      geom_point(aes(color=.data[[groupby]]),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
+      geom_point(aes(color = .data$phylum), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data$phylum),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
       scale_size(name = 'Contig Length', range = c(.1, 15),breaks = breaks, labels = labels)
 
   } else {
     iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
-      geom_point(aes(color = .data[[groupby]]), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
-      geom_point(aes(color=.data[[groupby]]), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
+      geom_point(aes(color = .data$phylum), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data$phylum), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
 
 
@@ -287,9 +298,45 @@ VhgIdentityScatterPlot <- function(file,
     )+
     theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
 
+  if (!is.null(highlight_groups)) {
+
+    if (!all(highlight_groups %in% unique(file[[groupby]]))) {
+      stop("Error: Some names in 'highlight_groups' are not present in the 'groupby' column.")
+    }
+
+    # Generate colors for the highlighted groups
+    highlight_colors <- hue_pal()(length(highlight_groups))
+    names(highlight_colors) <- highlight_groups
+
+    # Filter the data for highlighting
+    highlight_data <- file[file[[groupby]] %in% highlight_groups, ]
+
+    # Create a base plot with all groups and highlight the selected groups
+    if (conlen_bubble_plot) {
+      iden_refevalue <- iden_refevalue +
+        geom_point(data = highlight_data,
+                   aes(color = .data[[groupby]], size = .data$contig_len),
+                   shape = 21, alpha = 1, stroke = 2)+
+        guides(color = guide_legend(override.aes = list(size = 5, stroke = 2)))
+    } else {
+      iden_refevalue <- iden_refevalue +
+        geom_point(data = highlight_data,
+                   aes(color = .data[[groupby]]),
+                   shape = 21, size = 5, alpha = 1, stroke = 2)
+    }
+
+    iden_refevalue <- iden_refevalue +
+      scale_color_manual(values = c(labels_manualcol, highlight_colors),
+                         breaks = c(names(labels_manualcol), names(highlight_colors))) +
+      guides(color = guide_legend(override.aes = list(size = 5, stroke = 2)))
+  } else {
+    # No highlights; just apply the color scale for base groups
+    iden_refevalue <- iden_refevalue +
+      scale_color_manual(values = labels_manualcol)
+  }
 
 
-  iden_refevalue  <- iden_refevalue  + scale_color_manual(values = matched_vector)
+
 
 
 
