@@ -212,7 +212,7 @@ VhSumHitsBarplot <- function(vh_file,
  pyhlum_names <- legend_labels[unique_queries]
 
  # Match names to vh_group$best_query
- vh_group$phylum <- pyhlum_names[match(vh_group[[groupby]], unique_queries)]
+ vh_group$phyl <- pyhlum_names[match(vh_group[[groupby]], unique_queries)]
 
  # Check for valid reorder_criteria
   valid_criteria <- c("max", "min")
@@ -246,7 +246,7 @@ VhSumHitsBarplot <- function(vh_file,
    reorder(.data[[groupby]], if (reorder_criteria == "max") .data$sum else -.data$sum)
  } else {
      factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
- },y= .data$sum,fill=.data$phylum))+
+ },y= .data$sum,fill=.data$phyl))+
    geom_bar(stat = "identity")+
    labs(title = title,
         x = xlabel,

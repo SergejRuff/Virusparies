@@ -320,7 +320,7 @@ facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
   if(!is.null(facet_ncol)){
 
     plot <- plot +  # Define colors for TRUE and FALSE
-      facet_wrap(~.data$phylum, ncol = facet_ncol,scales = ifelse(flip_coords, "free_y", "free_x"))
+      facet_wrap(~.data$phyl, ncol = facet_ncol,scales = ifelse(flip_coords, "free_y", "free_x"))
   }
 
   return(plot)

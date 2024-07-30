@@ -98,6 +98,12 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' @export
 VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
+  #is_file_empty(file)
+  if (is_file_empty(vh_file)) {
+    #message("Skipping VhgBoxplot generation due to empty data.")
+    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
+  }
+
   if (!all(grepl("^taxid:", vh_file$ViralRefSeq_taxonomy))) {
 
     message("The 'ViralRefSeq_taxonomy' column is expected to start with 'taxid:' followed by taxa ranks separated by '|'.\n",

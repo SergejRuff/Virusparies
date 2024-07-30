@@ -293,7 +293,7 @@ VhgBoxplot <- function(file,
   pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to file$best_query
-  file$phylum <- pyhlum_names[match(file[[x_column]], unique_queries)]
+  file$phyl <- pyhlum_names[match(file[[x_column]], unique_queries)]
 
 
   # Check for valid reorder_criteria
@@ -344,7 +344,7 @@ VhgBoxplot <- function(file,
   } else {
     factor(.data[[x_column]], levels = rev(unique(sort(.data[[x_column]]))))
   },
-                             y=y_aes,fill=.data$phylum))+
+                             y=y_aes,fill=.data$phyl))+
     geom_boxplot(staplewidth = 0.4)+
     labs(x=xlabel,
          y=ylabel,
@@ -425,7 +425,7 @@ VhgBoxplot <- function(file,
 
 
   # delete new column before sum statistics and export.
-  file$phylum <- NULL
+  file$phyl <- NULL
 
 
 

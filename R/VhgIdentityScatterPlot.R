@@ -236,7 +236,7 @@ VhgIdentityScatterPlot <- function(file,
   pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to file$best_query
-  file$phylum <- pyhlum_names[match(file[[groupby]], unique_queries)]
+  file$phyl <- pyhlum_names[match(file[[groupby]], unique_queries)]
 
 
 
@@ -252,14 +252,14 @@ VhgIdentityScatterPlot <- function(file,
     file <- file[order(-file$contig_len), ]
 
     iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E), size = .data$contig_len))+
-      geom_point(aes(color = .data$phylum), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
-      geom_point(aes(color=.data$phylum),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
+      geom_point(aes(color = .data$phyl), alpha = 0.5, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data$phyl),alpha=0.5)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)+
       scale_size(name = 'Contig Length', range = c(.1, 15),breaks = breaks, labels = labels)
 
   } else {
     iden_refevalue <- ggplot(file, aes(x = .data$ViralRefSeq_ident, y = -log10(.data$ViralRefSeq_E)))+
-      geom_point(aes(color = .data$phylum), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
-      geom_point(aes(color=.data$phylum), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
+      geom_point(aes(color = .data$phyl), alpha = 0.8, shape = 21, fill = "white", colour = "black")+
+      geom_point(aes(color=.data$phyl), alpha = 0.8)+ geom_hline(aes(yintercept=cutoff), colour=cut_colour)
   }
 
 

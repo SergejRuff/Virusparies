@@ -224,7 +224,7 @@ VhgRunsBarplot <- function(file,
   pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to sample_run$best_query
-  sample_run$phylum <- pyhlum_names[match(sample_run[[groupby]], unique_queries)]
+  sample_run$phyl <- pyhlum_names[match(sample_run[[groupby]], unique_queries)]
 
   # Check for valid reorder_criteria
   valid_criteria <- c("max", "min")
@@ -256,7 +256,7 @@ VhgRunsBarplot <- function(file,
     reorder(.data[[groupby]], if (reorder_criteria == "max") .data$unique_SRA_run else -.data$unique_SRA_run)
   } else {
     factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
-  },y=.data$unique_SRA_run,fill= .data$phylum))+
+  },y=.data$unique_SRA_run,fill= .data$phyl))+
     geom_bar(stat = "identity")+
     labs(title = title,
          x= xlabel,

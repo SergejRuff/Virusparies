@@ -179,7 +179,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   pyhlum_names <- legend_labels[unique_queries]
 
   # Match names to vg_file$best_query
-  vg_file$phylum <- pyhlum_names[match(vg_file[["ViralRefSeq_taxonomy"]], unique_queries)]
+  vg_file$phyl <- pyhlum_names[match(vg_file[["ViralRefSeq_taxonomy"]], unique_queries)]
 
 
 
@@ -231,7 +231,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   } else {
     factor(.data$ViralRefSeq_taxonomy, levels = rev(unique(sort(.data$ViralRefSeq_taxonomy))))
   },
-                          y=.data$contig_len,fill=.data$phylum))+
+                          y=.data$contig_len,fill=.data$phyl))+
     geom_violin(drop=FALSE,adjust=adjust_bw) +  # Create violin plot
     labs(x=xlabel,
          y=ylabel,
