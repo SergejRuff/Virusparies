@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdenFacetedScatterPlot.R
 \name{VhgIdenFacetedScatterPlot}
 \alias{VhgIdenFacetedScatterPlot}
-\title{VhgIdenFacetedScatterPlot: Create a Scatter plot of Viral RefSeq Identity vs. -log10 of Viral Reference e-value.}
+\title{VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral reference e-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
   file,
@@ -36,13 +36,12 @@ VhgIdenFacetedScatterPlot(
 )
 }
 \arguments{
-\item{file}{A data frame containing at least the columns \code{ViralRefSeq_E}, \code{ViralRefSeq_ident}, and the specified grouping column.}
+\item{file}{VirusHunterGatherer hittable.}
 
-\item{groupby}{(optional):  A string indicating the column used for grouping the data points in the scatter plot.
-The values in this column determine the color of each point in the scatter plot. Default is "best_query".
+\item{groupby}{(optional): A character specifying the column containing the groups (default:"best_query").
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
-\item{taxa_rank}{(optional):  When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -59,75 +58,74 @@ Supported ranks are:
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}
 
 \item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
-should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.}
+should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).}
 
-\item{contiglen_breaks}{(optional):  number of breaks for the bubble plot (for \code{conlen_bubble_plot}=TRUE). Default is 5.}
+\item{contiglen_breaks}{(optional): Number of breaks (default: 5) for the bubble plot (for \code{conlen_bubble_plot}=TRUE).}
 
-\item{theme_choice}{(optional):  A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-Default is "linedraw".}
+\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".}
 
-\item{title}{(optional):  The title of the plot. Default is "Faceted scatter plot of viral reference e-values and identity".}
+\item{title}{(optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").}
 
 \item{title_size}{(optional):  The size of the title text. Default is 16.}
 
-\item{title_face}{(optional):  The face (bold, italic, etc.) of the title text. Default is "bold".}
+\item{title_face}{(optional):  The face (bold, italic, etc.) of the title text (default: "bold").}
 
-\item{title_colour}{(optional):  The color of the title text. Default is "#2a475e".}
+\item{title_colour}{(optional):  The color of the title text (default: "#2a475e").}
 
-\item{subtitle}{(optional):  The subtitle of the plot. Default is NULL.}
+\item{subtitle}{(optional):  The subtitle of the plot (default: NULL).}
 
-\item{subtitle_size}{(optional):  The size of the subtitle text. Default is 12.}
+\item{subtitle_size}{(optional):  The size of the subtitle text (default: 12).}
 
-\item{subtitle_face}{(optional):  The face (bold, italic, etc.) of the subtitle text. Default is "bold".}
+\item{subtitle_face}{(optional):  The face (bold, italic, etc.) of the subtitle text (default: "bold").}
 
-\item{subtitle_colour}{(optional):  The color of the subtitle text. Default is "#1b2838".}
+\item{subtitle_colour}{(optional):  The color of the subtitle text (default: "#1b2838").}
 
-\item{xlabel}{(optional):  The label for the x-axis. Default is "Viral reference identity (\%)".}
+\item{xlabel}{(optional):  The label for the x-axis (default: "Viral reference identity (\%)").}
 
-\item{ylabel}{(optional):  The label for the y-axis. Default is "-log10 of viral reference e-values".}
+\item{ylabel}{(optional):  The label for the y-axis (default: "-log10 of viral reference e-values").}
 
-\item{axis_title_size}{(optional):  The size of the axis titles. Default is 12.}
+\item{axis_title_size}{(optional):  The size of the axis titles (default: 12).}
 
-\item{xtext_size}{(optional):  The size of the x-axis text. Default is 10.}
+\item{xtext_size}{(optional):  The size of the x-axis text (default: 10).}
 
-\item{ytext_size}{(optional):  The size of the y-axis text. Default is 10.}
+\item{ytext_size}{(optional):  The size of the y-axis text (default: 10).}
 
-\item{legend_position}{(optional):  The position of the legend. Default is "bottom".}
+\item{legend_position}{(optional):  The position of the legend (default: "bottom).}
 
-\item{legend_title_size}{(optional):  The size of the legend title text. Default is 12.}
+\item{legend_title_size}{(optional):  The size of the legend title text (default: 12).}
 
-\item{legend_title_face}{(optional):  The face (bold, italic, etc.) of the legend title text. Default is "bold".}
+\item{legend_title_face}{(optional):  The face (bold, italic, etc.) of the legend title text (default: "bottom).}
 
-\item{legend_text_size}{(optional):  The size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional):  The size of the legend text (default: 10).}
 
-\item{true_colour}{(optional):  The color for points that meet the cutoff condition. Default is "blue".}
+\item{true_colour}{(optional):  The color for points that meet the cutoff condition (default: "blue").}
 
-\item{false_colour}{(optional):  The color for points that do not meet the cutoff condition. Default is "red".}
+\item{false_colour}{(optional):  The color for points that do not meet the cutoff condition (default: "red").}
 
-\item{wrap_ncol}{(optional):  The number of columns for faceting. Default is 2.}
+\item{wrap_ncol}{(optional):  The number of columns for faceting (default: 12).}
 
 \item{filter_group_criteria}{(optional):  Character vector, numeric vector, or single character/numeric value.
 \itemize{
 \item Character vector: Names of viral groups to filter.
 \item Numeric vector: Indices of viral groups to filter.
 \item Single character or numeric value: Filter a single viral group.
-\item NULL: No filtering is performed.
+\item NULL: No filtering is performed (default).
 }}
 }
 \value{
 A list containing the following components:
 \itemize{
-\item plot: A plot object representing the faceted scatter plot.
+\item Plot: A plot object representing the faceted scatter plot.
 \item evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
 \item identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
 \item contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with \code{conlen_bubble_plot=TRUE}.
 }
 }
 \description{
-This function generates a scatter plot of viral RefSeq identity versus -log10 of viral reference e-value
-for each virus group in the \code{best_query} column (or another column). The points are colored based on whether the
-e-value meets a specified cutoff and are faceted by the \code{best_query} column (or another column).
+VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of viral reference e-value
+for each virus group in the \code{best_query} or \code{ViralRefSeq_taxonomy} column . The points are colored based on whether the
+e-value meets a specified cutoff and are faceted by the viral groups in the \code{best_query} or \code{ViralRefSeq_taxonomy} column.
 }
 \details{
 'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer hittable and a cutoff value as inputs.
@@ -165,9 +163,9 @@ Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min,
 and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 
-Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
-returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
-If the smallest E-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
+Warning: In some cases, e-values might be exactly 0. When these values are transformed using -log10, R
+returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
+If the smallest e-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

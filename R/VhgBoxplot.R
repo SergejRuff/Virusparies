@@ -5,7 +5,8 @@
 #' for each group from VirusHunter or VirusGatherer hittable results.
 #'
 #' @param file A data frame containing VirusHunter or VirusGatherer hittable results.
-#' @param x_column A character specifying the column containing the groups (default:"best_query").
+#' @param x_column (optional): A character specifying the column containing the groups (default:"best_query").
+#' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
@@ -390,7 +391,7 @@ VhgBoxplot <- function(file,
 
   if(x_column != "SRA_run"){
 
-    # matched_vector <- consistentColourPalette(file = file, groupby = x_column)
+
     boxp <- boxp + scale_fill_manual(values = labels)
 
 

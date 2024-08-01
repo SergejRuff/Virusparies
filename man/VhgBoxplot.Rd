@@ -44,7 +44,8 @@ VhgBoxplot(
 \arguments{
 \item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
 
-\item{x_column}{A character specifying the column containing the groups (default:"best_query").}
+\item{x_column}{(optional): A character specifying the column containing the groups (default:"best_query").
+Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
 \item{taxa_rank}{(optional): When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
