@@ -10,14 +10,14 @@ ImportVirusTable(path)
 \item{path}{A character string specifying the path to the VirusHunter or VirusGatherer hittable file.}
 }
 \value{
-A dataframe containing the data from the VirusHunter or VirusGatherer hittable file.
+A data frame containing the data from the VirusHunter or VirusGatherer hittable file.
 }
 \description{
-This function imports VirusHunterGatherer hittables into R.
+ImportVirusTable imports VirusHunterGatherer hittables into R.
 }
 \details{
-This function reads the VirusHunter or VirusGatherer hittable file specified by 'path'
-into a dataframe in R. The file should be in tab-separated values (TSV) format.
+ImportVirusTable reads the VirusHunter or VirusGatherer hittable file specified by 'path'
+into a data frame in R. The file should be in tab-separated values (TSV) format.
 The first row should contain column headers.
 }
 \examples{

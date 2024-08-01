@@ -1,14 +1,14 @@
 #' @title ImportVirusTable: Import VirusHunterGatherer hittables into R
 #'
-#' @description This function imports VirusHunterGatherer hittables into R.
+#' @description ImportVirusTable imports VirusHunterGatherer hittables into R.
 #'
 #' @param path A character string specifying the path to the VirusHunter or VirusGatherer hittable file.
 #'
-#' @details This function reads the VirusHunter or VirusGatherer hittable file specified by 'path'
-#' into a dataframe in R. The file should be in tab-separated values (TSV) format.
+#' @details ImportVirusTable reads the VirusHunter or VirusGatherer hittable file specified by 'path'
+#' into a data frame in R. The file should be in tab-separated values (TSV) format.
 #' The first row should contain column headers.
 #'
-#' @return A dataframe containing the data from the VirusHunter or VirusGatherer hittable file.
+#' @return A data frame containing the data from the VirusHunter or VirusGatherer hittable file.
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
