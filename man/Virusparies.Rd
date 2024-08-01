@@ -6,14 +6,13 @@
 \alias{Virusparies-package}
 \title{Virusparies Package}
 \description{
-Virusparies contains a collection of Data Visualisations for VirusHunterGatherer output.
+Virusparies designed for visualizing output from VirusHunterGatherer.
 }
 \details{
-VirusHunterGatherer is a data-driven tool designed for high-throughput virus discovery.
-The process involves Virushunter conducting sensitive homology-based detection of
-viral sequence reads in unprocessed data. This approach identifies the most conserved regions
-of a virus, which serve as seeds in the Virusgatherer step for a seed-based assembly
-of full-length viral genome sequences.
+VirusHunterGatherer is a pipeline designed for data-driven virus discovery (DDVD).
+It involves two steps: (i) Virushunter conducts sensitive homology-based detection of viral sequence reads in unprocessed data,
+identifying the most conserved regions of a virus, which serve as seeds for the
+(ii) Virusgatherer step that assembles full-length viral genome sequences.
 
 The Virusparies package provides a set of plotting functions tailored for visualizing
 VirushunterGatherer Hittables. The name draws inspiration from the hunter-gatherer metaphor,
@@ -30,22 +29,22 @@ This package includes the following functions:
 \item \code{\link{ImportVirusTable}}: Import VirusHunterGatherer hittables into R.
 }
 
-\strong{VirushunterGatherer Plots}:
+\strong{VirusHunterGatherer Plots}:
 \itemize{
-\item \code{\link{VhgBoxplot}}: boxplot plotting RefSeq identity, evalues or contig length for each group.
+\item \code{\link{VhgBoxplot}}: Box plot plotting RefSeq identity, evalues or contig length for each group.
 \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
 \item \code{\link{VhgIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-\item \code{\link{VhgRunsBarplot}}: barplot showing how many unique Runs map against each virus.
-}
-
-\strong{VirusGatherer only Plots}:
-\itemize{
-\item \code{\link{VgConLenViolin}}: violin plot to visualize the distribution of contig lengths.
+\item \code{\link{VhgRunsBarplot}}: Bar plot showing how many unique Runs map against each virus.
 }
 
 \strong{VirusHunter only Plots}:
 \itemize{
-\item \code{\link{VhSumHitsBarplot}}: barplot for the sum of hits for each virus found in group.
+\item \code{\link{VhSumHitsBarplot}}: Bar plot for the sum of hits for each virus found in group.
+}
+
+\strong{VirusGatherer only Plots}:
+\itemize{
+\item \code{\link{VgConLenViolin}}: Violin plot to visualize the distribution of contig lengths.
 }
 
 \strong{Graphical Tables(gt)}:
@@ -64,8 +63,8 @@ This package includes the following functions:
 \strong{Utils}:
 \itemize{
 \item \code{\link{VhgAddPhylum}}: Extract Phylum information.
-\item \code{\link{VhgPreprocessTaxa}}: process ViralRefSeq_taxonomy column.
-\item \code{\link{VhgSubsetHittable}}: Filter VirusHunterGatherer data based on criteria.
+\item \code{\link{VhgPreprocessTaxa}}: Process ViralRefSeq_taxonomy column.
+\item \code{\link{VhgSubsetHittable}}: Filter VirusHunterGatherer data based on user’s own criteria.
 }
 }
 
@@ -84,6 +83,5 @@ If you encounter any errors or issues, please report them at: \url{https://githu
 \item Li Chuin, Chong (\email{lichuin.chong@twincore.de})
 }
 
-If you have any questions, suggestions, or issues, please feel free to contact the maintainer,
-Sergej Ruff (\email{serijnh@gmail.com}).
+If you have any questions, suggestions, or issues, please feel free to contact Sergej Ruff (\email{serijnh@gmail.com}).
 }
