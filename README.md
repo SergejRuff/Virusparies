@@ -1,17 +1,11 @@
 # Virusparies
 
-VirusHunterGatherer is a data-driven tool designed for high-throughput virus discovery.
-The process involves Virushunter conducting sensitive homology-based detection of
-viral sequence reads in unprocessed data. This approach identifies the most conserved regions
-of a virus, which serve as seeds in the Virusgatherer step for a seed-based assembly
-of full-length viral genome sequences.
 
-The Virusparies package provides a set of plotting functions tailored for visualizing
-**VirushunterGatherer Hittables**. The name draws inspiration from the hunter-gatherer metaphor,
-with "paries" derived from Latin meaning "wall". It symbolizes the parietal art left by
-ancient hunters and gatherers on walls, summarizing their stories and beliefs.
+Virusparies is an R package designed for visualizing outputs from VirusHunterGatherer, a data-driven virus discovery (DDVD) tool. It provides a set of plotting functions that aid in the interpretation and analysis of viral sequence data. 
+The name draws inspiration from the hunter-gatherer metaphor, with "paries" derived from Latin meaning "wall". It symbolizes the parietal art left by ancient hunters and gatherers on walls, summarizing their stories and beliefs.
 
-VirusHunterGatherer is available on: https://github.com/lauberlab/VirusHunterGatherer .
+VirusHunterGatherer is a computational pipeline designed for DDVD and is available on: https://github.com/lauberlab/VirusHunterGatherer. It involves two steps: (i) VirusHunter conducts sensitive homology-based detection of viral sequence reads in unprocessed data, identifying the most conserved regions of a virus, which serve as seeds for the (ii) Virusgatherer step that assembles full-length viral genome sequences.
+
 
 - [Installation](https://github.com/SergejRuff/Virusparies#installation)
 - [Overview](https://github.com/SergejRuff/Virusparies#overview)
@@ -61,9 +55,9 @@ Virusparies includes the following functions:
 
 ### VirushunterGatherer Plots:
 
-- `VhgBoxplot()` Boxplot plotting RefSeq identity, evalues or contig length for each group.
-- `VhgIdenFacetedScatterPlot()` Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-- `VhgIdentityScatterPlot()` Scatter Plot for Reference Identity vs -log10 of Reference E-value.
+- `VhgBoxplot()` Boxplot plotting refSeq identity, e-values or contig length for each group.
+- `VhgIdenFacetedScatterPlot()` Faceted scatter plot for reference identity vs -log10 of reference e-value.
+- `VhgIdentityScatterPlot()` Scatter Plot for reference Identity vs -log10 of reference e-value.
 - `VhgRunsBarplot()` Bar plot showing how many unique Runs map against each virus.
 
 
@@ -74,7 +68,7 @@ Virusparies includes the following functions:
 
 ### Graphical Tables(gt):
 
-- `VhgRunsTable()` Generate a gt-table for vhRunsBarplot.
+- `VhgRunsTable()` Generate a gt-table for VhRunsBarplot.
 - `VhgTabularRasa()` Generate custome gt-tables.
 
 The table functions generate gt objects, which can be further manipulated using the gt package (see the Details section for more information).
@@ -82,7 +76,7 @@ The table functions generate gt objects, which can be further manipulated using 
 
 ### Export:
 
-- `ExportVirusGt()`  Export Graphical Tables.
+- `ExportVirusGt()`  Export graphical tables.
 - `ExportVirusPlot()` Export plots.
 
 

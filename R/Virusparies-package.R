@@ -26,19 +26,19 @@
 #'
 #' \strong{VirusHunterGatherer Plots}:
 #' \itemize{
-#'   \item \code{\link{VhgBoxplot}}: Box plot plotting RefSeq identity, evalues or contig length for each group.
-#'   \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-#'   \item \code{\link{VhgIdentityScatterPlot}}: Scatter Plot for Reference Identity vs -log10 of Reference E-value.
-#'   \item \code{\link{VhgRunsBarplot}}: Bar plot showing how many unique Runs map against each virus.
+#'   \item \code{\link{VhgBoxplot}}: Box plot plotting refSeq identity, e-values or contig length for each group.
+#'   \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted scatter plot for reference identity vs -log10 of reference e-value.
+#'   \item \code{\link{VhgIdentityScatterPlot}}: Scatter plot for reference identity vs -log10 of reference e-value.
+#'   \item \code{\link{VhgRunsBarplot}}: Bar plot showing how many unique runs map against each virus.
 #' }
 #'
 #'
-#'\strong{VirusHunter only Plots}:
+#'\strong{VirusHunter only plots}:
 #' \itemize{
 #'   \item \code{\link{VhSumHitsBarplot}}: Bar plot for the sum of hits for each virus found in group.
 #' }
 #'
-#' \strong{VirusGatherer only Plots}:
+#' \strong{VirusGatherer only plots}:
 #' \itemize{
 #'   \item \code{\link{VgConLenViolin}}: Violin plot to visualize the distribution of contig lengths.
 #' }
@@ -52,14 +52,14 @@
 #'
 #'\strong{Export}:
 #' \itemize{
-#'   \item \code{\link{ExportVirusDataFrame}}: Export Data Frames.
-#'   \item \code{\link{ExportVirusGt}}: Export Graphical Tables.
-#'   \item \code{\link{ExportVirusPlot}}: Export Plots.
+#'   \item \code{\link{ExportVirusDataFrame}}: Export data frames.
+#'   \item \code{\link{ExportVirusGt}}: Export graphical tables.
+#'   \item \code{\link{ExportVirusPlot}}: Export plots.
 #' }
 #'
 #' \strong{Utils}:
 #' \itemize{
-#'   \item \code{\link{VhgAddPhylum}}: Extract Phylum information.
+#'   \item \code{\link{VhgAddPhylum}}: Extract phylum information.
 #'   \item \code{\link{VhgPreprocessTaxa}}: Process ViralRefSeq_taxonomy column.
 #'   \item \code{\link{VhgSubsetHittable}}: Filter VirusHunterGatherer data based on user’s own criteria.
 #' }
