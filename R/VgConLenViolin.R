@@ -145,6 +145,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   arg_character(legend_position)
   arg_logical(flip_coords)
   arg_logical(jitter_point)
+  arg_logical(add_boxplot)
 
 
   vg_file <- VhgPreprocessTaxa(vg_file,taxa_rank)
