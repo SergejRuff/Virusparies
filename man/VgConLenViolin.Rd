@@ -39,7 +39,7 @@ VgConLenViolin(
 )
 }
 \arguments{
-\item{vg_file}{A data frame containing VirusGatherer Hittable results.}
+\item{vg_file}{A data frame containing VirusGatherer hittable results.}
 
 \item{taxa_rank}{(optional): Specify the taxonomic rank to group your data by.
 Supported ranks are:

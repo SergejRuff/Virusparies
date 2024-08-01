@@ -60,7 +60,7 @@
 #' - contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with `conlen_bubble_plot=TRUE`.
 #' @author Sergej Ruff
 #' @details
-#' 'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs.
+#' 'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer hittable and a cutoff value as inputs.
 #' The plot includes:
 #' - Points colored based on whether they meet the cutoff condition.
 #' - Faceting by the `best_query` column as the default column. The user can provide their own column

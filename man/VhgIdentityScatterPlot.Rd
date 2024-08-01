@@ -35,7 +35,7 @@ VhgIdentityScatterPlot(
 )
 }
 \arguments{
-\item{file}{A data frame containing VirusHunter or VirusGatherer Hittable results.}
+\item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
 The values in this column determine the color of each point in the scatter plot. Default is "best_query".
@@ -121,7 +121,7 @@ based on  best query  and adds a horizontal line representing the cutoff value.
 }
 \details{
 VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
-It accepts both VirusHunter and VirusGatherer Hittables as input.
+It accepts both VirusHunter and VirusGatherer hittables as input.
 The plot includes:
 \itemize{
 \item A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).

@@ -5,7 +5,7 @@
 #' for each group in VirusGatherer hittables.
 #'
 #'
-#' @param vg_file A data frame containing VirusGatherer Hittable results.
+#' @param vg_file A data frame containing VirusGatherer hittable results.
 #' @param taxa_rank (optional): Specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"

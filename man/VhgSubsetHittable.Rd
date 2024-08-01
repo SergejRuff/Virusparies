@@ -56,7 +56,7 @@ Use a positive value to filter where ViralRefSeq_ident is above the threshold, a
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 file <- ImportVirusTable(path)
 
-cat("The dimensions of the VirusHunter Hittable before filtering are: \n");dim(file)
+cat("The dimensions of the VirusHunter hittable before filtering are: \n");dim(file)
 
 file_filtered <- VhgSubsetHittable(file,group_column = "best_query",
 virus_groups = "Anello_ORF1core",

@@ -4,7 +4,7 @@
 #' by calculating the number of unique SRA runs for each virus group and
 #' creating additional variables for visualization.
 #'
-#' @param vh_file A data frame containing VirusHunter Hittables results.
+#' @param vh_file A data frame containing VirusHunter hittables results.
 #' @param groupby string indicating best_query or ViralRefSeq_taxonomy column
 #'
 #' @return A processed data frame for run_bar plot.

@@ -3,7 +3,7 @@
 #' @description This function generates a summary table of unique runs for each virus group
 #' based on the input dataset.
 #'
-#' @param vh_file A data frame containing the Virushunter Hittables Results
+#' @param vh_file A data frame containing the Virushunter hittables Results
 #' @param groupby (optional) A string indicating the column used for grouping the data.
 #' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.

@@ -26,7 +26,7 @@ VhgRunsTable(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing the Virushunter Hittables Results}
+\item{vh_file}{A data frame containing the Virushunter hittables Results}
 
 \item{groupby}{(optional) A string indicating the column used for grouping the data.
 "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".

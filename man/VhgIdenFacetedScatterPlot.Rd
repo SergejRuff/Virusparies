@@ -130,7 +130,7 @@ for each virus group in the \code{best_query} column (or another column). The po
 e-value meets a specified cutoff and are faceted by the \code{best_query} column (or another column).
 }
 \details{
-'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer Hittable and a cutoff value as inputs.
+'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer hittable and a cutoff value as inputs.
 The plot includes:
 \itemize{
 \item Points colored based on whether they meet the cutoff condition.
