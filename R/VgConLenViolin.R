@@ -144,6 +144,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   arg_character(theme_choice)
   arg_character(legend_position)
   arg_logical(flip_coords)
+  arg_logical(jitter_point)
 
 
   vg_file <- VhgPreprocessTaxa(vg_file,taxa_rank)
@@ -272,15 +273,16 @@ VgConLenViolin <- function(vg_file=vg_file,
     scale_y_continuous(expand = c(0, 0), limits = y_limits)
 
   if (!is.null(vg_file_boxplot) && nrow(vg_file_boxplot) > 0) {
-    p <- p + stat_boxplot(data = vg_file_boxplot,geom = "errorbar", width = 0.2,alpha = 0.5) +
+    alpha_val <- ifelse(jitter_point == 1,0.8,0.5)
+    p <- p + stat_boxplot(data = vg_file_boxplot,geom = "errorbar", width = 0.2,alpha = alpha_val) +
       geom_boxplot(
         data = vg_file_boxplot,
         width = 0.2,
-        alpha = 0.5,
+        alpha = alpha_val,
         outlier.shape = NA,  # Do not draw outliers
         coef = 1.5,  # Control the length of the whiskers (default is 1.5)
         show.legend = FALSE
-      )   # Add error bars for whiskers
+      )
   }
 
   # Assuming jitter_point is a logical variable you have defined earlier
@@ -290,7 +292,7 @@ VgConLenViolin <- function(vg_file=vg_file,
       size = 1.5,
       aes(color = .data$phyl, fill = .data$phyl),  # Use fill for color by phyl
       show.legend = FALSE,
-      shape = 21,  # Shape 21 allows for both fill and outline
+      shape = 21,
       color = "black",  # Outline color
       stroke = 1  # Width of the outline
     )
@@ -299,11 +301,11 @@ VgConLenViolin <- function(vg_file=vg_file,
       data = vg_file_filtered,
       position = position_jitter(width = 0.1),
       size = 1.5,
-      aes(color = .data$phyl, fill = .data$phyl),  # Use fill for color by phyl
+      aes(color = .data$phyl, fill = .data$phyl),
       show.legend = FALSE,
-      shape = 21,  # Shape 21 allows for both fill and outline
-      color = "black",  # Outline color
-      stroke = 1  # Width of the outline
+      shape = 21,
+      color = "black",
+      stroke = 1
     )
   }
 
