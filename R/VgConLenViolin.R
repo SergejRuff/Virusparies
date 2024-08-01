@@ -50,6 +50,7 @@
 #' @param min_observations (optional): Minimum number of observations required per group to be included in the plot (default: 1).
 #' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
+#' @param add_boxplot add a boxplot to the violin plot (default: FALSE)
 #'
 #'
 #' @details
@@ -120,7 +121,8 @@ VgConLenViolin <- function(vg_file=vg_file,
                            legend_title_face = "bold",
                            legend_text_size = 10,
                            min_observations = 1,
-                           facet_ncol = NULL) {
+                           facet_ncol = NULL,
+                           add_boxplot =FALSE) {
 
   #check if table is empty
   #is_file_empty(vg_file)
@@ -202,6 +204,14 @@ VgConLenViolin <- function(vg_file=vg_file,
   # Filter data for groups with 2 or fewer observations
   vg_file_filtered <- vg_file %>%
     filter(.data$observations < 2)
+
+  # Data for adding boxplots (groups with 2 or more observations)
+  if (add_boxplot) {
+    vg_file_boxplot <- vg_file %>%
+      filter(.data$observations >= 2)
+  } else {
+    vg_file_boxplot <- NULL
+  }
 
 
   min_y <- 0
@@ -304,6 +314,17 @@ VgConLenViolin <- function(vg_file=vg_file,
 
   p <- facet_plot(p,facet_ncol,flip_coords)
 
+  if (!is.null(vg_file_boxplot) && nrow(vg_file_boxplot) > 0) {
+    p <- p + stat_boxplot(data = vg_file_boxplot,geom = "errorbar", width = 0.2,alpha = 0.5) +
+      geom_boxplot(
+      data = vg_file_boxplot,
+      width = 0.2,
+      alpha = 0.5,
+      outlier.shape = NA,  # Do not draw outliers
+      coef = 1.5,  # Control the length of the whiskers (default is 1.5)
+      show.legend = FALSE
+    )   # Add error bars for whiskers
+  }
 
 
 

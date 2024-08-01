@@ -34,7 +34,8 @@ VgConLenViolin(
   legend_title_face = "bold",
   legend_text_size = 10,
   min_observations = 1,
-  facet_ncol = NULL
+  facet_ncol = NULL,
+  add_boxplot = FALSE
 )
 }
 \arguments{
@@ -114,6 +115,8 @@ Default is "linedraw".}
 
 \item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
+
+\item{add_boxplot}{add a boxplot to the violin plot (default: FALSE)}
 }
 \value{
 A list containing the following components:
