@@ -271,6 +271,18 @@ VgConLenViolin <- function(vg_file=vg_file,
     theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))+
     scale_y_continuous(expand = c(0, 0), limits = y_limits)
 
+  if (!is.null(vg_file_boxplot) && nrow(vg_file_boxplot) > 0) {
+    p <- p + stat_boxplot(data = vg_file_boxplot,geom = "errorbar", width = 0.2,alpha = 0.5) +
+      geom_boxplot(
+        data = vg_file_boxplot,
+        width = 0.2,
+        alpha = 0.5,
+        outlier.shape = NA,  # Do not draw outliers
+        coef = 1.5,  # Control the length of the whiskers (default is 1.5)
+        show.legend = FALSE
+      )   # Add error bars for whiskers
+  }
+
   # Assuming jitter_point is a logical variable you have defined earlier
   if (jitter_point) {
     p <- p + geom_point(
@@ -314,17 +326,7 @@ VgConLenViolin <- function(vg_file=vg_file,
 
   p <- facet_plot(p,facet_ncol,flip_coords)
 
-  if (!is.null(vg_file_boxplot) && nrow(vg_file_boxplot) > 0) {
-    p <- p + stat_boxplot(data = vg_file_boxplot,geom = "errorbar", width = 0.2,alpha = 0.5) +
-      geom_boxplot(
-      data = vg_file_boxplot,
-      width = 0.2,
-      alpha = 0.5,
-      outlier.shape = NA,  # Do not draw outliers
-      coef = 1.5,  # Control the length of the whiskers (default is 1.5)
-      show.legend = FALSE
-    )   # Add error bars for whiskers
-  }
+
 
 
 
