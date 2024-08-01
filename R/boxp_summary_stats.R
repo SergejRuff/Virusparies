@@ -38,6 +38,12 @@ boxp_summary_stats <- function(vh_file,group="best_query",ycol ="ViralRefSeq_ide
     ) %>%
     arrange(desc(median))
 
+  # Check for NA values in the sd column and provide a specific message
+  if (any(is.na(summary_stats_identity$sd))) {
+    warning("Standard deviation values are NA for some groups. This typically occurs when there is only one observation in the group.")
+  }
+
+
 
   # Round the results except when ycol is "ViralRefSeq_E"
   # if(ycol != "ViralRefSeq_E") {
