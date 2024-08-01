@@ -1,12 +1,12 @@
-#' @title VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral reference e-value.
+#' @title VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq e-value.
 #'
 #' @description
-#' VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of viral reference e-value
+#' VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq e-value
 #' for each virus group in the `best_query` or `ViralRefSeq_taxonomy` column . The points are colored based on whether the
 #' e-value meets a specified cutoff and are faceted by the viral groups in the `best_query` or `ViralRefSeq_taxonomy` column.
 #'
 #' @param file VirusHunterGatherer hittable.
-#' @param groupby (optional): A character specifying the column containing the groups (default:"best_query").
+#' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
@@ -18,7 +18,7 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cutoff (optional):  A numeric value representing the cutoff for the viral reference e-value. Points with `ViralRefSeq_E`
+#' @param cutoff (optional):  A numeric value representing the cutoff for the refseq e-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
 #' @param conlen_bubble_plot (optional):  Logical value indicating whether the `contig_len` column
 #'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).
@@ -26,7 +26,7 @@
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 #' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").
-#' @param title_size (optional):  The size of the title text. Default is 16.
+#' @param title_size (optional):  The size of the title text (default: 16).
 #' @param title_face (optional):  The face (bold, italic, etc.) of the title text (default: "bold").
 #' @param title_colour (optional):  The color of the title text (default: "#2a475e").
 #' @param subtitle (optional):  The subtitle of the plot (default: NULL).
@@ -40,7 +40,7 @@
 #' @param ytext_size (optional):  The size of the y-axis text (default: 10).
 #' @param legend_position (optional):  The position of the legend (default: "bottom).
 #' @param legend_title_size (optional):  The size of the legend title text (default: 12).
-#' @param legend_title_face (optional):  The face (bold, italic, etc.) of the legend title text (default: "bottom).
+#' @param legend_title_face (optional):  The face (bold, italic, etc.) of the legend title text (default: "bold").
 #' @param legend_text_size (optional):  The size of the legend text (default: 10).
 #' @param true_colour (optional):  The color for points that meet the cutoff condition (default: "blue").
 #' @param false_colour (optional):  The color for points that do not meet the cutoff condition (default: "red").

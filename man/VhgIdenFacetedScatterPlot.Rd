@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdenFacetedScatterPlot.R
 \name{VhgIdenFacetedScatterPlot}
 \alias{VhgIdenFacetedScatterPlot}
-\title{VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral reference e-value.}
+\title{VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq e-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
   file,
@@ -38,7 +38,7 @@ VhgIdenFacetedScatterPlot(
 \arguments{
 \item{file}{VirusHunterGatherer hittable.}
 
-\item{groupby}{(optional): A character specifying the column containing the groups (default:"best_query").
+\item{groupby}{(optional): A character specifying the column containing the groups (default: "best_query").
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
 \item{taxa_rank}{(optional): When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
@@ -54,7 +54,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional):  A numeric value representing the cutoff for the viral reference e-value. Points with \code{ViralRefSeq_E}
+\item{cutoff}{(optional):  A numeric value representing the cutoff for the refseq e-value. Points with \code{ViralRefSeq_E}
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}
 
 \item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
@@ -67,7 +67,7 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 
 \item{title}{(optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").}
 
-\item{title_size}{(optional):  The size of the title text. Default is 16.}
+\item{title_size}{(optional):  The size of the title text (default: 16).}
 
 \item{title_face}{(optional):  The face (bold, italic, etc.) of the title text (default: "bold").}
 
@@ -95,7 +95,7 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 
 \item{legend_title_size}{(optional):  The size of the legend title text (default: 12).}
 
-\item{legend_title_face}{(optional):  The face (bold, italic, etc.) of the legend title text (default: "bottom).}
+\item{legend_title_face}{(optional):  The face (bold, italic, etc.) of the legend title text (default: "bold").}
 
 \item{legend_text_size}{(optional):  The size of the legend text (default: 10).}
 
@@ -123,7 +123,7 @@ A list containing the following components:
 }
 }
 \description{
-VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of viral reference e-value
+VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq e-value
 for each virus group in the \code{best_query} or \code{ViralRefSeq_taxonomy} column . The points are colored based on whether the
 e-value meets a specified cutoff and are faceted by the viral groups in the \code{best_query} or \code{ViralRefSeq_taxonomy} column.
 }

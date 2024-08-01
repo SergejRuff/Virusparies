@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdentityScatterPlot.R
 \name{VhgIdentityScatterPlot}
 \alias{VhgIdentityScatterPlot}
-\title{VhgIdentityScatterPlot: Scatter Plot for Reference Identity vs -log10 of Reference E-value}
+\title{VhgIdentityScatterPlot: Scatter plot for refseq identity vs -log10 of refseq e-value}
 \usage{
 VhgIdentityScatterPlot(
   file,
@@ -35,13 +35,12 @@ VhgIdentityScatterPlot(
 )
 }
 \arguments{
-\item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
+\item{file}{VirusHunterGatherer hittable.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data points in the scatter plot.
-The values in this column determine the color of each point in the scatter plot. Default is "best_query".
+\item{groupby}{(optional): A character specifying the column containing the groups (default: "best_query").
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
-\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{x_column} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -54,73 +53,71 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in file
-with values larger than the cutoff value in the ViralRefSeq_E column.}
+\item{cutoff}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).}
 
-\item{conlen_bubble_plot}{(optional) Logical value indicating whether the \code{contig_len} column
-should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input. Default is FALSE.}
+\item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
+should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).}
 
-\item{contiglen_breaks}{(optional) number of breaks for the bubble plot (for \code{conlen_bubble_plot}=TRUE). Default is 5.}
+\item{contiglen_breaks}{(optional): Number of breaks (default: 5) for the bubble plot (for \code{conlen_bubble_plot}=TRUE).}
 
-\item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".}
+\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".}
 
-\item{cut_colour}{(optional) The color for the horizontal cutoff line. Default is "#990000".}
+\item{cut_colour}{(optional): The color for the horizontal cutoff line (default: "#990000").}
 
-\item{title}{(optional) The title of the plot. Default is "Scatterplot of viral reference e-values and identity".}
+\item{title}{(optional): The title of the plot (default: "Scatterplot of viral reference e-values and identity").}
 
-\item{title_size}{(optional) The size of the title text. Default is 16.}
+\item{title_size}{(optional): The size of the title text (default: 16).}
 
-\item{title_face}{(optional) The face (bold, italic, etc.) of the title text. Default is "bold".}
+\item{title_face}{(optional): The face (bold, italic, etc.) of the title text (default: "bold").}
 
-\item{title_colour}{(optional) The color of the title text. Default is "#2a475e".}
+\item{title_colour}{(optional): The color of the title text (default: "#2a475e").}
 
-\item{subtitle}{(optional) The subtitle of the plot. Default is NULL.}
+\item{subtitle}{(optional): The subtitle of the plot (default: NULL).}
 
-\item{subtitle_size}{(optional) The size of the subtitle text. Default is 12.}
+\item{subtitle_size}{(optional): The size of the subtitle text (default: 12).}
 
-\item{subtitle_face}{(optional) The face (bold, italic, etc.) of the subtitle text. Default is "bold".}
+\item{subtitle_face}{(optional): The face (bold, italic, etc.) of the subtitle text (default: "bold").}
 
-\item{subtitle_colour}{(optional) The color of the subtitle text. Default is "#1b2838".}
+\item{subtitle_colour}{(optional): The color of the subtitle text (default: "#1b2838").}
 
-\item{xlabel}{(optional) The label for the x-axis. Default is "Viral reference identity (\%)".}
+\item{xlabel}{(optional): The label for the x-axis (default: "Viral reference identity (\%)").}
 
-\item{ylabel}{(optional) The label for the y-axis. Default is "-log10 of viral reference e-values".}
+\item{ylabel}{(optional): The label for the y-axis (default: "-log10 of viral reference e-values").}
 
-\item{axis_title_size}{(optional) The size of the axis titles. Default is 12.}
+\item{axis_title_size}{(optional): The size of the axis titles (default: 12).}
 
-\item{xtext_size}{(optional) The size of the x-axis text. Default is 10.}
+\item{xtext_size}{(optional): The size of the x-axis text (default: 10).}
 
-\item{ytext_size}{(optional) The size of the y-axis text. Default is 10.}
+\item{ytext_size}{(optional): The size of the y-axis text (default: 10).}
 
-\item{legend_title}{(optional) The title of the legend. Default is "Group".}
+\item{legend_title}{(optional): The title of the legend (default: "Group").}
 
-\item{legend_position}{(optional) The position of the legend. Default is "bottom".}
+\item{legend_position}{(optional): The position of the legend (default: "bottom).}
 
-\item{legend_title_size}{(optional) The size of the legend title text. Default is 12.}
+\item{legend_title_size}{(optional):  The size of the legend title text (default: 12).}
 
-\item{legend_title_face}{(optional) The face (bold, italic, etc.) of the legend title text. Default is "bold".}
+\item{legend_title_face}{(optional): The face (bold, italic, etc.) of the legend title text (default: "bold").}
 
-\item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional): The size of the legend text (default: 10).}
 
-\item{highlight_groups}{(optional) A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).}
+\item{highlight_groups}{(optional): A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).}
 }
 \value{
 A list containing the following components:
 \itemize{
-\item plot: A plot object representing the faceted scatterplot.
+\item Plot: A plot object representing the faceted scatterplot.
 \item evalue_stats: A tibble data frame with summary statistics for "ViralRefSeq_E" values.
 \item identity_stats: A tibble data frame with summary statistics for "ViralRefSeq_ident" values.
 \item contig_stats (optional): A tibble data frame with summary statistics for "contig_len" values, included only if VirusGatherer is used with \code{conlen_bubble_plot=TRUE}.
 }
 }
 \description{
-This function creates a scatter plot of viral RefSeq identity versus
-the negative logarithm (base 10) of viral RefSeq E-value. It colors the points
-based on  best query  and adds a horizontal line representing the cutoff value.
+VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -log10 of viral refseq e-value.
+It colors the points based on  phylum  and adds a horizontal line representing the cutoff value.
 }
 \details{
-VhgIdentityScatterPlot generates a scatter plot for Reference Identity versus -log10 of Reference E-value.
+VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq e-value.
 It accepts both VirusHunter and VirusGatherer hittables as input.
 The plot includes:
 \itemize{
@@ -135,8 +132,8 @@ are also included if applicable. These summary statistics, along with the plot o
 \code{highlight_groups} enables the user to specify one or more viral groups from the column indicated in the \code{groupby} argument. These groups will be highlighted in the plot.
 
 Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
-returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
-If the smallest E-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
+returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
+If the smallest e-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

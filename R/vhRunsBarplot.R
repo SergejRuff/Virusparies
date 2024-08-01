@@ -2,10 +2,10 @@
 #' each Virus group.
 #'
 #' @param file Data frame containing Virushunter or VirusGatherer hittables results.
-#' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
+#' @param groupby (optional): A string indicating the column used for grouping the data points in the plot.
 #' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
-#' @param taxa_rank (optional) When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' @param taxa_rank (optional): When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -15,45 +15,45 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cut (optional) The significance cutoff value for E-values (default: 1e-5).
+#' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
 #' Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 #' NULL sorts alphabetically.
-#' @param theme_choice (optional) A character indicating the ggplot2 theme to apply.
+#' @param theme_choice (optional): A character indicating the ggplot2 theme to apply.
 #' Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".
-#' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".
-#' @param title_size (optional) The size of the plot title. Default is 16.
-#' @param title_face (optional) The font face of the plot title. Default is "bold".
-#' @param title_colour (optional) The color of the plot title. Default is "#2a475e".
-#' @param subtitle (optional) A character specifying the subtitle of the plot.
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
+#' @param title (optional): A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".
+#' @param title_size (optional): The size of the plot title. Default is 16.
+#' @param title_face (optional): The font face of the plot title. Default is "bold".
+#' @param title_colour (optional): The color of the plot title. Default is "#2a475e".
+#' @param subtitle (optional): A character specifying the subtitle of the plot.
 #' Default is "default", which calculates the total number of data sets with hits and returns it as
 #' "total number of data sets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.
-#' @param subtitle_size (optional) The size of the plot subtitle. Default is 12.
-#' @param subtitle_face (optional) The font face of the plot subtitle. Default is "bold".
-#' @param subtitle_colour (optional) The color of the plot subtitle. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Viral group".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".
-#' @param axis_title_size (optional) The size of axis titles. Default is 12.
-#' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
-#' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
+#' @param subtitle_size (optional): The size of the plot subtitle. Default is 12.
+#' @param subtitle_face (optional): The font face of the plot subtitle. Default is "bold".
+#' @param subtitle_colour (optional): The color of the plot subtitle. Default is "#1b2838".
+#' @param xlabel (optional): A character specifying the label for the x-axis. Default is "Viral group".
+#' @param ylabel (optional): A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".
+#' @param axis_title_size (optional): The size of axis titles. Default is 12.
+#' @param xtext_size (optional): The size of x-axis text labels. Default is 10.
+#' @param ytext_size (optional): The size of y-axis text labels. Default is 10.
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
-#' @param legend_title (optional) A character specifying the title of the legend. Default is "Phylum".
-#' @param legend_position (optional) The position of the legend. Default is "bottom"."none" removes legend.
-#' @param legend_title_size (optional) The size of the legend title. Default is 12.
-#' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
-#' @param legend_text_size (optional) The size of the legend text. Default is 10.
+#' @param legend_title (optional): A character specifying the title of the legend. Default is "Phylum".
+#' @param legend_position (optional): The position of the legend. Default is "bottom"."none" removes legend.
+#' @param legend_title_size (optional): The size of the legend title. Default is 12.
+#' @param legend_title_face (optional): The font face of the legend title. Default is "bold".
+#' @param legend_text_size (optional): The size of the legend text. Default is 10.
 #' @param plot_text An index (0-3) to select the variable for text labels.
 #' - 0 = None.
 #' - 1 = Number of viral groups detected across query sequences.
 #' - 2 = Only the percentage.
 #' - 3 = Both (Default).
-#' @param plot_text_size (optional) The size of the text labels added to the plot. Default is 3.5.
-#' @param plot_text_position_dodge (optional) The degree of dodging for positioning text labels. Default is 0.9.
-#' @param plot_text_hjust (optional) The horizontal justification of text labels. Default is -0.1.
-#' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
+#' @param plot_text_size (optional): The size of the text labels added to the plot. Default is 3.5.
+#' @param plot_text_position_dodge (optional): The degree of dodging for positioning text labels. Default is 0.9.
+#' @param plot_text_hjust (optional): The horizontal justification of text labels. Default is -0.1.
+#' @param plot_text_vjust (optional): The vertical justification of text labels. Default is 0.5.
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
-#' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
+#' @param plot_text_colour (optional): The color of the text labels added to the plot. Default is "black".
 #' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #'

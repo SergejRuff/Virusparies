@@ -44,11 +44,11 @@ VhgRunsBarplot(
 \arguments{
 \item{file}{Data frame containing Virushunter or VirusGatherer hittables results.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
+\item{groupby}{(optional): A string indicating the column used for grouping the data points in the plot.
 "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
-\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -61,56 +61,56 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5).
+\item{cut}{(optional): The significance cutoff value for E-values (default: 1e-5).
 Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.}
 
 \item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 NULL sorts alphabetically.}
 
-\item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply.
+\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply.
 Options include "minimal", "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test". Default is "linedraw".}
 
-\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
 
-\item{title}{(optional) A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".}
+\item{title}{(optional): A character specifying the title of the plot. Default is "Distribution of viral groups detected across query sequences".}
 
-\item{title_size}{(optional) The size of the plot title. Default is 16.}
+\item{title_size}{(optional): The size of the plot title. Default is 16.}
 
-\item{title_face}{(optional) The font face of the plot title. Default is "bold".}
+\item{title_face}{(optional): The font face of the plot title. Default is "bold".}
 
-\item{title_colour}{(optional) The color of the plot title. Default is "#2a475e".}
+\item{title_colour}{(optional): The color of the plot title. Default is "#2a475e".}
 
-\item{subtitle}{(optional) A character specifying the subtitle of the plot.
+\item{subtitle}{(optional): A character specifying the subtitle of the plot.
 Default is "default", which calculates the total number of data sets with hits and returns it as
 "total number of data sets with hits: " followed by the calculated number. an empty string ("") removes the subtitle.}
 
-\item{subtitle_size}{(optional) The size of the plot subtitle. Default is 12.}
+\item{subtitle_size}{(optional): The size of the plot subtitle. Default is 12.}
 
-\item{subtitle_face}{(optional) The font face of the plot subtitle. Default is "bold".}
+\item{subtitle_face}{(optional): The font face of the plot subtitle. Default is "bold".}
 
-\item{subtitle_colour}{(optional) The color of the plot subtitle. Default is "#1b2838".}
+\item{subtitle_colour}{(optional): The color of the plot subtitle. Default is "#1b2838".}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Viral group".}
+\item{xlabel}{(optional): A character specifying the label for the x-axis. Default is "Viral group".}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".}
+\item{ylabel}{(optional): A character specifying the label for the y-axis. Default is "Number of data sets with hits for group".}
 
-\item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
+\item{axis_title_size}{(optional): The size of axis titles. Default is 12.}
 
-\item{xtext_size}{(optional) The size of x-axis text labels. Default is 10.}
+\item{xtext_size}{(optional): The size of x-axis text labels. Default is 10.}
 
-\item{ytext_size}{(optional) The size of y-axis text labels. Default is 10.}
+\item{ytext_size}{(optional): The size of y-axis text labels. Default is 10.}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
-\item{legend_title}{(optional) A character specifying the title of the legend. Default is "Phylum".}
+\item{legend_title}{(optional): A character specifying the title of the legend. Default is "Phylum".}
 
-\item{legend_position}{(optional) The position of the legend. Default is "bottom"."none" removes legend.}
+\item{legend_position}{(optional): The position of the legend. Default is "bottom"."none" removes legend.}
 
-\item{legend_title_size}{(optional) The size of the legend title. Default is 12.}
+\item{legend_title_size}{(optional): The size of the legend title. Default is 12.}
 
-\item{legend_title_face}{(optional) The font face of the legend title. Default is "bold".}
+\item{legend_title_face}{(optional): The font face of the legend title. Default is "bold".}
 
-\item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional): The size of the legend text. Default is 10.}
 
 \item{plot_text}{An index (0-3) to select the variable for text labels.
 \itemize{
@@ -120,16 +120,16 @@ Default is "default", which calculates the total number of data sets with hits a
 \item 3 = Both (Default).
 }}
 
-\item{plot_text_size}{(optional) The size of the text labels added to the plot. Default is 3.5.}
+\item{plot_text_size}{(optional): The size of the text labels added to the plot. Default is 3.5.}
 
-\item{plot_text_position_dodge}{(optional) The degree of dodging for positioning text labels. Default is 0.9.}
+\item{plot_text_position_dodge}{(optional): The degree of dodging for positioning text labels. Default is 0.9.}
 
-\item{plot_text_hjust}{(optional) The horizontal justification of text labels. Default is -0.1.}
+\item{plot_text_hjust}{(optional): The horizontal justification of text labels. Default is -0.1.}
 
-\item{plot_text_vjust}{(optional) The vertical justification of text labels. Default is 0.5.
+\item{plot_text_vjust}{(optional): The vertical justification of text labels. Default is 0.5.
 It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
 
-\item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
+\item{plot_text_colour}{(optional): The color of the text labels added to the plot. Default is "black".}
 
 \item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
