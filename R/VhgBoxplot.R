@@ -1,11 +1,11 @@
-#' @title VhgBoxplot: Generate box plots comparing E-values,identity or contig length (Gatherer only) for each virus group
+#' @title VhgBoxplot: Generate box plots comparing e-values,identity or contig length (Gatherer only) for each virus group
 #'
 #' @description
-#'  This function generates box plots comparing either E-values,identity or contig length (Gatherer only)
-#' for each group from VirusHunter or VirusGatherer hittables results.
+#' VhgBoxplot generates box plots comparing either e-values,identity or contig length (Gatherer only)
+#' for each group from VirusHunter or VirusGatherer hittable results.
 #'
-#' @param file A data frame containing VirusHunter or VirusGatherer Hittable results.
-#' @param x_column A character specifying the column containing the groups (Default:"best_query").
+#' @param file A data frame containing VirusHunter or VirusGatherer hittable results.
+#' @param x_column A character specifying the column containing the groups (default:"best_query").
 #' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
@@ -17,69 +17,68 @@
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_ident",
-#' "contig_len" (Column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (Default:"ViralRefSeq_E").
+#' "contig_len" (column in Gatherer hittable) and "ViralRefSeq_E" are supported columns (default:"ViralRefSeq_E").
 #' @param contiglen_log10_scale (optional): When `y_column` is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).
-#' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
-#' @param add_cutoff_line (optional): whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
+#' @param cut (optional): The significance cutoff value for e-values (default: 1e-5).
+#' @param add_cutoff_line (optional): Whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
 #' @param cut_colour (optional): The color for the significance cutoff line (default: "#990000").
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
 #' NULL sorts alphabetically.
-#' @param theme_choice (optional):: A character indicating the ggplot2 theme to apply. Options include "minimal",
-#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "linedraw".
-#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param add_mean_point (optional): Logical indicating whether to add mean points to the boxplot. Default is FALSE.
-#' @param mean_color (optional): change color of point indicating mean value in box plot (default: "white").
-#' @param mean_point_size (optional): change size of point indicating mean value in box plot (default: 2)
+#' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).
+#' @param add_mean_point (optional): Logical indicating whether to add mean points to the box plot (default: FALSE).
+#' @param mean_color (optional): Change color of point indicating mean value in box plot (default: "white").
+#' @param mean_point_size (optional): Change size of point indicating mean value in box plot (default: 2).
 #' @param title (optional): A character specifying the title of the plot. Default title is set based on y_column.
-#' @param title_size (optional): Numeric specifying the size of the title text. Default is 16.
-#' @param title_face (optional): A character specifying the font face for the title text. Default is "bold".
-#' @param title_colour (optional): A character specifying the color for the title text. Default is "#2a475e".
+#' @param title_size (optional): Numeric specifying the size of the title text (default: 16).
+#' @param title_face (optional): A character specifying the font face for the title text (default: "bold").
+#' @param title_colour (optional): A character specifying the color for the title text (default: "#2a475e").
 #' @param subtitle (optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
-#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text. Default is 12.
-#' @param subtitle_face (optional): A character specifying the font face for the subtitle text. Default is "bold".
-#' @param subtitle_colour (optional): A character specifying the color for the subtitle text. Default is "#1b2838".
-#' @param xlabel (optional): A character specifying the label for the x-axis. Default is "Virus found in query".
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text(default: 12).
+#' @param subtitle_face (optional): A character specifying the font face for the subtitle text (default: "bold").
+#' @param subtitle_colour (optional): A character specifying the color for the subtitle text (default: "#1b2838").
+#' @param xlabel (optional): A character specifying the label for the x-axis (default: "Virus found in query").
 #' @param ylabel (optional): A character specifying the label for the y-axis. Default is set based on y_column.
-#' @param axis_title_size (optional): Numeric specifying the size of the axis title text. Default is 12.
-#' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels. Default is 10.
-#' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels. Default is 10.
+#' @param axis_title_size (optional): Numeric specifying the size of the axis title text (default: 12).
+#' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels (default: 10).
+#' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels (default: 10).
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
-#' @param legend_title (optional): A character specifying the title for the legend. Default is "Phylum".
-#' @param legend_position (optional): A character specifying the position of the legend. Default is "bottom".
-#' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
-#' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
-#' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
-#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' @param legend_title (optional): A character specifying the title for the legend (default: "Phylum").
+#' @param legend_position (optional): A character specifying the position of the legend (default: "bottom").
+#' @param legend_title_size (optional): Numeric specifying the size of the legend title text (default: 12).
+#' @param legend_title_face (optional): A character specifying the font face for the legend title text (default: "bold").
+#' @param legend_text_size (optional): Numeric specifying the size of the legend text (default: 10).
+#' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #'
 #'
 #' @details
-#' VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+#' VhgBoxplot generates box plots comparing either e-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
 #'
-#' The user can specify whether to generate boxplots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
-#' This means that 'VhgBoxplot' can generate three different types of boxplots.
-#' By default, 'y_column' is set to "ViralRefSeq_E" and will plot the Reference E-Value on the y-axis.
+#' The user can specify whether to generate box plots for e-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
+#' This means that 'VhgBoxplot' can generate three different types of box plots.
+#' By default, 'y_column' is set to "ViralRefSeq_E" and will plot the reference e-Value on the y-axis.
 #' Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
 #'
 #' Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
-#' When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the hittable filtered for the rows below the threshold specified in the 'cut' argument.
+#' When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the Hittable filtered for the rows below the threshold specified in the 'cut' argument.
 #'
 #' The 'cut' argument is used differently depending on the 'y_column' value:
-#' - For 'y_column' set to "contig_len" or "ViralRefSeq_ident", the 'cut' argument filters the data to plot only the values with a "ViralRefSeq_E" below the specified threshold (default is 0.0001).
+#' - For 'y_column' set to "contig_len" or "ViralRefSeq_ident", the 'cut' argument filters the data to plot only the values with a "ViralRefSeq_E" below the specified threshold (default: 1e-5).
 #' - For 'y_column' set to "ViralRefSeq_E", the rows are not filtered. Instead, a horizontal line (h_line) is shown in the plot to indicate the cutoff value.
 #'
 #' This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
 #'
-#' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
-#' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest E-value that is greater than 0.
-#' If the smallest E-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
+#' Warning: In some cases, e-values might be exactly 0. When these values are transformed using -log10, R
+#' returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
+#' If the smallest e-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
 #'
 #' @return A list containing:
-#' - the generated box plot.
-#' - summary statistics.
-#' - outliers ("ViralRefSeq_E" and "contig_len" only).
-#' - and rows_belowthres ("ViralRefSeq_E" only).
+#' - Rhe generated box plot.
+#' - Summary statistics.
+#' - Outliers ("ViralRefSeq_E" and "contig_len" only).
+#' - rows_belowthres ("ViralRefSeq_E" only).
 #'
 #' @author Sergej Ruff
 #'
@@ -90,7 +89,7 @@
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' file <- ImportVirusTable(path)
 #'
-#' # plot 1 for evalues
+#' # plot 1 for e-values
 #' plot1 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_E")
 #' plot1
 #'
@@ -242,7 +241,7 @@ VhgBoxplot <- function(file,
   }
 
 
-  # change values of evalues to -log10
+  # change values of e-values to -log10
   if(y_column == "ViralRefSeq_E"){
 
     y_aes <- -log10(file[[y_column]])
