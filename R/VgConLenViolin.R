@@ -24,7 +24,6 @@
 #' A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier.
 #' Default is 1.
 #' @param jitter_point (optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.
-#' @param jitter_point_colour (optional): colour of jitter points. Default is "blue"
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
 #'  Default is "linedraw".
@@ -99,7 +98,6 @@ VgConLenViolin <- function(vg_file=vg_file,
                            reorder_criteria = "median",
                            adjust_bw = 1,
                            jitter_point=FALSE,
-                           jitter_point_colour = "blue",
                            theme_choice = "linedraw",
                            flip_coords = TRUE,
                            title = "Violinplot of contig length for each group",
@@ -220,7 +218,7 @@ VgConLenViolin <- function(vg_file=vg_file,
   }
 
 
-  # Plotting with tryCatch to handle warning
+
   p <- ggplot(vg_file,aes(x= if (!is.null(reorder_criteria)) {
     reorder(.data$ViralRefSeq_taxonomy, .data$contig_len,
             FUN = switch(reorder_criteria,
@@ -263,11 +261,28 @@ VgConLenViolin <- function(vg_file=vg_file,
     theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))+
     scale_y_continuous(expand = c(0, 0), limits = y_limits)
 
-  if(jitter_point){
-    p <- p + geom_jitter(width = 0.1, size = 1, color = jitter_point_colour)
-  }else{
-    p <- p + geom_jitter(data = vg_file_filtered, width = 0.1, size = 1, color = jitter_point_colour)
-
+  # Assuming jitter_point is a logical variable you have defined earlier
+  if (jitter_point) {
+    p <- p + geom_point(
+      position = position_jitter(width = 0.1),
+      size = 1.5,
+      aes(color = .data$phyl, fill = .data$phyl),  # Use fill for color by phyl
+      show.legend = FALSE,
+      shape = 21,  # Shape 21 allows for both fill and outline
+      color = "black",  # Outline color
+      stroke = 1  # Width of the outline
+    )
+  } else {
+    p <- p + geom_point(
+      data = vg_file_filtered,
+      position = position_jitter(width = 0.1),
+      size = 1.5,
+      aes(color = .data$phyl, fill = .data$phyl),  # Use fill for color by phyl
+      show.legend = FALSE,
+      shape = 21,  # Shape 21 allows for both fill and outline
+      color = "black",  # Outline color
+      stroke = 1  # Width of the outline
+    )
   }
 
 

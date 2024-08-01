@@ -12,7 +12,6 @@ VgConLenViolin(
   reorder_criteria = "median",
   adjust_bw = 1,
   jitter_point = FALSE,
-  jitter_point_colour = "blue",
   theme_choice = "linedraw",
   flip_coords = TRUE,
   title = "Violinplot of contig length for each group",
@@ -66,8 +65,6 @@ A higher value results in a smoother plot by increasing the bandwidth, while a l
 Default is 1.}
 
 \item{jitter_point}{(optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
-
-\item{jitter_point_colour}{(optional): colour of jitter points. Default is "blue"}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
