@@ -1,14 +1,14 @@
 #' @title VhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family
 #'
 #' @description
-#' This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
-#' for each virus family from the input dataset.
+#' VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
+#' for each virus family from the input data set.
 #'
-#' @param vh_file A data frame containing VirusHunters hittables results.
-#' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
-#' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
-#' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
-#' @param taxa_rank (optional) When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' @param vh_file A data frame containing VirusHunters hittable results.
+#'
+#' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
+#'
+#' @param taxa_rank (optional): When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -18,54 +18,61 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cut (optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
-#' with values larger than cutoff value in ViralRefSeq_E column.
-#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
-#' NULL sorts alphabetically.
-#' @param theme_choice (optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
-#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "linedraw".
 #'
-#' @param flip_coords (optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional) A character specifying the title of the plot. Default is "Distribution of hits for each virus group".
-#' @param title_size (optional) The size of the plot title. Default is 16.
-#' @param title_face (optional) The font face of the plot title. Default is "bold".
-#' @param title_colour (optional) The color of the plot title. Default is "#2a475e".
-#' @param subtitle (optional) A character specifying the subtitle of the plot.
-#' Default is "total number of hits: " followed by the calculated number.empty string ("") removes subttitle.
-#' @param subtitle_size (optional) The size of the plot subtitle. Default is 12.
-#' @param subtitle_face (optional) The font face of the plot subtitle. Default is "bold".
-#' @param subtitle_colour (optional) The color of the plot subtitle. Default is "#1b2838".
-#' @param xlabel (optional) A character specifying the label for the x-axis. Default is "Viral group".
-#' @param ylabel (optional) A character specifying the label for the y-axis. Default is "Total number of hits".
-#' @param axis_title_size (optional) The size of axis titles. Default is 12.
-#' @param xtext_size (optional) The size of x-axis text labels. Default is 10.
-#' @param ytext_size (optional) The size of y-axis text labels. Default is 10.
+#' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5). Removes rows in vh_file
+#' with values larger than cutoff value in "ViralRefSeq_E" column.
+#'
+#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' NULL sorts alphabetically.
+#'
+#' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#'
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).
+#'
+#' @param title (optional): The title of the plot (default: "Distribution of hits for each virus group").
+#'
+#' @param title_size (optional): The size of the title text (default: 16).
+#' @param title_face (optional): The face (bold, italic, etc.) of the title text (default: "bold").
+#' @param title_colour (optional): The color of the title text (default: "#2a475e").
+#'
+#' @param subtitle (optional): A character specifying the subtitle of the plot.
+#' Default is "total number of hits: " followed by the calculated number.empty string ("") removes subtitle.
+#'
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text(default: 12).
+#' @param subtitle_face (optional): A character specifying the font face for the subtitle text (default: "bold").
+#' @param subtitle_colour (optional): A character specifying the color for the subtitle text (default: "#1b2838").
+#' .
+#' @param xlabel (optional): The label for the x-axis (default: "Viral group").
+#' @param ylabel (optional): The label for the y-axis (default: "Total number of hits").
+#'
+#' @param axis_title_size (optional): The size of the axis titles (default: 12).
+#' @param xtext_size (optional): The size of the x-axis text (default: 10).
+#' @param ytext_size (optional): The size of the y-axis text (default: 10).
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
-#' @param legend_title (optional) A character specifying the title of the legend. Default is "Phylum".
-#' @param legend_position (optional) The position of the legend. Default is "bottom".
-#' @param legend_title_size (optional) The size of the legend title. Default is 12.
-#' @param legend_title_face (optional) The font face of the legend title. Default is "bold".
-#' @param legend_text_size (optional) The size of the legend text. Default is 10.
-#' @param plot_text An index (0-3) to select the variable for text labels.
+#' @param legend_title (optional): A character specifying the title for the legend (default: "Phylum").
+#' @param legend_position (optional): A character specifying the position of the legend (default: "bottom").
+#' @param legend_title_size (optional): Numeric specifying the size of the legend title text (default: 12).
+#' @param legend_title_face (optional): A character specifying the font face for the legend title text (default: "bold").
+#' @param legend_text_size (optional): Numeric specifying the size of the legend text (default: 10).
+#' @param plot_text (optional): An index (0-3) to select the variable for text labels.
 #' - 0 = None.
 #' - 1 = Number of hits for each viral group.
 #' - 2 = Only the percentage.
 #' - 3 = Both (Default).
-#' @param plot_text_size (optional) The size of the text labels added to the plot. Default is 3.5.
-#' @param plot_text_position_dodge (optional) The degree of dodging for positioning text labels. Default is 0.9.
-#' @param plot_text_hjust (optional) The horizontal justification of text labels. Default is -0.1.
-#' @param plot_text_vjust (optional) The vertical justification of text labels. Default is 0.5.
+#' @param plot_text_size (optional): The size of the text labels added to the plot (default: 3.5).
+#' @param plot_text_position_dodge (optional): The degree of dodging for positioning text labels (default: 0.9).
+#' @param plot_text_hjust (optional): The horizontal justification of text labels (default: -0.1).
+#' @param plot_text_vjust (optional): The vertical justification of text labels (default: 0.5).
 #' It is recommended to change `vjust` when setting `flip_coords = FALSE`.
-#' @param plot_text_colour (optional) The color of the text labels added to the plot. Default is "black".
-#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' @param plot_text_colour (optional): The color of the text labels added to the plot (default: "black").
+#' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
-#'
 #'
 #'
 #' @details
 #' VhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
-#' hits for each virus family from the input dataset (accepts only VirusHunter hittables).
+#' hits for each virus family from the input data set (accepts only VirusHunter hittables).
 #' It then generates a bar plot showing the sum of hits/contigs for each virus family.
 #' Additionally, it returns the processed data for further analysis.
 #'

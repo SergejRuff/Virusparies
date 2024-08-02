@@ -42,7 +42,7 @@
 #' @param legend_title_size (optional): Numeric specifying the size of the legend title text (default: 12).
 #' @param legend_title_face (optional): A character specifying the font face for the legend title text (default: "bold").
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text (default: 10).
-#' @param plot_text An index (0-3) to select the variable for text labels.
+#' @param plot_text (optional): An index (0-3) to select the variable for text labels.
 #' - 0 = None.
 #' - 1 = Number of viral groups detected across query sequences.
 #' - 2 = Only the percentage.

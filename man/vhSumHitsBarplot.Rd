@@ -41,13 +41,11 @@ VhSumHitsBarplot(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing VirusHunters hittables results.}
+\item{vh_file}{A data frame containing VirusHunters hittable results.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
-"best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
-Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
+\item{groupby}{(optional): A character specifying the column containing the groups (default: "best_query").}
 
-\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -60,58 +58,58 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional) The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
-with values larger than cutoff value in ViralRefSeq_E column.}
+\item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5). Removes rows in vh_file
+with values larger than cutoff value in "ViralRefSeq_E" column.}
 
-\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+\item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 NULL sorts alphabetically.}
 
-\item{theme_choice}{(optional) A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-Default is "linedraw".}
+\item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".}
 
-\item{flip_coords}{(optional) Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).}
 
-\item{title}{(optional) A character specifying the title of the plot. Default is "Distribution of hits for each virus group".}
+\item{title}{(optional): The title of the plot (default: "Distribution of hits for each virus group").}
 
-\item{title_size}{(optional) The size of the plot title. Default is 16.}
+\item{title_size}{(optional): The size of the title text (default: 16).}
 
-\item{title_face}{(optional) The font face of the plot title. Default is "bold".}
+\item{title_face}{(optional): The face (bold, italic, etc.) of the title text (default: "bold").}
 
-\item{title_colour}{(optional) The color of the plot title. Default is "#2a475e".}
+\item{title_colour}{(optional): The color of the title text (default: "#2a475e").}
 
-\item{subtitle}{(optional) A character specifying the subtitle of the plot.
-Default is "total number of hits: " followed by the calculated number.empty string ("") removes subttitle.}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot.
+Default is "total number of hits: " followed by the calculated number.empty string ("") removes subtitle.}
 
-\item{subtitle_size}{(optional) The size of the plot subtitle. Default is 12.}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text(default: 12).}
 
-\item{subtitle_face}{(optional) The font face of the plot subtitle. Default is "bold".}
+\item{subtitle_face}{(optional): A character specifying the font face for the subtitle text (default: "bold").}
 
-\item{subtitle_colour}{(optional) The color of the plot subtitle. Default is "#1b2838".}
+\item{subtitle_colour}{(optional): A character specifying the color for the subtitle text (default: "#1b2838").
+.}
 
-\item{xlabel}{(optional) A character specifying the label for the x-axis. Default is "Viral group".}
+\item{xlabel}{(optional): The label for the x-axis (default: "Viral group").}
 
-\item{ylabel}{(optional) A character specifying the label for the y-axis. Default is "Total number of hits".}
+\item{ylabel}{(optional): The label for the y-axis (default: "Total number of hits").}
 
-\item{axis_title_size}{(optional) The size of axis titles. Default is 12.}
+\item{axis_title_size}{(optional): The size of the axis titles (default: 12).}
 
-\item{xtext_size}{(optional) The size of x-axis text labels. Default is 10.}
+\item{xtext_size}{(optional): The size of the x-axis text (default: 10).}
 
-\item{ytext_size}{(optional) The size of y-axis text labels. Default is 10.}
+\item{ytext_size}{(optional): The size of the y-axis text (default: 10).}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
-\item{legend_title}{(optional) A character specifying the title of the legend. Default is "Phylum".}
+\item{legend_title}{(optional): A character specifying the title for the legend (default: "Phylum").}
 
-\item{legend_position}{(optional) The position of the legend. Default is "bottom".}
+\item{legend_position}{(optional): A character specifying the position of the legend (default: "bottom").}
 
-\item{legend_title_size}{(optional) The size of the legend title. Default is 12.}
+\item{legend_title_size}{(optional): Numeric specifying the size of the legend title text (default: 12).}
 
-\item{legend_title_face}{(optional) The font face of the legend title. Default is "bold".}
+\item{legend_title_face}{(optional): A character specifying the font face for the legend title text (default: "bold").}
 
-\item{legend_text_size}{(optional) The size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional): Numeric specifying the size of the legend text (default: 10).}
 
-\item{plot_text}{An index (0-3) to select the variable for text labels.
+\item{plot_text}{(optional): An index (0-3) to select the variable for text labels.
 \itemize{
 \item 0 = None.
 \item 1 = Number of hits for each viral group.
@@ -119,30 +117,30 @@ Default is "total number of hits: " followed by the calculated number.empty stri
 \item 3 = Both (Default).
 }}
 
-\item{plot_text_size}{(optional) The size of the text labels added to the plot. Default is 3.5.}
+\item{plot_text_size}{(optional): The size of the text labels added to the plot (default: 3.5).}
 
-\item{plot_text_position_dodge}{(optional) The degree of dodging for positioning text labels. Default is 0.9.}
+\item{plot_text_position_dodge}{(optional): The degree of dodging for positioning text labels (default: 0.9).}
 
-\item{plot_text_hjust}{(optional) The horizontal justification of text labels. Default is -0.1.}
+\item{plot_text_hjust}{(optional): The horizontal justification of text labels (default: -0.1).}
 
-\item{plot_text_vjust}{(optional) The vertical justification of text labels. Default is 0.5.
+\item{plot_text_vjust}{(optional): The vertical justification of text labels (default: 0.5).
 It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}.}
 
-\item{plot_text_colour}{(optional) The color of the text labels added to the plot. Default is "black".}
+\item{plot_text_colour}{(optional): The color of the text labels added to the plot (default: "black").}
 
-\item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
+\item{facet_ncol}{(optional):  The number of columns for faceting (default: NULL).
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
 }
 \value{
 A list containing the generated bar plot and processed data.
 }
 \description{
-This function preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
-for each virus family from the input dataset.
+VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
+for each virus family from the input data set.
 }
 \details{
 VhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
-hits for each virus family from the input dataset (accepts only VirusHunter hittables).
+hits for each virus family from the input data set (accepts only VirusHunter hittables).
 It then generates a bar plot showing the sum of hits/contigs for each virus family.
 Additionally, it returns the processed data for further analysis.
 }

@@ -111,7 +111,7 @@ Default is "default", which calculates the total number of data sets with hits a
 
 \item{legend_text_size}{(optional): Numeric specifying the size of the legend text (default: 10).}
 
-\item{plot_text}{An index (0-3) to select the variable for text labels.
+\item{plot_text}{(optional): An index (0-3) to select the variable for text labels.
 \itemize{
 \item 0 = None.
 \item 1 = Number of viral groups detected across query sequences.
