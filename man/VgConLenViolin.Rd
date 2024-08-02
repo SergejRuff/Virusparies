@@ -54,69 +54,67 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional): The significance cutoff value for E-values (default: 1e-5).}
+\item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).}
 
-\item{log10_scale}{(optinal) transform y-axis to log10 scale (default: TRUE)}
+\item{log10_scale}{(optinal): transform y-axis to log10 scale (default: TRUE).}
 
-\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+\item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 NULL sorts alphabetically.}
 
 \item{adjust_bw}{(optional): control the bandwidth of the kernel density estimator used to create the violin plot.
-A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier.
-Default is 1.}
+A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier (default: 1).}
 
-\item{jitter_point}{(optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.}
+\item{jitter_point}{(optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations (default: FALSE).}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-Default is "linedraw".}
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".}
 
-\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.}
+\item{flip_coords}{(optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).}
 
-\item{title}{(optional): A character specifying the title of the plot. Default title is set based on y_column.}
+\item{title}{(optional): The title of the plot (default: "Violinplot of contig length for each group").}
 
-\item{title_size}{(optional): Numeric specifying the size of the title text. Default is 16.}
+\item{title_size}{(optional): The size of the title text (default: 16).}
 
-\item{title_face}{(optional): A character specifying the font face for the title text. Default is "bold".}
+\item{title_face}{(optional): The face (bold, italic, etc.) of the title text (default: "bold").}
 
-\item{title_colour}{(optional): A character specifying the color for the title text. Default is "#2a475e".}
+\item{title_colour}{(optional): The color of the title text (default: "#2a475e").}
 
-\item{subtitle}{(optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot (default: NULL).}
 
-\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text. Default is 12.}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text(default: 12).}
 
-\item{subtitle_face}{(optional): A character specifying the font face for the subtitle text. Default is "bold".}
+\item{subtitle_face}{(optional): A character specifying the font face for the subtitle text (default: "bold").}
 
-\item{subtitle_colour}{(optional): A character specifying the color for the subtitle text. Default is "#1b2838".}
+\item{subtitle_colour}{(optional): A character specifying the color for the subtitle text (default: "#1b2838").}
 
-\item{xlabel}{(optional): A character specifying the label for the x-axis. Default is "Virus found in query".}
+\item{xlabel}{(optional): The label for the x-axis (default: "Viral group").}
 
-\item{ylabel}{(optional): A character specifying the label for the y-axis. Default is set based on y_column.}
+\item{ylabel}{(optional): The label for the y-axis (default: "Contig length (nt)").}
 
-\item{axis_title_size}{(optional): Numeric specifying the size of the axis title text. Default is 12.}
+\item{axis_title_size}{(optional): The size of the axis titles (default: 12).}
 
-\item{xtext_size}{(optional): Numeric specifying the size of the x-axis tick labels. Default is 10.}
+\item{xtext_size}{(optional): The size of the x-axis text (default: 10).}
 
-\item{ytext_size}{(optional): Numeric specifying the size of the y-axis tick labels. Default is 10.}
+\item{ytext_size}{(optional): The size of the y-axis text (default: 10).}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
-\item{legend_title}{(optional): A character specifying the title for the legend. Default is "Phylum".}
+\item{legend_title}{(optional): A character specifying the title for the legend (default: "Phylum").}
 
-\item{legend_position}{(optional): A character specifying the position of the legend. Default is "bottom".}
+\item{legend_position}{(optional): The position of the legend (default: "bottom).}
 
-\item{legend_title_size}{(optional): Numeric specifying the size of the legend title text. Default is 12.}
+\item{legend_title_size}{(optional): Numeric specifying the size of the legend title text (default: 12).}
 
-\item{legend_title_face}{(optional): A character specifying the font face for the legend title text. Default is "bold".}
+\item{legend_title_face}{(optional): A character specifying the font face for the legend title text (default: "bold").}
 
-\item{legend_text_size}{(optional): Numeric specifying the size of the legend text. Default is 10.}
+\item{legend_text_size}{(optional): Numeric specifying the size of the legend text (default: 10).}
 
 \item{min_observations}{(optional): Minimum number of observations required per group to be included in the plot (default: 1).}
 
-\item{facet_ncol}{(optional):  The number of columns for faceting. Default is NULL.
+\item{facet_ncol}{(optional):  The number of columns for faceting (default: NULL).
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
 
-\item{add_boxplot}{add a boxplot to the violin plot (default: FALSE)}
+\item{add_boxplot}{(optional): Add a boxplot to the violin plot (default: FALSE).}
 }
 \value{
 A list containing the following components:
@@ -126,11 +124,11 @@ A list containing the following components:
 }
 }
 \description{
-This function creates a violin plot to visualize the distribution of contig lengths
+VgConLenViolin creates a violin plot to visualize the distribution of contig lengths
 for each group in VirusGatherer hittables.
 }
 \details{
-This function creates a violin plot to visualize the distribution of contig lengths
+VgConLenViolin creates a violin plot to visualize the distribution of contig lengths
 for each group in the "ViralRefSeq_taxonomy" column of the VirusGatherer hittable.
 The x-axis represents the groups as defined by the "ViralRefSeq_taxonomy" column,
 and the y-axis represents the contig lengths.
@@ -139,7 +137,7 @@ By default, the y-axis is transformed to a log10 scale to better visualize diffe
 in contig lengths across groups. This transformation can be disabled by setting the
 \code{log10_scale} argument to FALSE.
 
-\code{min_observations} filters the datasets to include only groups with at least the specified number of observations
+\code{min_observations} filters the data sets to include only groups with at least the specified number of observations
 before plotting them. This feature allows users to exclude groups with insufficient data.
 By default, every group is plotted, as the minimum requirement is set to at least one observation per group.
 }

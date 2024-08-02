@@ -1,11 +1,12 @@
 #' @title VgConLenViolin: Generate a Violinplot of contig length for each group (Gatherer only)
 #'
 #' @description
-#' This function creates a violin plot to visualize the distribution of contig lengths
+#' VgConLenViolin creates a violin plot to visualize the distribution of contig lengths
 #' for each group in VirusGatherer hittables.
 #'
 #'
 #' @param vg_file A data frame containing VirusGatherer hittable results.
+#'
 #' @param taxa_rank (optional): Specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
@@ -16,45 +17,56 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
-#' @param log10_scale (optinal) transform y-axis to log10 scale (default: TRUE)
-#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+#'
+#' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+#'
+#' @param log10_scale (optinal): transform y-axis to log10 scale (default: TRUE).
+#'
+#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 #' NULL sorts alphabetically.
+#'
 #' @param adjust_bw (optional): control the bandwidth of the kernel density estimator used to create the violin plot.
-#' A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier.
-#' Default is 1.
-#' @param jitter_point (optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations.
+#' A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier (default: 1).
+#'
+#' @param jitter_point (optional): logical: TRUE to show all observations, FALSE to show only groups with less than 2 observations (default: FALSE).
+#'
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
-#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw", and "test".
-#'  Default is "linedraw".
-#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot. Default is TRUE.
-#' @param title (optional): A character specifying the title of the plot. Default title is set based on y_column.
-#' @param title_size (optional): Numeric specifying the size of the title text. Default is 16.
-#' @param title_face (optional): A character specifying the font face for the title text. Default is "bold".
-#' @param title_colour (optional): A character specifying the color for the title text. Default is "#2a475e".
-#' @param subtitle (optional): A character specifying the subtitle of the plot. Default subtitle is set based on y_column.
-#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text. Default is 12.
-#' @param subtitle_face (optional): A character specifying the font face for the subtitle text. Default is "bold".
-#' @param subtitle_colour (optional): A character specifying the color for the subtitle text. Default is "#1b2838".
-#' @param xlabel (optional): A character specifying the label for the x-axis. Default is "Virus found in query".
-#' @param ylabel (optional): A character specifying the label for the y-axis. Default is set based on y_column.
-#' @param axis_title_size (optional): Numeric specifying the size of the axis title text. Default is 12.
-#' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels. Default is 10.
-#' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels. Default is 10.
+#'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#'
+#' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).
+#'
+#' @param title (optional): The title of the plot (default: "Violinplot of contig length for each group").
+#' @param title_size (optional): The size of the title text (default: 16).
+#' @param title_face (optional): The face (bold, italic, etc.) of the title text (default: "bold").
+#' @param title_colour (optional): The color of the title text (default: "#2a475e").
+#'
+#' @param subtitle (optional): A character specifying the subtitle of the plot (default: NULL).
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text(default: 12).
+#' @param subtitle_face (optional): A character specifying the font face for the subtitle text (default: "bold").
+#' @param subtitle_colour (optional): A character specifying the color for the subtitle text (default: "#1b2838").
+#'
+#' @param xlabel (optional): The label for the x-axis (default: "Viral group").
+#' @param ylabel (optional): The label for the y-axis (default: "Contig length (nt)").
+#' @param axis_title_size (optional): The size of the axis titles (default: 12).
+#' @param xtext_size (optional): The size of the x-axis text (default: 10).
+#' @param ytext_size (optional): The size of the y-axis text (default: 10).
+#'
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
-#' @param legend_title (optional): A character specifying the title for the legend. Default is "Phylum".
-#' @param legend_position (optional): A character specifying the position of the legend. Default is "bottom".
-#' @param legend_title_size (optional): Numeric specifying the size of the legend title text. Default is 12.
-#' @param legend_title_face (optional): A character specifying the font face for the legend title text. Default is "bold".
-#' @param legend_text_size (optional): Numeric specifying the size of the legend text. Default is 10.
+#'
+#' @param legend_title (optional): A character specifying the title for the legend (default: "Phylum").
+#' @param legend_position (optional): The position of the legend (default: "bottom).
+#' @param legend_title_size (optional): Numeric specifying the size of the legend title text (default: 12).
+#' @param legend_title_face (optional): A character specifying the font face for the legend title text (default: "bold").
+#' @param legend_text_size (optional): Numeric specifying the size of the legend text (default: 10).
+#'
 #' @param min_observations (optional): Minimum number of observations required per group to be included in the plot (default: 1).
-#' @param facet_ncol (optional):  The number of columns for faceting. Default is NULL.
+#' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
-#' @param add_boxplot add a boxplot to the violin plot (default: FALSE)
+#' @param add_boxplot (optional): Add a boxplot to the violin plot (default: FALSE).
 #'
 #'
 #' @details
-#' This function creates a violin plot to visualize the distribution of contig lengths
+#' VgConLenViolin creates a violin plot to visualize the distribution of contig lengths
 #' for each group in the "ViralRefSeq_taxonomy" column of the VirusGatherer hittable.
 #' The x-axis represents the groups as defined by the "ViralRefSeq_taxonomy" column,
 #' and the y-axis represents the contig lengths.
@@ -63,7 +75,7 @@
 #' in contig lengths across groups. This transformation can be disabled by setting the
 #' `log10_scale` argument to FALSE.
 #'
-#' `min_observations` filters the datasets to include only groups with at least the specified number of observations
+#' `min_observations` filters the data sets to include only groups with at least the specified number of observations
 #'  before plotting them. This feature allows users to exclude groups with insufficient data.
 #'  By default, every group is plotted, as the minimum requirement is set to at least one observation per group.
 #'
