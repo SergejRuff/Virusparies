@@ -53,9 +53,8 @@ get_most_common_taxonomic_rank <- function(virus_names) {
 #' with each entry in the column reflecting the phylum name derived from the `groupby` column for each observation.
 #'
 #'
-#' @param file VirusHunter or VirusGatherer hittable
-#' @param groupby (optional) A string indicating the column used for grouping the data points in the plot.
-#' "best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+#' @param file A data frame containing VirusHunter or VirusGatherer hittable results.
+#' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #'
 #' @return Hittable with Phylum column

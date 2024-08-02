@@ -1,11 +1,11 @@
 #' @title VhgSubsetHittable: Filter VirusHunter and VirusGatherer hittables
 #'
 #' @description
-#' This function filters a virusHunter or VirusGatherer table based on specified criteria,
+#' VhgSubsetHittable filters a VirusHunter or VirusGatherer hittable based on specified criteria,
 #' including specific virus groups, minimum number of hits, and observations below certain
 #' E-value or identity percentage criteria.
 #'
-#' @param file A dataframe containing VirusHunter or VirusGatherer hittable data.
+#' @param file A data frame containing VirusHunter or VirusGatherer hittable results.
 #' @param group_column A string indicating the column containing the virus groups specified in the virus_groups argument.
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
 #' @param virus_groups A character vector specifying virus groups to filter by.

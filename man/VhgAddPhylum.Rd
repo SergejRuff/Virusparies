@@ -7,10 +7,9 @@
 VhgAddPhylum(file, groupby = "best_query")
 }
 \arguments{
-\item{file}{VirusHunter or VirusGatherer hittable}
+\item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data points in the plot.
-"best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+\item{groupby}{(optional): A character specifying the column containing the groups (default: "best_query").
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 }
 \value{

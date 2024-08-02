@@ -51,8 +51,8 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' Process the `ViralRefSeq_taxonomy` column.
 #'
 #'
-#' @param vh_file VirusHunter or VirusGatherer hittable
-#' @param taxa_rank Specify the taxonomic rank to group your data by.
+#' @param file A data frame containing VirusHunter or VirusGatherer hittable results.
+#' @param taxa_rank (optional): Specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
@@ -63,6 +63,7 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #'
+#'
 #' @details
 #' Besides `best_query`, the user can utilize the `ViralRefSeq_taxonomy` column as `x_column` or `groupby` in plots.
 #' This column needs preprocessing because it is too long and has too many unique elements for effective grouping.
@@ -72,19 +73,19 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' The user can also apply this function independently to process the taxonomy column and filter for the selected taxa rank in their data.
 #'
 #'
-#' @return vh_file with preprocessed ViralRefSeq_taxonomy elements
+#' @return file with preprocessed ViralRefSeq_taxonomy elements
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- ImportVirusTable(path)
+#' file <- ImportVirusTable(path)
 #'
-#' vh_file_filtered <- VhgPreprocessTaxa(vh_file,"Family")
+#' file_filtered <- VhgPreprocessTaxa(file,"Family")
 #'
 #' print("ViralRefSeq_taxonomy before processing:\n")
-#' print(head(vh_file$ViralRefSeq_taxonomy,5))
+#' print(head(file$ViralRefSeq_taxonomy,5))
 #'
 #' print("ViralRefSeq_taxonomy after processing:\n")
-#' print(head(vh_file_filtered$ViralRefSeq_taxonomy,5))
+#' print(head(file_filtered$ViralRefSeq_taxonomy,5))
 #'
 #'
 #'
@@ -96,21 +97,21 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' @importFrom tidyr unnest pivot_longer
 #' @importFrom stringr  str_extract str_remove_all str_detect
 #' @export
-VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
+VhgPreprocessTaxa <- function(file,taxa_rank) {
 
   #is_file_empty(file)
-  if (is_file_empty(vh_file)) {
+  if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
 
-  if (!all(grepl("^taxid:", vh_file$ViralRefSeq_taxonomy))) {
+  if (!all(grepl("^taxid:", file$ViralRefSeq_taxonomy))) {
 
     message("The 'ViralRefSeq_taxonomy' column is expected to start with 'taxid:' followed by taxa ranks separated by '|'.\n",
             "However, Your column has a different structure, possibly indicating that the data has already been processed by 'VhgPreprocessTaxa'.\n",
             "Skipping Taxonomy processing ...")
 
-    return(vh_file)
+    return(file)
 
   }
 
@@ -124,7 +125,7 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
   taxon_filter <- paste(unique(ictv_formatted$name), collapse = "|")
 
 
-  vh_file <- vh_file %>%
+  file <- file %>%
     mutate(
       ViralRefSeq_taxonomy = str_remove_all(.data$ViralRefSeq_taxonomy, "taxid:\\d+\\||\\w+\\s\\w+\\|"),
       name = str_extract(.data$ViralRefSeq_taxonomy, taxon_filter),
@@ -145,5 +146,5 @@ VhgPreprocessTaxa <- function(vh_file,taxa_rank) {
 
 
 
-  return(vh_file)
+  return(file)
 }

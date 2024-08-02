@@ -4,12 +4,12 @@
 \alias{VhgPreprocessTaxa}
 \title{VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements}
 \usage{
-VhgPreprocessTaxa(vh_file, taxa_rank)
+VhgPreprocessTaxa(file, taxa_rank)
 }
 \arguments{
-\item{vh_file}{VirusHunter or VirusGatherer hittable}
+\item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
 
-\item{taxa_rank}{Specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): Specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -23,7 +23,7 @@ Supported ranks are:
 }}
 }
 \value{
-vh_file with preprocessed ViralRefSeq_taxonomy elements
+file with preprocessed ViralRefSeq_taxonomy elements
 }
 \description{
 VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements
@@ -40,15 +40,15 @@ The user can also apply this function independently to process the taxonomy colu
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-vh_file <- ImportVirusTable(path)
+file <- ImportVirusTable(path)
 
-vh_file_filtered <- VhgPreprocessTaxa(vh_file,"Family")
+file_filtered <- VhgPreprocessTaxa(file,"Family")
 
 print("ViralRefSeq_taxonomy before processing:\n")
-print(head(vh_file$ViralRefSeq_taxonomy,5))
+print(head(file$ViralRefSeq_taxonomy,5))
 
 print("ViralRefSeq_taxonomy after processing:\n")
-print(head(vh_file_filtered$ViralRefSeq_taxonomy,5))
+print(head(file_filtered$ViralRefSeq_taxonomy,5))
 
 
 
