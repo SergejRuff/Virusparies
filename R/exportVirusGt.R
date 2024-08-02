@@ -1,17 +1,17 @@
 #' @title ExportVirusGt: (Experimental) Export Graphical Tables
 #'
-#' @description This function allows the user to export graphical tables in different formats.
+#' @description ExportVirusGt allows the user to export graphical tables in different formats.
 #'
 #'
 #'
 #'
 #' @param gtable A graphical table object.
-#' @param filename Name of the output file. Default is "table.docx".Make sure to provide an extension
+#' @param filename Name of the output file (default: table.docx"). Make sure to provide an extension
 #' compatible with the output types: .html, .tex, .ltx, .rtf, .docx. If a custom save function is provided,
 #' the file extension is ignored.
-#' @param export_gt_obj (optional): If TRUE, exports the input data frame in .rds format with the same name as specified in filename. Default is FALSE.
+#' @param export_gt_obj (optional): If TRUE, exports the input data frame in .rds format with the same name as specified in filename (default: FALSE).
 #' @param path Path of the directory to save plot to: path and filename are combined to create the
-#' fully qualified file name. Defaults to the working directory.
+#' fully qualified file name (default: current corking directory).
 #' @param create.dir Whether to create new directories if a non-existing directory is specified in
 #' the filename or path (TRUE) or return an error (FALSE, default). If FALSE and run in an interactive session,
 #' a prompt will appear asking to create a new directory when necessary.
@@ -39,7 +39,7 @@
 #'
 #' For .docx output, requires rmarkdown package.
 #'
-#' When 'create.dir' is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
+#' When `create.dir` is set to TRUE, it generates a directory at the specified 'path' argument if the path doesn't already exist.
 #'
 #' The optional `export_gt_obj` argument enables the user to export the data frame as a .rds file alongside the graphical table.
 #'
