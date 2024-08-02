@@ -8,7 +8,7 @@
 #' @param file VirusHunterGatherer hittable.
 #' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
 #' Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.
-#' @param taxa_rank (optional): When `x_column` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+#' @param taxa_rank (optional): When `groupby` is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 #' Supported ranks are:
 #' - "Subphylum"
 #' - "Class"
