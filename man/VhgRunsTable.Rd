@@ -49,7 +49,7 @@ Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" col
 
 \item{title}{(optional): The title of the plot (default: "Summary of unique runs by virus group").}
 
-\item{title_align}{(optional): A character vector specifying the alignment of title (and subtile) text.
+\item{title_align}{(optional): A character vector specifying the alignment of title (and subtitle) text.
 Possible values are "left" (default), "center", or "right".}
 
 \item{names_}{(optional): A vector of length 3 containing column names (default: c("Virus Group","Number of Unique SRA Runs","SRAs Found")).}

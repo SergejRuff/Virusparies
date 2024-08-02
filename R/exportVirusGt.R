@@ -55,7 +55,7 @@
 #' # using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 #' vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
 #'
-#' table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+#' table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtitle =
 #' "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
 #' "Reference E-Value","Reference Identity"))
 #'

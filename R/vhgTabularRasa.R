@@ -1,36 +1,48 @@
-#' @title VhgTabularRasa: Function for Generating Custom Formatted Graphical Tables
+#' @title VhgTabularRasa: Generate Custom Formatted Graphical Tables
 #'
-#' @description This function creates a formatted table using the `gt` package.
+#' @description VhgTabularRasa creates a formatted table using the `gt` package.
 #'
 #' @param file A data frame.
-#' @param title (optional): a custom title.
-#' Default is "Graphical Table".
-#' @param title_align (optional): a character vector specifying the alignment of title (and subtitle) text.
-#' Possible values are "left", "center", or "right". Default is "left".
-#' @param names_ (optional): a vector containing column names, with a length matching the number
-#' of columns in the file argument. Default is names(file)
-#' @param align (optional): a character vector specifying the alignment of text in the table columns.
-#' Possible values are "left", "center", or "right". Default is "left".
-#' @param subtit (optional): a character vector specifying the subtitle. Default is NULL (no subtitle).
-#' @param data_row.pad (optional): numeric value specifying the row padding. Default is 6.
-#' @param column_colour (optional): character specifying the background color for the column header.
-#' Default is dodgerblue4.
-#' @param title_size (optional): numeric value specifying title size. Default is 26.
-#' @param subtitle_size (optional): numeric value specifying subtitle size. Default is 14.
-#' @param title_weight (optional): character or numeric value specifying title font weight.
-#' The weight of the font can be modified thorough a text-based option such as "normal", "bold",
-#' "lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".
-#' @param title_colour (optional): character specifying title color. Default is dodgerblue4.
-#' @param table_font_size  (optional): numeric value specifying table font size. This will change font
-#' size for the column header and for all values in each cell. Default is 14.
-#' @param cell_colour (optional): character specifying cell color.Default is grey90.
-#' @param col_everyrow (optional): bool value specifying if every row or every second row of the table
-#' should be filled with the color from the cell_color argument. col_everyrow = TRUE colours every
-#' row and col_everyrow = FALSE colours every second row. Default is FALSE.
+#'
+#' @param title (optional): The title of the plot (default: "Graphical Table").
+#'
+#' @param title_align (optional): A character vector specifying the alignment of title (and subtitle) text.
+#' Possible values are "left" (default), "center", or "right".
+#'
+#' @param names_ (optional): A vector containing column names, with a length matching the number
+#' of columns in the file argument (default: names(file)).
+#'
+#' @param align (optional): A character vector specifying the alignment of text in the table columns.
+#' Possible values are "left" (default), "center", or "right".
+#'
+#' @param subtitle (optional): A character specifying the subtitle of the plot (default: NULL).
+#'
+#' @param data_row.pad (optional): Numeric value specifying the row padding (default: 6).
+#'
+#' @param column_colour (optional): character specifying the background colour for the column header (default: "dodgerblue4").
+#'
+#' @param title_size (optional): The size of the title text (default: 26).
+#' @param subtitle_size (optional): Numeric specifying the size of the subtitle text (default: 14).
+#'
+#' @param title_weight (optional): Character or numeric value specifying title font weight.
+#' The weight of the font can be modified thorough a text-based option such as "normal", "bold" (default),
+#' "lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.
+#'
+#' @param title_colour (optional): A character specifying the color for the title text (default: "dodgerblue4").
+#'
+#' @param table_font_size  (optional): Numeric value specifying table font size. This will change font
+#' size for the column header and for all values in each cell (default: 14).
+#'
+#' @param cell_colour (optional): Character specifying cell colour (default: "grey90").
+#'
+#' @param col_everyrow (optional): Bool value specifying if every row or every second row of the table
+#' should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colors every
+#' row and col_everyrow = FALSE (default) colors every second row.
+#'
 #'
 #' @return Returns a `gt` table object formatted according to the specified parameters.
 #'
-#' @details This function creates a formatted table using the `gt` package, based on input data with specified column names.
+#' @details VhgTabularRasa creates a formatted table using the `gt` package, based on input data with specified column names.
 #' It is particularly useful for generating tables that cannot be produced with `vhRunsTable`,
 #' when the input data does not originate from the `vhRunsBarplot` functions.
 #'
@@ -43,7 +55,7 @@
 #' If the data frame lacks column names, an error message is triggered. However, users can
 #' supply their own column names via the `names_` argument, requiring a vector of names matching the data frame's column count.
 #'
-#' `VhgTabularRasa` takes dataframes as Input. Passing any other object type results in an error message.
+#' `VhgTabularRasa` takes data frames as Input. Passing any other object type results in an error message.
 #' Users can fine-tune their tables with options to adjust text attributes, alignment, and size, as well as row padding
 #' and color schemes for titles, subtitles, columns, and backgrounds.
 #' If that is not enough, `VhgTabularRasa` returns an gt tables object, which
@@ -64,7 +76,7 @@
 #' # using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 #' vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
 #'
-#' VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+#' VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtitle =
 #' "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
 #' "Refrence E-Value","Refrence Identity"))
 #'
@@ -82,7 +94,7 @@
 #' @importFrom stats setNames
 #' @export
 VhgTabularRasa <- function(file,title="Graphical Table",
-                               title_align = "left",names_=NULL,align = "left",subtit =NULL,
+                               title_align = "left",names_=NULL,align = "left",subtitle =NULL,
                                data_row.pad=6,column_colour="dodgerblue4",title_size = 26,subtitle_size=14,
                                title_weight="bold",title_colour = "dodgerblue4",table_font_size = 14,
                                cell_colour="grey90",col_everyrow=FALSE){
@@ -119,11 +131,11 @@ VhgTabularRasa <- function(file,title="Graphical Table",
     )%>%
     opt_align_table_header(align = title_align)
 
-  if(!is.null(subtit)){
+  if(!is.null(subtitle)){
     gt_table <- gt_table %>%
       tab_header(
         title = title,
-        subtitle = subtit # Add the subtitle
+        subtitle = subtitle # Add the subtitlele
       )%>%
       tab_options(
         heading.subtitle.font.size = px(subtitle_size)

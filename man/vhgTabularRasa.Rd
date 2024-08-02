@@ -2,7 +2,7 @@
 % Please edit documentation in R/vhgTabularRasa.R
 \name{VhgTabularRasa}
 \alias{VhgTabularRasa}
-\title{VhgTabularRasa: Function for Generating Custom Formatted Graphical Tables}
+\title{VhgTabularRasa: Generate Custom Formatted Graphical Tables}
 \usage{
 VhgTabularRasa(
   file,
@@ -10,7 +10,7 @@ VhgTabularRasa(
   title_align = "left",
   names_ = NULL,
   align = "left",
-  subtit = NULL,
+  subtitle = NULL,
   data_row.pad = 6,
   column_colour = "dodgerblue4",
   title_size = 26,
@@ -25,52 +25,50 @@ VhgTabularRasa(
 \arguments{
 \item{file}{A data frame.}
 
-\item{title}{(optional): a custom title.
-Default is "Graphical Table".}
+\item{title}{(optional): The title of the plot (default: "Graphical Table").}
 
-\item{title_align}{(optional): a character vector specifying the alignment of title (and subtitle) text.
-Possible values are "left", "center", or "right". Default is "left".}
+\item{title_align}{(optional): A character vector specifying the alignment of title (and subtitle) text.
+Possible values are "left" (default), "center", or "right".}
 
-\item{names_}{(optional): a vector containing column names, with a length matching the number
-of columns in the file argument. Default is names(file)}
+\item{names_}{(optional): A vector containing column names, with a length matching the number
+of columns in the file argument (default: names(file)).}
 
-\item{align}{(optional): a character vector specifying the alignment of text in the table columns.
-Possible values are "left", "center", or "right". Default is "left".}
+\item{align}{(optional): A character vector specifying the alignment of text in the table columns.
+Possible values are "left" (default), "center", or "right".}
 
-\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL (no subtitle).}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot (default: NULL).}
 
-\item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
+\item{data_row.pad}{(optional): Numeric value specifying the row padding (default: 6).}
 
-\item{column_colour}{(optional): character specifying the background color for the column header.
-Default is dodgerblue4.}
+\item{column_colour}{(optional): character specifying the background colour for the column header (default: "dodgerblue4").}
 
-\item{title_size}{(optional): numeric value specifying title size. Default is 26.}
+\item{title_size}{(optional): The size of the title text (default: 26).}
 
-\item{subtitle_size}{(optional): numeric value specifying subtitle size. Default is 14.}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text (default: 14).}
 
-\item{title_weight}{(optional): character or numeric value specifying title font weight.
-The weight of the font can be modified thorough a text-based option such as "normal", "bold",
-"lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".}
+\item{title_weight}{(optional): Character or numeric value specifying title font weight.
+The weight of the font can be modified thorough a text-based option such as "normal", "bold" (default),
+"lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.}
 
-\item{title_colour}{(optional): character specifying title color. Default is dodgerblue4.}
+\item{title_colour}{(optional): A character specifying the color for the title text (default: "dodgerblue4").}
 
-\item{table_font_size}{(optional): numeric value specifying table font size. This will change font
-size for the column header and for all values in each cell. Default is 14.}
+\item{table_font_size}{(optional): Numeric value specifying table font size. This will change font
+size for the column header and for all values in each cell (default: 14).}
 
-\item{cell_colour}{(optional): character specifying cell color.Default is grey90.}
+\item{cell_colour}{(optional): Character specifying cell colour (default: "grey90").}
 
-\item{col_everyrow}{(optional): bool value specifying if every row or every second row of the table
-should be filled with the color from the cell_color argument. col_everyrow = TRUE colours every
-row and col_everyrow = FALSE colours every second row. Default is FALSE.}
+\item{col_everyrow}{(optional): Bool value specifying if every row or every second row of the table
+should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colors every
+row and col_everyrow = FALSE (default) colors every second row.}
 }
 \value{
 Returns a \code{gt} table object formatted according to the specified parameters.
 }
 \description{
-This function creates a formatted table using the \code{gt} package.
+VhgTabularRasa creates a formatted table using the \code{gt} package.
 }
 \details{
-This function creates a formatted table using the \code{gt} package, based on input data with specified column names.
+VhgTabularRasa creates a formatted table using the \code{gt} package, based on input data with specified column names.
 It is particularly useful for generating tables that cannot be produced with \code{vhRunsTable},
 when the input data does not originate from the \code{vhRunsBarplot} functions.
 
@@ -83,7 +81,7 @@ By default, column names are derived from the data frame's structure using \code
 If the data frame lacks column names, an error message is triggered. However, users can
 supply their own column names via the \code{names_} argument, requiring a vector of names matching the data frame's column count.
 
-\code{VhgTabularRasa} takes dataframes as Input. Passing any other object type results in an error message.
+\code{VhgTabularRasa} takes data frames as Input. Passing any other object type results in an error message.
 Users can fine-tune their tables with options to adjust text attributes, alignment, and size, as well as row padding
 and color schemes for titles, subtitles, columns, and backgrounds.
 If that is not enough, \code{VhgTabularRasa} returns an gt tables object, which
@@ -104,7 +102,7 @@ VhgTabularRasa(identity$summary_stats)
 # using first 10 rows of SRA_run,num_hits,bestquery,ViralRefSeq_E and Identity col.
 vh_file_part <- vh_file[c(1:10),c(1,7,9,10,11)]
 
-VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
+VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtitle =
 "example for any table",names_ = c("Runs","Number of Contigs","Best Query Result",
 "Refrence E-Value","Refrence Identity"))
 

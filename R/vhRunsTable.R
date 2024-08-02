@@ -19,7 +19,7 @@
 #' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
 #' Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.
 #' @param title (optional): The title of the plot (default: "Summary of unique runs by virus group").
-#' @param title_align (optional): A character vector specifying the alignment of title (and subtile) text.
+#' @param title_align (optional): A character vector specifying the alignment of title (and subtitle) text.
 #' Possible values are "left" (default), "center", or "right".
 #' @param names_ (optional): A vector of length 3 containing column names (default: c("Virus Group","Number of Unique SRA Runs","SRAs Found")).
 #' @param align (optional): A character vector specifying the alignment of text in the table columns.
