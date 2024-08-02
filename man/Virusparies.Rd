@@ -31,7 +31,7 @@ This package includes the following functions:
 
 \strong{VirusHunterGatherer Plots}:
 \itemize{
-\item \code{\link{VhgBoxplot}}: Box plot plotting refSeq identity, e-values or contig length for each group.
+\item \code{\link{VhgBoxplot}}: Box plot plotting refseq identity, e-values or contig length for each group.
 \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted scatter plot for reference identity vs -log10 of reference e-value.
 \item \code{\link{VhgIdentityScatterPlot}}: Scatter plot for reference identity vs -log10 of reference e-value.
 \item \code{\link{VhgRunsBarplot}}: Bar plot showing how many unique runs map against each virus.

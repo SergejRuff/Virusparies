@@ -15,7 +15,7 @@
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
-#' Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.
+#' Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.
 #' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",

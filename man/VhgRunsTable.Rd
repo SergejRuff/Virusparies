@@ -13,7 +13,7 @@ VhgRunsTable(
   title_align = "left",
   names_ = NULL,
   align = "left",
-  subtit = NULL,
+  subtitle = NULL,
   data_row.pad = 6,
   column_colour = "dodgerblue4",
   title_size = 26,
@@ -26,13 +26,12 @@ VhgRunsTable(
 )
 }
 \arguments{
-\item{vh_file}{A data frame containing the Virushunter hittables Results}
+\item{vh_file}{A data frame containing the Virushunter hittables results.}
 
-\item{groupby}{(optional) A string indicating the column used for grouping the data.
-"best_query" and "ViralRefSeq_taxonomy" can be used. Default is "best_query".
+\item{groupby}{(optional): A character specifying the column containing the groups (default: "best_query").
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
-\item{taxa_rank}{(optional) When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
+\item{taxa_rank}{(optional): When \code{groupby} is set to "ViralRefSeq_taxonomy", specify the taxonomic rank to group your data by.
 Supported ranks are:
 \itemize{
 \item "Subphylum"
@@ -45,57 +44,54 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{The significance cutoff value for E-values (default: 1e-5). Removes rows in vh_file
-with values larger than cutoff value in ViralRefSeq_E column.}
+\item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.}
 
-\item{title}{(optional): a title for the summary title.
-Default is "Summary of unique runs by virus group"}
+\item{title}{(optional): The title of the plot (default: "Summary of unique runs by virus group").}
 
-\item{title_align}{(optional): a character vector specifying the alignment of title (and subtile) text.
-Possible values are "left", "center", or "right". Default is "left".}
+\item{title_align}{(optional): A character vector specifying the alignment of title (and subtile) text.
+Possible values are "left" (default), "center", or "right".}
 
-\item{names_}{(optional): a vector of length 3 containing column names.
-Default is c("Virus Group","Number of Unique SRA Runs","SRAs Found")}
+\item{names_}{(optional): A vector of length 3 containing column names (default: c("Virus Group","Number of Unique SRA Runs","SRAs Found")).}
 
-\item{align}{(optional): a character vector specifying the alignment of text in the table columns.
-Possible values are "left", "center", or "right". Default is "left".}
+\item{align}{(optional): A character vector specifying the alignment of text in the table columns.
+Possible values are "left" (default), "center", or "right".}
 
-\item{subtit}{(optional): a character vector specifying the subtitle. Default is NULL.}
+\item{subtitle}{(optional): A character specifying the subtitle of the plot (default: NULL).}
 
-\item{data_row.pad}{(optional): numeric value specifying the row padding. Default is 6.}
+\item{data_row.pad}{(optional): Numeric value specifying the row padding (default: 6).}
 
-\item{column_colour}{(optional): character specifying the background colour for the column header.
-Default is dodgerblue4.}
+\item{column_colour}{(optional): character specifying the background colour for the column header (default: "dodgerblue4").}
 
-\item{title_size}{(optional): numeric value specifying title size. Default is 26.}
+\item{title_size}{(optional): The size of the title text (default: 26).}
 
-\item{subtitle_size}{(optional): numeric value specifying subtitle size. Default is 14.}
+\item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text (default: 14).}
 
-\item{title_weight}{(optional): character or numeric value specifying title font weight.
-The weight of the font can be modified thorough a text-based option such as "normal", "bold",
-"lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.Default value is "bold".}
+\item{title_weight}{(optional): Character or numeric value specifying title font weight.
+The weight of the font can be modified thorough a text-based option such as "normal", "bold" (default),
+"lighter", "bolder", or, a numeric value between 1 and 1000, inclusive.}
 
-\item{title_colour}{(optional): character specifying title colour. Default is dodgerblue4.}
+\item{title_colour}{(optional): A character specifying the color for the title text (default: "dodgerblue4").}
 
-\item{table_font_size}{(optional): numeric value specifying table font size. This will change font
-size for the column header and for all values in each cell. Default is 14.}
+\item{table_font_size}{(optional): Numeric value specifying table font size. This will change font
+size for the column header and for all values in each cell (default: 14).}
 
-\item{cell_colour}{(optional): character specifying cell colour.Default is grey90.}
+\item{cell_colour}{(optional): Character specifying cell colour (default: "grey90").}
 
-\item{col_everyrow}{(optional): bool value specifying if every row or every second row of the table
-should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colours every
-row and col_everyrow = FALSE colours every second row. Default is FALSE.}
+\item{col_everyrow}{(optional): Bool value specifying if every row or every second row of the table
+should be filled with the colour from the cell_colour argument. col_everyrow = TRUE colors every
+row and col_everyrow = FALSE (default) colors every second row.}
 }
 \value{
 A formatted gt table summarizing unique runs for each virus group
 }
 \description{
-This function generates a summary table of unique runs for each virus group
-based on the input dataset.
+VhgRunsTable generates a summary table of unique runs for each virus group
+based on the input data set.
 }
 \details{
-VhgRunsTable calculates the number of unique runs for each virus group from the input dataset.
-It takes VirusHunter hittables as input and determines how many runs (SRA runs or local FastQ files) found a specific virus family.
+VhgRunsTable calculates the number of unique runs for each virus group from the input data set.
+It takes VirusHunter hittables as input and determines how many runs (SRA runs or local FASTQ files) found a specific virus family.
 
 A graphical table is returned with two columns. The first column contains the name of the virus group,
 while the second column contains all IDs of SRA runs or local files that found that virus group.
@@ -112,7 +108,7 @@ table
 # example 2: generate table with custom arguments
 
 table_2 <- VhgRunsTable(vh_file,title = "test",title_align="right",
-names_ = c("column_1","column_2","column_3"),align = "right",subtit="subtitle")
+names_ = c("column_1","column_2","column_3"),align = "right",subtitle="subtitlele")
 
 table_2
 

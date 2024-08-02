@@ -61,7 +61,7 @@ Supported ranks are:
 }}
 
 \item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
-Removes rows in file with values larger than cutoff value in ViralRefSeq_E column.}
+Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.}
 
 \item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
 NULL sorts alphabetically.}
