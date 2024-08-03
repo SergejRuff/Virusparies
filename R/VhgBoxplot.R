@@ -255,7 +255,7 @@ VhgBoxplot <- function(file,
   # add default subtitle for E-values
   if(y_column=="ViralRefSeq_E"){
     # define a cut off fot evalue significance
-    default_sub <- paste0("Red line shows viral reference e-values under user-defined threshold: ",10^(-cutoff)," (-log10 scale: ",cutoff,")")
+    default_sub <- paste0("Cutoff (line): ",10^(-cutoff)," (-log10: ",cutoff,")")
 
   }else{
 
