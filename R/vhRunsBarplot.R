@@ -20,6 +20,7 @@
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
 #' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).
 #' @param title (optional): The title of the plot (default: "Distribution of viral groups detected across query sequences").
 #' @param title_size (optional): The size of the title text (default: 16).
@@ -68,6 +69,7 @@
 #' @return A list containing the bar plot and tabular data with information from the plot.
 #' @author Sergej Ruff
 #' @examples
+#' # import data
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 #' file <- ImportVirusTable(path)
 #'
@@ -75,33 +77,6 @@
 #' plot <- VhgRunsBarplot(file,cut = 1e-5)
 #' plot
 #'
-#' # return sample_run inside plot object
-#' print(plot$sample_run)
-#'
-#' # Plot 2: Customized plot with modified settings
-#' plot_custom <- VhgRunsBarplot(
-#'   file,
-#'   cut = 1e-6, # Lower cutoff value
-#'   theme_choice = "grey", # Classic theme
-#'   title = "Customized Bar Plot", # Custom title
-#'   subtitle = "test_subtitle", # No subtitle
-#'   xlabel = "Custom X Label", # Custom x-axis label
-#'   ylabel = "Custom Y Label", # Custom y-axis label
-#'   legend_position = "top", # Legend position on top
-#'   plot_text_size = 5, # Larger text label size
-#'   plot_text_colour = "red" # Red text labels
-#' )
-#' plot_custom
-#'
-#'
-#' # import gatherer files
-#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
-#' vg_file <- ImportVirusTable(path2)
-#'
-#'
-#  plot 3: Virusgatherer plot
-#  plot3 <- VhgRunsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",cut = 1e-5)
-#  plot3
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.

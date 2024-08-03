@@ -27,6 +27,7 @@
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
 #' @param flip_coords (optional): Logical indicating whether to flip the coordinates of the plot (default: TRUE).
 #' @param add_mean_point (optional): Logical indicating whether to add mean points to the box plot (default: FALSE).
 #' @param mean_color (optional): Change color of point indicating mean value in box plot (default: "white").

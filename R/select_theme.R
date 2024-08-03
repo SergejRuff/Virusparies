@@ -14,6 +14,10 @@
 #'
 #' @noRd
 select_theme <- function(theme_choice) {
+
+  add_dotted_grid_lines <- grepl("_dotted", theme_choice)
+  theme_choice <- sub("_dotted$", "", theme_choice)
+
   base_theme <- theme_minimal()
 
   if (theme_choice == "classic") {
@@ -34,12 +38,14 @@ select_theme <- function(theme_choice) {
     base_theme <- theme_test()
   }
 
-  # Add custom grid lines
-  base_theme <- base_theme +
-    theme(
-      panel.grid.major = element_line(linewidth = 0.5, linetype = "dotted", colour = "grey50"),  # Dotted major grid lines
-      panel.grid.minor = element_line(linewidth = 0.25, linetype = "dotted", colour = "grey75")   # Dotted minor grid lines
-    )
+  if (add_dotted_grid_lines) {
+    # Add dotted grid lines
+    base_theme <- base_theme +
+      theme(
+        panel.grid.major = element_line(linewidth = 0.5, linetype = "dotted", colour = "grey50"),  # Dotted major grid lines
+        panel.grid.minor = element_line(linewidth = 0.25, linetype = "dotted", colour = "grey75")   # Dotted minor grid lines
+      )
+  }
 
   return(base_theme)
 }

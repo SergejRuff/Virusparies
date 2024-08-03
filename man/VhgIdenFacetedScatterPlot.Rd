@@ -63,7 +63,8 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 \item{contiglen_breaks}{(optional): Number of breaks (default: 5) for the bubble plot (for \code{conlen_bubble_plot}=TRUE).}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
-"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".}
+"classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").}
 
 \item{title}{(optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").}
 

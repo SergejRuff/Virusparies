@@ -25,6 +25,7 @@
 #' @param contiglen_breaks (optional): Number of breaks (default: 5) for the bubble plot (for `conlen_bubble_plot`=TRUE).
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
+#'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
 #' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").
 #' @param title_size (optional):  The size of the title text (default: 16).
 #' @param title_face (optional):  The face (bold, italic, etc.) of the title text (default: "bold").
