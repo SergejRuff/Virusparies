@@ -63,6 +63,7 @@ This package includes the following functions:
 \strong{Utils}:
 \itemize{
 \item \code{\link{VhgAddPhylum}}: Extract phylum information.
+\item \code{\link{VhgGetSubject}}: Process and Count Viral Subjects within Groups.
 \item \code{\link{VhgPreprocessTaxa}}: Process ViralRefSeq_taxonomy column.
 \item \code{\link{VhgSubsetHittable}}: Filter VirusHunterGatherer data based on user’s own criteria.
 }
