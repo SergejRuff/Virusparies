@@ -4,7 +4,12 @@
 \alias{VhgGetSubject}
 \title{VhgGetSubject: Process and Count Viral Subjects within Groups}
 \usage{
-VhgGetSubject(file, groupby = "best_query", remove_identifiers = TRUE)
+VhgGetSubject(
+  file,
+  groupby = "best_query",
+  remove_identifiers = TRUE,
+  include_run_ids = FALSE
+)
 }
 \arguments{
 \item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
@@ -13,6 +18,10 @@ VhgGetSubject(file, groupby = "best_query", remove_identifiers = TRUE)
 Note: Gatherer hittables do not have a "best_query" column. Please provide an appropriate column for grouping.}
 
 \item{remove_identifiers}{(optional): if \code{TRUE} (default), removes the identifiers in the ViralRefSeq_subject cells.}
+
+\item{include_run_ids}{(optional): If \code{TRUE} (default is \code{TRUE}), adds a fourth column named \code{run_ids} to the output.
+This column contains a comma-separated list of unique identifiers from either the \code{SRA_run} or \code{run_id} column,
+aggregated for each combination of group and subject.}
 }
 \value{
 a processed tibble object.
