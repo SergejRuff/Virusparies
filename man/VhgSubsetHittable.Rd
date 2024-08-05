@@ -29,7 +29,7 @@ Note: Gatherer hittables do not have a "best_query" column. Please provide an ap
 \item{ViralRefSeq_ident_criteria}{Maximum or minimum sequence identity percentage threshold for ViralRefSeq_ident criteria. Default is NULL, which means no filter based on ViralRefSeq_ident.
 If positive, filters where ViralRefSeq_ident is above the threshold. If negative, filters where ViralRefSeq_ident is below the absolute value of the threshold.}
 
-\item{contig_len_criteria}{description}
+\item{contig_len_criteria}{(Gatherer only): Minimum contig length required.}
 }
 \value{
 A filtered dataframe based on the specified criteria.

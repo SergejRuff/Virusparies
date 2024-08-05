@@ -13,7 +13,7 @@
 #' @param ViralRefSeq_E_criteria Maximum E-value threshold for ViralRefSeq_E criteria. Default is NULL, which means no filter based on ViralRefSeq_E.
 #' @param ViralRefSeq_ident_criteria Maximum or minimum sequence identity percentage threshold for ViralRefSeq_ident criteria. Default is NULL, which means no filter based on ViralRefSeq_ident.
 #'   If positive, filters where ViralRefSeq_ident is above the threshold. If negative, filters where ViralRefSeq_ident is below the absolute value of the threshold.
-#' @param contig_len_criteria description
+#' @param contig_len_criteria (Gatherer only): Minimum contig length required.
 #'
 #' @details
 #' The function filters the input VirusHunter or VirusGatherer data (`file`) based on specified criteria:
