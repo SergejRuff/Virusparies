@@ -26,6 +26,7 @@ Imports:
     dplyr,
     ggplot2,
     gt,
+    readr,
     rlang,
     scales,
     stats,

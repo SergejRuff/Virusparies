@@ -25,7 +25,8 @@
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
-#' @importFrom utils read.table
+#' @importFrom readr read_tsv
+#' @importFrom rlang .data
 #' @export
 ImportVirusTable <- function(path) {
   if (!is.character(path)) {
@@ -34,13 +35,17 @@ ImportVirusTable <- function(path) {
 
   # Try to read the file and handle any potential errors
   tryCatch({
-    vh_file <- read.table(file = path, sep = "\t", header = TRUE,fill = TRUE,quote = NULL,
-                          comment.char = "")
+    vh_file <- read_tsv(file = path,
+                        show_col_types = FALSE,
+                        col_names = TRUE,
+                        quote = "",
+                        comment = "",
+                        skip_empty_rows = FALSE)
 
-    vh_file[vh_file == ""] <- NA
+    # vh_file[vh_file == ""] <- NA
 
-    # replace NA with value.
-    vh_file[is.na(vh_file[,"ViralRefSeq_taxonomy"]),"ViralRefSeq_taxonomy"] <- "taxid:"
+    vh_file <- vh_file %>%
+      mutate(ViralRefSeq_taxonomy = ifelse(is.na(.data$ViralRefSeq_taxonomy), "taxid:", .data$ViralRefSeq_taxonomy))
 
     # Print success message
     message("File successfully imported.")
