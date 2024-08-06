@@ -43,6 +43,31 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
   return(taxa_list[[taxa_rank]])
 }
 
+# Define the function to process each chunk
+process_chunk <- function(chunk, ictv_formatted, taxa_rank) {
+  taxon_filter <- paste(unique(ictv_formatted$name), collapse = "|")
+
+  chunk_processed <- chunk %>%
+    mutate(
+      ViralRefSeq_taxonomy = str_remove_all(.data$ViralRefSeq_taxonomy, "taxid:\\d+\\||\\w+\\s\\w+\\|"),
+      name = str_extract(.data$ViralRefSeq_taxonomy, taxon_filter),
+      ViralRefSeq_taxonomy = str_extract(.data$ViralRefSeq_taxonomy, paste0("\\w+", taxa_rank))
+    ) %>%
+    left_join(ictv_formatted, join_by("name" == "name")) %>%
+    mutate(
+      ViralRefSeq_taxonomy = case_when(
+        is.na(.data$ViralRefSeq_taxonomy) & is.na(.data$Phylum) ~ "unclassified",
+        is.na(.data$ViralRefSeq_taxonomy) ~ paste("unclassified", .data$Phylum),
+        .default = .data$ViralRefSeq_taxonomy
+      )
+    ) %>% select(-c(.data$name:.data$level)) %>%
+    mutate(
+      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified unclassified", "unclassified", .data$ViralRefSeq_taxonomy),
+      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified NA", "unclassified", .data$ViralRefSeq_taxonomy)
+    )
+
+  return(chunk_processed)
+}
 
 
 #' @title VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements
@@ -62,6 +87,7 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
+#' @param num_cores (optional): Number of cores used (default: 1)
 #'
 #'
 #' @details
@@ -72,6 +98,10 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' This function is used internally by every function that can use the `ViralRefSeq_taxonomy` column as input.
 #' The user can also apply this function independently to process the taxonomy column and filter for the selected taxa rank in their data.
 #'
+#' For datasets with significantly more than 100,000 observations, it is recommended to use this function to ensure it is skipped in the plot functions.
+#'
+#' The `num_cores` parameter allows you to divide the dataset into multiple parts, corresponding to the number of cores available.
+#' This enables parallel processing across multiple threads, thereby speeding up the overall processing time.
 #'
 #' @return file with preprocessed ViralRefSeq_taxonomy elements
 #' @author Sergej Ruff
@@ -96,8 +126,9 @@ taxonomy_rank_hierarchy <- function(taxa_rank) {
 #' @importFrom rlang .data
 #' @importFrom tidyr unnest pivot_longer
 #' @importFrom stringr  str_extract str_remove_all str_detect
+#' @importFrom parallel detectCores mclapply
 #' @export
-VhgPreprocessTaxa <- function(file,taxa_rank) {
+VhgPreprocessTaxa <- function(file,taxa_rank, num_cores = 1) {
 
   #is_file_empty(file)
   if (is_file_empty(file)) {
@@ -122,29 +153,23 @@ VhgPreprocessTaxa <- function(file,taxa_rank) {
   ictv_formatted <- format_ICTV(taxa_rank)
 
 
-  taxon_filter <- paste(unique(ictv_formatted$name), collapse = "|")
+  # Validate num_cores
+  if (num_cores < 1) {
+    stop("Number of cores must be at least 1")
+  }
 
+  # Use default number of cores if specified is greater than available
+  num_cores <- min(num_cores, detectCores() - 1)
 
-  file <- file %>%
-    mutate(
-      ViralRefSeq_taxonomy = str_remove_all(.data$ViralRefSeq_taxonomy, "taxid:\\d+\\||\\w+\\s\\w+\\|"),
-      name = str_extract(.data$ViralRefSeq_taxonomy, taxon_filter),
-      ViralRefSeq_taxonomy = str_extract(.data$ViralRefSeq_taxonomy, paste0("\\w+", taxa_rank))
-    ) %>%
-    left_join(ictv_formatted, join_by("name" == "name")) %>%
-    mutate(
-      ViralRefSeq_taxonomy = case_when(
-        is.na(.data$ViralRefSeq_taxonomy) & is.na(.data$Phylum) ~ "unclassified",
-        is.na(.data$ViralRefSeq_taxonomy) ~ paste("unclassified", .data$Phylum),
-        .default = .data$ViralRefSeq_taxonomy
-      )
-    ) %>% select(-c(.data$name:.data$level))%>%
-    mutate(
-      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified unclassified", "unclassified", .data$ViralRefSeq_taxonomy),
-      ViralRefSeq_taxonomy = if_else(.data$ViralRefSeq_taxonomy == "unclassified NA", "unclassified", .data$ViralRefSeq_taxonomy)
-    )
+  # Split the data into chunks
+  num_chunks <- num_cores
+  chunks <- split(file, rep(1:num_chunks, length.out = nrow(file)))
 
+  # Process chunks in parallel
+  processed_chunks <- mclapply(chunks, process_chunk, ictv_formatted = ictv_formatted, taxa_rank = taxa_rank, mc.cores = num_cores)
 
+  # Combine processed chunks
+  file_processed <- bind_rows(processed_chunks)
 
-  return(file)
+  return(file_processed)
 }

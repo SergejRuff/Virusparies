@@ -4,7 +4,7 @@
 \alias{VhgPreprocessTaxa}
 \title{VhgPreprocessTaxa: preprocess ViralRefSeq_taxonomy elements}
 \usage{
-VhgPreprocessTaxa(file, taxa_rank)
+VhgPreprocessTaxa(file, taxa_rank, num_cores = 1)
 }
 \arguments{
 \item{file}{A data frame containing VirusHunter or VirusGatherer hittable results.}
@@ -21,6 +21,8 @@ Supported ranks are:
 \item "Subfamily"
 \item "Genus" (including Subgenus)
 }}
+
+\item{num_cores}{(optional): Number of cores used (default: 1)}
 }
 \value{
 file with preprocessed ViralRefSeq_taxonomy elements
@@ -37,6 +39,11 @@ The element containing the taxa suffix specified by the \code{taxa_rank} argumen
 
 This function is used internally by every function that can use the \code{ViralRefSeq_taxonomy} column as input.
 The user can also apply this function independently to process the taxonomy column and filter for the selected taxa rank in their data.
+
+For datasets with significantly more than 100,000 observations, it is recommended to use this function to ensure it is skipped in the plot functions.
+
+The \code{num_cores} parameter allows you to divide the dataset into multiple parts, corresponding to the number of cores available.
+This enables parallel processing across multiple threads, thereby speeding up the overall processing time.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
