@@ -44,7 +44,7 @@ The function filters the input VirusHunter or VirusGatherer data (\code{file}) b
 \itemize{
 \item \code{group_column}: Specifies the column to filter by, which must be either "ViralRefSeq_taxonomy" or "best_query".
 \item \code{virus_groups}: Allows filtering by specific virus groups. If NULL, all virus groups are included.
-\item \code{num_hits_min}: Filters rows where the number of hits ("num_hits") is equal to or larger than the specified minimum.
+\item \code{num_hits_min}: Filters rows where the number of hits ("num_hits") is larger than the specified minimum.
 \item \code{ViralRefSeq_E_criteria}: Filters rows where the E-value ("ViralRefSeq_E") is below the specified maximum threshold.
 \item \code{ViralRefSeq_ident_criteria}: Filters rows where the sequence identity percentage ("ViralRefSeq_ident") is above or below the specified threshold.
 Use a positive value to filter where ViralRefSeq_ident is above the threshold, and a negative value to filter where ViralRefSeq_ident is below the absolute value of the threshold.

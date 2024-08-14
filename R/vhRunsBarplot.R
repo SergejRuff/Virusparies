@@ -145,14 +145,23 @@ VhgRunsBarplot <- function(file,
 
 
   required_columns <- c("ViralRefSeq_E",groupby)
+
   all_names <- names(file)
+  available_columns <- c("SRA_run", "run_id")[c("SRA_run", "run_id") %in% names(file)]
+
+  if (length(available_columns) == 0) {
+    stop("Neither 'SRA_run' nor 'run_id' found in file. Available column names: ", paste(all_names, collapse = ", "))
+  }
+
+  # # Check if either "SRA_run" or "run_id" exists in file
+  # if (!("SRA_run" %in% all_names) && !("run_id" %in% all_names)) {
+  #   stop("Neither 'SRA_run' nor 'run_id' found in file. Available column names: ", paste(all_names, collapse = ", "))
+  # }
+
 
 
   check_columns(file,required_columns)
-  # Check if either "SRA_run" or "run_id" exists in file
-  if (!("SRA_run" %in% all_names) && !("run_id" %in% all_names)) {
-    stop("Neither 'SRA_run' nor 'run_id' found in file. Available column names: ", paste(all_names, collapse = ", "))
-  }
+
 
   check_input_type(file,"ViralRefSeq_E",2)
   check_input_type(file,groupby,1)
@@ -180,11 +189,15 @@ VhgRunsBarplot <- function(file,
   # preprocess data for plot
   sample_run <- preprocess_runs_bar(file,groupby)
 
+
+
   # Set the subtitle based on the input
-  if (subtitle == "default") {
-    subtitle_text <- paste0("total number of datasets: ", n_distinct(coalesce(file$SRA_run, file$run_id)))
+  if (is.null(subtitle)) {
+    subtitle_text <- NULL
+  } else if (subtitle == "default") {
+    subtitle_text <- paste0("total number of datasets: ",  n_distinct(file[[available_columns[1]]]))
   } else {
-    subtitle_text <- ifelse(is.null(subtitle) || subtitle == "", NULL, subtitle)
+    subtitle_text <- subtitle
   }
 
   color_data <- consistentColourPalette(file, groupby = groupby,taxa_rank=taxa_rank)

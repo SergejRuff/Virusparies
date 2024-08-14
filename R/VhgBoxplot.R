@@ -272,10 +272,22 @@ VhgBoxplot <- function(file,
 
 
   # Set the title
-  title_text <- if (title == "default") default_titl else if (is.null(title) || title == "") NULL else title
+  title_text <- if (!is.null(title) && title == "default") {
+    default_titl
+  } else if (is.null(title) || title == "") {
+    NULL
+  } else {
+    title
+  }
 
   # Set the subtitle
-  subtitle_text <- if (subtitle == "default") default_sub else if (is.null(subtitle) || subtitle == "") NULL else subtitle
+  subtitle_text <- if (!is.null(subtitle) && subtitle == "default") {
+    default_sub
+  } else if (is.null(subtitle) || subtitle == "") {
+    NULL
+  } else {
+    subtitle
+  }
 
   # Update xlabel to use user-provided label if provided
   xlabel <- ifelse(!is.null(xlabel), xlabel, "Viral Group")

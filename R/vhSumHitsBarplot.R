@@ -200,12 +200,12 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  # Set the subtitle based on the input
- if (subtitle == "default") {
-    subtitle_text <- paste0("Total number of hits: ",sum(vh_group$sum))
+ if (!is.null(subtitle) && subtitle == "default") {
+   subtitle_text <- paste0("Total number of hits: ", sum(vh_group$sum))
  } else if (is.null(subtitle) || subtitle == "") {
-    subtitle_text <- NULL
+   subtitle_text <- NULL
  } else {
-    subtitle_text <- subtitle
+   subtitle_text <- subtitle
  }
 
 

@@ -25,9 +25,12 @@ preprocess_runs_bar <- function(vh_file,groupby="best_query"){
     stop("Neither 'SRA_run' nor 'run_id' found in vh_file. Available column names: ", paste(all_names, collapse = ", "))
   }
 
+  # Determine which column to use
+  run_column <- if ("SRA_run" %in% all_names) "SRA_run" else "run_id"
+
   check_columns(vh_file,groupby)
 
-  total_unique_SRA_run <- n_distinct(coalesce(vh_file$SRA_run, vh_file$run_id))
+  total_unique_SRA_run <- n_distinct(vh_file[[run_column]])
 
 
   sample_run <- vh_file %>%
