@@ -41,6 +41,26 @@
 #'   }
 #'   If \code{NULL} (the default), only the basic counts are included.
 #'
+#'
+#' @param sort_by (optional): A character string specifying the column name by which to sort the results.
+#'   Supported values include:
+#'   \itemize{
+#'     \item "less_than_X": The count of observations below the specified \code{metric_cutoff} (X is replaced by the cutoff value).
+#'     \item "equal_or_more_than_X": The count of observations greater than or equal to the specified \code{metric_cutoff} (X is replaced by the cutoff value).
+#'     \item "total": The total count of observations in each group.
+#'     \item "mean": The mean value of the specified metric in each group (if \code{"mean"} is included in \code{extra_stats}).
+#'     \item "median": The median value of the specified metric in each group (if \code{"median"} is included in \code{extra_stats}).
+#'     \item "Q1": The first quartile (25th percentile) of the specified metric in each group (if \code{"Q1"} is included in \code{extra_stats}).
+#'     \item "Q3": The third quartile (75th percentile) of the specified metric in each group (if \code{"Q3"} is included in \code{extra_stats}).
+#'     \item "sd": The standard deviation of the specified metric in each group (if \code{"sd"} is included in \code{extra_stats}).
+#'     \item "min": The minimum value of the specified metric in each group (if \code{"min"} is included in \code{extra_stats}).
+#'     \item "max": The maximum value of the specified metric in each group (if \code{"max"} is included in \code{extra_stats}).
+#'   }
+#'   If \code{NULL} (the default), no sorting is applied.
+#'
+#' @param top_n (optional): A numeric value indicating the number of top rows to return based on the selected metric.
+#'   If \code{NULL} (the default), all rows are returned.
+#'
 #' @return A data frame summarizing the viral stats. The output includes:
 #'   \itemize{
 #'     \item The count of observations below and above or equal to the \code{metric_cutoff}.
@@ -76,7 +96,9 @@ SummarizeViralStats <- function(file,
                                 metric_cutoff,
                                 filter_cutoff = NULL,
                                 show_total = FALSE,
-                                extra_stats = NULL) {
+                                extra_stats = NULL,
+                                sort_by = NULL,
+                                top_n = NULL) {
 
   #is_file_empty(file)
   if (is_file_empty(file)) {
@@ -143,6 +165,17 @@ SummarizeViralStats <- function(file,
     # If extra_stats is NULL, remove all additional stats columns
     summary_table <- summary_table %>%
       select(.data[[groupby]], !!sym(less_than_label), !!sym(more_or_equal_label), data$total)
+  }
+
+  if (!is.null(sort_by)) {
+    summary_table <- summary_table %>%
+      arrange(desc(.data[[sort_by]]), .na_last = TRUE)
+  }
+
+  # Filter the top `top_n` rows, if specified
+  if (!is.null(top_n)) {
+    summary_table <- summary_table %>%
+      slice_head(n = top_n)
   }
 
   # Optionally add a row with the total for each column
