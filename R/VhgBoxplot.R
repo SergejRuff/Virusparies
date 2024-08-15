@@ -77,7 +77,7 @@
 #' If the smallest e-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
 #'
 #' @return A list containing:
-#' - Rhe generated box plot.
+#' - The generated box plot.
 #' - Summary statistics.
 #' - Outliers ("ViralRefSeq_E" and "contig_len" only).
 #' - rows_belowthres ("ViralRefSeq_E" only).
