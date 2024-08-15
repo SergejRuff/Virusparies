@@ -44,7 +44,9 @@
 #' @param ylabel (optional): A character specifying the label for the y-axis. Default is set based on y_column.
 #' @param axis_title_size (optional): Numeric specifying the size of the axis title text (default: 12).
 #' @param xtext_size (optional): Numeric specifying the size of the x-axis tick labels (default: 10).
+#' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
 #' @param ytext_size (optional): Numeric specifying the size of the y-axis tick labels (default: 10).
+#' @param y_angle (optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #' @param legend_title (optional): A character specifying the title for the legend (default: "Phylum").
 #' @param legend_position (optional): A character specifying the position of the legend (default: "bottom").
@@ -150,7 +152,9 @@ VhgBoxplot <- function(file,
                               ylabel = NULL,
                               axis_title_size = 12,
                               xtext_size = 10,
+                              x_angle = NULL,
                               ytext_size = 10,
+                              y_angle = NULL,
                               remove_group_labels = FALSE,
                               legend_title = "Phylum",
                               legend_position = "bottom",
@@ -425,6 +429,8 @@ VhgBoxplot <- function(file,
   boxp <- remove_group_text(boxp,remove_group_labels,flip_coords)
 
   boxp <- facet_plot(boxp,facet_ncol,flip_coords)
+
+  boxp <- adjust_plot_angles(boxp,x_angle = x_angle,y_angle = y_angle)
 
 
 

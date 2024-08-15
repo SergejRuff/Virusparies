@@ -50,7 +50,9 @@
 #' @param ylabel (optional): The label for the y-axis (default: "Contig length (nt)").
 #' @param axis_title_size (optional): The size of the axis titles (default: 12).
 #' @param xtext_size (optional): The size of the x-axis text (default: 10).
+#' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
 #' @param ytext_size (optional): The size of the y-axis text (default: 10).
+#' @param y_angle (optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.
 #'
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #'
@@ -126,7 +128,9 @@ VgConLenViolin <- function(vg_file=vg_file,
                            ylabel = "Contig length (nt)",
                            axis_title_size = 12,
                            xtext_size = 10,
+                           x_angle = NULL,
                            ytext_size = 10,
+                           y_angle = NULL,
                            remove_group_labels = FALSE,
                            legend_title = "Phylum",
                            legend_position = "bottom",
@@ -341,6 +345,8 @@ VgConLenViolin <- function(vg_file=vg_file,
   p <- remove_group_text(p,remove_group_labels,flip_coords)
 
   p <- facet_plot(p,facet_ncol,flip_coords)
+
+  p <- adjust_plot_angles(p,x_angle = x_angle,y_angle = y_angle)
 
 
 

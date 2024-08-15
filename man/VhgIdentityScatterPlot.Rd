@@ -25,7 +25,9 @@ VhgIdentityScatterPlot(
   ylabel = "-log10 of viral reference e-values",
   axis_title_size = 12,
   xtext_size = 10,
+  x_angle = NULL,
   ytext_size = 10,
+  y_angle = NULL,
   legend_title = "Group",
   legend_position = "bottom",
   legend_title_size = 12,
@@ -90,7 +92,11 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{xtext_size}{(optional): The size of the x-axis text (default: 10).}
 
+\item{x_angle}{(optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.}
+
 \item{ytext_size}{(optional): The size of the y-axis text (default: 10).}
+
+\item{y_angle}{(optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.}
 
 \item{legend_title}{(optional): The title of the legend (default: "Group").}
 

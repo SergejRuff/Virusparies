@@ -25,7 +25,9 @@ VhgRunsBarplot(
   ylabel = "Number of datasets with hits for group",
   axis_title_size = 12,
   xtext_size = 10,
+  x_angle = NULL,
   ytext_size = 10,
+  y_angle = NULL,
   remove_group_labels = FALSE,
   legend_title = "Phylum",
   legend_position = "bottom",
@@ -98,7 +100,11 @@ Default is "default", which calculates the total number of data sets with hits a
 
 \item{xtext_size}{(optional): The size of the x-axis text (default: 10).}
 
+\item{x_angle}{(optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.}
+
 \item{ytext_size}{(optional): The size of the y-axis text (default: 10).}
+
+\item{y_angle}{(optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 

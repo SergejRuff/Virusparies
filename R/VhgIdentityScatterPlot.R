@@ -38,7 +38,9 @@
 #' @param ylabel (optional): The label for the y-axis (default: "-log10 of viral reference e-values").
 #' @param axis_title_size (optional): The size of the axis titles (default: 12).
 #' @param xtext_size (optional): The size of the x-axis text (default: 10).
+#' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
 #' @param ytext_size (optional): The size of the y-axis text (default: 10).
+#' @param y_angle (optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.
 #' @param legend_title (optional): The title of the legend (default: "Group").
 #' @param legend_position (optional): The position of the legend (default: "bottom).
 #' @param legend_title_size (optional):  The size of the legend title text (default: 12).
@@ -147,7 +149,9 @@ VhgIdentityScatterPlot <- function(file,
                                   ylabel = "-log10 of viral reference e-values",
                                   axis_title_size = 12,
                                   xtext_size = 10,
+                                  x_angle = NULL,
                                   ytext_size = 10,
+                                  y_angle = NULL,
                                   legend_title = "Group",
                                   legend_position = "bottom",
                                   legend_title_size = 12,
@@ -332,6 +336,9 @@ VhgIdentityScatterPlot <- function(file,
     iden_refevalue <- iden_refevalue +
       scale_color_manual(values = labels_manualcol)
   }
+
+
+  iden_refevalue  <- adjust_plot_angles(iden_refevalue ,x_angle = x_angle,y_angle = y_angle)
 
 
 

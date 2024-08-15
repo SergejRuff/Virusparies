@@ -38,7 +38,9 @@
 #' @param ylabel (optional):  The label for the y-axis (default: "-log10 of viral reference e-values").
 #' @param axis_title_size (optional):  The size of the axis titles (default: 12).
 #' @param xtext_size (optional):  The size of the x-axis text (default: 10).
+#' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
 #' @param ytext_size (optional):  The size of the y-axis text (default: 10).
+#' @param y_angle (optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.
 #' @param legend_position (optional):  The position of the legend (default: "bottom).
 #' @param legend_title_size (optional):  The size of the legend title text (default: 12).
 #' @param legend_title_face (optional):  The face (bold, italic, etc.) of the legend title text (default: "bold").
@@ -158,7 +160,9 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      ylabel = "-log10 of viral reference e-values",
                                      axis_title_size = 12,
                                      xtext_size = 10,
+                                     x_angle = NULL,
                                      ytext_size = 10,
+                                     y_angle = NULL,
                                      legend_position = "bottom",
                                      legend_title_size = 12,
                                      legend_title_face = "bold",
@@ -292,6 +296,9 @@ VhgIdenFacetedScatterPlot <- function(file,
       breaks = seq(0, 100, by = 10)
     )+
     theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm"))
+
+
+  iden_refevalue_seperate  <- adjust_plot_angles(iden_refevalue_seperate ,x_angle = x_angle,y_angle = y_angle)
 
   # reuse summary stats from boxplot to calculate stats.
   evalue_stats <- boxp_summary_stats(file, group = groupby,ycol ="ViralRefSeq_E")

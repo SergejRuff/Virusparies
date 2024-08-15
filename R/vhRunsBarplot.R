@@ -36,7 +36,9 @@
 #' @param ylabel (optional): The label for the y-axis (default: "Number of data sets with hits for group").
 #' @param axis_title_size (optional): The size of the axis titles (default: 12).
 #' @param xtext_size (optional): The size of the x-axis text (default: 10).
+#' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
 #' @param ytext_size (optional): The size of the y-axis text (default: 10).
+#' @param y_angle (optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.
 #' @param remove_group_labels (optional): If `TRUE`, the group labels will be removed; if `FALSE` or omitted, the labels will be displayed.
 #' @param legend_title (optional): A character specifying the title for the legend (default: "Phylum").
 #' @param legend_position (optional): The position of the legend (default: "bottom).
@@ -104,7 +106,9 @@ VhgRunsBarplot <- function(file,
                           ylabel = "Number of datasets with hits for group",
                           axis_title_size = 12,
                           xtext_size = 10,
+                          x_angle = NULL,
                           ytext_size = 10,
+                          y_angle = NULL,
                           remove_group_labels = FALSE,
                           legend_title = "Phylum",
                           legend_position = "bottom",
@@ -308,6 +312,9 @@ VhgRunsBarplot <- function(file,
   }
 
   run_bar <- facet_plot(run_bar,facet_ncol,flip_coords)
+
+
+  run_bar <- adjust_plot_angles(run_bar ,x_angle = x_angle,y_angle = y_angle)
 
 
 

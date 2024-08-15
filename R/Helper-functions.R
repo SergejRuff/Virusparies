@@ -351,4 +351,28 @@ format_ICTV <- function(taxa_rank){
 
 }
 
+#' change angle of labels
+#'
+#' @param plot plot obj
+#' @param x_angle x angle
+#' @param y_angle y angle
+#'
+#' @return plot
+#'
+#' @import ggplot2
+#' @noRd
+adjust_plot_angles <- function(plot, x_angle = NULL, y_angle = NULL) {
+  # Check if x_angle is provided, and if so, adjust the x-axis text angle
+  if (!is.null(x_angle)) {
+    plot <- plot + theme(axis.text.x = element_text(angle = x_angle, vjust = 0.5, hjust = 1))
+  }
+
+  # Check if y_angle is provided, and if so, adjust the y-axis text angle
+  if (!is.null(y_angle)) {
+    plot <- plot + theme(axis.text.y = element_text(angle = y_angle, vjust = 0.5, hjust = 1))
+  }
+
+  # Return the modified plot
+  return(plot)
+}
 

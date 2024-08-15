@@ -31,7 +31,9 @@ VhgBoxplot(
   ylabel = NULL,
   axis_title_size = 12,
   xtext_size = 10,
+  x_angle = NULL,
   ytext_size = 10,
+  y_angle = NULL,
   remove_group_labels = FALSE,
   legend_title = "Phylum",
   legend_position = "bottom",
@@ -110,7 +112,11 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{xtext_size}{(optional): Numeric specifying the size of the x-axis tick labels (default: 10).}
 
+\item{x_angle}{(optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.}
+
 \item{ytext_size}{(optional): Numeric specifying the size of the y-axis tick labels (default: 10).}
+
+\item{y_angle}{(optional): An integer specifying the angle (in degrees) for the y-axis text labels. Default is NULL, meaning no change.}
 
 \item{remove_group_labels}{(optional): If \code{TRUE}, the group labels will be removed; if \code{FALSE} or omitted, the labels will be displayed.}
 
@@ -130,7 +136,7 @@ It is recommended to specify this when the number of viral groups is high, to en
 \value{
 A list containing:
 \itemize{
-\item Rhe generated box plot.
+\item The generated box plot.
 \item Summary statistics.
 \item Outliers ("ViralRefSeq_E" and "contig_len" only).
 \item rows_belowthres ("ViralRefSeq_E" only).
