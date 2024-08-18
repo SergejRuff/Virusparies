@@ -20,11 +20,11 @@
 #'
 #' - `group_column`: Specifies the column to filter by, which must be either "ViralRefSeq_taxonomy" or "best_query".
 #' - `virus_groups`: Allows filtering by specific virus groups. If NULL, all virus groups are included.
-#' - `num_hits_min`: Filters rows where the number of hits ("num_hits") is larger than the specified minimum.
+#' - `num_hits_min`: Filters rows where the number of hits ("num_hits") is greater than or equal to the specified minimum.
 #' - `ViralRefSeq_E_criteria`: Filters rows where the E-value ("ViralRefSeq_E") is below the specified maximum threshold.
 #' - `ViralRefSeq_ident_criteria`: Filters rows where the sequence identity percentage ("ViralRefSeq_ident") is above or below the specified threshold.
 #'   Use a positive value to filter where ViralRefSeq_ident is above the threshold, and a negative value to filter where ViralRefSeq_ident is below the absolute value of the threshold.
-#' -  `contig_len_criteria`: (Gatherer only) Filters rows where the contig length ("contig_len") is above the specified threshold.
+#' -  `contig_len_criteria`: (Gatherer only) Filters rows where the contig length ("contig_len") is greater than or equal to the specified threshold.
 #'
 #' @return A filtered dataframe based on the specified criteria.
 #' @author Sergej Ruff
@@ -109,7 +109,7 @@ VhgSubsetHittable <- function(file,
     if (!"num_hits" %in% colnames(file)) {
       stop("Error: 'num_hits' column does not exist in the dataframe.")
     }
-    file <- file[file$num_hits > num_hits_min, ]
+    file <- file[file$num_hits >= num_hits_min, ]
   }
   if (!is.null(ViralRefSeq_E_criteria)) {
 
@@ -137,7 +137,7 @@ VhgSubsetHittable <- function(file,
     if (!"contig_len" %in% colnames(file)) {
       stop("Error: 'contig_len' column does not exist in the dataframe.")
     }
-    file <- file[file$contig_len > contig_len_criteria, ]
+    file <- file[file$contig_len >= contig_len_criteria, ]
   }
 
   if (nrow(file) == 0) {
