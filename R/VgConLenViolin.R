@@ -66,7 +66,15 @@
 #' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
 #' @param add_boxplot (optional): Add a boxplot to the violin plot (default: FALSE).
-#'
+#' @param group_unwanted_phyla A character string specifying which group of viral phyla to retain in the analysis.
+#' Valid values are:
+#' \describe{
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#' }
+#' All other phyla not in the specified group will be grouped into a single category:
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
 #'
 #' @details
 #' VgConLenViolin creates a violin plot to visualize the distribution of contig lengths
@@ -139,7 +147,8 @@ VgConLenViolin <- function(vg_file=vg_file,
                            legend_text_size = 10,
                            min_observations = 1,
                            facet_ncol = NULL,
-                           add_boxplot =FALSE) {
+                           add_boxplot =FALSE,
+                           group_unwanted_phyla =NULL) {
 
   #check if table is empty
   #is_file_empty(vg_file)
@@ -199,6 +208,19 @@ VgConLenViolin <- function(vg_file=vg_file,
 
   # Match names to vg_file$best_query
   vg_file$phyl <- pyhlum_names[match(vg_file[["ViralRefSeq_taxonomy"]], unique_queries)]
+
+
+  if(!is.null(group_unwanted_phyla)){
+
+    group_unphyla <- remove_non_group(file=vg_file,groupby="ViralRefSeq_taxonomy",chosen_group=group_unwanted_phyla,label_vector=labels,
+                                      taxa_rank=taxa_rank)
+
+    vg_file <- group_unphyla$file
+
+    labels <- group_unphyla$label
+
+
+  }
 
 
 

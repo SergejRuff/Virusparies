@@ -40,7 +40,8 @@ VhgRunsBarplot(
   plot_text_hjust = -0.1,
   plot_text_vjust = 0.5,
   plot_text_colour = "black",
-  facet_ncol = NULL
+  facet_ncol = NULL,
+  group_unwanted_phyla = NULL
 )
 }
 \arguments{
@@ -139,6 +140,16 @@ It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}
 
 \item{facet_ncol}{(optional):  The number of columns for faceting (default: NULL).
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
+
+\item{group_unwanted_phyla}{A character string specifying which group of viral phyla to retain in the analysis.
+Valid values are:
+\describe{
+\item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}
+\item{"smalldna"}{Retain only the phyla specified for small DNA viruses (\code{valid_phyla_smalldna}).}
+\item{"largedna"}{Retain only the phyla specified for large DNA viruses (\code{valid_phyla_largedna}).}
+}
+All other phyla not in the specified group will be grouped into a single category:
+"Non-RNA-virus" for \code{"rna"}, "Non-Small-DNA-Virus" for \code{"smalldna"}, or "Non-Large-DNA-Virus" for \code{"largedna"}.}
 }
 \value{
 A list containing the bar plot and tabular data with information from the plot.

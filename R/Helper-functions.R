@@ -376,3 +376,76 @@ adjust_plot_angles <- function(plot, x_angle = NULL, y_angle = NULL) {
   return(plot)
 }
 
+
+
+
+#' remove_non_group
+#'
+#' @param file file
+#' @param groupby groupby
+#' @param chosen_group chosen_group
+#' @param label_vector label_vector
+#' @param taxa_rank taxa_rank
+#'
+#' @return list with vector and df
+#' @import dplyr
+#' @importFrom rlang .data
+#' @noRd
+remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
+
+  valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                        "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+
+  valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                             "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+  valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                             "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+  chosen_list <- switch(chosen_group,
+                        "rna" = valid_phyla_rna,
+                        "smalldna" = valid_phyla_smalldna,
+                        "largedna" = valid_phyla_largedna,
+                        stop("Invalid chosen_group value. Use 'rna', 'smalldna', or 'largedna'."))
+
+  change_label <- switch(chosen_group,
+                         "rna" = "Non-RNA-virus",
+                         "smalldna" = "Non-Small-DNA-Virus",
+                         "largedna" = "Non-Large-DNA-Virus")
+  # if (all(grepl("^taxid:", file$ViralRefSeq_taxonomy))) {
+  #   file <- VhgPreprocessTaxa(file,taxa_rank)
+  # }
+  #
+  #
+  # file <- VhgAddPhylum(file,"ViralRefSeq_taxonomy")
+
+  # Modify the dataframe
+  file <- file %>%
+    mutate(
+      !!sym(groupby) := case_when(
+        phyl == "unclassified" ~ !!sym(groupby),
+        grepl(paste0(chosen_list, collapse = "|"), .data$phyl, ignore.case = TRUE) ~ !!sym(groupby),
+        TRUE ~ change_label
+      )
+    )
+
+  file <- file %>%
+    mutate(
+      phyl = case_when(
+        phyl == "unclassified" ~ "unclassified",  # Keep as unclassified
+        grepl(paste0(chosen_list, collapse = "|"), phyl, ignore.case = TRUE) ~ phyl,  # Keep original value for valid phyla
+        TRUE ~ change_label  # Change to label if not in chosen_list
+      )
+    )
+
+  # Filter out entries that are not in the valid phyla list, excluding "unclassified"
+  label_vector <- label_vector[names(label_vector) %in% c(chosen_list, "unclassified")]
+
+  # Add the "Non-RNA-virus" entry with the color black
+  label_vector[change_label] <- "#000000"
+
+  return(list(file =file,label=label_vector))
+
+
+}

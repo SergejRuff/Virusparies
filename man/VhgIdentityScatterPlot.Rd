@@ -33,7 +33,8 @@ VhgIdentityScatterPlot(
   legend_title_size = 12,
   legend_title_face = "bold",
   legend_text_size = 10,
-  highlight_groups = NULL
+  highlight_groups = NULL,
+  group_unwanted_phyla = NULL
 )
 }
 \arguments{
@@ -109,6 +110,16 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 \item{legend_text_size}{(optional): The size of the legend text (default: 10).}
 
 \item{highlight_groups}{(optional): A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).}
+
+\item{group_unwanted_phyla}{A character string specifying which group of viral phyla to retain in the analysis.
+Valid values are:
+\describe{
+\item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}
+\item{"smalldna"}{Retain only the phyla specified for small DNA viruses (\code{valid_phyla_smalldna}).}
+\item{"largedna"}{Retain only the phyla specified for large DNA viruses (\code{valid_phyla_largedna}).}
+}
+All other phyla not in the specified group will be grouped into a single category:
+"Non-RNA-virus" for \code{"rna"}, "Non-Small-DNA-Virus" for \code{"smalldna"}, or "Non-Large-DNA-Virus" for \code{"largedna"}.}
 }
 \value{
 A list containing the following components:

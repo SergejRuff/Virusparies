@@ -55,7 +55,15 @@
 #' @param legend_text_size (optional): Numeric specifying the size of the legend text (default: 10).
 #' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
-#'
+#' @param group_unwanted_phyla A character string specifying which group of viral phyla to retain in the analysis.
+#' Valid values are:
+#' \describe{
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#' }
+#' All other phyla not in the specified group will be grouped into a single category:
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
 #'
 #' @details
 #' VhgBoxplot generates box plots comparing either e-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
@@ -161,7 +169,8 @@ VhgBoxplot <- function(file,
                               legend_title_size = 12,
                               legend_title_face = "bold",
                               legend_text_size = 10,
-                              facet_ncol = NULL
+                              facet_ncol = NULL,
+                              group_unwanted_phyla =NULL
                               ){
 
 
@@ -311,6 +320,19 @@ VhgBoxplot <- function(file,
 
   # Match names to file$best_query
   file$phyl <- pyhlum_names[match(file[[x_column]], unique_queries)]
+
+  if(!is.null(group_unwanted_phyla)){
+
+    group_unphyla <- remove_non_group(file=file,groupby=x_column,chosen_group=group_unwanted_phyla,label_vector=labels,
+                                      taxa_rank=taxa_rank)
+
+    file <- group_unphyla$file
+
+    labels <- group_unphyla$label
+
+
+  }
+
 
 
   # Check for valid reorder_criteria

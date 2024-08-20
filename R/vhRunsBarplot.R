@@ -58,6 +58,15 @@
 #' @param plot_text_colour (optional): The color of the text labels added to the plot (default: "black").
 #' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
+#' @param group_unwanted_phyla A character string specifying which group of viral phyla to retain in the analysis.
+#' Valid values are:
+#' \describe{
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#' }
+#' All other phyla not in the specified group will be grouped into a single category:
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
 #'
 #'
 #' @details
@@ -121,7 +130,8 @@ VhgRunsBarplot <- function(file,
                           plot_text_hjust = -0.1,
                           plot_text_vjust = 0.5,
                           plot_text_colour = "black",
-                          facet_ncol = NULL
+                          facet_ncol = NULL,
+                          group_unwanted_phyla =NULL
                           ){
 
 
@@ -216,6 +226,19 @@ VhgRunsBarplot <- function(file,
 
   # Match names to sample_run$best_query
   sample_run$phyl <- pyhlum_names[match(sample_run[[groupby]], unique_queries)]
+
+
+  if(!is.null(group_unwanted_phyla)){
+
+    group_unphyla <- remove_non_group(file=sample_run,groupby=groupby,chosen_group=group_unwanted_phyla,label_vector=labels,
+                                      taxa_rank=taxa_rank)
+
+    sample_run <- group_unphyla$file
+
+    labels <- group_unphyla$label
+
+
+  }
 
   # Check for valid reorder_criteria
   valid_criteria <- c("max", "min")
