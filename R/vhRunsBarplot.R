@@ -243,15 +243,22 @@ VhgRunsBarplot <- function(file,
       "best_query"
     }
 
+    merge_phyl_values <- c("Non-RNA-virus", "Non-Small-DNA-Virus", "Non-Large-DNA-Virus")
+
     phyl <- "phyl"
     unique_SRA_run <-"unique_SRA_run"
     perc <- "perc"
     cyl <- "cyl"
     res <- "res"
+
     sample_run <- sample_run %>%
-      group_by(!!sym(phyl))%>%
+      # Separate the data into those that should be aggregated and those that should not
+      mutate(merge_flag = if_else(phyl %in% merge_phyl_values, "Merge", "Keep")) %>%
+
+      # Aggregate rows where phyl matches specified values
+      filter(.data$merge_flag == "Merge") %>%
+      group_by(!!sym(best_query_col), phyl) %>%  # Keep 'phyl' in group_by to retain original values
       summarize(
-        # Use the correct column name for best_query based on the grouping variable
         !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
         unique_SRA_run = sum(!!sym(unique_SRA_run)),
         perc = paste0(
@@ -261,10 +268,33 @@ VhgRunsBarplot <- function(file,
           )
         ),
         res = paste(sum(!!sym(unique_SRA_run)), " (", perc, "%", ")"),
-        cyl = paste(unique(!!sym(cyl)), collapse = ", ")
+        cyl = paste(unique(!!sym(cyl)), collapse = ", "),
+        .groups = 'drop'
       ) %>%
-      ungroup()  %>%
-      select(!!sym(best_query_col), !!sym(unique_SRA_run), !!sym(perc), !!sym(res), !!sym(cyl), !!sym(phyl))
+
+      # Combine with non-aggregated rows
+      bind_rows(
+        sample_run %>%
+          filter(!phyl %in% merge_phyl_values) %>%
+          group_by(!!sym(best_query_col)) %>%
+          summarize(
+            !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
+            unique_SRA_run = sum(!!sym(unique_SRA_run)),
+            perc = paste0(
+              round(
+                sum(as.numeric(gsub("%", "", !!sym(perc))) * !!sym(unique_SRA_run)) / sum(!!sym(unique_SRA_run)),
+                2
+              )
+            ),
+            res = paste(sum(!!sym(unique_SRA_run)), " (", perc, "%", ")"),
+            cyl = paste(unique(!!sym(cyl)), collapse = ", "),
+            phyl = unique(phyl),
+            .groups = 'drop'
+          )
+      ) %>%
+      ungroup() %>%
+      select(!!sym(best_query_col), unique_SRA_run, perc, res, cyl, phyl)
+
 
 
   }
