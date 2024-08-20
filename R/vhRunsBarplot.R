@@ -93,7 +93,7 @@
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
-#' @importFrom  dplyr n_distinct coalesce
+#' @importFrom  dplyr n_distinct coalesce summarize mutate
 #' @importFrom rlang .data
 #' @export
 VhgRunsBarplot <- function(file,
@@ -237,25 +237,34 @@ VhgRunsBarplot <- function(file,
 
     labels <- group_unphyla$label
 
+    best_query_col <- if (groupby == "ViralRefSeq_taxonomy") {
+      "ViralRefSeq_taxonomy"
+    } else {
+      "best_query"
+    }
 
+    phyl <- "phyl"
+    unique_SRA_run <-"unique_SRA_run"
+    perc <- "perc"
+    cyl <- "cyl"
+    res <- "res"
     sample_run <- sample_run %>%
-      group_by(phyl) %>%
+      group_by(!!sym(phyl))%>%
       summarize(
-        best_query = paste(unique(best_query), collapse = ", "),
-        unique_SRA_run = sum(unique_SRA_run),
-        # Remove extra '%' and calculate the percentage
+        # Use the correct column name for best_query based on the grouping variable
+        !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
+        unique_SRA_run = sum(!!sym(unique_SRA_run)),
         perc = paste0(
           round(
-            sum(as.numeric(gsub("%", "", perc)) * unique_SRA_run) / sum(unique_SRA_run),
+            sum(as.numeric(gsub("%", "", !!sym(perc))) * !!sym(unique_SRA_run)) / sum(!!sym(unique_SRA_run)),
             2
           )
         ),
-        # Format the res column with the updated percentage
-        res = paste(sum(unique_SRA_run), " (", perc,"%" ,")"),
-        cyl = paste(unique(cyl), collapse = ", ")
+        res = paste(sum(!!sym(unique_SRA_run)), " (", perc, "%", ")"),
+        cyl = paste(unique(!!sym(cyl)), collapse = ", ")
       ) %>%
-      ungroup() %>%
-      select(best_query, unique_SRA_run, perc, res, cyl, phyl)
+      ungroup()  %>%
+      select(!!sym(best_query_col), !!sym(unique_SRA_run), !!sym(perc), !!sym(res), !!sym(cyl), !!sym(phyl))
 
 
   }

@@ -245,25 +245,35 @@ VhSumHitsBarplot <- function(vh_file,
 
    labels <- group_unphyla$label
 
+   best_query_col <- if (groupby == "ViralRefSeq_taxonomy") {
+     "ViralRefSeq_taxonomy"
+   } else {
+     "best_query"
+   }
+
+   phyl <- "phyl"
+   perc <- "perc"
+   cyl <- "cyl"
+   res <- "res"
 
    vh_group <- vh_group %>%
-     group_by(phyl) %>%
+     group_by(!!sym(phyl)) %>%
      summarize(
-       best_query = paste(unique(best_query), collapse = ", "),
+       !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
        sum = sum(sum),
        # Remove extra '%' and calculate the percentage
        perc = paste0(
          round(
-           sum(as.numeric(gsub("%", "", perc)) * sum) / sum(sum),
+           sum(as.numeric(gsub("%", "", !!sym(perc))) * sum) / sum(sum),
            2
          )
        ),
        # Format the res column with the updated percentage
-       res = paste(sum(sum), " (", perc,"%" ,")"),
-       cyl = paste(unique(cyl), collapse = ", ")
+       res = paste(sum(sum), " (", !!sym(perc),"%" ,")"),
+       cyl = paste(unique(!!sym(cyl)), collapse = ", ")
      ) %>%
      ungroup() %>%
-     select(best_query, sum, perc, res, cyl, phyl)
+     select(!!sym(best_query_col), sum, !!sym(perc), !!sym(res), !!sym(cyl), !!sym(phyl))
 
 
  }
