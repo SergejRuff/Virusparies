@@ -111,10 +111,18 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
 
   # Extract unique names and corresponding values
   unique_labels <- unique(legend_labels)
-  labels <- matched_vector[match(unique_labels, legend_labels)]
+  labels <- matched_vector[names(legend_labels)]
 
   # Create a named vector
-  names(labels) <- unique_labels
+  names(labels) <- legend_labels
+
+  phyla_colors <- unique_phyla[names(unique_phyla) != "unclassified"]
+
+  # Find the labels that are currently "#a9a9a9" and are not 'unclassified'
+  update_indices <- names(labels)[labels == "#a9a9a9" & names(labels) != "unclassified"]
+
+  # Replace "#a9a9a9" with the corresponding color from phyla_colors
+  labels[update_indices] <- phyla_colors[match(update_indices, names(phyla_colors))]
 
   # Loop through legend_labels to substitute "unclassified" entries
   for (label in names(legend_labels)) {
