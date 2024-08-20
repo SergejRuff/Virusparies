@@ -246,6 +246,26 @@ VhSumHitsBarplot <- function(vh_file,
    labels <- group_unphyla$label
 
 
+   vh_group <- vh_group %>%
+     group_by(phyl) %>%
+     summarize(
+       best_query = paste(unique(best_query), collapse = ", "),
+       sum = sum(sum),
+       # Remove extra '%' and calculate the percentage
+       perc = paste0(
+         round(
+           sum(as.numeric(gsub("%", "", perc)) * sum) / sum(sum),
+           2
+         )
+       ),
+       # Format the res column with the updated percentage
+       res = paste(sum(sum), " (", perc,"%" ,")"),
+       cyl = paste(unique(cyl), collapse = ", ")
+     ) %>%
+     ungroup() %>%
+     select(best_query, sum, perc, res, cyl, phyl)
+
+
  }
 
  # Check for valid reorder_criteria

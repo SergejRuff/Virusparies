@@ -238,6 +238,26 @@ VhgRunsBarplot <- function(file,
     labels <- group_unphyla$label
 
 
+    sample_run <- sample_run %>%
+      group_by(phyl) %>%
+      summarize(
+        best_query = paste(unique(best_query), collapse = ", "),
+        unique_SRA_run = sum(unique_SRA_run),
+        # Remove extra '%' and calculate the percentage
+        perc = paste0(
+          round(
+            sum(as.numeric(gsub("%", "", perc)) * unique_SRA_run) / sum(unique_SRA_run),
+            2
+          )
+        ),
+        # Format the res column with the updated percentage
+        res = paste(sum(unique_SRA_run), " (", perc,"%" ,")"),
+        cyl = paste(unique(cyl), collapse = ", ")
+      ) %>%
+      ungroup() %>%
+      select(best_query, unique_SRA_run, perc, res, cyl, phyl)
+
+
   }
 
   # Check for valid reorder_criteria
