@@ -158,7 +158,7 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
   labels <- c(labels, setNames(missing_colors, missing_labels))
 
 
-
+ labels <- labels[unique(names(labels))]
 
 
   return(list(legend_labels = legend_labels, labels = labels,matched_vector=matched_vector))
