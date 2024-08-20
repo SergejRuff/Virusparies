@@ -297,6 +297,8 @@ VhgRunsBarplot <- function(file,
 
 
 
+
+
   }
 
   # Check for valid reorder_criteria

@@ -256,24 +256,46 @@ VhSumHitsBarplot <- function(vh_file,
    cyl <- "cyl"
    res <- "res"
 
+   merge_phyl_values <- c("Non-RNA-virus", "Non-Small-DNA-Virus", "Non-Large-DNA-Virus")
+
    vh_group <- vh_group %>%
-     group_by(!!sym(phyl)) %>%
+     # Separate the data into those that should be aggregated and those that should not
+     mutate(merge_flag = if_else(!!sym(phyl) %in% merge_phyl_values, "Merge", "Keep")) %>%
+
+     # Aggregate the rows where phyl matches specified values
+     group_by(!!sym(best_query_col), phyl, .data$merge_flag) %>%
      summarize(
        !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
-       sum = sum(sum),
-       # Remove extra '%' and calculate the percentage
+       sum = sum(sum),  # Aggregate the 'sum' column
        perc = paste0(
          round(
            sum(as.numeric(gsub("%", "", !!sym(perc))) * sum) / sum(sum),
            2
          )
        ),
-       # Format the res column with the updated percentage
-       res = paste(sum(sum), " (", !!sym(perc),"%" ,")"),
-       cyl = paste(unique(!!sym(cyl)), collapse = ", ")
+       res = paste(sum, " (", perc, "%", ")"),
+       cyl = paste(unique(!!sym(cyl)), collapse = ", "),
+       .groups = 'drop'
      ) %>%
-     ungroup() %>%
-     select(!!sym(best_query_col), sum, !!sym(perc), !!sym(res), !!sym(cyl), !!sym(phyl))
+     ungroup()
+
+   # Process non-merged data separately
+   vh_group_non_merge <- vh_group %>%
+     filter(.data$merge_flag == "Keep") %>%
+     select(-.data$merge_flag)  # Remove the merge_flag after processing
+
+   # Combine the merged and non-merged data
+   vh_group <- bind_rows(
+     vh_group %>%
+       filter(.data$merge_flag == "Merge") %>%
+       select(-.data$merge_flag),  # Remove the merge_flag after processing
+     vh_group_non_merge
+   )
+
+   # Select final columns
+   vh_group <- vh_group %>%
+     select(!!sym(best_query_col), sum, perc, res, cyl, phyl)
+
 
 
  }
