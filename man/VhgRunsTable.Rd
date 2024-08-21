@@ -44,7 +44,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+\item{cut}{(optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).
 Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.}
 
 \item{title}{(optional): The title of the plot (default: "Summary of unique runs by virus group").}

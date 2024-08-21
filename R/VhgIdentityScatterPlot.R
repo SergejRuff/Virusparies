@@ -1,7 +1,7 @@
-#' @title VhgIdentityScatterPlot: Scatter plot for refseq identity vs -log10 of refseq e-value
+#' @title VhgIdentityScatterPlot: Scatter plot for refseq identity vs -log10 of refseq E-value
 #'
 #' @description
-#' VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -log10 of viral refseq e-value.
+#' VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -log10 of viral refseq E-value.
 #' It colors the points based on  phylum  and adds a horizontal line representing the cutoff value.
 #'
 #'
@@ -18,7 +18,7 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cutoff (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+#' @param cutoff (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).
 #' @param conlen_bubble_plot (optional):  Logical value indicating whether the `contig_len` column
 #'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).
 #' @param contiglen_breaks (optional): Number of breaks (default: 5) for the bubble plot (for `conlen_bubble_plot`=TRUE).
@@ -26,7 +26,7 @@
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 #'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
 #' @param cut_colour (optional): The color for the horizontal cutoff line (default: "#990000").
-#' @param title (optional): The title of the plot (default: "Scatterplot of viral reference e-values and identity").
+#' @param title (optional): The title of the plot (default: "Scatterplot of viral reference E-values and identity").
 #' @param title_size (optional): The size of the title text (default: 16).
 #' @param title_face (optional): The face (bold, italic, etc.) of the title text (default: "bold").
 #' @param title_colour (optional): The color of the title text (default: "#2a475e").
@@ -35,7 +35,7 @@
 #' @param subtitle_face (optional): The face (bold, italic, etc.) of the subtitle text (default: "bold").
 #' @param subtitle_colour (optional): The color of the subtitle text (default: "#1b2838").
 #' @param xlabel (optional): The label for the x-axis (default: "Viral reference identity (%)").
-#' @param ylabel (optional): The label for the y-axis (default: "-log10 of viral reference e-values").
+#' @param ylabel (optional): The label for the y-axis (default: "-log10 of viral reference E-values").
 #' @param axis_title_size (optional): The size of the axis titles (default: 12).
 #' @param xtext_size (optional): The size of the x-axis text (default: 10).
 #' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
@@ -59,7 +59,7 @@
 #'
 #'
 #' @details
-#' VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq e-value.
+#' VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq E-value.
 #' It accepts both VirusHunter and VirusGatherer hittables as input.
 #' The plot includes:
 #' - A line indicates whether the observed values are above or below the cutoff specified by the 'cutoff' argument (default: 1e-5).
@@ -72,8 +72,8 @@
 #' `highlight_groups` enables the user to specify one or more viral groups from the column indicated in the `groupby` argument. These groups will be highlighted in the plot.
 #'
 #' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
-#' returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
-#' If the smallest e-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
+#' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest e-value that is greater than 0.
+#' If the smallest E-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
 #'
 #' @return A list containing the following components:
 #' - Plot: A plot object representing the faceted scatterplot.
@@ -146,7 +146,7 @@ VhgIdentityScatterPlot <- function(file,
                                   contiglen_breaks = 5,
                                   theme_choice = "linedraw",
                                   cut_colour = "#990000",
-                                  title = "Scatterplot of viral reference e-values and identity",
+                                  title = "Scatterplot of viral reference E-values and identity",
                                   title_size = 16,
                                   title_face = "bold",
                                   title_colour = "#2a475e",
@@ -155,7 +155,7 @@ VhgIdentityScatterPlot <- function(file,
                                   subtitle_face = "bold",
                                   subtitle_colour = "#1b2838",
                                   xlabel = "Viral reference identity (%)",
-                                  ylabel = "-log10 of viral reference e-values",
+                                  ylabel = "-log10 of viral reference E-values",
                                   axis_title_size = 12,
                                   xtext_size = 10,
                                   x_angle = NULL,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgBoxplot.R
 \name{VhgBoxplot}
 \alias{VhgBoxplot}
-\title{VhgBoxplot: Generate box plots comparing e-values,identity or contig length (Gatherer only) for each virus group}
+\title{VhgBoxplot: Generate box plots comparing E-values,identity or contig length (Gatherer only) for each virus group}
 \usage{
 VhgBoxplot(
   file,
@@ -68,7 +68,7 @@ Supported ranks are:
 
 \item{contiglen_log10_scale}{(optional): When \code{y_column} is set to "contig_len", this parameter enables logarithmic scaling (log10) of the y-axis (TRUE). By default, this feature is disabled (FALSE).}
 
-\item{cut}{(optional): The significance cutoff value for e-values (default: 1e-5).}
+\item{cut}{(optional): The significance cutoff value for E-values (default: 1e-5).}
 
 \item{add_cutoff_line}{(optional): Whether to add a horizontal line based on \code{cut} for \code{"ViralRefSeq_E"} column (default: TRUE).}
 
@@ -154,15 +154,15 @@ A list containing:
 }
 }
 \description{
-VhgBoxplot generates box plots comparing either e-values,identity or contig length (Gatherer only)
+VhgBoxplot generates box plots comparing either E-values,identity or contig length (Gatherer only)
 for each group from VirusHunter or VirusGatherer hittable results.
 }
 \details{
-VhgBoxplot generates box plots comparing either e-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
 
-The user can specify whether to generate box plots for e-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
+The user can specify whether to generate box plots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 This means that 'VhgBoxplot' can generate three different types of box plots.
-By default, 'y_column' is set to "ViralRefSeq_E" and will plot the reference e-Value on the y-axis.
+By default, 'y_column' is set to "ViralRefSeq_E" and will plot the reference E-Value on the y-axis.
 Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
 
 Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
@@ -176,15 +176,15 @@ The 'cut' argument is used differently depending on the 'y_column' value:
 
 This allows the user to plot only the significant contig lengths and identities while also visualizing the number of non-significant and significant values for comparison.
 
-Warning: In some cases, e-values might be exactly 0. When these values are transformed using -log10, R
-returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
-If the smallest e-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
+Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest e-value that is greater than 0.
+If the smallest E-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
 file <- ImportVirusTable(path)
 
-# plot 1 for e-values
+# plot 1 for E-values
 plot1 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_E")
 plot1
 

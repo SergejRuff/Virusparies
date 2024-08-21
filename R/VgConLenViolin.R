@@ -18,7 +18,7 @@
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #'
-#' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+#' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).
 #'
 #' @param log10_scale (optinal): transform y-axis to log10 scale (default: TRUE).
 #'

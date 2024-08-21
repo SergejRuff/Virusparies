@@ -212,7 +212,7 @@ vhg_filter_belowthresholdboxplot <- function(vh_file,cut){
 #' @keywords interlal
 get_plot_parameters <- function(y_column, cut) {
   params <- list(
-    ViralRefSeq_E = list(cutoff = -log10(cut), ylabel = "-log10 of viral reference e-values"),
+    ViralRefSeq_E = list(cutoff = -log10(cut), ylabel = "-log10 of viral reference E-values"),
     ViralRefSeq_ident = list(cutoff = NULL, ylabel = "Viral reference identity (%)"),
     contig_len = list(cutoff = NULL, ylabel = "Contig length (nt)")
   )

@@ -1,9 +1,9 @@
-#' @title VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq e-value.
+#' @title VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq E-value.
 #'
 #' @description
-#' VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq e-value
+#' VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq E-value
 #' for each virus group in the `best_query` or `ViralRefSeq_taxonomy` column . The points are colored based on whether the
-#' e-value meets a specified cutoff and are faceted by the viral groups in the `best_query` or `ViralRefSeq_taxonomy` column.
+#' E-value meets a specified cutoff and are faceted by the viral groups in the `best_query` or `ViralRefSeq_taxonomy` column.
 #'
 #' @param file VirusHunterGatherer hittable.
 #' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
@@ -18,7 +18,7 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cutoff (optional):  A numeric value representing the cutoff for the refseq e-value. Points with `ViralRefSeq_E`
+#' @param cutoff (optional):  A numeric value representing the cutoff for the refseq E-value. Points with `ViralRefSeq_E`
 #' less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).
 #' @param conlen_bubble_plot (optional):  Logical value indicating whether the `contig_len` column
 #'  should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).
@@ -26,7 +26,7 @@
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 #'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
-#' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").
+#' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference E-values and identity").
 #' @param title_size (optional):  The size of the title text (default: 16).
 #' @param title_face (optional):  The face (bold, italic, etc.) of the title text (default: "bold").
 #' @param title_colour (optional):  The color of the title text (default: "#2a475e").
@@ -35,7 +35,7 @@
 #' @param subtitle_face (optional):  The face (bold, italic, etc.) of the subtitle text (default: "bold").
 #' @param subtitle_colour (optional):  The color of the subtitle text (default: "#1b2838").
 #' @param xlabel (optional):  The label for the x-axis (default: "Viral reference identity (%)").
-#' @param ylabel (optional):  The label for the y-axis (default: "-log10 of viral reference e-values").
+#' @param ylabel (optional):  The label for the y-axis (default: "-log10 of viral reference E-values").
 #' @param axis_title_size (optional):  The size of the axis titles (default: 12).
 #' @param xtext_size (optional):  The size of the x-axis text (default: 10).
 #' @param x_angle (optional): An integer specifying the angle (in degrees) for the x-axis text labels. Default is NULL, meaning no change.
@@ -94,9 +94,9 @@
 #' and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 #' are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 #'
-#' Warning: In some cases, e-values might be exactly 0. When these values are transformed using -log10, R
-#' returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
-#' If the smallest e-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
+#' Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+#' returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest e-value that is greater than 0.
+#' If the smallest E-value is above the user-defined cutoff, we use a value of `cutoff * 10^-10` to replace the zeros.
 #'
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
@@ -148,7 +148,7 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      conlen_bubble_plot = FALSE,
                                      contiglen_breaks = 5,
                                      theme_choice = "linedraw",
-                                     title="Faceted scatterplot of viral reference e-values and identity",
+                                     title="Faceted scatterplot of viral reference E-values and identity",
                                      title_size = 16,
                                      title_face = "bold",
                                      title_colour = "#2a475e",
@@ -157,7 +157,7 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      subtitle_face = "bold",
                                      subtitle_colour = "#1b2838",
                                      xlabel = "Viral reference identity (%)",
-                                     ylabel = "-log10 of viral reference e-values",
+                                     ylabel = "-log10 of viral reference E-values",
                                      axis_title_size = 12,
                                      xtext_size = 10,
                                      x_angle = NULL,

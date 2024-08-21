@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdentityScatterPlot.R
 \name{VhgIdentityScatterPlot}
 \alias{VhgIdentityScatterPlot}
-\title{VhgIdentityScatterPlot: Scatter plot for refseq identity vs -log10 of refseq e-value}
+\title{VhgIdentityScatterPlot: Scatter plot for refseq identity vs -log10 of refseq E-value}
 \usage{
 VhgIdentityScatterPlot(
   file,
@@ -13,7 +13,7 @@ VhgIdentityScatterPlot(
   contiglen_breaks = 5,
   theme_choice = "linedraw",
   cut_colour = "#990000",
-  title = "Scatterplot of viral reference e-values and identity",
+  title = "Scatterplot of viral reference E-values and identity",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -22,7 +22,7 @@ VhgIdentityScatterPlot(
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
   xlabel = "Viral reference identity (\%)",
-  ylabel = "-log10 of viral reference e-values",
+  ylabel = "-log10 of viral reference E-values",
   axis_title_size = 12,
   xtext_size = 10,
   x_angle = NULL,
@@ -56,7 +56,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).}
+\item{cutoff}{(optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).}
 
 \item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
 should be used to size the bubbles in the plot. Applicable only to VirusGatherer hittables input (default: FALSE).}
@@ -69,7 +69,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{cut_colour}{(optional): The color for the horizontal cutoff line (default: "#990000").}
 
-\item{title}{(optional): The title of the plot (default: "Scatterplot of viral reference e-values and identity").}
+\item{title}{(optional): The title of the plot (default: "Scatterplot of viral reference E-values and identity").}
 
 \item{title_size}{(optional): The size of the title text (default: 16).}
 
@@ -87,7 +87,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{xlabel}{(optional): The label for the x-axis (default: "Viral reference identity (\%)").}
 
-\item{ylabel}{(optional): The label for the y-axis (default: "-log10 of viral reference e-values").}
+\item{ylabel}{(optional): The label for the y-axis (default: "-log10 of viral reference E-values").}
 
 \item{axis_title_size}{(optional): The size of the axis titles (default: 12).}
 
@@ -131,11 +131,11 @@ A list containing the following components:
 }
 }
 \description{
-VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -log10 of viral refseq e-value.
+VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -log10 of viral refseq E-value.
 It colors the points based on  phylum  and adds a horizontal line representing the cutoff value.
 }
 \details{
-VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq e-value.
+VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq E-value.
 It accepts both VirusHunter and VirusGatherer hittables as input.
 The plot includes:
 \itemize{
@@ -150,8 +150,8 @@ are also included if applicable. These summary statistics, along with the plot o
 \code{highlight_groups} enables the user to specify one or more viral groups from the column indicated in the \code{groupby} argument. These groups will be highlighted in the plot.
 
 Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
-returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
-If the smallest e-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
+returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest e-value that is greater than 0.
+If the smallest E-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

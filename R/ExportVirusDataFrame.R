@@ -16,7 +16,7 @@
 #'
 #' @details
 #' Functions in the Virusparies package can generate both plots and new data frames.
-#' Data frames contain either summary statistics for contig length, e-value or identity in percentage
+#' Data frames contain either summary statistics for contig length, E-value or identity in percentage
 #' or a processed hittable for example outlier or observations below threshold, when running
 #' `VhgBoxplot`.
 #'

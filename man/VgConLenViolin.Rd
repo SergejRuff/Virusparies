@@ -57,7 +57,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cut}{(optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).}
+\item{cut}{(optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).}
 
 \item{log10_scale}{(optinal): transform y-axis to log10 scale (default: TRUE).}
 

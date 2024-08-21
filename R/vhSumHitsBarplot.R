@@ -19,7 +19,7 @@
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
 #'
-#' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5). Removes rows in vh_file
+#' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in "ViralRefSeq_E" column.
 #'
 #' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').

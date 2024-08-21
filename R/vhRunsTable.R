@@ -16,7 +16,7 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param cut (optional): A numeric value representing the cutoff for the refseq e-value (default: 1e-5).
+#' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).
 #' Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.
 #' @param title (optional): The title of the plot (default: "Summary of unique runs by virus group").
 #' @param title_align (optional): A character vector specifying the alignment of title (and subtitle) text.

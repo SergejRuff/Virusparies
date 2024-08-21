@@ -2,7 +2,7 @@
 % Please edit documentation in R/VhgIdenFacetedScatterPlot.R
 \name{VhgIdenFacetedScatterPlot}
 \alias{VhgIdenFacetedScatterPlot}
-\title{VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq e-value.}
+\title{VhgIdenFacetedScatterPlot: Create a scatter plot of Viral refseq identity vs. -log10 of viral refseq E-value.}
 \usage{
 VhgIdenFacetedScatterPlot(
   file,
@@ -12,7 +12,7 @@ VhgIdenFacetedScatterPlot(
   conlen_bubble_plot = FALSE,
   contiglen_breaks = 5,
   theme_choice = "linedraw",
-  title = "Faceted scatterplot of viral reference e-values and identity",
+  title = "Faceted scatterplot of viral reference E-values and identity",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -21,7 +21,7 @@ VhgIdenFacetedScatterPlot(
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
   xlabel = "Viral reference identity (\%)",
-  ylabel = "-log10 of viral reference e-values",
+  ylabel = "-log10 of viral reference E-values",
   axis_title_size = 12,
   xtext_size = 10,
   x_angle = NULL,
@@ -56,7 +56,7 @@ Supported ranks are:
 \item "Genus" (including Subgenus)
 }}
 
-\item{cutoff}{(optional):  A numeric value representing the cutoff for the refseq e-value. Points with \code{ViralRefSeq_E}
+\item{cutoff}{(optional):  A numeric value representing the cutoff for the refseq E-value. Points with \code{ViralRefSeq_E}
 less than or equal to this value will be colored blue; otherwise, they will be colored red (default: 1e-5).}
 
 \item{conlen_bubble_plot}{(optional):  Logical value indicating whether the \code{contig_len} column
@@ -68,7 +68,7 @@ should be used to size the bubbles in the plot. Applicable only to VirusGatherer
 "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").}
 
-\item{title}{(optional):  The title of the plot (default: "Faceted scatter plot of viral reference e-values and identity").}
+\item{title}{(optional):  The title of the plot (default: "Faceted scatter plot of viral reference E-values and identity").}
 
 \item{title_size}{(optional):  The size of the title text (default: 16).}
 
@@ -86,7 +86,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{xlabel}{(optional):  The label for the x-axis (default: "Viral reference identity (\%)").}
 
-\item{ylabel}{(optional):  The label for the y-axis (default: "-log10 of viral reference e-values").}
+\item{ylabel}{(optional):  The label for the y-axis (default: "-log10 of viral reference E-values").}
 
 \item{axis_title_size}{(optional):  The size of the axis titles (default: 12).}
 
@@ -130,9 +130,9 @@ A list containing the following components:
 }
 }
 \description{
-VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq e-value
+VhgIdenFacetedScatterPlot generates a scatter plot of viral refseq identity versus -log10 of refseq E-value
 for each virus group in the \code{best_query} or \code{ViralRefSeq_taxonomy} column . The points are colored based on whether the
-e-value meets a specified cutoff and are faceted by the viral groups in the \code{best_query} or \code{ViralRefSeq_taxonomy} column.
+E-value meets a specified cutoff and are faceted by the viral groups in the \code{best_query} or \code{ViralRefSeq_taxonomy} column.
 }
 \details{
 'VhgIdenFacetedScatterPlot' takes a VirusHunter or VirusGatherer hittable and a cutoff value as inputs.
@@ -170,9 +170,9 @@ Tibble data frames containing summary statistics (median, Q1, Q3, mean, sd, min,
 and 'ViralRefSeq_ident' values are generated. Optionally, summary statistics for 'contig_len' values
 are also included if applicable. These summary statistics, along with the plot object, are returned within a list object.
 
-Warning: In some cases, e-values might be exactly 0. When these values are transformed using -log10, R
-returns "inf" as the output. To avoid this issue, we replace all e-values that are 0 with the smallest e-value that is greater than 0.
-If the smallest e-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
+Warning: In some cases, E-values might be exactly 0. When these values are transformed using -log10, R
+returns "inf" as the output. To avoid this issue, we replace all E-values that are 0 with the smallest e-value that is greater than 0.
+If the smallest E-value is above the user-defined cutoff, we use a value of \code{cutoff * 10^-10} to replace the zeros.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
