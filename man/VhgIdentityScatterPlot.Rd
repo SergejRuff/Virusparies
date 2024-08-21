@@ -111,7 +111,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{highlight_groups}{(optional): A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).}
 
-\item{group_unwanted_phyla}{A character string specifying which group of viral phyla to retain in the analysis.
+\item{group_unwanted_phyla}{(optional): A character string specifying which group of viral phyla to retain in the analysis.
 Valid values are:
 \describe{
 \item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}

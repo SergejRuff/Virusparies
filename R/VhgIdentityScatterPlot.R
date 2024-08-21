@@ -47,7 +47,7 @@
 #' @param legend_title_face (optional): The face (bold, italic, etc.) of the legend title text (default: "bold").
 #' @param legend_text_size (optional): The size of the legend text (default: 10).
 #' @param highlight_groups (optional): A character vector specifying the names of viral groups to be highlighted in the plot (Default:NULL).
-#' @param group_unwanted_phyla A character string specifying which group of viral phyla to retain in the analysis.
+#' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
 #' Valid values are:
 #' \describe{
 #'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}

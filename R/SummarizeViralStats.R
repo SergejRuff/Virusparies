@@ -60,6 +60,16 @@
 #'
 #' @param top_n (optional): A numeric value indicating the number of top rows to return based on the selected metric.
 #'   If \code{NULL} (the default), all rows are returned.
+#' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
+#' Valid values are:
+#' \describe{
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#' }
+#' All other phyla not in the specified group will be grouped into a single category:
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
+#'
 #'
 #' @return A data frame summarizing the viral stats. The output includes:
 #'   \itemize{
@@ -67,6 +77,7 @@
 #'     \item Optional additional summary statistics as specified by \code{extra_stats}.
 #'     \item An optional total row if \code{show_total} is \code{TRUE}.
 #'   }
+#'
 #'
 #' @author Sergej Ruff
 #' @seealso
@@ -98,7 +109,8 @@ SummarizeViralStats <- function(file,
                                 show_total = FALSE,
                                 extra_stats = NULL,
                                 sort_by = NULL,
-                                top_n = NULL) {
+                                top_n = NULL,
+                                group_unwanted_phyla =NULL) {
 
   #is_file_empty(file)
   if (is_file_empty(file)) {
@@ -126,6 +138,54 @@ SummarizeViralStats <- function(file,
       #message("Skipping VhgBoxplot generation due to empty data.")
       return(invisible(NULL))  # Return invisible(NULL) to stop further exefilter_cutoffion
     }
+
+  }
+
+  if(!is.null(group_unwanted_phyla)){
+
+    valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                          "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+
+    valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+    valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+    chosen_list <- switch(group_unwanted_phyla,
+                          "rna" = valid_phyla_rna,
+                          "smalldna" = valid_phyla_smalldna,
+                          "largedna" = valid_phyla_largedna,
+                          stop("Invalid group_unwanted_phyla value. Use 'rna', 'smalldna', or 'largedna'."))
+
+    change_label <- switch(group_unwanted_phyla,
+                           "rna" = "Non-RNA-virus",
+                           "smalldna" = "Non-Small-DNA-Virus",
+                           "largedna" = "Non-Large-DNA-Virus")
+
+
+
+    file <- VhgAddPhylum(file,"ViralRefSeq_taxonomy")
+
+    # Modify the dataframe
+    file <- file %>%
+      mutate(
+        !!sym(groupby) := case_when(
+          Phylum == "unclassified" ~ !!sym(groupby),
+          grepl(paste0(chosen_list, collapse = "|"), .data$Phylum, ignore.case = TRUE) ~ !!sym(groupby),
+          TRUE ~ change_label
+        )
+      )
+
+    file <- file %>%
+      mutate(
+        Phylum = case_when(
+          Phylum == "unclassified" ~ "unclassified",  # Keep as unclassified
+          grepl(paste0(chosen_list, collapse = "|"), Phylum, ignore.case = TRUE) ~ Phylum,  # Keep original value for valid phyla
+          TRUE ~ change_label  # Change to label if not in chosen_list
+        )
+      )
 
   }
 

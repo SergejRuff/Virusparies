@@ -71,7 +71,7 @@
 #' @param plot_text_colour (optional): The color of the text labels added to the plot (default: "black").
 #' @param facet_ncol (optional):  The number of columns for faceting (default: NULL).
 #' It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.
-#' @param group_unwanted_phyla A character string specifying which group of viral phyla to retain in the analysis.
+#' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
 #' Valid values are:
 #' \describe{
 #'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}

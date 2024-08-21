@@ -13,7 +13,8 @@ SummarizeViralStats(
   show_total = FALSE,
   extra_stats = NULL,
   sort_by = NULL,
-  top_n = NULL
+  top_n = NULL,
+  group_unwanted_phyla = NULL
 )
 }
 \arguments{
@@ -68,6 +69,16 @@ If \code{NULL} (the default), no sorting is applied.}
 
 \item{top_n}{(optional): A numeric value indicating the number of top rows to return based on the selected metric.
 If \code{NULL} (the default), all rows are returned.}
+
+\item{group_unwanted_phyla}{(optional): A character string specifying which group of viral phyla to retain in the analysis.
+Valid values are:
+\describe{
+\item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}
+\item{"smalldna"}{Retain only the phyla specified for small DNA viruses (\code{valid_phyla_smalldna}).}
+\item{"largedna"}{Retain only the phyla specified for large DNA viruses (\code{valid_phyla_largedna}).}
+}
+All other phyla not in the specified group will be grouped into a single category:
+"Non-RNA-virus" for \code{"rna"}, "Non-Small-DNA-Virus" for \code{"smalldna"}, or "Non-Large-DNA-Virus" for \code{"largedna"}.}
 }
 \value{
 A data frame summarizing the viral stats. The output includes:

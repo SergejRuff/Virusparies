@@ -141,7 +141,7 @@ It is recommended to change \code{vjust} when setting \code{flip_coords = FALSE}
 \item{facet_ncol}{(optional):  The number of columns for faceting (default: NULL).
 It is recommended to specify this when the number of viral groups is high, to ensure they fit well in one plot.}
 
-\item{group_unwanted_phyla}{A character string specifying which group of viral phyla to retain in the analysis.
+\item{group_unwanted_phyla}{(optional): A character string specifying which group of viral phyla to retain in the analysis.
 Valid values are:
 \describe{
 \item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}

@@ -7,6 +7,16 @@
 #' @param include_run_ids (optional): If `TRUE` (default is `TRUE`), adds a fourth column named `run_ids` to the output.
 #' This column contains a comma-separated list of unique identifiers from either the `SRA_run` or `run_id` column,
 #' aggregated for each combination of group and subject.
+#' @param extract_brackets (optional): extract content within square brackets [].
+#' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
+#' Valid values are:
+#' \describe{
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#' }
+#' All other phyla not in the specified group will be grouped into a single category:
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
 #'
 #' @details
 #' The function `VhgGetSubject` counts the number of viral subjects in the `ViralRefSeq_subject` column
@@ -43,7 +53,9 @@
 VhgGetSubject <- function(file,
                           groupby = "best_query",
                           remove_identifiers = TRUE,
-                          include_run_ids = FALSE){
+                          include_run_ids = FALSE,
+                          extract_brackets = FALSE,
+                          group_unwanted_phyla =NULL){
 
   #is_file_empty(file)
   if (is_file_empty(file)) {
@@ -68,13 +80,70 @@ VhgGetSubject <- function(file,
     stop('Neither "SRA_run" nor "run_id" column found in the file.')
   }
 
-  # Process the data based on the remove_identifiers argument
+
+  if(!is.null(group_unwanted_phyla)){
+
+    valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                          "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+
+    valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+    valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
+                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+
+    chosen_list <- switch(group_unwanted_phyla,
+                          "rna" = valid_phyla_rna,
+                          "smalldna" = valid_phyla_smalldna,
+                          "largedna" = valid_phyla_largedna,
+                          stop("Invalid group_unwanted_phyla value. Use 'rna', 'smalldna', or 'largedna'."))
+
+    change_label <- switch(group_unwanted_phyla,
+                           "rna" = "Non-RNA-virus",
+                           "smalldna" = "Non-Small-DNA-Virus",
+                           "largedna" = "Non-Large-DNA-Virus")
+
+
+
+    file <- VhgAddPhylum(file,"ViralRefSeq_taxonomy")
+
+    # Modify the dataframe
+    file <- file %>%
+      mutate(
+        !!sym(groupby) := case_when(
+          Phylum == "unclassified" ~ !!sym(groupby),
+          grepl(paste0(chosen_list, collapse = "|"), .data$Phylum, ignore.case = TRUE) ~ !!sym(groupby),
+          TRUE ~ change_label
+        )
+      )
+
+    file <- file %>%
+      mutate(
+        Phylum = case_when(
+          Phylum == "unclassified" ~ "unclassified",  # Keep as unclassified
+          grepl(paste0(chosen_list, collapse = "|"), Phylum, ignore.case = TRUE) ~ Phylum,  # Keep original value for valid phyla
+          TRUE ~ change_label  # Change to label if not in chosen_list
+        )
+      )
+
+  }
+
   file <- file %>%
-    mutate(Processed_ViralRefSeq_subject = if (remove_identifiers) {
-      str_extract(.data$ViralRefSeq_subject, "(?<=\\|).*")
-    } else {
-      .data$ViralRefSeq_subject
-    })
+    mutate(
+      Processed_ViralRefSeq_subject = if (remove_identifiers) {
+        str_extract(.data$ViralRefSeq_subject, "(?<=\\|).*")
+      } else {
+        .data$ViralRefSeq_subject
+      }
+    ) %>%
+    mutate(
+      Processed_ViralRefSeq_subject = if (extract_brackets) {
+        str_extract(.data$Processed_ViralRefSeq_subject, "(?<=\\[)[^\\]]*(?=\\])")
+      } else {
+        .data$Processed_ViralRefSeq_subject
+      }
+    )
 
 
 

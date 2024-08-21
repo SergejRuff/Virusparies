@@ -8,7 +8,9 @@ VhgGetSubject(
   file,
   groupby = "best_query",
   remove_identifiers = TRUE,
-  include_run_ids = FALSE
+  include_run_ids = FALSE,
+  extract_brackets = FALSE,
+  group_unwanted_phyla = NULL
 )
 }
 \arguments{
@@ -22,6 +24,18 @@ Note: Gatherer hittables do not have a "best_query" column. Please provide an ap
 \item{include_run_ids}{(optional): If \code{TRUE} (default is \code{TRUE}), adds a fourth column named \code{run_ids} to the output.
 This column contains a comma-separated list of unique identifiers from either the \code{SRA_run} or \code{run_id} column,
 aggregated for each combination of group and subject.}
+
+\item{extract_brackets}{(optional): extract content within square brackets [].}
+
+\item{group_unwanted_phyla}{(optional): A character string specifying which group of viral phyla to retain in the analysis.
+Valid values are:
+\describe{
+\item{"rna"}{Retain only the phyla specified for RNA viruses (\code{valid_phyla_rna}).}
+\item{"smalldna"}{Retain only the phyla specified for small DNA viruses (\code{valid_phyla_smalldna}).}
+\item{"largedna"}{Retain only the phyla specified for large DNA viruses (\code{valid_phyla_largedna}).}
+}
+All other phyla not in the specified group will be grouped into a single category:
+"Non-RNA-virus" for \code{"rna"}, "Non-Small-DNA-Virus" for \code{"smalldna"}, or "Non-Large-DNA-Virus" for \code{"largedna"}.}
 }
 \value{
 a processed tibble object.
