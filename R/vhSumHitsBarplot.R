@@ -1,7 +1,7 @@
-#' @title VhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family
+#' @title VhSumHitsBarplot: Generate a bar plot showing the sum of reads/contigs for each virus family
 #'
 #' @description
-#' VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
+#' VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of reads/contigs
 #' for each virus family from the input data set.
 #'
 #' @param vh_file A data frame containing VirusHunters hittable results.
@@ -18,7 +18,8 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#'
+#' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_contigs"
+#'  and "num_hits" are supported columns (default:"num_hits").
 #' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in "ViralRefSeq_E" column.
 #'
@@ -128,6 +129,7 @@
 VhSumHitsBarplot <- function(vh_file,
                              groupby = "best_query",
                              taxa_rank = "Family",
+                             y_column = "num_hits",
                              cut = 1e-5,
                              reorder_criteria = "max",
                              theme_choice = "linedraw",
@@ -174,14 +176,14 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  # Define the required columns
- required_columns <- c("num_hits", "ViralRefSeq_E", groupby)
+ required_columns <- c(y_column, "ViralRefSeq_E", groupby)
 
  if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
      stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
  }
 
  check_columns(vh_file,required_columns)
- check_input_type(vh_file,c("num_hits", "ViralRefSeq_E"),2)
+ check_input_type(vh_file,c(y_column, "ViralRefSeq_E"),2)
  check_input_type(vh_file,groupby,1)
 
 
@@ -206,7 +208,7 @@ VhSumHitsBarplot <- function(vh_file,
    #message("Skipping VhgBoxplot generation due to empty data.")
    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
  }
- vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby)
+ vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby,y_column)
 
  # Apply the selected theme
  theme_selected <- select_theme(theme_choice)

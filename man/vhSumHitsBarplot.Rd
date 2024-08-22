@@ -2,12 +2,13 @@
 % Please edit documentation in R/vhSumHitsBarplot.R
 \name{VhSumHitsBarplot}
 \alias{VhSumHitsBarplot}
-\title{VhSumHitsBarplot: Generate a bar plot showing the sum of hits for each virus family}
+\title{VhSumHitsBarplot: Generate a bar plot showing the sum of reads/contigs for each virus family}
 \usage{
 VhSumHitsBarplot(
   vh_file,
   groupby = "best_query",
   taxa_rank = "Family",
+  y_column = "num_hits",
   cut = 1e-05,
   reorder_criteria = "max",
   theme_choice = "linedraw",
@@ -60,6 +61,9 @@ Supported ranks are:
 \item "Subfamily"
 \item "Genus" (including Subgenus)
 }}
+
+\item{y_column}{A character specifying the column containing the values to be compared. Currently "ViralRefSeq_contigs"
+and "num_hits" are supported columns (default:"num_hits").}
 
 \item{cut}{(optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in "ViralRefSeq_E" column.}
@@ -153,7 +157,7 @@ All other phyla not in the specified group will be grouped into a single categor
 A list containing the generated bar plot and processed data.
 }
 \description{
-VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of hits/ contigs
+VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of reads/contigs
 for each virus family from the input data set.
 }
 \details{
