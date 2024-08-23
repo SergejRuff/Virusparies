@@ -59,7 +59,7 @@
 #'
 #' \strong{Utils}:
 #' \itemize{
-#'   \item \code{\link{CombineHittables}}: Combine Hittables.
+#'   \item \code{\link{CombineHittables}}: Combine hittables.
 #'   \item \code{\link{SummarizeViralStats}}: Generate summary stats outside of plot functions.
 #'   \item \code{\link{VhgAddPhylum}}: Extract phylum information.
 #'   \item \code{\link{VhgGetSubject}}: Process and Count Viral Subjects within Groups.

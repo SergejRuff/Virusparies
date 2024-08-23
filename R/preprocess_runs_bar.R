@@ -10,7 +10,7 @@
 #' @return A processed data frame for run_bar plot.
 #' @author Sergej Ruff
 #' @details This function is an internal utility function used within the package.
-#' It calculates the number of unique runs for each virus group from the VirusHunters Hittables.
+#' It calculates the number of unique runs for each virus group from the VirusHunter hittable.
 #'
 #' @importFrom dplyr group_by summarise mutate n_distinct across any_of coalesce
 #' @importFrom stringr str_c

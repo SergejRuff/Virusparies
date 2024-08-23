@@ -2,7 +2,7 @@
 % Please edit documentation in R/CombineHittables.R
 \name{CombineHittables}
 \alias{CombineHittables}
-\title{CombineHittables: Combine Hittables.}
+\title{CombineHittables: Combine hittables.}
 \usage{
 CombineHittables(...)
 }
@@ -10,10 +10,10 @@ CombineHittables(...)
 \item{...}{Hittables to be combined.}
 }
 \value{
-A single Hittable resulting from the row-binding of all input Hittables.
+A single hittable resulting from the row-binding of all input Hittables.
 }
 \description{
-CombineHittables combines multiple Hittables by row-binding them, provided they have the same column names.
+CombineHittables combines multiple hittables by row-binding them, provided they have the same column names.
 }
 \examples{
 path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")

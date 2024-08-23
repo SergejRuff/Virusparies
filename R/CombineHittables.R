@@ -1,11 +1,11 @@
-#' @title CombineHittables: Combine Hittables.
+#' @title CombineHittables: Combine hittables.
 #'
 #' @description
-#' CombineHittables combines multiple Hittables by row-binding them, provided they have the same column names.
+#' CombineHittables combines multiple hittables by row-binding them, provided they have the same column names.
 #'
 #' @param ... Hittables to be combined.
 #'
-#' @return A single Hittable resulting from the row-binding of all input Hittables.
+#' @return A single hittable resulting from the row-binding of all input Hittables.
 #'
 #' @author Sergej Ruff
 #' @seealso
@@ -26,7 +26,7 @@ CombineHittables <- function(...) {
 
   # Check if there are any hittables provided
   if (length(dfs) == 0) {
-    stop("No Hittables provided.")
+    stop("No hittables provided.")
   }
 
   # Ensure all elements in the list are dataframes
@@ -39,7 +39,7 @@ CombineHittables <- function(...) {
 
   # Check that all dataframes have the same column names
   if (!all(sapply(dfs, function(df) identical(colnames(df), column_names)))) {
-    stop("All Hittables must have the same column names.")
+    stop("All hittables must have the same column names.")
   }
 
   # Combine the dataframes by row-binding

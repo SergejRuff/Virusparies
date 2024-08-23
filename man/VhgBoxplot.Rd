@@ -158,7 +158,7 @@ VhgBoxplot generates box plots comparing either E-values,identity or contig leng
 for each group from VirusHunter or VirusGatherer hittable results.
 }
 \details{
-VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer Hittable.
+VhgBoxplot generates box plots comparing either E-values, identity, or contig length (Gatherer only) for each virus group from the VirusHunter or Gatherer hittable.
 
 The user can specify whether to generate box plots for E-values, identity, or contig length (Gatherer only) by specifying the 'y_column'.
 This means that 'VhgBoxplot' can generate three different types of box plots.
@@ -166,7 +166,7 @@ By default, 'y_column' is set to "ViralRefSeq_E" and will plot the reference E-V
 Grouping on the x-axis is done by the 'x_column' argument. By default, the "best_query" will be used.
 
 Additionally, the function calculates summary statistics and identifies outliers for further analysis ("ViralRefSeq_E" and "contig_len" only).
-When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the Hittable filtered for the rows below the threshold specified in the 'cut' argument.
+When 'y_column' is set to "ViralRefSeq_E", the output also includes 'rows_belowthres', which contains the hittable filtered for the rows below the threshold specified in the 'cut' argument.
 
 The 'cut' argument is used differently depending on the 'y_column' value:
 \itemize{
