@@ -113,7 +113,7 @@
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @export
 VgConLenViolin <- function(vg_file=vg_file,
                            taxa_rank = "Family",
@@ -156,6 +156,8 @@ VgConLenViolin <- function(vg_file=vg_file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
+
+  taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
 
   # Define the required columns
   required_columns <- c("contig_len", "ViralRefSeq_E", "ViralRefSeq_taxonomy")

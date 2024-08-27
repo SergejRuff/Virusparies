@@ -123,7 +123,7 @@
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @importFrom stats reorder
 #' @export
 VhSumHitsBarplot <- function(vh_file,
@@ -170,7 +170,12 @@ VhSumHitsBarplot <- function(vh_file,
  if (is_file_empty(vh_file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
-  }
+ }
+
+ # Convert non-quoted column names to strings
+ groupby <- rlang::as_string(rlang::ensym(groupby))
+ taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
+ y_column <- rlang::as_string(rlang::ensym(y_column))
 
 
 

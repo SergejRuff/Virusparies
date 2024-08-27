@@ -132,7 +132,7 @@
 #'
 #'
 #' @import ggplot2
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @export
 VhgBoxplot <- function(file,
                               x_column ="best_query",
@@ -180,6 +180,14 @@ VhgBoxplot <- function(file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
+
+  # Convert non-quoted column names to strings
+  x_column <- rlang::as_string(rlang::ensym(x_column))
+  y_column <- rlang::as_string(rlang::ensym(y_column))
+  taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
+
+
+
 
 
   if (!(x_column %in% c("best_query", "ViralRefSeq_taxonomy"))) {

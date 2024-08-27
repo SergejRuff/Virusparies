@@ -99,7 +99,7 @@
 #'
 #'
 #'
-#' @importFrom rlang .data :=
+#' @importFrom rlang .data := as_string ensym
 #' @export
 SummarizeViralStats <- function(file,
                                 groupby = "best_query",
@@ -117,6 +117,9 @@ SummarizeViralStats <- function(file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further exefilter_cutoffion
   }
+
+  groupby <- rlang::as_string(rlang::ensym(groupby))
+  metric <- rlang::as_string(rlang::ensym(metric))
 
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')

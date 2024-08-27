@@ -146,6 +146,8 @@ VhgPreprocessTaxa <- function(file,taxa_rank, num_cores = 1) {
 
   }
 
+
+
   taxa_rank <- taxonomy_rank_hierarchy(taxa_rank)
 
 

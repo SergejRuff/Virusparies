@@ -75,6 +75,7 @@ get_most_common_taxonomic_rank <- function(virus_names) {
 #'
 #' print(unique(processed_taxa$Phylum))
 #'
+#' @importFrom rlang .data as_string ensym
 #' @export
 VhgAddPhylum <- function(file,
                          groupby = "best_query"
@@ -85,6 +86,8 @@ VhgAddPhylum <- function(file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
+
+  groupby <- rlang::as_string(rlang::ensym(groupby))
 
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')

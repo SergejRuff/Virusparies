@@ -58,6 +58,7 @@
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#' @importFrom rlang .data as_string ensym
 #' @export
 VhgSubsetHittable <- function(file,
                       group_column="best_query",
@@ -89,6 +90,8 @@ VhgSubsetHittable <- function(file,
 
   # Apply user-defined virus_groups criteria if provided
   if (!is.null(virus_groups)) {
+
+    group_column <- rlang::as_string(rlang::ensym(group_column))
 
     valid_columns <- c("ViralRefSeq_taxonomy", "best_query")
     if (!(group_column %in% valid_columns)) {

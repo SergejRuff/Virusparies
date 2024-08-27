@@ -83,7 +83,7 @@
 #'
 #' @importFrom dplyr group_by summarise n_distinct across any_of
 #' @importFrom gt gt
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @export
 VhgRunsTable <- function(vh_file,
                          groupby = "best_query",
@@ -109,6 +109,10 @@ VhgRunsTable <- function(vh_file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
+
+  # Convert non-quoted column names to strings
+  groupby <- rlang::as_string(rlang::ensym(groupby))
+  taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
 
   if(groupby == "ViralRefSeq_taxonomy"){
 
