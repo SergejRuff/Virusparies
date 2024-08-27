@@ -123,7 +123,7 @@ process_chunk <- function(chunk, ictv_formatted, taxa_rank) {
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import dplyr
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @importFrom tidyr unnest pivot_longer
 #' @importFrom stringr  str_extract str_remove_all str_detect
 #' @importFrom parallel detectCores mclapply
@@ -143,6 +143,13 @@ VhgPreprocessTaxa <- function(file,taxa_rank, num_cores = 1) {
             "Skipping Taxonomy processing ...")
 
     return(file)
+
+  }
+
+  if(rlang::as_string(rlang::ensym(taxa_rank)) != "taxa_rank"){
+
+    taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
+
 
   }
 

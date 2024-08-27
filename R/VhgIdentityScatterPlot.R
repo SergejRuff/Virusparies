@@ -135,7 +135,7 @@
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
 #'
 #' @import ggplot2
-#' @importFrom rlang .data
+#' @importFrom rlang .data as_string ensym
 #' @importFrom scales hue_pal
 #' @export
 VhgIdentityScatterPlot <- function(file,
@@ -179,6 +179,9 @@ VhgIdentityScatterPlot <- function(file,
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
+
+  groupby <- rlang::as_string(rlang::ensym(groupby))
+  taxa_rank <- rlang::as_string(rlang::ensym(taxa_rank))
 
 
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {

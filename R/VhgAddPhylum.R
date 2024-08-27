@@ -87,7 +87,12 @@ VhgAddPhylum <- function(file,
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
   }
 
-  groupby <- rlang::as_string(rlang::ensym(groupby))
+  if(rlang::as_string(rlang::ensym(groupby)) != "groupby"){
+
+    groupby <- rlang::as_string(rlang::ensym(groupby))
+
+  }
+
 
   if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
     stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
