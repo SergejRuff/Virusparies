@@ -25,6 +25,7 @@ Imports:
     cowplot,
     dplyr,
     ggplot2,
+    ggridges,
     gt,
     parallel,
     readr,
