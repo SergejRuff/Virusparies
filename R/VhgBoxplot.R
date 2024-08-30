@@ -23,7 +23,7 @@
 #' @param cut (optional): The significance cutoff value for E-values (default: 1e-5).
 #' @param add_cutoff_line (optional): Whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
 #' @param cut_colour (optional): The color for the significance cutoff line (default: "#990000").
-#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
@@ -344,9 +344,9 @@ VhgBoxplot <- function(file,
 
 
   # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min", "median", "mean")
+  valid_criteria <- c("max", "min", "median", "mean","phylum")
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean, phylum.")
   }
 
 
@@ -381,17 +381,23 @@ VhgBoxplot <- function(file,
 
 
 
-  boxp <- ggplot(file,aes(x= if (!is.null(reorder_criteria)) {
-    reorder(.data[[x_column]], y_aes,
-            FUN = switch(reorder_criteria,
-                         "max" = max,
-                         "min" = min,
-                         "median" = median,
-                         "mean" = mean))
-  } else {
-    factor(.data[[x_column]], levels = rev(unique(sort(.data[[x_column]]))))
-  },
-                             y=y_aes,fill=.data$phyl))+
+  boxp <- ggplot(file, aes(x = {
+    if (!is.null(reorder_criteria)) {
+      if (reorder_criteria == "phylum") {
+        ordered_levels <- rev(unique(.data[[x_column]][order(.data$phyl)]))
+        factor(.data[[x_column]], levels = ordered_levels)
+      } else {
+        reorder(.data[[x_column]], y_aes,
+                FUN = switch(reorder_criteria,
+                             "max" = max,
+                             "min" = min,
+                             "median" = median,
+                             "mean" = mean))
+      }
+    } else {
+      factor(.data[[x_column]], levels = rev(unique(sort(.data[[x_column]]))))
+    }
+  }, y = y_aes, fill = .data$phyl))+
     geom_boxplot(staplewidth = 0.4)+
     labs(x=xlabel,
          y=ylabel,

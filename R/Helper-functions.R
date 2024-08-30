@@ -394,14 +394,14 @@ adjust_plot_angles <- function(plot, x_angle = NULL, y_angle = NULL) {
 remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
 
   valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                        "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                        "Lenarviricota","Negarnaviricota","Pisuviricota")
 
 
   valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                             "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                             "Lenarviricota","Negarnaviricota","Pisuviricota")
 
   valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                             "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                             "Lenarviricota","Negarnaviricota","Pisuviricota")
 
   chosen_list <- switch(chosen_group,
                         "rna" = valid_phyla_rna,
@@ -410,9 +410,9 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
                         stop("Invalid chosen_group value. Use 'rna', 'smalldna', or 'largedna'."))
 
   change_label <- switch(chosen_group,
-                         "rna" = "Non-RNA-virus",
-                         "smalldna" = "Non-Small-DNA-Virus",
-                         "largedna" = "Non-Large-DNA-Virus")
+                         "rna" = "Non-RNA-viruses",
+                         "smalldna" = "Non-Small-DNA-Viruses",
+                         "largedna" = "Non-Large-DNA-Viruses")
   # if (all(grepl("^taxid:", file$ViralRefSeq_taxonomy))) {
   #   file <- VhgPreprocessTaxa(file,taxa_rank)
   # }

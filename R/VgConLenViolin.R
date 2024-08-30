@@ -22,7 +22,7 @@
 #'
 #' @param log10_scale (optinal): transform y-axis to log10 scale (default: TRUE).
 #'
-#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
 #' NULL sorts alphabetically.
 #'
 #' @param adjust_bw (optional): control the bandwidth of the kernel density estimator used to create the violin plot.
@@ -265,24 +265,34 @@ VgConLenViolin <- function(vg_file=vg_file,
 
 
   # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min", "median", "mean")
+  valid_criteria <- c("max", "min", "median", "mean","phylum")
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean,phylum.")
   }
 
 
 
-  p <- ggplot(vg_file,aes(x= if (!is.null(reorder_criteria)) {
-    reorder(.data$ViralRefSeq_taxonomy, .data$contig_len,
-            FUN = switch(reorder_criteria,
-                         "max" = max,
-                         "min" = min,
-                         "median" = median,
-                         "mean" = mean))
-  } else {
-    factor(.data$ViralRefSeq_taxonomy, levels = rev(unique(sort(.data$ViralRefSeq_taxonomy))))
-  },
-                          y=.data$contig_len,fill=.data$phyl))+
+
+
+
+
+  p <- ggplot(vg_file, aes(x = {
+    if (!is.null(reorder_criteria)) {
+      if (reorder_criteria == "phylum") {
+        ordered_levels <- rev(unique(.data$ViralRefSeq_taxonomy[order(.data$phyl)]))
+        factor(.data$ViralRefSeq_taxonomy, levels = ordered_levels)
+      } else {
+        reorder(.data$ViralRefSeq_taxonomy, .data$contig_len,
+                FUN = switch(reorder_criteria,
+                             "max" = max,
+                             "min" = min,
+                             "median" = median,
+                             "mean" = mean))
+      }
+    } else {
+      factor(.data$ViralRefSeq_taxonomy, levels = rev(unique(sort(.data$ViralRefSeq_taxonomy))))
+    }
+  }, y = .data$contig_len, fill = .data$phyl))+
     geom_violin(drop=FALSE,adjust=adjust_bw) +  # Create violin plot
     labs(x=xlabel,
          y=ylabel,

@@ -68,7 +68,7 @@ and "num_hits" are supported columns (default:"num_hits").}
 \item{cut}{(optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 with values larger than cutoff value in "ViralRefSeq_E" column.}
 
-\item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+\item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum').
 NULL sorts alphabetically.}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",

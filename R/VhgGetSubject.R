@@ -86,14 +86,14 @@ VhgGetSubject <- function(file,
   if(!is.null(group_unwanted_phyla)){
 
     valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                          "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                          "Lenarviricota","Negarnaviricota","Pisuviricota")
 
 
     valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                               "Lenarviricota","Negarnaviricota","Pisuviricota")
 
     valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                               "Lenarviricota","Negarnaviricota ","Pisuviricota","Artverviricota")
+                               "Lenarviricota","Negarnaviricota","Pisuviricota")
 
     chosen_list <- switch(group_unwanted_phyla,
                           "rna" = valid_phyla_rna,
@@ -102,9 +102,9 @@ VhgGetSubject <- function(file,
                           stop("Invalid group_unwanted_phyla value. Use 'rna', 'smalldna', or 'largedna'."))
 
     change_label <- switch(group_unwanted_phyla,
-                           "rna" = "Non-RNA-virus",
-                           "smalldna" = "Non-Small-DNA-Virus",
-                           "largedna" = "Non-Large-DNA-Virus")
+                           "rna" = "Non-RNA-viruses",
+                           "smalldna" = "Non-Small-DNA-Viruses",
+                           "largedna" = "Non-Large-DNA-Viruses")
 
 
 

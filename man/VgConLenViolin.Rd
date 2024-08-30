@@ -61,7 +61,7 @@ Supported ranks are:
 
 \item{log10_scale}{(optinal): transform y-axis to log10 scale (default: TRUE).}
 
-\item{reorder_criteria}{(optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
 NULL sorts alphabetically.}
 
 \item{adjust_bw}{(optional): control the bandwidth of the kernel density estimator used to create the violin plot.

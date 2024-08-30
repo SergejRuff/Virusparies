@@ -74,7 +74,7 @@ Supported ranks are:
 
 \item{cut_colour}{(optional): The color for the significance cutoff line (default: "#990000").}
 
-\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean').
+\item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
 NULL sorts alphabetically.}
 
 \item{theme_choice}{(optional): A character indicating the ggplot2 theme to apply. Options include "minimal",

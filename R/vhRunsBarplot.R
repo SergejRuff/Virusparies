@@ -16,7 +16,7 @@
 #' - "Genus" (including Subgenus)
 #' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5).
 #' Removes rows in file with values larger than cutoff value in "ViralRefSeq_E" column.
-#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum').
 #' NULL sorts alphabetically.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
@@ -247,7 +247,7 @@ VhgRunsBarplot <- function(file,
       "best_query"
     }
 
-    merge_phyl_values <- c("Non-RNA-virus", "Non-Small-DNA-Virus", "Non-Large-DNA-Virus")
+    merge_phyl_values <- c("Non-RNA-viruses", "Non-Small-DNA-Viruses", "Non-Large-DNA-Viruses")
 
     phyl <- "phyl"
     unique_SRA_run <-"unique_SRA_run"
@@ -306,9 +306,9 @@ VhgRunsBarplot <- function(file,
   }
 
   # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min")
+  valid_criteria <- c("max", "min","phylum")
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min,phylum.")
   }
 
   text_var_names <- c("none", "unique_SRA_run", "perc", "res")
@@ -331,11 +331,22 @@ VhgRunsBarplot <- function(file,
 
 
 
-  run_bar <- ggplot(data = sample_run,aes(x=if (!is.null(reorder_criteria)) {
-    reorder(.data[[groupby]], if (reorder_criteria == "max") .data$unique_SRA_run else -.data$unique_SRA_run)
-  } else {
-    factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
-  },y=.data$unique_SRA_run,fill= .data$phyl))+
+  run_bar <- ggplot(data = sample_run, aes(
+    x = if (!is.null(reorder_criteria)) {
+      if (reorder_criteria == "phylum") {
+        # Sort `groupby` levels alphabetically by `phyl`, and reverse the order
+        factor(.data[[groupby]], levels = rev(unique(.data[[groupby]][order(.data$phyl)])))
+      } else {
+        # Reorder `groupby` based on `unique_SRA_run` using the specified criteria
+        reorder(.data[[groupby]], if (reorder_criteria == "max") .data$unique_SRA_run else -.data$unique_SRA_run)
+      }
+    } else {
+      # Default ordering if no `reorder_criteria` is specified
+      factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
+    },
+    y = .data$unique_SRA_run,
+    fill = .data$phyl
+  ))+
     geom_bar(stat = "identity")+
     labs(title = title,
          x= xlabel,

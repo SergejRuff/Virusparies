@@ -23,7 +23,7 @@
 #' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in "ViralRefSeq_E" column.
 #'
-#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min').
+#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum').
 #' NULL sorts alphabetically.
 #'
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -263,7 +263,7 @@ VhSumHitsBarplot <- function(vh_file,
    cyl <- "cyl"
    res <- "res"
 
-   merge_phyl_values <- c("Non-RNA-virus", "Non-Small-DNA-Virus", "Non-Large-DNA-Virus")
+   merge_phyl_values <- c("Non-RNA-viruseses", "Non-Small-DNA-Viruseses", "Non-Large-DNA-Viruseses")
 
    vh_group <- vh_group %>%
      # Separate the data into those that should be aggregated and those that should not
@@ -308,9 +308,9 @@ VhSumHitsBarplot <- function(vh_file,
  }
 
  # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min")
+  valid_criteria <- c("max", "min","phylum")
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min,phylum.")
   }
 
   text_var_names <- c("none", "sum", "perc", "res")
@@ -335,11 +335,24 @@ VhSumHitsBarplot <- function(vh_file,
 
 
 
- sum_plot <- ggplot(data = vh_group,aes(x=if (!is.null(reorder_criteria)) {
-   reorder(.data[[groupby]], if (reorder_criteria == "max") .data$sum else -.data$sum)
- } else {
+
+
+ sum_plot <-   ggplot(data = vh_group, aes(
+   x = if (!is.null(reorder_criteria)) {
+     if (reorder_criteria == "phylum") {
+       # Sort `groupby` levels alphabetically by `phyl`, and reverse the order
+       factor(.data[[groupby]], levels = rev(unique(.data[[groupby]][order(.data$phyl)])))
+     } else {
+       # Reorder `groupby` based on `unique_SRA_run` using the specified criteria
+       reorder(.data[[groupby]], if (reorder_criteria == "max") .data$sum else -.data$sum)
+     }
+   } else {
+     # Default ordering if no `reorder_criteria` is specified
      factor(.data[[groupby]], levels = rev(unique(sort(.data[[groupby]]))))
- },y= .data$sum,fill=.data$phyl))+
+   },
+   y = .data$sum,
+   fill = .data$phyl
+ ))+
    geom_bar(stat = "identity")+
    labs(title = title,
         x = xlabel,
