@@ -24,7 +24,7 @@
 #' @param add_cutoff_line (optional): Whether to add a horizontal line based on `cut` for `"ViralRefSeq_E"` column (default: TRUE).
 #' @param cut_colour (optional): The color for the significance cutoff line (default: "#990000").
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
-#' NULL sorts alphabetically.
+#' NULL sorts alphabetically. You can also specify criteria with 'phylum_' prefix (e.g., 'phylum_median') to sort by phylum first and then by the specified statistic within each phylum.
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 #'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
@@ -133,6 +133,7 @@
 #'
 #' @import ggplot2
 #' @importFrom rlang .data as_string ensym
+#' @importFrom  stats aggregate
 #' @export
 VhgBoxplot <- function(file,
                               x_column ="best_query",
@@ -343,10 +344,12 @@ VhgBoxplot <- function(file,
 
 
 
-  # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min", "median", "mean","phylum")
+  # # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min", "median", "mean", "phylum", "phylum_max", "phylum_min", "phylum_median", "phylum_mean")
+
+  # Check if reorder_criteria is valid
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean, phylum.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean, phylum, phylum_max, phylum_min, phylum_median, phylum_mean.")
   }
 
 
@@ -379,12 +382,33 @@ VhgBoxplot <- function(file,
 
 
 
-
-
   boxp <- ggplot(file, aes(x = {
     if (!is.null(reorder_criteria)) {
       if (reorder_criteria == "phylum") {
         ordered_levels <- rev(unique(.data[[x_column]][order(.data$phyl)]))
+        factor(.data[[x_column]], levels = ordered_levels)
+      } else if (grepl("^phylum_", reorder_criteria)) {
+        # Extract the secondary criterion (e.g., "median" from "phylum_median")
+        secondary_criteria <- sub("^phylum_", "", reorder_criteria)
+
+        # Use aggregate to calculate the secondary criteria within each phylum
+        agg_data <- aggregate(y_aes, list(phylum = .data$phyl, x_val = .data[[x_column]]),
+                              FUN = switch(secondary_criteria,
+                                           "max" = max,
+                                           "min" = min,
+                                           "median" = median,
+                                           "mean" = mean))
+
+
+
+
+        agg_data$phylum <- factor(agg_data$phylum, levels = rev(sort(unique(agg_data$phylum))))
+
+
+        agg_data <- agg_data[order(agg_data$phylum, agg_data$x), ]
+
+
+        ordered_levels <- agg_data$x_val[order(agg_data$phylum, agg_data$x)]
         factor(.data[[x_column]], levels = ordered_levels)
       } else {
         reorder(.data[[x_column]], y_aes,
