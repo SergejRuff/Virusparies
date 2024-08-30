@@ -23,7 +23,7 @@
 #' @param log10_scale (optinal): transform y-axis to log10 scale (default: TRUE).
 #'
 #' @param reorder_criteria Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
-#' NULL sorts alphabetically.
+#' NULL sorts alphabetically. You can also specify criteria with 'phylum_' prefix (e.g., 'phylum_median') to sort by phylum first and then by the specified statistic within each phylum.
 #'
 #' @param adjust_bw (optional): control the bandwidth of the kernel density estimator used to create the violin plot.
 #' A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier (default: 1).
@@ -263,11 +263,12 @@ VgConLenViolin <- function(vg_file=vg_file,
 
 
 
+  # # Check for valid reorder_criteria
+  valid_criteria <- c("max", "min", "median", "mean", "phylum", "phylum_max", "phylum_min", "phylum_median", "phylum_mean")
 
-  # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min", "median", "mean","phylum")
+  # Check if reorder_criteria is valid
   if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean,phylum.")
+    stop("Invalid reorder_criteria. Please choose one of: max, min, median, mean, phylum, phylum_max, phylum_min, phylum_median, phylum_mean.")
   }
 
 
@@ -280,6 +281,29 @@ VgConLenViolin <- function(vg_file=vg_file,
     if (!is.null(reorder_criteria)) {
       if (reorder_criteria == "phylum") {
         ordered_levels <- rev(unique(.data$ViralRefSeq_taxonomy[order(.data$phyl)]))
+        factor(.data$ViralRefSeq_taxonomy, levels = ordered_levels)
+      }else if (grepl("^phylum_", reorder_criteria)) {
+        # Extract the secondary criterion (e.g., "median" from "phylum_median")
+        secondary_criteria <- sub("^phylum_", "", reorder_criteria)
+
+        # Use aggregate to calculate the secondary criteria within each phylum
+        agg_data <- aggregate(.data$contig_len, list(phylum = .data$phyl, x_val = .data$ViralRefSeq_taxonomy),
+                              FUN = switch(secondary_criteria,
+                                           "max" = max,
+                                           "min" = min,
+                                           "median" = median,
+                                           "mean" = mean))
+
+
+
+
+        agg_data$phylum <- factor(agg_data$phylum, levels = rev(sort(unique(agg_data$phylum))))
+
+
+        agg_data <- agg_data[order(agg_data$phylum, agg_data$x), ]
+
+
+        ordered_levels <- agg_data$x_val[order(agg_data$phylum, agg_data$x)]
         factor(.data$ViralRefSeq_taxonomy, levels = ordered_levels)
       } else {
         reorder(.data$ViralRefSeq_taxonomy, .data$contig_len,

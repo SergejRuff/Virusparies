@@ -62,7 +62,7 @@ Supported ranks are:
 \item{log10_scale}{(optinal): transform y-axis to log10 scale (default: TRUE).}
 
 \item{reorder_criteria}{Character string specifying the criteria for reordering the x-axis ('max', 'min', 'median'(Default),'mean','phylum').
-NULL sorts alphabetically.}
+NULL sorts alphabetically. You can also specify criteria with 'phylum_' prefix (e.g., 'phylum_median') to sort by phylum first and then by the specified statistic within each phylum.}
 
 \item{adjust_bw}{(optional): control the bandwidth of the kernel density estimator used to create the violin plot.
 A higher value results in a smoother plot by increasing the bandwidth, while a lower value can make the plot more detailed but potentially noisier (default: 1).}
