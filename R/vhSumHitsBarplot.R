@@ -23,7 +23,7 @@
 #' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
 #' with values larger than cutoff value in "ViralRefSeq_E" column.
 #'
-#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum').
+#' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum',phylum_max,phylum_min).
 #' NULL sorts alphabetically.
 #'
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
@@ -308,10 +308,10 @@ VhSumHitsBarplot <- function(vh_file,
  }
 
  # Check for valid reorder_criteria
-  valid_criteria <- c("max", "min","phylum")
-  if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
-    stop("Invalid reorder_criteria. Please choose one of: max, min,phylum.")
-  }
+ valid_criteria <- c("max", "min","phylum","phylum_max","phylum_min")
+ if (!is.null(reorder_criteria) && !(reorder_criteria %in% valid_criteria)) {
+   stop("Invalid reorder_criteria. Please choose one of: max, min,phylum,phylum_max,phylum_min.")
+ }
 
   text_var_names <- c("none", "sum", "perc", "res")
 
@@ -342,6 +342,28 @@ VhSumHitsBarplot <- function(vh_file,
      if (reorder_criteria == "phylum") {
        # Sort `groupby` levels alphabetically by `phyl`, and reverse the order
        factor(.data[[groupby]], levels = rev(unique(.data[[groupby]][order(.data$phyl)])))
+     }else if (grepl("^phylum_", reorder_criteria)) {
+       # Extract the secondary criterion (e.g., "median" from "phylum_median")
+       secondary_criteria <- sub("^phylum_", "", reorder_criteria)
+
+       # Use aggregate to calculate the secondary criteria within each phylum
+       agg_data <- aggregate(.data$sum, list(phylum = .data$phyl, x_val = .data[[groupby]]),
+                             FUN = switch(secondary_criteria,
+                                          "max" = max,
+                                          "min" = min))
+
+
+
+
+       agg_data$phylum <- factor(agg_data$phylum, levels = rev(sort(unique(agg_data$phylum))))
+
+
+       agg_data <- agg_data[order(agg_data$phylum, agg_data$x), ]
+
+
+
+       ordered_levels <- agg_data$x_val[order(agg_data$phylum, if (secondary_criteria == "max") agg_data$x else -agg_data$x)]
+       factor(.data[[groupby]], levels = ordered_levels)
      } else {
        # Reorder `groupby` based on `unique_SRA_run` using the specified criteria
        reorder(.data[[groupby]], if (reorder_criteria == "max") .data$sum else -.data$sum)
