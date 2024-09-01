@@ -4,7 +4,7 @@
 #'
 #' @param vh_file A data frame containing VirusHunter hittables.
 #' @param group column to group stats by
-#' @param ycol column, which specifies identity or evalue.
+#' @param ycol column, which specifies sequence identity or evalue.
 #'
 #' @return A data frame containing summary statistics including median,
 #' Q1 (1st quartile), Q3 (3rd quartile), minimum, and maximum values for each virus group

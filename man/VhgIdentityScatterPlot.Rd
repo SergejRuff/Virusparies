@@ -13,7 +13,7 @@ VhgIdentityScatterPlot(
   contiglen_breaks = 5,
   theme_choice = "linedraw",
   cut_colour = "#990000",
-  title = "Scatterplot of viral reference E-values and identity",
+  title = "Scatterplot of viral reference E-values and sequence identity",
   title_size = 16,
   title_face = "bold",
   title_colour = "#2a475e",
@@ -21,7 +21,7 @@ VhgIdentityScatterPlot(
   subtitle_size = 12,
   subtitle_face = "bold",
   subtitle_colour = "#1b2838",
-  xlabel = "Viral reference identity (\%)",
+  xlabel = "Viral reference sequence identity (\%)",
   ylabel = "-log10 of viral reference E-values",
   axis_title_size = 12,
   xtext_size = 10,
@@ -69,7 +69,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{cut_colour}{(optional): The color for the horizontal cutoff line (default: "#990000").}
 
-\item{title}{(optional): The title of the plot (default: "Scatterplot of viral reference E-values and identity").}
+\item{title}{(optional): The title of the plot (default: "Scatterplot of viral reference E-values and sequence identity").}
 
 \item{title_size}{(optional): The size of the title text (default: 16).}
 
@@ -85,7 +85,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 
 \item{subtitle_colour}{(optional): The color of the subtitle text (default: "#1b2838").}
 
-\item{xlabel}{(optional): The label for the x-axis (default: "Viral reference identity (\%)").}
+\item{xlabel}{(optional): The label for the x-axis (default: "Viral reference sequence identity (\%)").}
 
 \item{ylabel}{(optional): The label for the y-axis (default: "-log10 of viral reference E-values").}
 
@@ -135,7 +135,7 @@ VhgIdentityScatterPlot generates a scatter plot of viral refSeq identity vs. -lo
 It colors the points based on  phylum  and adds a horizontal line representing the cutoff value.
 }
 \details{
-VhgIdentityScatterPlot generates a scatter plot for refseq identity vs -log10 of refseq E-value.
+VhgIdentityScatterPlot generates a scatter plot for refseq sequence identity vs -log10 of refseq E-value.
 It accepts both VirusHunter and VirusGatherer hittables as input.
 The plot includes:
 \itemize{

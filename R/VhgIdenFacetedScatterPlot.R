@@ -26,7 +26,7 @@
 #' @param theme_choice (optional): A character indicating the ggplot2 theme to apply. Options include "minimal",
 #'  "classic", "light", "dark", "void", "grey" (or "gray"), "bw", "linedraw" (default), and "test".
 #'  Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_dotted").
-#' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference E-values and identity").
+#' @param title (optional):  The title of the plot (default: "Faceted scatter plot of viral reference E-values and sequence identity").
 #' @param title_size (optional):  The size of the title text (default: 16).
 #' @param title_face (optional):  The face (bold, italic, etc.) of the title text (default: "bold").
 #' @param title_colour (optional):  The color of the title text (default: "#2a475e").
@@ -34,7 +34,7 @@
 #' @param subtitle_size (optional):  The size of the subtitle text (default: 12).
 #' @param subtitle_face (optional):  The face (bold, italic, etc.) of the subtitle text (default: "bold").
 #' @param subtitle_colour (optional):  The color of the subtitle text (default: "#1b2838").
-#' @param xlabel (optional):  The label for the x-axis (default: "Viral reference identity (%)").
+#' @param xlabel (optional):  The label for the x-axis (default: "Viral reference sequence identity (%)").
 #' @param ylabel (optional):  The label for the y-axis (default: "-log10 of viral reference E-values").
 #' @param axis_title_size (optional):  The size of the axis titles (default: 12).
 #' @param xtext_size (optional):  The size of the x-axis text (default: 10).
@@ -148,7 +148,7 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      conlen_bubble_plot = FALSE,
                                      contiglen_breaks = 5,
                                      theme_choice = "linedraw",
-                                     title="Faceted scatterplot of viral reference E-values and identity",
+                                     title="Faceted scatterplot of viral reference E-values and sequence identity",
                                      title_size = 16,
                                      title_face = "bold",
                                      title_colour = "#2a475e",
@@ -156,7 +156,7 @@ VhgIdenFacetedScatterPlot <- function(file,
                                      subtitle_size = 12,
                                      subtitle_face = "bold",
                                      subtitle_colour = "#1b2838",
-                                     xlabel = "Viral reference identity (%)",
+                                     xlabel = "Viral reference sequence identity (%)",
                                      ylabel = "-log10 of viral reference E-values",
                                      axis_title_size = 12,
                                      xtext_size = 10,

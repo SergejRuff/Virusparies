@@ -289,7 +289,7 @@ VhgBoxplot <- function(file,
     y_column,
     "ViralRefSeq_E" = "Boxplot of viral reference E-values for each group",
     "contig_len" = "Boxplot of contig length for each group",
-    "ViralRefSeq_ident" = "Boxplot of viral reference identity for each group"
+    "ViralRefSeq_ident" = "Boxplot of reference sequence identity for each group"
   )
 
 

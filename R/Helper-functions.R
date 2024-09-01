@@ -28,9 +28,9 @@ is_file_empty <- function(file) {
 #' @noRd
 plot_boxplot_message <- function(y_column, x_column, cutoff) {
   messages <- list(
-    "ViralRefSeq_E" = paste0("boxplot plotting RefSeq evalues for specified groups (", x_column, ")\nusing the following cut off: ", cutoff),
-    "ViralRefSeq_ident" = paste0("boxplot plotting RefSeq Identity for specified groups (", x_column, ")"),
-    "contig_len" = paste0("boxplot plotting contig length for specified groups (", x_column, ")")
+    "ViralRefSeq_E" = paste0("Boxplot plotting reference sequence E-values for specified groups (", x_column, ")\nusing the following cut off: ", cutoff),
+    "ViralRefSeq_ident" = paste0("Boxplot plotting reference sequence identity for specified groups (", x_column, ")"),
+    "contig_len" = paste0("Boxplot plotting contig length for specified groups (", x_column, ")")
   )
 
   if (y_column %in% names(messages)) {
@@ -213,7 +213,7 @@ vhg_filter_belowthresholdboxplot <- function(vh_file,cut){
 get_plot_parameters <- function(y_column, cut) {
   params <- list(
     ViralRefSeq_E = list(cutoff = -log10(cut), ylabel = "-log10 of viral reference E-values"),
-    ViralRefSeq_ident = list(cutoff = NULL, ylabel = "Viral reference identity (%)"),
+    ViralRefSeq_ident = list(cutoff = NULL, ylabel = "Reference sequence identity (%)"),
     contig_len = list(cutoff = NULL, ylabel = "Contig length (nt)")
   )
 
