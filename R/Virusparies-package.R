@@ -60,6 +60,8 @@
 #' \strong{Utils}:
 #' \itemize{
 #'   \item \code{\link{CombineHittables}}: Combine hittables.
+#'   \item \code{\link{Current_ICTV}}: Verify the version of ICTV data currently in use.
+#'   \item \code{\link{New_ICTV}}: Assign Custom ICTV Data for Use in Virusparies.
 #'   \item \code{\link{SummarizeViralStats}}: Generate summary stats outside of plot functions.
 #'   \item \code{\link{VhgAddPhylum}}: Extract phylum information.
 #'   \item \code{\link{VhgGetSubject}}: Process and Count Viral Subjects within Groups.

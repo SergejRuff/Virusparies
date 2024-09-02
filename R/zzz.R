@@ -24,3 +24,5 @@
                         " of ", pkgname,".")
 }
 
+# Declare global variables
+utils::globalVariables(c("ICTV_env"))

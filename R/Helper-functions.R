@@ -338,9 +338,23 @@ facet_plot <- function(plot,facet_ncol=FALSE,flip_coords=TRUE){
 #' @noRd
 format_ICTV <- function(taxa_rank){
 
+  # Check if ICTV_env exists and is an environment
+  if (exists("ICTV_env") && is.environment(ICTV_env) && exists("new_ICTV_data", envir = ICTV_env)) {
+
+    # Assign new_ICTV_data to df from ICTV_env
+    df <- get("new_ICTV_data", envir = ICTV_env)
+
+    message("Warning: User-defined ICTV data is being used in place of the internal default ICTV data.")
+
+  } else {
+
+    # Assign ICTV_data to df
+    df <- ICTV_data
+  }
 
 
-  return(ICTV_data %>%
+
+  return(df %>%
             select(.data$Phylum:.data$Subgenus) %>%
             pivot_longer(.data$Subphylum:.data$Subgenus, names_to = "level", values_to = "name") %>%
             filter(str_detect(.data$name, paste0("\\w+", taxa_rank), negate = TRUE)) %>%
@@ -451,4 +465,148 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
 }
 
 
+#' @title New_ICTV: Assign Custom ICTV Data for Use in Virusparies
+#'
+#' @description
+#' New_ICTV enables users to define their own ICTV data for use in Virusparies.
+#'
+#'
+#' @param new_ICTV_data data frame containing new ICTV data.
+#'
+#' @return An `ICTV_env` object containing the user-defined ICTV data
+#'
+#' @details
+#' Virusparies utilizes the ICTV taxonomy data set for two main purposes:
+#' 1. Assigning the appropriate taxonomy rank via VhgPreprocessTaxa and related functions.
+#' 2. In plotting functions, the ICTV data set is used to assign colors based on phylum.
+#'
+#' `New_ICTV` enables users to define and load their own ICTV data for use in Virusparies.
+#' This feature is useful for those who wish to use a subset of ICTV data to speed up functions
+#' such as \code{\link{VhgPreprocessTaxa}}, or for users who want to incorporate a newer or older version of
+#' ICTV data within Virusparies.
+#' The custom ICTV data is stored in a new environment, which means it does not overwrite the
+#' internal data. Instead, users need to apply this function each time they start a new R session
+#' to load their custom dataset.
+#'
+#' @examples
+#' # Define example data
+#'
+#' # Sample data
+#' Example_ICTV <- data.frame(
+#'Phylum = c("Taleaviricota", "Taleaviricota", "Taleaviricota", "Taleaviricota",
+#'"Taleaviricota"),Subphylum = c(NA, NA, NA, NA, NA),
+#' Class = c("Tokiviricetes", "Tokiviricetes", "Tokiviricetes", "Tokiviricetes",
+#' "Tokiviricetes"),
+#' Subclass = c(NA, NA, NA, NA, NA),
+#' Order = c("Ligamenvirales", "Ligamenvirales", "Ligamenvirales", "Ligamenvirales",
+#' "Ligamenvirales"),
+#' Suborder = c(NA, NA, NA, NA, NA),
+#' Family = c("Lipothrixviridae", "Lipothrixviridae", "Lipothrixviridae",
+#' "Lipothrixviridae", "Lipothrixviridae"),
+#' Subfamily = c(NA, NA, NA, NA, NA),
+#' Genus = c("Alphalipothrixvirus", "Alphalipothrixvirus",
+#' "Betalipothrixvirus", "Betalipothrixvirus", "Betalipothrixvirus"),
+#' Subgenus = c(NA, NA, NA, NA, NA),
+#' stringsAsFactors = FALSE)
+#'
+#' \dontrun{
+#' # Assign new example ICTV data for use in Virusparies
+#' New_ICTV(Example_ICTV)
+#' # check currently used ICTV data in Virusparies
+#' Current_ICTV()
+#'
+#' }
+#'
+#'
+#'
+#'
+#' @author Sergej Ruff
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#' @export
+New_ICTV <- function(new_ICTV_data=NULL){
+
+  pos <- 0
+
+
+
+  check_is_dataframe(new_ICTV_data)
+
+  # Define the required columns
+  required_columns <- c("Phylum", "Subphylum", "Class", "Subclass",
+                        "Order", "Suborder", "Family", "Subfamily",
+                        "Genus", "Subgenus")
+
+  # Check if all required columns are present
+  missing_columns <- setdiff(required_columns, colnames(new_ICTV_data))
+
+  if (length(missing_columns) > 0) {
+    stop("new_ICTV_data is missing the following required columns: ",
+         paste(missing_columns, collapse = ", "))
+  }
+
+  ICTV_env <- new.env()
+
+  assign("new_ICTV_data",new_ICTV_data,envir = ICTV_env)
+
+  if(!is.null(new_ICTV_data)){
+
+    pos <- 1
+
+    assign("ICTV_env", ICTV_env, envir = as.environment(pos))
+
+  }
+
+
+}
+
+
+#' @title Current_ICTV: Verify the version of ICTV data currently in use.
+#'
+#' @description
+#' Displays the entire ICTV data object currently used by Virusparies.
+#'
+#'
+#' @return data frame with the currently used ICTV data
+#'
+#' @details
+#' Virusparies utilizes the ICTV taxonomy data set for two main purposes:
+#' 1. Assigning the appropriate taxonomy rank via VhgPreprocessTaxa and related functions.
+#' 2. In plotting functions, the ICTV data set is used to assign colors based on phylum.
+#'
+#' Current_ICTV allows users to inspect the current ICTV data object used by Virusparies.
+#' It also enables users to check if their custom version of the ICTV data,
+#' provided by the \code{\link{New_ICTV}}, is loaded.
+#'
+#' @examples
+#'
+#' internal_ICTV <- Current_ICTV()
+#'
+#' str(internal_ICTV)
+#'
+#'
+#' @author Sergej Ruff
+#' @seealso
+#' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
+#' @export
+Current_ICTV <- function(){
+
+  # Check if ICTV_env exists and is an environment
+  if (exists("ICTV_env") && is.environment(ICTV_env) && exists("new_ICTV_data", envir = ICTV_env)) {
+
+    message("Currently, the User-defined ICTV data is being used.")
+
+    # Assign new_ICTV_data to df from ICTV_env
+    df <- get("new_ICTV_data", envir = ICTV_env)
+
+  } else {
+
+    message("Currently, the internal ICTV data is being used.")
+
+    # Assign ICTV_data to df
+    df <- ICTV_data
+  }
+
+  return(df)
+}
 

@@ -31,14 +31,28 @@ consistentColourPalette <- function(vh_file = vh_file, groupby = "best_query",ta
     unclassified = "#a9a9a9"
   )
 
+  # Check if ICTV_env exists and is an environment
+  if (exists("ICTV_env") && is.environment(ICTV_env) && exists("new_ICTV_data", envir = ICTV_env)) {
+
+    # Assign new_ICTV_data to df from ICTV_env
+    ICTV_df <- get("new_ICTV_data", envir = ICTV_env)
+
+    message("Warning: User-defined ICTV data is being used in place of the internal default ICTV data.")
+
+  } else {
+
+    # Assign ICTV_data to df
+    ICTV_df <- ICTV_data
+  }
+
 
 
   # Split the data frame by the 'Phylum' column
-  ICTV_data_split <- split(ICTV_data, ICTV_data$Phylum)
+  ICTV_data_split <- split(ICTV_df, ICTV_df$Phylum)
 
   # Initialize family colors vector
-  family_colors_vector <- character(length = length(unique(ICTV_data[[taxa_rank]])))
-  names(family_colors_vector) <- unique(ICTV_data[[taxa_rank]])
+  family_colors_vector <- character(length = length(unique(ICTV_df[[taxa_rank]])))
+  names(family_colors_vector) <- unique(ICTV_df[[taxa_rank]])
 
   phylum_mapping <- list()
 
