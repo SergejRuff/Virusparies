@@ -11,12 +11,13 @@
 #' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
 #' Valid values are:
 #' \describe{
-#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
-#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
-#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses.}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses.}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses.}
+#'   \item{"others"}{Retain only the phyla that match small DNA, Large DNA and RNA viruses.}
 #' }
 #' All other phyla not in the specified group will be grouped into a single category:
-#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`,"Non-Large-DNA-Virus" for `"largedna"`,or "Other Viruses" for `"others"`.
 #'
 #' @details
 #' The function `VhgGetSubject` counts the number of viral subjects in the `ViralRefSeq_subject` column
@@ -85,49 +86,23 @@ VhgGetSubject <- function(file,
 
   if(!is.null(group_unwanted_phyla)){
 
-    valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                          "Lenarviricota","Negarnaviricota","Pisuviricota")
+    if(groupby == "best_query"){
+      taxa_rank <- "Family"
+    }else{
 
+      taxa_rank <- get_most_common_taxonomic_rank(file[[groupby]])
 
-    valid_phyla_smalldna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                               "Lenarviricota","Negarnaviricota","Pisuviricota")
+    }
 
-    valid_phyla_largedna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
-                               "Lenarviricota","Negarnaviricota","Pisuviricota")
-
-    chosen_list <- switch(group_unwanted_phyla,
-                          "rna" = valid_phyla_rna,
-                          "smalldna" = valid_phyla_smalldna,
-                          "largedna" = valid_phyla_largedna,
-                          stop("Invalid group_unwanted_phyla value. Use 'rna', 'smalldna', or 'largedna'."))
-
-    change_label <- switch(group_unwanted_phyla,
-                           "rna" = "Non-RNA-viruses",
-                           "smalldna" = "Non-Small-DNA-Viruses",
-                           "largedna" = "Non-Large-DNA-Viruses")
-
-
-
-    file <- VhgAddPhylum(file,"ViralRefSeq_taxonomy")
-
-    # Modify the dataframe
+    file <- VhgAddPhylum(file,groupby)
     file <- file %>%
-      mutate(
-        !!sym(groupby) := case_when(
-          Phylum == "unclassified" ~ !!sym(groupby),
-          grepl(paste0(chosen_list, collapse = "|"), .data$Phylum, ignore.case = TRUE) ~ !!sym(groupby),
-          TRUE ~ change_label
-        )
-      )
+      rename(phyl = .data$Phylum)
 
-    file <- file %>%
-      mutate(
-        Phylum = case_when(
-          Phylum == "unclassified" ~ "unclassified",  # Keep as unclassified
-          grepl(paste0(chosen_list, collapse = "|"), Phylum, ignore.case = TRUE) ~ Phylum,  # Keep original value for valid phyla
-          TRUE ~ change_label  # Change to label if not in chosen_list
-        )
-      )
+
+    group_unphyla <- remove_non_group(file=file,groupby=groupby,chosen_group=group_unwanted_phyla,label_vector=NULL,
+                                      taxa_rank=taxa_rank)
+
+    file <- group_unphyla$file
 
   }
 

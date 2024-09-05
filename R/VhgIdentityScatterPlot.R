@@ -50,12 +50,13 @@
 #' @param group_unwanted_phyla (optional): A character string specifying which group of viral phyla to retain in the analysis.
 #' Valid values are:
 #' \describe{
-#'   \item{"rna"}{Retain only the phyla specified for RNA viruses (`valid_phyla_rna`).}
-#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses (`valid_phyla_smalldna`).}
-#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses (`valid_phyla_largedna`).}
+#'   \item{"rna"}{Retain only the phyla specified for RNA viruses.}
+#'   \item{"smalldna"}{Retain only the phyla specified for small DNA viruses.}
+#'   \item{"largedna"}{Retain only the phyla specified for large DNA viruses.}
+#'   \item{"others"}{Retain only the phyla that match small DNA, Large DNA and RNA viruses.}
 #' }
 #' All other phyla not in the specified group will be grouped into a single category:
-#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`, or "Non-Large-DNA-Virus" for `"largedna"`.
+#' "Non-RNA-virus" for `"rna"`, "Non-Small-DNA-Virus" for `"smalldna"`,"Non-Large-DNA-Virus" for `"largedna"`,or "Other Viruses" for `"others"`.
 #'
 #'
 #' @details

@@ -407,6 +407,7 @@ adjust_plot_angles <- function(plot, x_angle = NULL, y_angle = NULL) {
 #' @noRd
 remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
 
+
   valid_phyla_rna <-  c("Ambiviricota","Duplornaviricota","Kitrinoviricota",
                         "Lenarviricota","Negarnaviricota","Pisuviricota")
 
@@ -417,17 +418,21 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
   valid_phyla_largedna <-  c("Taleaviricota", "Nucleocytoviricota", "Preplasmiviricota",
                               "Dividoviricota", "Peploviricota", "Uroviricota")
 
+  all_phyla <- c(valid_phyla_rna, valid_phyla_smalldna, valid_phyla_largedna)
+
   # Add families to exclude for each group
 
   if(groupby == "best_query"){
     families_rna <- c("^Birna", "^Permutotetra")
     families_smalldna <- c("^Anello")
     families_largedna <- c("^Yara")
+    other <- c("^Yara","^Anello","^Birna","^Permutotetra")
 
   }else{
     families_rna <- c("Birnaviridae", "Permutotetraviridae")
     families_smalldna <- c("Anelloviridae")
     families_largedna <- c("Yaraviridae")
+    other <- c("Yaraviridae","Anelloviridae","Birnaviridae","Permutotetraviridae")
 
   }
 
@@ -436,71 +441,98 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
                         "rna" = valid_phyla_rna,
                         "smalldna" = valid_phyla_smalldna,
                         "largedna" = valid_phyla_largedna,
-                        stop("Invalid chosen_group value. Use 'rna', 'smalldna', or 'largedna'."))
+                        "others" = NULL,
+                        stop("Invalid chosen_group value. Use 'rna', 'smalldna', 'largedna', or 'others'."))
 
 
   change_label <- switch(chosen_group,
                          "rna" = "Non-RNA-viruses",
                          "smalldna" = "Non-Small-DNA-Viruses",
-                         "largedna" = "Non-Large-DNA-Viruses")
+                         "largedna" = "Non-Large-DNA-Viruses",
+                         "others" = "Other Viruses")
 
 
 
 
-
-
-  # Step 1: Initial categorization based on `phyl`
-  file <- file %>%
-    mutate(
-      !!sym(groupby) := case_when(
-        phyl == "unclassified" ~ !!sym(groupby),
-        grepl(paste0(chosen_list, collapse = "|"), .data$phyl, ignore.case = TRUE) ~ !!sym(groupby),
-        TRUE ~ change_label
-      )
-    )
-
-  file <- file %>%
-    mutate(
-      phyl = case_when(
-        phyl == "unclassified" ~ "unclassified",  # Keep as unclassified
-        grepl(paste0(chosen_list, collapse = "|"), phyl, ignore.case = TRUE) ~ phyl,  # Keep original value for valid phyla
-        TRUE ~ change_label  # Change to label if not in chosen_list
-      )
-    )
-
-  # Step 2: Reclassify virus families and adjust `phyl` column
   non_group_families <- switch(chosen_group,
-                               "rna" = c(families_smalldna, families_largedna),
-                               "smalldna" = c(families_rna, families_largedna),
-                               "largedna" = c(families_rna, families_smalldna))
-
+                               "rna" = families_rna,
+                               "smalldna" = families_smalldna,
+                               "largedna" = families_largedna)
 
   file <- file %>%
     mutate(
       phyl = case_when(
-        grepl(paste0(non_group_families, collapse = "|"), !!sym(groupby), ignore.case = TRUE) ~ change_label,
+        grepl(paste0(non_group_families, collapse = "|"), !!sym(groupby), ignore.case = TRUE) ~ phyl,
+        phyl == "unclassified" & !!sym(groupby) != "unclassified" ~ change_label,
         TRUE ~ phyl
       ),
       !!sym(groupby) := case_when(
-        grepl(paste0(non_group_families, collapse = "|"), !!sym(groupby), ignore.case = TRUE) ~ change_label,
+        grepl(paste0(non_group_families, collapse = "|"), !!sym(groupby), ignore.case = TRUE) ~ !!sym(groupby),
+        phyl == "unclassified" & !!sym(groupby) != "unclassified" ~ change_label,
         TRUE ~ !!sym(groupby)
       )
     )
 
-  print(table(file$phyl))
+
+  # Step 2: Handle the 'others' category
+  if (is.null(chosen_list)) {
+    file <- file %>%
+      mutate(!!sym(groupby) := case_when(
+        !phyl %in% c(valid_phyla_rna, valid_phyla_smalldna, valid_phyla_largedna) ~ change_label,
+        TRUE ~ !!sym(groupby)
+      ),
+        phyl = case_when(
+          !phyl %in% c(valid_phyla_rna, valid_phyla_smalldna, valid_phyla_largedna) ~ change_label,
+          TRUE ~ phyl
+        )
+
+      )
+
+  } else {
+    file <- file %>%
+      mutate(
+        !!sym(groupby) := case_when(
+          phyl == "unclassified" ~ !!sym(groupby),
+          grepl(paste0(chosen_list, collapse = "|"), .data$phyl, ignore.case = TRUE) ~ !!sym(groupby),
+          TRUE ~ change_label
+        ),
+        phyl = case_when(
+          phyl == "unclassified" ~ "unclassified",
+          grepl(paste0(chosen_list, collapse = "|"), phyl, ignore.case = TRUE) ~ phyl,
+          TRUE ~ change_label
+        )
+      )
+  }
 
 
 
 
+ if(!is.null(label_vector)){
+
+   # Filter label_vector based on chosen_group
+   selected_phyla <- if (chosen_group == "others") {
+     all_phyla
+   } else {
+     chosen_list
+   }
+
+   label_vector <- label_vector[names(label_vector) %in% c(selected_phyla, "unclassified")]
+
+   print(label_vector)
+
+   # Add the "Non-RNA-virus" entry with the color black
+   label_vector[change_label] <- "#000000"
+
+   return(list(file =file,label=label_vector))
 
 
-  # Filter out entries that are not in the valid phyla list, excluding "unclassified"
-  label_vector <- label_vector[names(label_vector) %in% c(chosen_list, "unclassified")]
+ }else{
 
-  # Add the "Non-RNA-virus" entry with the color black
-  label_vector[change_label] <- "#000000"
+   return(list(file =file))
+ }
 
-  return(list(file =file,label=label_vector))
+
+
 
 
 }
