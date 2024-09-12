@@ -518,7 +518,7 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
 
    label_vector <- label_vector[names(label_vector) %in% c(selected_phyla, "unclassified")]
 
-   print(label_vector)
+   # print(label_vector)
 
    # Add the "Non-RNA-virus" entry with the color black
    label_vector[change_label] <- "#000000"

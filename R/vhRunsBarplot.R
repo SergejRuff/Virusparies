@@ -256,6 +256,8 @@ VhgRunsBarplot <- function(file,
     cyl <- "cyl"
     res <- "res"
 
+    max_unique_values <- length(unique(file[[1]]))
+
     sample_run <- sample_run %>%
       # Separate the data into those that should be aggregated and those that should not
       mutate(merge_flag = if_else(phyl %in% merge_phyl_values, "Merge", "Keep")) %>%
@@ -265,10 +267,10 @@ VhgRunsBarplot <- function(file,
       group_by(!!sym(best_query_col), phyl) %>%  # Keep 'phyl' in group_by to retain original values
       summarize(
         !!sym(best_query_col) := paste(unique(!!sym(best_query_col)), collapse = ", "),
-        unique_SRA_run = sum(!!sym(unique_SRA_run)),
+        unique_SRA_run = min(sum(!!sym(unique_SRA_run)), max_unique_values),
         perc = paste0(
           round(
-            sum(as.numeric(gsub("%", "", !!sym(perc))) * !!sym(unique_SRA_run)) / sum(!!sym(unique_SRA_run)),
+            (min(sum(!!sym(unique_SRA_run)), max_unique_values) / max_unique_values)*100,
             2
           )
         ),
