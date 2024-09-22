@@ -1,5 +1,5 @@
 Package: Virusparies
-Title: Virusparies designed for visualizing output from VirusHunterGatherer
+Title: Visualize and Process Output from 'VirusHunterGatherer'
 Version: 1.0.0
 Authors@R: 
     c(
@@ -9,11 +9,8 @@ Authors@R:
            comment = c(ORCID = "0000-0002-2265-2953")),
     person("Chong", "Li Chuin",email = "lichuin.chong@twincore.de", role = "ctb",
            comment = c(ORCID = "0000-0002-3574-1365")))
-Author: Sergej Ruff [aut, cre],
-  Chris Lauber [ctb],
-  Li Chuin Chong [ctb]
-Maintainer: Sergej Ruff <serijnh@gmail.com>  
-Description: Virusparies contains a collection of Data Visualisations for VirusHunterGatherer output.
+Maintainer: Ruff Sergej <serijnh@gmail.com>  
+Description: Contains a collection of Data Visualisations for 'VirusHunterGatherer' output.
 License: GPL (>= 3)
 URL: https://github.com/SergejRuff/Virusparies, https://github.com/lauberlab/VirusHunterGatherer
 BugReports: https://github.com/SergejRuff/Virusparies/issues
