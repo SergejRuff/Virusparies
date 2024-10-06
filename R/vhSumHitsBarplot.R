@@ -39,7 +39,7 @@
 #' @param title_colour (optional): The color of the title text (default: "#2a475e").
 #'
 #' @param subtitle (optional): A character specifying the subtitle of the plot.
-#' Default is "total number of hits: " followed by the calculated number.empty string ("") removes subtitle.
+#' Default is "total number of hits/micro-contigs: " followed by the calculated number.empty string ("") removes subtitle.
 #'
 #' @param subtitle_size (optional): Numeric specifying the size of the subtitle text(default: 12).
 #' @param subtitle_face (optional): A character specifying the font face for the subtitle text (default: "bold").
@@ -214,16 +214,26 @@ VhSumHitsBarplot <- function(vh_file,
    #message("Skipping VhgBoxplot generation due to empty data.")
    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
  }
+
+
  vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby,y_column)
 
  # Apply the selected theme
  theme_selected <- select_theme(theme_choice)
 
+ if(y_column == "ViralRefSeq_contigs"){
+
+   micro_contig_or_reads <- "micro-contigs"
+ }else{
+
+   micro_contig_or_reads <- "reads"
+ }
+
 
 
  # Set the subtitle based on the input
  if (!is.null(subtitle) && subtitle == "default") {
-   subtitle_text <- paste0("Total number of hits: ", sum(vh_group$sum))
+   subtitle_text <- paste0("Total number of ",micro_contig_or_reads,": ", sum(vh_group$sum))
  } else if (is.null(subtitle) || subtitle == "") {
    subtitle_text <- NULL
  } else {

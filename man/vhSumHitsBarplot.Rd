@@ -86,7 +86,7 @@ Append "_dotted" to any theme to add custom dotted grid lines (e.g., "classic_do
 \item{title_colour}{(optional): The color of the title text (default: "#2a475e").}
 
 \item{subtitle}{(optional): A character specifying the subtitle of the plot.
-Default is "total number of hits: " followed by the calculated number.empty string ("") removes subtitle.}
+Default is "total number of hits/micro-contigs: " followed by the calculated number.empty string ("") removes subtitle.}
 
 \item{subtitle_size}{(optional): Numeric specifying the size of the subtitle text(default: 12).}
 
