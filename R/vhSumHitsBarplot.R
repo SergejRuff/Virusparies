@@ -1,10 +1,10 @@
-#' @title VhSumHitsBarplot: Generate a bar plot showing the sum of reads/contigs for each virus family
+#' @title VhgSumHitsBarplot: Generate a bar plot showing the sum of reads/contigs for each virus family
 #'
 #' @description
-#' VhSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of reads/contigs
+#' VhgSumHitsBarplot preprocesses virus data for plotting and generates a bar plot showing the sum of reads/contigs
 #' for each virus family from the input data set.
 #'
-#' @param vh_file A data frame containing VirusHunters hittable results.
+#' @param file A data frame containing VirusHunters hittable results.
 #'
 #' @param groupby (optional): A character specifying the column containing the groups (default: "best_query").
 #'
@@ -18,9 +18,9 @@
 #' - "Family" (default)
 #' - "Subfamily"
 #' - "Genus" (including Subgenus)
-#' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_contigs"
-#'  and "num_hits" are supported columns (default:"num_hits").
-#' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in vh_file
+#' @param y_column A character specifying the column containing the values to be compared. Currently "ViralRefSeq_contigs" (micro-contigs),"contigs",
+#'  and "num_hits" (reads) are supported columns (default:"num_hits").
+#' @param cut (optional): A numeric value representing the cutoff for the refseq E-value (default: 1e-5). Removes rows in file
 #' with values larger than cutoff value in "ViralRefSeq_E" column.
 #'
 #' @param reorder_criteria (optional): Character string specifying the criteria for reordering the x-axis ('max' (default), 'min','phylum',phylum_max,phylum_min).
@@ -85,9 +85,9 @@
 #'
 #'
 #' @details
-#' VhSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
+#' VhgSumHitsBarplot preprocesses virus data for plotting by calculating the sum of
 #' hits for each virus family from the input data set (accepts only VirusHunter hittables).
-#' It then generates a bar plot showing the sum of hits/contigs for each virus family.
+#' It then generates a bar plot showing the sum of hits for each virus family.
 #' Additionally, it returns the processed data for further analysis.
 #'
 #' @return A list containing the generated bar plot and processed data.
@@ -95,30 +95,26 @@
 #' @author Sergej Ruff
 #' @examples
 #' path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
-#' vh_file <- ImportVirusTable(path)
+#' file <- ImportVirusTable(path)
 #'
-#' # plot 1: plot boxplot for "identity"
-#' plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
+#' # plot 1: plot boxplot for reads
+#' plot <- VhgSumHitsBarplot(file,cut = 1e-5)
 #' plot
 #'
-#' # return vh_group inside plot object
-#' print(plot$vh_group)
+#' # plot 2: plot boxplot for micro_reads
+#' plot_reads <- VhgSumHitsBarplot(file,cut = 1e-5,
+#' y_column = "ViralRefSeq_contigs")
+#' plot_reads
+#'
+#' # import gatherer files
+#' path2 <- system.file("extdata", "virusgatherer.tsv", package = "Virusparies")
+#' vg_file <- ImportVirusTable(path2)
 #'
 #'
-#'# plot 2: Customized plot
-#' plot2 <- VhSumHitsBarplot(
-#'   vh_file,
-#'   cut = 1e-5,
-#'   title = "Customized Hits Plot",
-#'   subtitle = "Total Hits with Significance Cutoff",
-#'   xlabel = "Virus Family",
-#'   ylabel = "Total Hits",
-#'   legend_title = "Virus Families",
-#'   plot_text_size = 4,
-#'   plot_text_colour = "blue"
-#' )
-#'
-#' plot2
+#' # plot 3: contigs in Gatherer
+#' contig_plot <- VhgSumHitsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",
+#' y_column = "contig")
+#' contig_plot
 #'
 #' @seealso
 #' VirusHunterGatherer is available here: \url{https://github.com/lauberlab/VirusHunterGatherer}.
@@ -127,7 +123,7 @@
 #' @importFrom rlang .data as_string ensym
 #' @importFrom stats reorder
 #' @export
-VhSumHitsBarplot <- function(vh_file,
+VhgSumHitsBarplot <- function(file,
                              groupby = "best_query",
                              taxa_rank = "Family",
                              y_column = "num_hits",
@@ -167,8 +163,8 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  #check if table is empty
- #is_file_empty(vh_file)
- if (is_file_empty(vh_file)) {
+ #is_file_empty(file)
+ if (is_file_empty(file)) {
     #message("Skipping VhgBoxplot generation due to empty data.")
     return(invisible(NULL))  # Return invisible(NULL) to stop further execution
  }
@@ -182,15 +178,15 @@ VhSumHitsBarplot <- function(vh_file,
 
 
  # Define the required columns
- required_columns <- c(y_column, "ViralRefSeq_E", groupby)
+ required_columns <- c("ViralRefSeq_E", groupby)
 
  if (!(groupby %in% c("best_query", "ViralRefSeq_taxonomy"))) {
      stop('Invalid value for groupby. Please use either "best_query" or "ViralRefSeq_taxonomy".')
  }
 
- check_columns(vh_file,required_columns)
- check_input_type(vh_file,c(y_column, "ViralRefSeq_E"),2)
- check_input_type(vh_file,groupby,1)
+ check_columns(file,required_columns)
+ check_input_type(file,c("ViralRefSeq_E"),2)
+ check_input_type(file,groupby,1)
 
 
  # check arguments
@@ -202,31 +198,34 @@ VhSumHitsBarplot <- function(vh_file,
 
  if(groupby == "ViralRefSeq_taxonomy"){
 
-     vh_file <- VhgPreprocessTaxa(vh_file,taxa_rank)
+     file <- VhgPreprocessTaxa(file,taxa_rank)
 
  }
 
 
  ## preprocess data for plotting
- vh_file <- vh_file[vh_file$ViralRefSeq_E < cut,]
- #is_file_empty(vh_file)
- if (is_file_empty(vh_file)) {
+ file <- file[file$ViralRefSeq_E < cut,]
+ #is_file_empty(file)
+ if (is_file_empty(file)) {
    #message("Skipping VhgBoxplot generation due to empty data.")
    return(invisible(NULL))  # Return invisible(NULL) to stop further execution
  }
 
 
- vh_group <- vh_sumhitbar_preprocessing(vh_file,groupby,y_column)
+ vh_group <- vh_sumhitbar_preprocessing(file,groupby,y_column)
 
  # Apply the selected theme
  theme_selected <- select_theme(theme_choice)
 
- if(y_column == "ViralRefSeq_contigs"){
 
+ if (y_column == "ViralRefSeq_contigs") {
    micro_contig_or_reads <- "micro-contigs"
- }else{
-
+ } else if ("contig_len" %in% colnames(file) && y_column == "contig") {
+   micro_contig_or_reads <- "contigs"
+ } else if (y_column == "num_hits") {
    micro_contig_or_reads <- "reads"
+ } else {
+   stop("Error: y_column must be 'ViralRefSeq_contigs', 'contig', or 'num_hits'.")
  }
 
 
@@ -241,11 +240,11 @@ VhSumHitsBarplot <- function(vh_file,
  }
 
 
- color_data <- consistentColourPalette(vh_file, groupby = groupby,taxa_rank=taxa_rank)
+ color_data <- consistentColourPalette(file, groupby = groupby,taxa_rank=taxa_rank)
  legend_labels <- color_data$legend_labels
  labels <- color_data$labels
 
- # Extract unique values from vh_file$best_query
+ # Extract unique values from file$best_query
  unique_queries <- unique(vh_group[[groupby]])
 
  # Create a vector of corresponding names from legend_labels

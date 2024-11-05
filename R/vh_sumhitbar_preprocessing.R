@@ -23,15 +23,32 @@
 vh_sumhitbar_preprocessing <- function(vh_file,groupby="best_query",y_column ="num_hits"){
 
 
+  if (y_column == "num_hits" || y_column == "ViralRefSeq_contigs") {
 
-  vh_group <- vh_file %>%
-    group_by(.data[[groupby]]) %>%
-    summarize(sum=sum(.data[[y_column]]))%>%
-    mutate(
-      perc = round(proportions(.data$sum) * 100, 2),
-      res = str_c(.data$sum, " (", .data$perc, "%)"),
-      cyl = as.factor(.data[[groupby]])
-    )
+    vh_group <- vh_file %>%
+      group_by(.data[[groupby]]) %>%
+      summarize(sum=sum(.data[[y_column]]))%>%
+      mutate(
+        perc = round(proportions(.data$sum) * 100, 2),
+        res = str_c(.data$sum, " (", .data$perc, "%)"),
+        cyl = as.factor(.data[[groupby]])
+      )
+  } else {
+    row_num <- nrow(vh_file)
+    vh_group <- vh_file %>% group_by(.data[[groupby]]) %>% count()%>%
+      mutate(
+        perc = round(n / row_num *100, 2),
+        res = str_c(.data$n, " (", .data$perc, "%)"),
+        cyl = as.factor(.data[[groupby]])
+      )%>%
+      rename(
+        sum = n  # Renaming the 'n' column to 'sum'
+      )
+  }
+
+
+
+
 
   return(vh_group)
 }

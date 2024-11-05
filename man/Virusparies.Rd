@@ -35,11 +35,7 @@ This package includes the following functions:
 \item \code{\link{VhgIdenFacetedScatterPlot}}: Faceted scatter plot for reference sequence identity vs -log10 of reference E-value.
 \item \code{\link{VhgIdentityScatterPlot}}: Scatter plot for reference sequence identity vs -log10 of reference E-value.
 \item \code{\link{VhgRunsBarplot}}: Bar plot showing how many unique runs map against each virus.
-}
-
-\strong{VirusHunter only plots}:
-\itemize{
-\item \code{\link{VhSumHitsBarplot}}: Bar plot for the sum of hits for each virus found in group.
+\item \code{\link{VhgSumHitsBarplot}}: Bar plot for the sum of hits for each virus found in group.
 }
 
 \strong{VirusGatherer only plots}:
