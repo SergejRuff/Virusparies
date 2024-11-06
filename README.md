@@ -49,13 +49,17 @@ Virusparies includes the following functions:
 - `ImportVirusTable()`:  Import VirusHunterGatherer hittables into R.
 
 
-### VirushunterGatherer Plots:
+### VirusHunterGatherer Plots:
 
 - `VhgBoxplot()`: Boxplot plotting refSeq identity, e-values or contig length for each group.
 - `VhgIdenFacetedScatterPlot()`: Faceted scatter plot for reference sequence identity vs -log10 of reference e-value.
 - `VhgIdentityScatterPlot()`: Scatter Plot for reference Identity vs -log10 of reference e-value.
 - `VhgRunsBarplot()`: Bar plot showing how many unique Runs map against each virus.
 - `VhgSumHitsBarplot()`: Bar plot for the sum of hits for each virus found in group.
+
+### VirusGatherer only plots:
+
+- `VgConLenViolin()`: Violin plot to visualize the distribution of contig lengths.
 
 ### Graphical Tables(GT):
 
@@ -67,8 +71,20 @@ The table functions generate GT objects, which can be further manipulated using 
 
 ### Export:
 
+- `ExportVirusDataFrame()`:  Export data frames.
 - `ExportVirusGt()`:  Export graphical tables.
 - `ExportVirusPlot()`: Export plots.
+
+### Utils:
+
+- `CombineHittables()`: Combine hittables.
+- `Current_ICTV()`: Verify the version of ICTV data currently in use.
+- `New_ICTV()`: Assign Custom ICTV Data for Use in Virusparies.
+- `SummarizeViralStats()`: Generate summary stats outside of plot functions.
+- `VhgAddPhylum()`: Extract phylum information.
+- `VhgGetSubject()`: Process and Count Viral Subjects within Groups.
+- `VhgPreprocessTaxa()`: Process ViralRefSeq_taxonomy column.
+- `VhgSubsetHittable()`: Filter VirusHunterGatherer data based on user’s own criteria.
 
 
 ## Details
