@@ -562,9 +562,24 @@ file <- ImportVirusTable(path)
 
 file_filtered <- VhgPreprocessTaxa(file,"Family")
 
-print("ViralRefSeq_taxonomy before processing:\n")
+print("ViralRefSeq_taxonomy before processing:")
 print(head(file$ViralRefSeq_taxonomy,5))
 
+#>[1] "taxid:2065037|Betatorquevirus|Anelloviridae" 
+#>[2] "taxid:2065052|Gammatorquevirus|Anelloviridae"
+#>[3] "taxid:2065037|Betatorquevirus|Anelloviridae" 
+#>[4] "taxid:687379|Gammatorquevirus|Anelloviridae" 
+#>[5] "taxid:2065046|Gammatorquevirus|Anelloviridae"
+
+
+print("ViralRefSeq_taxonomy after processing:")
+print(head(file_filtered$ViralRefSeq_taxonomy,5))
+
+#>[1] "Anelloviridae"
+#>[2] "Anelloviridae"
+#>[3] "Anelloviridae"
+#>[4] "Anelloviridae"
+#>[5] "Anelloviridae"
 ```
 
 ## Citation
