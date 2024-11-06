@@ -284,7 +284,7 @@ plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
 plot
 
 ```
-![VhgIdenFacetedScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdenFacetedScatterPlot.png)
+![VhgIdenFacetedScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/scatefac_plot.png)
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
@@ -300,7 +300,7 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 plot(plot)
 
 ```
-![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdentityScatterPlot.png)
+![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/scate_plot.png)
 
 ### VirusHunterGatherer Plot - VhgRunsBarplot
 
@@ -317,7 +317,7 @@ plot
 
 
 ```
-![VhgRunsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgRunsBarplot.png)
+![VhgRunsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Runsplot.png)
 
 ### VirusHunter Plot - VhSumHitsBarplot
 
@@ -327,13 +327,37 @@ The example below shows that a total of 12704 hits exist in our data, but almost
 
 ``` r
 
-### Generate Plot
+### Generate Plot for reads per group
 
-plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
-plot
+plot <- VhSumHitsBarplot(vh_file,cut = 1e-5,
+                                y_column = "num_hits")
+plot$plot
 
 ```
-![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhSumHitsBarplot.png)
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/readplot.png)
+
+``` r
+
+### Generate Plot for micro-contigs per group
+plot_micro <- VhgSumHitsBarplot(vh_file,cut = 1e-5,
+                                y_column = "ViralRefSeq_contigs")
+plot_micro$plot
+
+```
+
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot_micro.png)
+
+
+``` r
+
+### Generate Plot for assembled contigs per group (Gatherer only)
+contig_plot <- VhgSumHitsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",
+                                 y_column = "contig")
+contig_plot$plot
+
+```
+
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/contig_plot.png)
 
 ### GT - VhgRunsTable
 
