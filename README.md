@@ -236,7 +236,7 @@ plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_id
 plot2
 
 ```
-![Boxplot ViralRefSeq_ident](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot2_boxiden.png)
+![Boxplot ViralRefSeq_ident](https://raw.githubusercontent.com/SergejRuff/plots_examples/refs/heads/main/virusparies_images/boxplot2.png)
 
 #### Boxplot 3: Customization
 
@@ -258,7 +258,7 @@ plot3
 
 ```
 
-![Boxplot Customization](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot3_custom.png)
+![Boxplot Customization](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxplot3.png)
 
 
 #### Boxplot 4: "contig_len" (Gatherer Tables only)
@@ -270,7 +270,7 @@ plot4 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig
 plot4
 
 ``` 
-![Boxplot Gatherer](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot4.png)
+![Boxplot Gatherer](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxplot4.png)
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
