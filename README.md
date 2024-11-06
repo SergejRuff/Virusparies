@@ -362,6 +362,7 @@ contig_plot$plot
 
 ### VirusGatherer only plots - VgConLenViolin
 
+`VgConLenViolin()` accepts only VirusGatherer hittables as input and generates a violin plot for contig lengths across viral groups. Violin plots require at least two data points; if only a single data point is available, a dot is displayed by default (see plot). Users can also set a minimum threshold for observations, and groups with fewer than this threshold are excluded from the plot.
 
 ``` r
 
