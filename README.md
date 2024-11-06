@@ -390,7 +390,7 @@ table
 
 ```
 
-![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Pasted%20image.png)
+![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/table1.png)
 
 ### GT - VhgTabularRasa
 
@@ -414,7 +414,7 @@ VhgTabularRasa(identity$summary_stats)
 
 
 ```
-![VhgTabularRasa](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/test_gt.png)
+![VhgTabularRasa](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/table2.png)
 
 ### Export
 
