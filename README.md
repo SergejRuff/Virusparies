@@ -359,6 +359,20 @@ contig_plot$plot
 
 ![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/contig_plot.png)
 
+
+### VirusGatherer only plots - VgConLenViolin
+
+
+``` r
+
+# create a violinplot.
+violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE)
+
+violinplot$plot
+
+```
+![VgConLenViolin](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/violinplot.png)
+
 ### GT - VhgRunsTable
 
 `VhgRunsTable()` function takes VirusHunter files as input and generates a graphical table, providing information about which run has found which virus group. This makes it a valuable complement to the `VhgRunsBarplot()` function. While `VhgRunsBarplot()` provides information in a plot that quantifies the number of unique runs finding a virus group, `VhgRunsTable()` presents the same information in table form, showing which runs are found along with their names (SRA accessions, FASTQ).
