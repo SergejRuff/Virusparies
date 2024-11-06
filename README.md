@@ -496,6 +496,26 @@ ExportVirusGt(gtable=table,filename="vh_parttable.docx")
 
 ```
 
+### Utils
+
+Virusparies includes utility functions to process VirusHunterGatherer hittables, extract targeted information, and update the internal ICTV dataset.
+
+#### CombineHittables
+
+Multiple hittables can be combined using the `CombineHittables()` function, provided they are of the same type (e.g., VirusHunter hittables can only be combined with other VirusHunter hittables).
+
+``` r
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+file <- ImportVirusTable(path)
+file2 <- ImportVirusTable(path)  # both files have 180 observations
+
+combined_file <- CombineHittables(file,file2)
+
+print(nrow(combined_file))
+
+```
+
 ## Citation
 
 When utilizing Virusparies in your research or software development, kindly reference the R package using the citation obtained from the `citation()` function:
