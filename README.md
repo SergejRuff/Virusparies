@@ -427,6 +427,29 @@ VhgTabularRasa(identity$summary_stats)
 
 ### Export
 
+#### Export Data frames
+
+Processed VirusHunterGatherer hittables and summary statistic tables can be exported as CSV or TSV files using the `ExportVirusDataFrame()` function.
+
+``` r
+
+
+# generate a plot that returns both processed hittables (outlier) and summary stats
+plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+
+
+
+
+# export hittable as tsv (same format as input hittables)
+ExportVirusDataFrame(df=plot1$outlier,file_name="outlier",file_type="tsv")
+
+# export summary stats as csv
+ExportVirusDataFrame(df=plot1$summary_stats,file_name="summarystats",file_type="csv")
+
+
+```
+
+
 #### Export Plots
 
 Plots can be exported in various formats using the `ExportVirusPlot()` function. Supported formats include "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", and "wmf" (Windows only). When the device argument is set to NULL, the file extension in the filename determines the export format.
