@@ -203,9 +203,9 @@ print(head(vg_file))  # print head of gatherer files
 The `VhgBoxplot()` function generates three versions of a boxplot depending on the provided ***y_column*** argument.
 
 Accepted ***y_column*** arguments are:
-- "ViralRefSeq_E"
-- "ViralRefSeq_ident"
-- "contig_len" (Gatherer Tables only)
+- "ViralRefSeq_E": Distribution of viral reference E-values.
+- "ViralRefSeq_ident": Distribution of sequence identity to the closest viral reference.
+- "contig_len" (Gatherer Tables only): Distribution of contig lengths.
 
 Below are 4 examples for different boxplots.
 
@@ -321,7 +321,14 @@ plot
 
 ### VirusHunter Plot - VhSumHitsBarplot
 
-The "best_query" column shows the number of hits in your samples that match the sequences in the blast database (filtering step of VirusHunter). `VhSumHitsBarplot()` plots the sum of hits ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold. Since the "best_query" column only exists in VirusHunter hittables, this function can only generate plots for VirusHunter hittables.
+`VhSumHitsBarplot()` plots the sum of reads/micro-contigs/contigs ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold.
+
+The `VhSumHitsBarplot()` function generates one of three bar plot versions, depending on the specified ***y_column*** argument.
+
+Accepted ***y_column*** arguments are:
+- "num_hits": Number of reads in each group.
+- "ViralRefSeq_contigs": Number of micro-contigs in each group.
+- "contig" (Gatherer Tables only): Number of contigs in each group.
 
 The example below shows that a total of 12704 hits exist in our data, but almost 89 % of the hits mactch to Hepadna-Nackedna_TP, followed by Anello_ORF1core with 11.24 % and less than 1 % for both Genomo_Rep and Gemini_Rep. 
 
