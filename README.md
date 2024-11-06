@@ -20,9 +20,9 @@ VirusHunterGatherer is a computational pipeline designed for DDVD and is availab
     - [GT - VhgRunsTable](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgrunstable)
     - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgtabularrasa)
     - [Export](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#export-1)
+    - [Utils](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#utils-1)
 - [Citation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
-
 
 ## Installation
 
