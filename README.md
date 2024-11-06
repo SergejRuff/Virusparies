@@ -52,9 +52,9 @@ Virusparies includes the following functions:
 
 ### VirusHunterGatherer Plots:
 
-- `VhgBoxplot()`: Boxplot plotting refSeq identity, e-values or contig length for each group.
-- `VhgIdenFacetedScatterPlot()`: Faceted scatter plot for reference sequence identity vs -log10 of reference e-value.
-- `VhgIdentityScatterPlot()`: Scatter Plot for reference Identity vs -log10 of reference e-value.
+- `VhgBoxplot()`: Boxplot plotting refSeq identity, E-values or contig length for each group.
+- `VhgIdenFacetedScatterPlot()`: Faceted scatter plot for reference sequence identity vs -log10 of reference E-value.
+- `VhgIdentityScatterPlot()`: Scatter Plot for reference Identity vs -log10 of reference E-value.
 - `VhgRunsBarplot()`: Bar plot showing how many unique Runs map against each virus.
 - `VhgSumHitsBarplot()`: Bar plot for the sum of hits for each virus found in group.
 
