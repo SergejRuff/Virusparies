@@ -223,7 +223,7 @@ plot1
 
 ```
 
-![Boxplot E-values](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxpl_evalues.png)
+![Boxplot E-values](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxpl_evalues.png](https://raw.githubusercontent.com/SergejRuff/plots_examples/refs/heads/main/virusparies_images/boxplot1.png)
 
 
 
