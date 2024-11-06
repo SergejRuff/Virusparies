@@ -516,6 +516,57 @@ print(nrow(combined_file))
 
 ```
 
+#### New_ICTV & Current_ICTV
+
+Virusparies uses the ICTV dataset from https://ictv.global/msl to process taxonomy information. Users can view the current ICTV dataset with the `Current_ICTV()` function or provide a custom dataset with the `New_ICTV()` function. The latter creates a temporary environment within the R session, without permanently altering the internal dataset. This allows users to focus on specific viral groups of interest. As both the VirusHunterGatherer hittable and the ICTV dataset expand, limiting the dataset to relevant viral groups can help reduce processing time.
+
+``` r
+
+# Define example data
+
+# Sample data
+Example_ICTV <- data.frame(
+Phylum = c("Taleaviricota", "Taleaviricota", "Taleaviricota", "Taleaviricota",
+"Taleaviricota"),Subphylum = c(NA, NA, NA, NA, NA),
+Class = c("Tokiviricetes", "Tokiviricetes", "Tokiviricetes", "Tokiviricetes",
+"Tokiviricetes"),
+Subclass = c(NA, NA, NA, NA, NA),
+Order = c("Ligamenvirales", "Ligamenvirales", "Ligamenvirales", "Ligamenvirales",
+"Ligamenvirales"),
+Suborder = c(NA, NA, NA, NA, NA),
+Family = c("Lipothrixviridae", "Lipothrixviridae", "Lipothrixviridae",
+"Lipothrixviridae", "Lipothrixviridae"),
+Subfamily = c(NA, NA, NA, NA, NA),
+Genus = c("Alphalipothrixvirus", "Alphalipothrixvirus",
+"Betalipothrixvirus", "Betalipothrixvirus", "Betalipothrixvirus"),
+Subgenus = c(NA, NA, NA, NA, NA),
+stringsAsFactors = FALSE)
+ 
+# Assign new example ICTV data for use in Virusparies
+New_ICTV(Example_ICTV)
+# check currently used ICTV data in Virusparies
+Current_ICTV()
+
+```
+
+#### VhgPreprocessTaxa
+
+`VhgPreprocessTaxa()` extracts user-defined taxonomy information from the ViralRefSeq_taxonomy column, which contains taxa data separated by "|" (e.g., "taxid:2065037|Betatorquevirus|Anelloviridae"). In the example below, if the virus family is selected, only families ending with "viridae" (e.g., "Anelloviridae") will remain in the processed ViralRefSeq_taxonomy column. When family information is unavailable, other taxa details are compared with the internal ICTV dataset to infer the phylum. If a phylum is found, the observation is classified as "unclassified" followed by the phylum name from the ICTV dataset. Otherwise, the term "unclassified" is used.
+
+`VhgPreprocessTaxa()` is used internally by various Virusparies functions. However, as the size of both the hittables and ICTV dataset increases, the processing time also grows. This makes `VhgPreprocessTaxa()` a potential bottleneck in terms of execution speed. Therefore, we recommend preprocessing taxonomy information with `VhgPreprocessTaxa()` before generating plots or graphical tables for large hittables.
+
+``` r
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+file <- ImportVirusTable(path)
+
+file_filtered <- VhgPreprocessTaxa(file,"Family")
+
+print("ViralRefSeq_taxonomy before processing:\n")
+print(head(file$ViralRefSeq_taxonomy,5))
+
+```
+
 ## Citation
 
 When utilizing Virusparies in your research or software development, kindly reference the R package using the citation obtained from the `citation()` function:
