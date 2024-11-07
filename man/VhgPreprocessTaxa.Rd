@@ -51,10 +51,10 @@ file <- ImportVirusTable(path)
 
 file_filtered <- VhgPreprocessTaxa(file,"Family")
 
-print("ViralRefSeq_taxonomy before processing:\n")
+cat("ViralRefSeq_taxonomy before processing:\n")
 print(head(file$ViralRefSeq_taxonomy,5))
 
-print("ViralRefSeq_taxonomy after processing:\n")
+cat("ViralRefSeq_taxonomy after processing:\n")
 print(head(file_filtered$ViralRefSeq_taxonomy,5))
 
 

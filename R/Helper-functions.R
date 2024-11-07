@@ -582,7 +582,7 @@ remove_non_group <- function(file,groupby,chosen_group,label_vector,taxa_rank){
 #' Subgenus = c(NA, NA, NA, NA, NA),
 #' stringsAsFactors = FALSE)
 #'
-#' \dontrun{
+#' \donttest{
 #' # Assign new example ICTV data for use in Virusparies
 #' New_ICTV(Example_ICTV)
 #' # check currently used ICTV data in Virusparies

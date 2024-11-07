@@ -10,7 +10,10 @@ Authors@R:
     person("Chong", "Li Chuin",email = "lichuin.chong@twincore.de", role = "ctb",
            comment = c(ORCID = "0000-0002-3574-1365")))
 Maintainer: Ruff Sergej <serijnh@gmail.com>  
-Description: Contains a collection of Data Visualisations for 'VirusHunterGatherer' output.
+Description: A collection of tools for downstream analysis of
+    'VirusHunterGatherer' output. Processing of hittables 
+    and plotting of results, enabling better interpretation,
+    is made easier with the provided functions. 
 License: GPL (>= 3)
 URL: https://github.com/SergejRuff/Virusparies, https://github.com/lauberlab/VirusHunterGatherer
 BugReports: https://github.com/SergejRuff/Virusparies/issues

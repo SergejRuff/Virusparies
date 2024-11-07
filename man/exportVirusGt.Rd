@@ -75,9 +75,9 @@ table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtitle
 "Reference E-Value","Reference Identity"))
 
 
-\dontrun{
+\donttest{
 
-ExportVirusGt(gtable=table,filename="vh_parttable.docx")
+ExportVirusGt(gtable=table,filename="vh_parttable.docx",path=tempdir())
 
 }
 

@@ -65,7 +65,7 @@ num_hits_min = 4,ViralRefSeq_ident_criteria = -90,ViralRefSeq_E_criteria = 0.000
 cat("The dimensions of the VirusHunter Hittable after filtering are: \n");dim(file_filtered)
 
 # other examples for viral_group
-\dontrun{
+\donttest{
 # Include a single group:
 result1 <- VhgSubsetHittable(file, virus_groups = "Hepadna-Nackedna_TP")
 # Include multiple groups:

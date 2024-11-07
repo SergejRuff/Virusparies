@@ -51,7 +51,7 @@ Genus = c("Alphalipothrixvirus", "Alphalipothrixvirus",
 Subgenus = c(NA, NA, NA, NA, NA),
 stringsAsFactors = FALSE)
 
-\dontrun{
+\donttest{
 # Assign new example ICTV data for use in Virusparies
 New_ICTV(Example_ICTV)
 # check currently used ICTV data in Virusparies

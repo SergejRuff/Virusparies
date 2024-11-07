@@ -52,13 +52,15 @@ file <- ImportVirusTable(path)
 plot1 <- VhgBoxplot(file, x_column = "best_query", y_column = "ViralRefSeq_E")
 
 
-\dontrun{
+\donttest{
 
 # export hittable as tsv (same format as input hittables)
-ExportVirusDataFrame(df=plot1$outlier,file_name="outlier",file_type="tsv")
+ExportVirusDataFrame(df=plot1$outlier,file_name="outlier",file_type="tsv",
+dir_path=tempdir())
 
 # export summary stats as csv
-ExportVirusDataFrame(df=plot1$summary_stats,file_name="summarystats",file_type="csv")
+ExportVirusDataFrame(df=plot1$summary_stats,file_name="summarystats",
+file_type="csv",dir_path=tempdir())
 
 }
 

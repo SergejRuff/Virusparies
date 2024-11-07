@@ -73,13 +73,15 @@
 #' # Basic plot
 #' plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' # first export
-#' ExportVirusPlot(plot=plot$plot,file_name="testplot.png",width=8,height=6,units="in")
+#' ExportVirusPlot(plot=plot$plot,file_name="testplot.png",width=8,height=6,
+#' units="in",path=tempdir())
 #'
 #' # second export with device argument
-#' ExportVirusPlot(plot=plot$plot,file_name="testplot",width=8,height=6,units="in",device = "png")
+#' ExportVirusPlot(plot=plot$plot,file_name="testplot",width=8,height=6,
+#' units="in",device = "png",path=tempdir())
 #'
 #' }
 #'
@@ -102,10 +104,10 @@
 #' # add plots to a list
 #' plot_list <- list(violinplot$plot,srarun$plot,boxplot$boxp)
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' ExportVirusPlot(plot=plot_list,file_name="grid_testplot.pdf",width=16,height=12,
-#' units="in",nrow = 3,ncol = 1)
+#' units="in",nrow = 3,ncol = 1,path=tempdir())
 #'
 #' }
 #'

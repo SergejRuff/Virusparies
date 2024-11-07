@@ -60,9 +60,9 @@
 #' "Reference E-Value","Reference Identity"))
 #'
 #'
-#' \dontrun{
+#' \donttest{
 #'
-#' ExportVirusGt(gtable=table,filename="vh_parttable.docx")
+#' ExportVirusGt(gtable=table,filename="vh_parttable.docx",path=tempdir())
 #'
 #' }
 #'
