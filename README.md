@@ -16,12 +16,13 @@ VirusHunterGatherer is a computational pipeline designed for DDVD and is availab
     - [VirusHunterGatherer Plot - VhgIdentityScatterPlot](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virushuntergatherer-plot---vhgidentityscatterplot)
     - [VirusHunterGatherer Plot - VhgRunsBarplot](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virushuntergatherer-plot---vhgrunsbarplot)
     - [VirusHunter Plot - VhSumHitsBarplot](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virushunter-plot---vhsumhitsbarplot)
+    - [VirusGatherer only plots - VgConLenViolin](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#virusgatherer-only-plots---vgconlenviolin)
     - [GT - VhgRunsTable](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgrunstable)
     - [GT - VhgTabularRasa](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#gt---vhgtabularrasa)
     - [Export](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#export-1)
+    - [Utils](https://github.com/SergejRuff/Virusparies?tab=readme-ov-file#utils-1)
 - [Citation](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#citation)
 - [Contributions](https://github.com/SergejRuff/Virusparies/tree/main?tab=readme-ov-file#contributions)
-
 
 ## Installation
 
@@ -49,13 +50,17 @@ Virusparies includes the following functions:
 - `ImportVirusTable()`:  Import VirusHunterGatherer hittables into R.
 
 
-### VirushunterGatherer Plots:
+### VirusHunterGatherer Plots:
 
-- `VhgBoxplot()`: Boxplot plotting refSeq identity, e-values or contig length for each group.
-- `VhgIdenFacetedScatterPlot()`: Faceted scatter plot for reference sequence identity vs -log10 of reference e-value.
-- `VhgIdentityScatterPlot()`: Scatter Plot for reference Identity vs -log10 of reference e-value.
+- `VhgBoxplot()`: Boxplot plotting refSeq identity, E-values or contig length for each group.
+- `VhgIdenFacetedScatterPlot()`: Faceted scatter plot for reference sequence identity vs -log10 of reference E-value.
+- `VhgIdentityScatterPlot()`: Scatter Plot for reference Identity vs -log10 of reference E-value.
 - `VhgRunsBarplot()`: Bar plot showing how many unique Runs map against each virus.
 - `VhgSumHitsBarplot()`: Bar plot for the sum of hits for each virus found in group.
+
+### VirusGatherer only plots:
+
+- `VgConLenViolin()`: Violin plot to visualize the distribution of contig lengths.
 
 ### Graphical Tables(GT):
 
@@ -67,8 +72,20 @@ The table functions generate GT objects, which can be further manipulated using 
 
 ### Export:
 
+- `ExportVirusDataFrame()`:  Export data frames.
 - `ExportVirusGt()`:  Export graphical tables.
 - `ExportVirusPlot()`: Export plots.
+
+### Utils:
+
+- `CombineHittables()`: Combine hittables.
+- `Current_ICTV()`: Verify the version of ICTV data currently in use.
+- `New_ICTV()`: Assign Custom ICTV Data for Use in Virusparies.
+- `SummarizeViralStats()`: Generate summary stats outside of plot functions.
+- `VhgAddPhylum()`: Extract phylum information.
+- `VhgGetSubject()`: Process and Count Viral Subjects within Groups.
+- `VhgPreprocessTaxa()`: Process ViralRefSeq_taxonomy column.
+- `VhgSubsetHittable()`: Filter VirusHunterGatherer data based on user’s own criteria.
 
 
 ## Details
@@ -187,9 +204,9 @@ print(head(vg_file))  # print head of gatherer files
 The `VhgBoxplot()` function generates three versions of a boxplot depending on the provided ***y_column*** argument.
 
 Accepted ***y_column*** arguments are:
-- "ViralRefSeq_E"
-- "ViralRefSeq_ident"
-- "contig_len" (Gatherer Tables only)
+- "ViralRefSeq_E": Distribution of viral reference E-values.
+- "ViralRefSeq_ident": Distribution of sequence identity to the closest viral reference.
+- "contig_len" (Gatherer Tables only): Distribution of contig lengths.
 
 Below are 4 examples for different boxplots.
 
@@ -207,7 +224,7 @@ plot1
 
 ```
 
-![Boxplot E-values](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxpl_evalues.png)
+![Boxplot E-values](https://raw.githubusercontent.com/SergejRuff/plots_examples/refs/heads/main/virusparies_images/boxplot1.png)
 
 
 
@@ -220,7 +237,7 @@ plot2 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_id
 plot2
 
 ```
-![Boxplot ViralRefSeq_ident](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot2_boxiden.png)
+![Boxplot ViralRefSeq_ident](https://raw.githubusercontent.com/SergejRuff/plots_examples/refs/heads/main/virusparies_images/boxplot2.png)
 
 #### Boxplot 3: Customization
 
@@ -242,7 +259,7 @@ plot3
 
 ```
 
-![Boxplot Customization](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot3_custom.png)
+![Boxplot Customization](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxplot3.png)
 
 
 #### Boxplot 4: "contig_len" (Gatherer Tables only)
@@ -254,7 +271,7 @@ plot4 <- VhgBoxplot(vg_file,x_column = "ViralRefSeq_taxonomy",y_column = "contig
 plot4
 
 ``` 
-![Boxplot Gatherer](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot4.png)
+![Boxplot Gatherer](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/boxplot4.png)
 
 ### VirusHunterGatherer Plot - VhgIdenFacetedScatterPlot
 
@@ -268,7 +285,7 @@ plot <- VhgIdenFacetedScatterPlot(vh_file,cutoff = 1e-5)
 plot
 
 ```
-![VhgIdenFacetedScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdenFacetedScatterPlot.png)
+![VhgIdenFacetedScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/scatefac_plot.png)
 
 ### VirusHunterGatherer Plot - VhgIdentityScatterPlot
 
@@ -284,7 +301,7 @@ plot <- VhgIdentityScatterPlot(vh_file,cutoff = 1e-5)
 plot(plot)
 
 ```
-![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgIdentityScatterPlot.png)
+![VhgIdentityScatterPlot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/scate_plot.png)
 
 ### VirusHunterGatherer Plot - VhgRunsBarplot
 
@@ -301,23 +318,69 @@ plot
 
 
 ```
-![VhgRunsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhgRunsBarplot.png)
+![VhgRunsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Runsplot.png)
 
 ### VirusHunter Plot - VhSumHitsBarplot
 
-The "best_query" column shows the number of hits in your samples that match the sequences in the blast database (filtering step of VirusHunter). `VhSumHitsBarplot()` plots the sum of hits ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold. Since the "best_query" column only exists in VirusHunter hittables, this function can only generate plots for VirusHunter hittables.
+`VhSumHitsBarplot()` plots the sum of reads/micro-contigs/contigs ("best_query") for each virus group specified by the ***groupby*** argument. The cutoff value is used to filter out observations above the threshold.
 
-The example below shows that a total of 12704 hits exist in our data, but almost 89 % of the hits belong to Hepadna-Nackedna_TP, followed by Anello_ORF1core with 11.24 % and less than 1 % for both Genomo_Rep and Gemini_Rep. 
+The `VhSumHitsBarplot()` function generates one of three bar plot versions, depending on the specified ***y_column*** argument.
+
+Accepted ***y_column*** arguments are:
+- "num_hits": Number of reads in each group.
+- "ViralRefSeq_contigs": Number of micro-contigs in each group.
+- "contig" (Gatherer Tables only): Number of contigs in each group.
+
+The example below shows that a total of 12704 hits exist in our data, but almost 89 % of the hits mactch to Hepadna-Nackedna_TP, followed by Anello_ORF1core with 11.24 % and less than 1 % for both Genomo_Rep and Gemini_Rep. 
 
 ``` r
 
-### Generate Plot
+### Generate Plot for reads per group
 
-plot <- VhSumHitsBarplot(vh_file,cut = 1e-5)
-plot
+plot <- VhSumHitsBarplot(vh_file,cut = 1e-5,
+                                y_column = "num_hits")
+plot$plot
 
 ```
-![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/VhSumHitsBarplot.png)
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/readplot.png)
+
+``` r
+
+### Generate Plot for micro-contigs per group
+plot_micro <- VhgSumHitsBarplot(vh_file,cut = 1e-5,
+                                y_column = "ViralRefSeq_contigs")
+plot_micro$plot
+
+```
+
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/plot_micro.png)
+
+
+``` r
+
+### Generate Plot for assembled contigs per group (Gatherer only)
+contig_plot <- VhgSumHitsBarplot(vg_file,groupby = "ViralRefSeq_taxonomy",
+                                 y_column = "contig")
+contig_plot$plot
+
+```
+
+![VhSumHitsBarplot](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/contig_plot.png)
+
+
+### VirusGatherer only plots - VgConLenViolin
+
+`VgConLenViolin()` accepts only VirusGatherer hittables as input and generates a violin plot for contig lengths across viral groups. Violin plots require at least two data points; if only a single data point is available, a dot is displayed by default (see plot). Users can also set a minimum threshold for observations, and groups with fewer than this threshold are excluded from the plot.
+
+``` r
+
+# create a violinplot.
+violinplot <- VgConLenViolin(vg_file=vg_file,cut = 1e-5,log10_scale = TRUE)
+
+violinplot$plot
+
+```
+![VgConLenViolin](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/violinplot.png)
 
 ### GT - VhgRunsTable
 
@@ -336,7 +399,7 @@ table
 
 ```
 
-![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/Pasted%20image.png)
+![VhgRunsTable](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/table1.png)
 
 ### GT - VhgTabularRasa
 
@@ -360,9 +423,32 @@ VhgTabularRasa(identity$summary_stats)
 
 
 ```
-![VhgTabularRasa](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/test_gt.png)
+![VhgTabularRasa](https://raw.githubusercontent.com/SergejRuff/plots_examples/main/virusparies_images/table2.png)
 
 ### Export
+
+#### Export Data frames
+
+Processed VirusHunterGatherer hittables and summary statistic tables can be exported as CSV or TSV files using the `ExportVirusDataFrame()` function.
+
+``` r
+
+
+# generate a plot that returns both processed hittables (outlier) and summary stats
+plot1 <- VhgBoxplot(vh_file, x_column = "best_query", y_column = "ViralRefSeq_E")
+
+
+
+
+# export hittable as tsv (same format as input hittables)
+ExportVirusDataFrame(df=plot1$outlier,file_name="outlier",file_type="tsv")
+
+# export summary stats as csv
+ExportVirusDataFrame(df=plot1$summary_stats,file_name="summarystats",file_type="csv")
+
+
+```
+
 
 #### Export Plots
 
@@ -408,6 +494,92 @@ table <- VhgTabularRasa(vh_file_part,title = "first 10 rows of vh_file",subtit =
 
 ExportVirusGt(gtable=table,filename="vh_parttable.docx")
 
+```
+
+### Utils
+
+Virusparies includes utility functions to process VirusHunterGatherer hittables, extract targeted information, and update the internal ICTV dataset.
+
+#### CombineHittables
+
+Multiple hittables can be combined using the `CombineHittables()` function, provided they are of the same type (e.g., VirusHunter hittables can only be combined with other VirusHunter hittables).
+
+``` r
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+file <- ImportVirusTable(path)
+file2 <- ImportVirusTable(path)  # both files have 180 observations
+
+combined_file <- CombineHittables(file,file2)
+
+print(nrow(combined_file))
+
+```
+
+#### New_ICTV & Current_ICTV
+
+Virusparies uses the ICTV dataset from https://ictv.global/msl to process taxonomy information. Users can view the current ICTV dataset with the `Current_ICTV()` function or provide a custom dataset with the `New_ICTV()` function. The latter creates a temporary environment within the R session, without permanently altering the internal dataset. This allows users to focus on specific viral groups of interest. As both the VirusHunterGatherer hittable and the ICTV dataset expand, limiting the dataset to relevant viral groups can help reduce processing time.
+
+``` r
+
+# Define example data
+
+# Sample data
+Example_ICTV <- data.frame(
+Phylum = c("Taleaviricota", "Taleaviricota", "Taleaviricota", "Taleaviricota",
+"Taleaviricota"),Subphylum = c(NA, NA, NA, NA, NA),
+Class = c("Tokiviricetes", "Tokiviricetes", "Tokiviricetes", "Tokiviricetes",
+"Tokiviricetes"),
+Subclass = c(NA, NA, NA, NA, NA),
+Order = c("Ligamenvirales", "Ligamenvirales", "Ligamenvirales", "Ligamenvirales",
+"Ligamenvirales"),
+Suborder = c(NA, NA, NA, NA, NA),
+Family = c("Lipothrixviridae", "Lipothrixviridae", "Lipothrixviridae",
+"Lipothrixviridae", "Lipothrixviridae"),
+Subfamily = c(NA, NA, NA, NA, NA),
+Genus = c("Alphalipothrixvirus", "Alphalipothrixvirus",
+"Betalipothrixvirus", "Betalipothrixvirus", "Betalipothrixvirus"),
+Subgenus = c(NA, NA, NA, NA, NA),
+stringsAsFactors = FALSE)
+ 
+# Assign new example ICTV data for use in Virusparies
+New_ICTV(Example_ICTV)
+# check currently used ICTV data in Virusparies
+Current_ICTV()
+
+```
+
+#### VhgPreprocessTaxa
+
+`VhgPreprocessTaxa()` extracts user-defined taxonomy information from the ViralRefSeq_taxonomy column, which contains taxa data separated by "|" (e.g., "taxid:2065037|Betatorquevirus|Anelloviridae"). In the example below, if the virus family is selected, only families ending with "viridae" (e.g., "Anelloviridae") will remain in the processed ViralRefSeq_taxonomy column. When family information is unavailable, other taxa details are compared with the internal ICTV dataset to infer the phylum. If a phylum is found, the observation is classified as "unclassified" followed by the phylum name from the ICTV dataset. Otherwise, the term "unclassified" is used.
+
+`VhgPreprocessTaxa()` is used internally by various Virusparies functions. However, as the size of both the hittables and ICTV dataset increases, the processing time also grows. This makes `VhgPreprocessTaxa()` a potential bottleneck in terms of execution speed. Therefore, we recommend preprocessing taxonomy information with `VhgPreprocessTaxa()` before generating plots or graphical tables for large hittables.
+
+``` r
+
+path <- system.file("extdata", "virushunter.tsv", package = "Virusparies")
+file <- ImportVirusTable(path)
+
+file_filtered <- VhgPreprocessTaxa(file,"Family")
+
+print("ViralRefSeq_taxonomy before processing:")
+print(head(file$ViralRefSeq_taxonomy,5))
+
+#>[1] "taxid:2065037|Betatorquevirus|Anelloviridae" 
+#>[2] "taxid:2065052|Gammatorquevirus|Anelloviridae"
+#>[3] "taxid:2065037|Betatorquevirus|Anelloviridae" 
+#>[4] "taxid:687379|Gammatorquevirus|Anelloviridae" 
+#>[5] "taxid:2065046|Gammatorquevirus|Anelloviridae"
+
+
+print("ViralRefSeq_taxonomy after processing:")
+print(head(file_filtered$ViralRefSeq_taxonomy,5))
+
+#>[1] "Anelloviridae"
+#>[2] "Anelloviridae"
+#>[3] "Anelloviridae"
+#>[4] "Anelloviridae"
+#>[5] "Anelloviridae"
 ```
 
 ## Citation
