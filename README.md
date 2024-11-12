@@ -38,8 +38,16 @@ install.packages("remotes")
 remotes::install_github("SergejRuff/Virusparies")
 
 ```
-***!*** Bioconductor/CRAN version coming soon ...
 
+
+To install the CRAN version of Virusparies (missing `Current_ICTV()` and `New_ICTV()`):
+
+
+``` r
+
+install.packages("Virusparies")
+
+```
 
 ## Overview
 
