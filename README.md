@@ -1,5 +1,7 @@
 # Virusparies <img src="tools/logo.png" align="right"/>
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/Virusparies)](https://cran.r-project.org/package=Virusparies)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/Virusparies)](https://cran.r-project.org/package=Virusparies)
 
 Virusparies is an R package designed for visualizing outputs from VirusHunterGatherer, a data-driven virus discovery (DDVD) tool. It provides a set of plotting functions that aid in the interpretation and analysis of viral sequence data. 
