@@ -1,6 +1,6 @@
 Package: Virusparies
 Title: Visualize and Process Output from 'VirusHunterGatherer'
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: 
     c(
     person("Ruff", "Sergej", email = "serijnh@gmail.com", role = c("aut", "cre"),

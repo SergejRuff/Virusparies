@@ -9,8 +9,10 @@
 Virusparies designed for visualizing output from VirusHunterGatherer.
 }
 \details{
+\figure{logo.png}{options: style='float: right' alt='logo' width='120'}
+
 VirusHunterGatherer is a pipeline designed for data-driven virus discovery (DDVD).
-It involves two steps: (i) Virushunter conducts sensitive homology-based detection of viral sequence reads in unprocessed data,
+It involves two steps:\cr (i) Virushunter conducts sensitive homology-based detection of viral sequence reads in unprocessed data,
 identifying the most conserved regions of a virus, which serve as seeds for the
 (ii) Virusgatherer step that assembles full-length viral genome sequences.
 
