@@ -1,5 +1,6 @@
 # Virusparies <img src="tools/logo.png" align="right"/>
 
+[![R-CMD-check](https://github.com/SergejRuff/Virusparies/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SergejRuff/Virusparies/actions/workflows/R-CMD-check.yaml)
 
 Virusparies is an R package designed for visualizing outputs from VirusHunterGatherer, a data-driven virus discovery (DDVD) tool. It provides a set of plotting functions that aid in the interpretation and analysis of viral sequence data. 
 The name draws inspiration from the hunter-gatherer metaphor, with "paries" derived from Latin meaning "wall". It symbolizes the parietal art left by ancient hunters and gatherers on walls, summarizing their stories and beliefs.
