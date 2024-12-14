@@ -2,6 +2,14 @@ rm(list=ls())
 
 library(hexSticker)
 library(magick)
+library(devtools)
+library(usethis)
+library(readxl)
+
+excel_file <- file.choose()
+ICTV_data <- read_excel(excel_file,sheet = 2)
+use_data(ICTV_data, overwrite = TRUE,internal = TRUE)
+
 
 
 hexSticker::sticker("data-raw/GGif3jHY.png",
